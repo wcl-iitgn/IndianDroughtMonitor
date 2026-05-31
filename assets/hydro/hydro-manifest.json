@@ -1,0 +1,276 @@
+{
+  "month_label": "February 2026",
+  "generated": "2026-02-28",
+  "parameters": [
+    {
+      "key": "Rainfall",
+      "name": "Rainfall",
+      "folder": "Rainfall",
+      "description": "Monthly rainfall as a percentile of the historical record. Low percentiles (red) indicate drier-than-normal conditions; high percentiles (blue) indicate wetter.",
+      "dashboard": "Rainfall_dashboard.png",
+      "maps": [
+        {
+          "file": "August (2002).png",
+          "label": "August (2002)",
+          "role": "other"
+        },
+        {
+          "file": "December (1997).png",
+          "label": "December (1997)",
+          "role": "other"
+        },
+        {
+          "file": "December.png",
+          "label": "December",
+          "role": "other"
+        },
+        {
+          "file": "February (2025_).png",
+          "label": "February (2025)",
+          "role": "other"
+        },
+        {
+          "file": "February (Current).png",
+          "label": "February (Current)",
+          "role": "current"
+        },
+        {
+          "file": "January.png",
+          "label": "January",
+          "role": "other"
+        },
+        {
+          "file": "March (Forecast).png",
+          "label": "March (Forecast)",
+          "role": "forecast"
+        },
+        {
+          "file": "November.png",
+          "label": "November",
+          "role": "other"
+        },
+        {
+          "file": "October.png",
+          "label": "October",
+          "role": "other"
+        }
+      ]
+    },
+    {
+      "key": "Temperature",
+      "name": "Surface Air Temperature",
+      "folder": "Temperature",
+      "description": "Monthly mean surface air temperature as a percentile of the historical record. Low percentiles (blue) are colder than normal; high (red) are warmer.",
+      "dashboard": "Temperature_dashboard.png",
+      "maps": [
+        {
+          "file": "April (2010).png",
+          "label": "April (2010)",
+          "role": "other"
+        },
+        {
+          "file": "December.png",
+          "label": "December",
+          "role": "other"
+        },
+        {
+          "file": "February (2025_).png",
+          "label": "February (2025)",
+          "role": "other"
+        },
+        {
+          "file": "February (Current).png",
+          "label": "February (Current)",
+          "role": "current"
+        },
+        {
+          "file": "January.png",
+          "label": "January",
+          "role": "other"
+        },
+        {
+          "file": "March (Forecast).png",
+          "label": "March (Forecast)",
+          "role": "forecast"
+        },
+        {
+          "file": "May (2023).png",
+          "label": "May (2023)",
+          "role": "other"
+        },
+        {
+          "file": "November.png",
+          "label": "November",
+          "role": "other"
+        },
+        {
+          "file": "October.png",
+          "label": "October",
+          "role": "other"
+        }
+      ]
+    },
+    {
+      "key": "Relative_Wetness",
+      "name": "Relative Wetness (Soil Moisture)",
+      "folder": "Relative_Wetness",
+      "description": "Root-zone soil moisture expressed as a percentile of the historical record. Low percentiles (red) indicate drier soils; high (blue) indicate wetter.",
+      "dashboard": "Relative_Wetness_dashboard.png",
+      "maps": [
+        {
+          "file": "August (2002).png",
+          "label": "August (2002)",
+          "role": "other"
+        },
+        {
+          "file": "December.png",
+          "label": "December",
+          "role": "other"
+        },
+        {
+          "file": "February (2022).png",
+          "label": "February (2022)",
+          "role": "other"
+        },
+        {
+          "file": "February (2025_).png",
+          "label": "February (2025)",
+          "role": "other"
+        },
+        {
+          "file": "February (Current).png",
+          "label": "February (Current)",
+          "role": "current"
+        },
+        {
+          "file": "January.png",
+          "label": "January",
+          "role": "other"
+        },
+        {
+          "file": "March (Forecast).png",
+          "label": "March (Forecast)",
+          "role": "forecast"
+        },
+        {
+          "file": "November.png",
+          "label": "November",
+          "role": "other"
+        },
+        {
+          "file": "October.png",
+          "label": "October",
+          "role": "other"
+        }
+      ]
+    },
+    {
+      "key": "Total_Runoff",
+      "name": "Total Runoff",
+      "folder": "Total_Runoff",
+      "description": "Monthly total runoff as a percentile of the historical record. Low percentiles (red) indicate below-normal runoff; high (blue) above-normal.",
+      "dashboard": "Total_Runoff_dashboard.png",
+      "maps": [
+        {
+          "file": "August (2002).png",
+          "label": "August (2002)",
+          "role": "other"
+        },
+        {
+          "file": "December.png",
+          "label": "December",
+          "role": "other"
+        },
+        {
+          "file": "February (2025_).png",
+          "label": "February (2025)",
+          "role": "other"
+        },
+        {
+          "file": "February (Current).png",
+          "label": "February (Current)",
+          "role": "current"
+        },
+        {
+          "file": "January.png",
+          "label": "January",
+          "role": "other"
+        },
+        {
+          "file": "March (Forecast).png",
+          "label": "March (Forecast)",
+          "role": "forecast"
+        },
+        {
+          "file": "November.png",
+          "label": "November",
+          "role": "other"
+        },
+        {
+          "file": "October (2019).png",
+          "label": "October (2019)",
+          "role": "other"
+        },
+        {
+          "file": "October.png",
+          "label": "October",
+          "role": "other"
+        }
+      ]
+    },
+    {
+      "key": "Evapotranspiration",
+      "name": "Evapotranspiration",
+      "folder": "Evapotranspiration",
+      "description": "Monthly evapotranspiration as a percentile of the historical record.",
+      "dashboard": "Evapotranspiration_dashboard.png",
+      "maps": [
+        {
+          "file": "December.png",
+          "label": "December",
+          "role": "other"
+        },
+        {
+          "file": "February (2025_).png",
+          "label": "February (2025)",
+          "role": "other"
+        },
+        {
+          "file": "February (Current).png",
+          "label": "February (Current)",
+          "role": "current"
+        },
+        {
+          "file": "January.png",
+          "label": "January",
+          "role": "other"
+        },
+        {
+          "file": "July (2002).png",
+          "label": "July (2002)",
+          "role": "other"
+        },
+        {
+          "file": "June (2021).png",
+          "label": "June (2021)",
+          "role": "other"
+        },
+        {
+          "file": "March (Forecast).png",
+          "label": "March (Forecast)",
+          "role": "forecast"
+        },
+        {
+          "file": "November.png",
+          "label": "November",
+          "role": "other"
+        },
+        {
+          "file": "October.png",
+          "label": "October",
+          "role": "other"
+        }
+      ]
+    }
+  ]
+}

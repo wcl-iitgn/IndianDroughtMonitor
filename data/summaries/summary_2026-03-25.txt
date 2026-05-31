@@ -1,0 +1,3 @@
+# India Drought Monitor — National Summary for week ending 2026-03-25
+
+For the week ending March 25, 2026, about 19.5% of India's area was in some level of drought (D0 or worse), with 80.5% at normal conditions. Severe-to-extreme drought (D2 or worse) covered roughly 0.9% of the country. Compared with the previous week, the drought-affected area contracted (-8.1 percentage points). Conditions were driven by the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.

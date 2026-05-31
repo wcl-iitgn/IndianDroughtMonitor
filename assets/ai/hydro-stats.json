@@ -1,0 +1,93 @@
+{
+  "month_label": "February 2026",
+  "generated": "2026-02-28",
+  "national_means": [
+    {
+      "parameter": "Rainfall",
+      "kind": "percentile",
+      "description": "Monthly rainfall as a percentile (0-100) of the historical record; ~50 = normal, lower = drier.",
+      "n_cells": 4537,
+      "current_month": 36.35,
+      "forecast_month": 60.8,
+      "prev_1": 44.21,
+      "prev_2": 32.86,
+      "prev_3": 62.28,
+      "prev_4": 66.47,
+      "last_year_same_month": 36.63,
+      "driest": 15.53,
+      "wettest": 86.72
+    },
+    {
+      "parameter": "Surface Air Temperature",
+      "kind": "anomaly_degC",
+      "description": "Temperature anomaly in degrees C vs the historical mean for that month; positive = warmer than normal.",
+      "n_cells": 4537,
+      "current_month": 0.39,
+      "forecast_month": -0.13,
+      "prev_1": -0.31,
+      "prev_2": -0.55,
+      "prev_3": -0.85,
+      "prev_4": -0.32,
+      "last_year_same_month": 0.91,
+      "driest": -2.18,
+      "wettest": 2.62
+    },
+    {
+      "parameter": "Relative Wetness (Soil Moisture)",
+      "kind": "anomaly_pct",
+      "description": "Soil-moisture (relative wetness) anomaly, % departure from the historical mean; negative = drier soils than normal.",
+      "n_cells": 4537,
+      "current_month": 3.6,
+      "forecast_month": -0.35,
+      "prev_1": 7.24,
+      "prev_2": 12.73,
+      "prev_3": 21.37,
+      "prev_4": 15.3,
+      "last_year_same_month": -1.07,
+      "driest": -32.5,
+      "wettest": 27.8
+    },
+    {
+      "parameter": "Total Runoff",
+      "kind": "anomaly_pct",
+      "description": "Total-runoff anomaly, % departure from the historical mean; negative = below-normal runoff.",
+      "n_cells": 4537,
+      "current_month": -3.23,
+      "forecast_month": -2.66,
+      "prev_1": 0.69,
+      "prev_2": 1.73,
+      "prev_3": 6.72,
+      "prev_4": 12.9,
+      "last_year_same_month": -1.7,
+      "driest": -39.83,
+      "wettest": 38.84
+    },
+    {
+      "parameter": "Evapotranspiration",
+      "kind": "anomaly_pct",
+      "description": "Evapotranspiration anomaly, % departure from the historical mean; negative = below-normal ET.",
+      "n_cells": 4537,
+      "current_month": -0.25,
+      "forecast_month": -1.59,
+      "prev_1": 0.37,
+      "prev_2": 0.15,
+      "prev_3": -0.2,
+      "prev_4": 0.56,
+      "last_year_same_month": -0.66,
+      "driest": -26.12,
+      "wettest": 15.02
+    }
+  ],
+  "columns": [
+    "current_month",
+    "forecast_month",
+    "prev_1",
+    "prev_2",
+    "prev_3",
+    "prev_4",
+    "last_year_same_month",
+    "driest",
+    "wettest"
+  ],
+  "note": "Each value is the NATIONAL MEAN over all India grid cells for that month-column. 'current_month' is the latest observed month (February 2026); 'forecast_month' is the one-month-ahead forecast (March 2026); prev_1..prev_4 are the four months before current; 'driest'/'wettest' are the historically most extreme analogue months."
+}

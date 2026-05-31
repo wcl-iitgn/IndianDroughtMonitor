@@ -1,0 +1,492 @@
+/* =============================================================================
+ * India Drought Monitor — Interactive Map styling
+ * Re-skins Pranav's canvas heatmap to match the USDM design system.
+ * Relies on the --usdm-* CSS variables defined in assets/styles.css.
+ * ========================================================================== */
+
+/* ---- Layout: map + side rail ------------------------------------------- */
+.idm-viewer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 24px;
+  align-items: start;
+  margin: 8px 0 32px;
+}
+@media (max-width: 1040px) {
+  .idm-viewer-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- The framed map panel (mirrors .map-wrap) -------------------------- */
+.idm-map-panel {
+  background: #fff;
+  border: 1px solid var(--usdm-border);
+  border-radius: 4px;
+  padding: 16px;
+  position: relative;
+  /* The canvas scales responsively (mouse hit-testing is scale-corrected in the
+     engine), so the stage fits the panel without horizontal scrolling. */
+  overflow: hidden;
+}
+
+.idm-canvas-stage {
+  position: relative;
+  width: 840px;
+  max-width: 100%;          /* never overflow the viewport / column */
+  aspect-ratio: 1 / 1;      /* keep the square aspect ratio when scaled down */
+  height: auto;
+  margin: 0 auto;
+  background: #fff;
+}
+.idm-canvas-stage canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;              /* fill the (responsive) stage; backing stays 840 */
+  height: 100%;
+}
+/* Core CSS contract (from Pranav's index.html): raster blends under vector,
+   vector layer captures pointer input on top. */
+#C_raster {
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+#C_vector {
+  z-index: 10;
+  cursor: crosshair;
+}
+
+/* ---- Loading overlay --------------------------------------------------- */
+#idm-map-loading {
+  position: absolute;
+  inset: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: var(--usdm-bg-tint);
+  border: 1px dashed var(--usdm-border);
+  border-radius: 4px;
+  z-index: 20;
+  color: var(--usdm-muted);
+  font-size: 15px;
+  transition: opacity 0.4s ease;
+}
+.idm-spinner {
+  width: 38px;
+  height: 38px;
+  border: 4px solid #eadfd9;
+  border-top-color: var(--usdm-red);
+  border-radius: 50%;
+  animation: idm-spin 0.9s linear infinite;
+}
+@keyframes idm-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.idm-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---- Toolbar above the map -------------------------------------------- */
+.idm-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.idm-toolbar .idm-tool-group {
+  display: inline-flex;
+  align-items: stretch;
+  border: 1px solid var(--usdm-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: #fff;
+}
+.idm-tool-label {
+  background: var(--usdm-red);
+  color: #fff;
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.idm-tool-group select {
+  border: none;
+  padding: 8px 30px 8px 12px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--usdm-text);
+  background: #fff;
+  outline: none;
+  min-width: 180px;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6'><path d='M0 0l5 6 5-6z' fill='%23b32d0a'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+.idm-tool-group select:focus {
+  background-color: #faf9f8;
+}
+
+.idm-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--usdm-red);
+  color: #fff;
+  padding: 9px 16px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+.idm-btn:hover {
+  background: var(--usdm-red-dark);
+}
+.idm-btn:active {
+  transform: translateY(1px);
+}
+.idm-btn.ghost {
+  background: #fff;
+  color: var(--usdm-red-darker);
+  border: 1px solid var(--usdm-border);
+}
+.idm-btn.ghost:hover {
+  background: #f5f3f1;
+}
+
+.idm-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--usdm-text);
+  user-select: none;
+}
+.idm-check input {
+  accent-color: var(--usdm-red);
+  cursor: pointer;
+}
+
+/* ---- Side rail (readout + legend + animation) -------------------------- */
+.idm-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.idm-card {
+  background: #fff;
+  border: 1px solid var(--usdm-border);
+  border-radius: 6px;
+  padding: 18px 18px 20px;
+}
+.idm-card h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 0 14px;
+  color: var(--usdm-red-darker);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--usdm-border);
+}
+
+/* live readout rows */
+.idm-readout-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 6px 0;
+  font-size: 14.5px;
+  border-bottom: 1px dotted #ece7e3;
+}
+.idm-readout-row:last-child {
+  border-bottom: none;
+}
+.idm-readout-row .k {
+  color: var(--usdm-muted);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.idm-readout-row .v {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--usdm-text);
+}
+#idm-readout-class {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 700;
+}
+.idm-readout-hint {
+  margin: 12px 0 0;
+  font-size: 12.5px;
+  color: var(--usdm-muted);
+  line-height: 1.5;
+}
+
+/* legend swatches (matches the core's 6 CDI buckets) */
+.idm-legend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.idm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+.idm-legend-swatch {
+  width: 30px;
+  height: 16px;
+  border: 1px solid #aaa;
+  flex-shrink: 0;
+  border-radius: 2px;
+}
+.sw-d4 { background: #A52A2A; }   /* Exceptional — brown */
+.sw-d3 { background: #FF0000; }   /* Extreme — red */
+.sw-d2 { background: #FFA500; }   /* Severe — orange */
+.sw-d1 { background: #FCD394; }   /* Moderate — rgb(252,214,148) */
+.sw-d0 { background: #FFFF00; }   /* Abnormal — yellow */
+.sw-none { background: #FFFFFF; border: 1px solid #c9c4c0; }  /* Normal — white */
+
+/* animation panel (re-skins Pranav's #animation_panel) */
+.idm-anim-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  align-items: end;
+  background: var(--usdm-bg-tint);
+  border: 1px solid var(--usdm-border);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin: 4px 0 8px;
+}
+.idm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.idm-field label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--usdm-muted);
+}
+.idm-field input[type="date"],
+.idm-field input[type="number"] {
+  border: 1px solid var(--usdm-border);
+  border-radius: 4px;
+  padding: 7px 10px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--usdm-text);
+  background: #fff;
+  outline: none;
+}
+.idm-field input:focus {
+  border-color: var(--usdm-red);
+}
+.idm-field input[type="number"] {
+  width: 72px;
+}
+.idm-anim-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+/* week badge shown during playback (HTML mirror is optional; core also draws on canvas) */
+.idm-week-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--usdm-text);
+  background: #fff;
+  border: 1px solid var(--usdm-border);
+  border-radius: 4px;
+  padding: 6px 12px;
+}
+.idm-week-badge .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #bbb;
+}
+.idm-week-badge.playing .dot {
+  background: var(--usdm-red);
+  animation: idm-pulse 1s ease-in-out infinite;
+}
+@keyframes idm-pulse {
+  50% { opacity: 0.3; }
+}
+
+/* fade the panel in once data is ready */
+.idm-map-panel.idm-ready .idm-canvas-stage {
+  animation: idm-fade 0.5s ease;
+}
+@keyframes idm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* how-to-use strip */
+.idm-howto {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 8px 0 0;
+}
+@media (max-width: 760px) {
+  .idm-howto { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 460px) {
+  .idm-howto { grid-template-columns: 1fr; }
+}
+.idm-howto-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 13.5px;
+  color: #3a3431;
+  line-height: 1.45;
+}
+.idm-howto-item .ico {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--usdm-red);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.idm-howto-item strong {
+  color: var(--usdm-text);
+}
+
+/* ============ COMPARE (two live maps) ============ */
+.idm-compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 8px 0 20px;
+}
+@media (max-width: 1040px) { .idm-compare-grid { grid-template-columns: 1fr; } }
+.idm-compare-panel { padding: 12px; }
+.idm-stage-sm { width: 520px; max-width: 100%; aspect-ratio: 1 / 1; height: auto; }
+.idm-stage-sm canvas { width: 100%; height: 100%; }
+.idm-map-loading-sm {
+  position: absolute; inset: 12px; display: flex; align-items: center; justify-content: center;
+  background: var(--usdm-bg-tint); border: 1px dashed var(--usdm-border); border-radius: 4px; z-index: 20;
+}
+.idm-map-loading-sm.idm-hidden { display: none; }
+
+/* inline legend strip */
+.idm-legend-inline {
+  display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center;
+  padding: 12px 16px; background: var(--usdm-bg-tint);
+  border: 1px solid var(--usdm-border); border-radius: 6px; font-size: 14px; margin: 8px 0 24px;
+}
+.idm-legend-inline .idm-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.idm-legend-inline .idm-legend-swatch { width: 26px; height: 14px; }
+
+/* product/date selects inside tool groups already styled; ensure full-width option */
+.idm-tool-group select { min-width: 150px; }
+
+/* ============ COMPARISON SLIDER (two live canvases) ============ */
+/* Both maps are identical full-size canvases stacked exactly on top of each other.
+   The OLDER (top) layer is revealed only left of the handle via clip-path, so it is
+   genuinely overlaid on the newer map and never rescaled. */
+.idm-slider-stage {
+  position: relative; width: 700px; max-width: 100%; aspect-ratio: 1 / 1;
+  margin: 8px auto 20px; background: #fff; border: 1px solid var(--usdm-border);
+  border-radius: 6px; overflow: hidden; user-select: none;
+}
+.idm-slider-layer, .idm-slider-clip {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+}
+/* Each canvas fills the stage identically (same aspect ratio, same box). */
+.idm-slider-layer canvas, .idm-slider-clip canvas {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  mix-blend-mode: multiply;
+}
+/* The top (older) layer: full size, but only the portion left of --wipe is shown.
+   clip-path insets from the RIGHT by (100% - wipe), leaving the canvas itself untouched. */
+.idm-slider-clip {
+  clip-path: inset(0 calc(100% - var(--wipe, 50%)) 0 0);
+}
+.idm-slider-handle {
+  position: absolute; top: 0; bottom: 0; left: var(--wipe, 50%); width: 3px;
+  background: var(--usdm-red); cursor: ew-resize; z-index: 5; transform: translateX(-50%);
+}
+.idm-slider-handle::after {
+  content: "\21D4"; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); background: var(--usdm-red); color: #fff;
+  border-radius: 50%; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; font-size: 15px;
+}
+.idm-slider-tag {
+  position: absolute; top: 8px; background: rgba(255,255,255,.92);
+  border: 1px solid var(--usdm-border); padding: 3px 9px; font-size: 12px; font-weight: 600;
+  border-radius: 3px; pointer-events: none; z-index: 6;
+}
+.idm-slider-tag.left { left: 10px; } .idm-slider-tag.right { right: 10px; }
+#slider-loading { position:absolute; inset:0; display:flex; flex-direction:column; gap:10px; align-items:center; justify-content:center; background:var(--usdm-bg-tint); z-index:20; color:var(--usdm-muted); }
+#slider-loading.idm-hidden { display:none; }
+
+/* ============ zoom-mode toggle button (active state) ============ */
+.idm-btn#zoom-mode.is-rect {
+  background: var(--usdm-red);
+  color: #fff;
+  border-color: var(--usdm-red);
+}
+
+/* ============ interpolation-detail slider ============ */
+.idm-interp {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13.5px; color: var(--usdm-ink, #3a3431); font-weight: 600;
+  padding: 4px 4px;
+}
+.idm-interp input[type="range"] { width: 110px; accent-color: var(--usdm-red); cursor: pointer; vertical-align: middle; }
+.idm-interp-val {
+  display: inline-block; min-width: 16px; text-align: center;
+  font-variant-numeric: tabular-nums; color: var(--usdm-red); font-weight: 700;
+}
+
+/* ============ state-name card (above cursor readout) ============ */
+.idm-state-card { padding-bottom: 12px; }
+.idm-state-name {
+  font-family: var(--usdm-display, Lora, Georgia, serif);
+  font-size: 22px; font-weight: 700; line-height: 1.15;
+  color: var(--usdm-red); min-height: 26px;
+}
+
+/* ============ GIF build status ============ */
+.idm-gif-status {
+  margin: 4px 0 18px; padding: 8px 14px; font-size: 13.5px; font-weight: 600;
+  background: var(--usdm-bg-tint); border: 1px solid var(--usdm-border);
+  border-radius: 6px; color: var(--usdm-ink, #3a3431); display: inline-block;
+}
+
+/* Disabled control buttons (e.g. Play while an animation is running) */
+.idm-btn:disabled, .idm-btn.is-disabled {
+  opacity: 0.5; cursor: not-allowed; pointer-events: none;
+}

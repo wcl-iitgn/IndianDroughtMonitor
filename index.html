@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Current Map | India Drought Monitor</title>
+  <meta name="theme-color" content="#da3910" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/interactive/drought-map.css" />
+  <script src="assets/vendor/papaparse.min.js"></script>
+  <script src="assets/vendor/alasql.min.js"></script>
+  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
+</head>
+<body>
+
+  <header class="usdm-header">
+    <div class="usdm-header-inner">
+      <h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1>
+    </div>
+  </header>
+
+    <nav class="usdm-nav" aria-label="Primary">
+    <div class="usdm-nav-inner">
+      <a href="index.html" class="active">Current</a>
+      <a href="maps.html">Maps</a>
+      <a href="data.html">Data</a>
+      <a href="hydro.html">Hydrological Outlook</a>
+      <a href="summary.html">Summary</a>
+      <a href="conditions.html">Conditions &amp; Outlooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="usdm-main">
+
+    <div class="page-title-row">
+      <div class="release-block">
+        <h2>Current Drought Conditions</h2>
+        <div class="data-valid">Combined Drought Index &middot; week of May 20, 2026</div>
+      </div>
+    </div>
+
+    <p style="font-size:16.5px;max-width:80ch;color:#3a3431;margin-bottom:16px;">
+      This is the live India Drought Monitor &mdash; an interactive map of the Combined Drought
+      Index built directly from the underlying gridded data. Hover anywhere to read the exact
+      value and drought class, drag to zoom, click or pick a state to focus it, and step through
+      the weekly record. Developed by the <strong>Water and Climate Lab, IIT Gandhinagar</strong>.
+    </p>
+
+    <!-- toolbar -->
+    <div class="idm-toolbar" role="region" aria-label="Map controls">
+      <div class="idm-tool-group">
+        <span class="idm-tool-label">Week</span>
+        <select id="date-select" aria-label="Choose week"></select>
+      </div>
+      <div class="idm-tool-group">
+        <span class="idm-tool-label">Jump to State</span>
+        <select id="state-select" aria-label="Jump to state">
+          <option value="">— Select a state —</option>
+        </select>
+      </div>
+      <button type="button" class="idm-btn ghost" id="reset-view">&#8635; Reset view</button>
+      <button type="button" class="idm-btn ghost" id="zoom-mode" aria-pressed="false">&#9783; Rectangle zoom: OFF</button>
+      <label class="idm-check"><input type="checkbox" id="isolate-toggle" checked /> Isolate selected state</label>
+      <label class="idm-check"><input type="checkbox" id="grayscale-toggle" /> Greyscale</label>
+      <button type="button" class="idm-btn ghost" id="download-png">&#11015; Download PNG</button>
+      <label class="idm-interp" title="Higher = smoother interpolation between grid cells">Detail&nbsp;<input type="range" id="interp-slider" min="1" max="6" step="1" value="3" aria-label="Interpolation detail" /><span id="interp-value" class="idm-interp-val">3</span></label>
+    </div>
+
+    <div class="idm-viewer-grid">
+      <div class="idm-map-panel" aria-label="Interactive drought map">
+        <div id="idm-map-loading">
+          <div class="idm-spinner" role="status" aria-label="Loading map"></div>
+          <div>Loading boundaries &amp; drought data&hellip;</div>
+        </div>
+        <div class="idm-canvas-stage">
+          <canvas id="C_vector" width="840" height="840"></canvas>
+          <canvas id="C_raster" width="840" height="840"></canvas>
+        </div>
+      </div>
+
+      <aside class="idm-rail">
+        <div class="idm-card idm-state-card">
+          <h3>State</h3>
+          <div class="idm-state-name" id="ro-state-big">&mdash;</div>
+        </div>
+        <div class="idm-card">
+          <h3>Cursor Readout</h3>
+          <div class="idm-readout-row"><span class="k">Latitude</span><span class="v" id="ro-lat">—</span></div>
+          <div class="idm-readout-row"><span class="k">Longitude</span><span class="v" id="ro-lng">—</span></div>
+          <div class="idm-readout-row"><span class="k">CDI value</span><span class="v" id="ro-val">—</span></div>
+          <div class="idm-readout-row"><span class="k">State</span><span class="v" id="ro-state">—</span></div>
+          <div class="idm-readout-row"><span class="k">Class</span><span class="v" id="ro-cls">—</span></div>
+          <p class="idm-readout-hint">Move your cursor over the map to inspect any 0.25&deg; grid cell.</p>
+        </div>
+        <div class="idm-card">
+          <h3>Drought Classes</h3>
+          <div class="idm-legend-list">
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span> No Drought</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span> D0 — Abnormally Dry</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span> D1 — Moderate</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span> D2 — Severe</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span> D3 — Extreme</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span> D4 — Exceptional</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- animation -->
+    <h2>Animate the Record</h2>
+    <p style="max-width:80ch;color:#3a3431;">Play through the weekly CDI series (July 2021 onward). The current week is stamped on the map as it plays.</p>
+    <div class="idm-anim-panel">
+      <div class="idm-field"><label for="anim_start_date">Start week</label><input type="date" id="anim_start_date" value="2021-07-14" min="2021-07-14" max="2026-05-20" /></div>
+      <div class="idm-field"><label for="anim_end_date">End week</label><input type="date" id="anim_end_date" value="2026-05-20" min="2021-07-14" max="2026-05-20" /></div>
+      <div class="idm-field"><label for="anim_fps">Frames / sec</label><input type="number" id="anim_fps" value="3" min="1" max="15" /></div>
+      <div class="idm-anim-actions">
+        <button type="button" class="idm-btn" id="btn_start_anim">&#9654; Play</button>
+        <button type="button" class="idm-btn ghost" id="btn_stop_anim">&#9632; Stop</button>
+      </div>
+    </div>
+
+    <hr class="soft" />
+    <section>
+      <h2>This Week's Summary</h2>
+      <p class="summary-section lead">
+        Large parts of peninsular and central India continue to show rainfall deficits as the
+        pre-monsoon period advances. The Combined Drought Index indicates severe-to-extreme
+        conditions across interior Maharashtra, northern Karnataka, Telangana and parts of
+        Rajasthan, while improved soil moisture has eased conditions over the eastern Gangetic
+        plains. Reservoir storage in several western and southern basins remains below the
+        ten-year average, sustaining short-term agricultural stress.
+      </p>
+      <p><a class="btn" href="summary.html">Read the Full National Summary</a></p>
+    </section>
+
+  </main>
+
+    <footer class="usdm-footer">
+    <div class="usdm-footer-inner">
+      <div class="partner-logos">
+        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
+        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
+        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
+      </div>
+      <p class="partner-blurb">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+      <div class="contact-block">
+        <div>
+          <h3>Contact Us</h3>
+          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
+          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
+          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+        </div>
+        <div>
+          <h3>Maps</h3>
+          <ul>
+            <li><a href="index.html">Current Map</a></li>
+            <li><a href="compare.html">Compare Two Weeks</a></li>
+            <li><a href="slider.html">Comparison Slider</a></li>
+            <li><a href="animations.html">Animations</a></li>
+            <li><a href="archive.html">Map Archive</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Hydrological Outlook</h3>
+          <ul>
+            <li><a href="hydro.html">Dashboards</a></li>
+            <li><a href="hydro-maps.html">Individual Maps</a></li>
+            <li><a href="hydro-reports.html">PDF Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="data.html">Data Download</a></li>
+            <li><a href="data-query.html">Query the Data</a></li>
+            <li><a href="summary.html">National Summary</a></li>
+            <li><a href="about.html">What is the IDM?</a></li>
+            <li><a href="contact.html">Contact Authors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/interactive/drought-map.colormaps.js"></script>
+  <script src="assets/interactive/drought-map.engine.js"></script>
+  <script src="assets/interactive/drought-map.app.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      IDM.fillDateSelect(document.getElementById("date-select"));
+      IDM.mountMap({
+        raster: "C_raster", vector: "C_vector", product: "cdi",
+        stateSelect: "state-select", dateSelect: "date-select",
+        resetBtn: "reset-view", zoomModeBtn: "zoom-mode", isolateChk: "isolate-toggle",
+        readout: { lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
+        animControls: {
+          btnStart: document.getElementById("btn_start_anim"),
+          btnStop: document.getElementById("btn_stop_anim"),
+          startDate: document.getElementById("anim_start_date"),
+          endDate: document.getElementById("anim_end_date"),
+          fps: document.getElementById("anim_fps")
+        },
+        interpSlider:"interp-slider", interpValue:"interp-value", grayscaleChk:"grayscale-toggle", downloadBtn:"download-png", downloadName:"india-drought-cdi", loader: "#idm-map-loading"
+      });
+    });
+  </script>
+  <script src="assets/ai/idm-ai.js"></script>
+  <script src="assets/ai/idm-chatbot.js"></script>
+</body>
+</html>

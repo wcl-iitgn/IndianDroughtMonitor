@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Animations | India Drought Monitor</title>
+  <meta name="theme-color" content="#da3910" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/interactive/drought-map.css" />
+  <script src="assets/vendor/papaparse.min.js"></script>
+  <script src="assets/vendor/alasql.min.js"></script>
+  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
+</head>
+<body>
+  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
+    <nav class="usdm-nav" aria-label="Primary">
+    <div class="usdm-nav-inner">
+      <a href="index.html">Current</a>
+      <a href="maps.html" class="active">Maps</a>
+      <a href="data.html">Data</a>
+      <a href="hydro.html">Hydrological Outlook</a>
+      <a href="summary.html">Summary</a>
+      <a href="conditions.html">Conditions &amp; Outlooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+  <main class="usdm-main">
+    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="maps.html">Maps</a> <span class="sep">/</span> Animations</div>
+    <h1 class="page-title">Animations</h1>
+    <p style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+      Watch the Combined Drought Index evolve week by week across the full record (July 2021 to
+      the present). Set a date range and frame rate, then press play. Every frame is read live
+      from that week's data grid.
+    </p>
+
+    <div class="idm-anim-panel">
+      <div class="idm-field"><label for="anim_start_date">Start week</label><input type="date" id="anim_start_date" value="2024-01-03" min="2021-07-14" max="2026-05-20" /></div>
+      <div class="idm-field"><label for="anim_end_date">End week</label><input type="date" id="anim_end_date" value="2026-05-20" min="2021-07-14" max="2026-05-20" /></div>
+      <div class="idm-field"><label for="anim_fps">Frames / sec</label><input type="number" id="anim_fps" value="4" min="1" max="15" /></div>
+      <div class="idm-field"><label for="interp-slider">Detail</label><span style="display:inline-flex;align-items:center;gap:6px;"><input type="range" id="interp-slider" min="1" max="6" step="1" value="3" /><span id="interp-value" class="idm-interp-val">3</span></span></div>
+      <div class="idm-field"><label>&nbsp;</label><label class="idm-check"><input type="checkbox" id="grayscale-toggle" /> Greyscale</label></div>
+      <div class="idm-anim-actions">
+        <button type="button" class="idm-btn" id="btn_start_anim">&#9654; Play</button>
+        <button type="button" class="idm-btn ghost" id="btn_stop_anim">&#9632; Stop</button>
+        <button type="button" class="idm-btn ghost" id="download-png">&#11015; PNG</button>
+        <button type="button" class="idm-btn ghost" id="download-gif">&#11015; GIF</button>
+      </div>
+    </div>
+    <div id="gif-status" class="idm-gif-status" style="display:none;"></div>
+
+    <div class="idm-viewer-grid">
+      <div class="idm-map-panel">
+        <div id="idm-map-loading"><div class="idm-spinner"></div><div>Loading data&hellip;</div></div>
+        <div class="idm-canvas-stage">
+          <canvas id="C_vector" width="840" height="840"></canvas>
+          <canvas id="C_raster" width="840" height="840"></canvas>
+        </div>
+      </div>
+      <aside class="idm-rail">
+        <div class="idm-card">
+          <h3>Drought Classes</h3>
+          <div class="idm-legend-list">
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span> No Drought</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span> D0 — Abnormally Dry</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span> D1 — Moderate</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span> D2 — Severe</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span> D3 — Extreme</div>
+            <div class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span> D4 — Exceptional</div>
+          </div>
+          <p class="idm-readout-hint">The current week is stamped on the map while playing.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+    <footer class="usdm-footer">
+    <div class="usdm-footer-inner">
+      <div class="partner-logos">
+        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
+        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
+        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
+      </div>
+      <p class="partner-blurb">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+      <div class="contact-block">
+        <div>
+          <h3>Contact Us</h3>
+          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
+          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
+          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+        </div>
+        <div>
+          <h3>Maps</h3>
+          <ul>
+            <li><a href="index.html">Current Map</a></li>
+            <li><a href="compare.html">Compare Two Weeks</a></li>
+            <li><a href="slider.html">Comparison Slider</a></li>
+            <li><a href="animations.html">Animations</a></li>
+            <li><a href="archive.html">Map Archive</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Hydrological Outlook</h3>
+          <ul>
+            <li><a href="hydro.html">Dashboards</a></li>
+            <li><a href="hydro-maps.html">Individual Maps</a></li>
+            <li><a href="hydro-reports.html">PDF Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="data.html">Data Download</a></li>
+            <li><a href="data-query.html">Query the Data</a></li>
+            <li><a href="summary.html">National Summary</a></li>
+            <li><a href="about.html">What is the IDM?</a></li>
+            <li><a href="contact.html">Contact Authors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+    </div>
+  </footer>
+  <script src="assets/interactive/drought-map.colormaps.js"></script>
+  <script src="assets/interactive/drought-map.engine.js"></script>
+  <script src="assets/interactive/drought-map.app.js"></script>
+  <script src="assets/vendor/gif.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var map = IDM.mountMap({
+        raster:"C_raster", vector:"C_vector", product:"cdi", interactive:true,
+        loader:"#idm-map-loading",
+        interpSlider:"interp-slider", interpValue:"interp-value",
+        grayscaleChk:"grayscale-toggle",
+        downloadBtn:"download-png", downloadName:"india-drought-animation-frame",
+        animControls:{
+          btnStart:document.getElementById("btn_start_anim"),
+          btnStop:document.getElementById("btn_stop_anim"),
+          startDate:document.getElementById("anim_start_date"),
+          endDate:document.getElementById("anim_end_date"),
+          fps:document.getElementById("anim_fps")
+        }
+      });
+
+      // ---- Download animation as GIF ----
+      // Iterate the chosen week range, render each frame, capture the flattened
+      // raster canvas, and encode to a .gif with gif.js (worker vendored locally).
+      var gifBtn = document.getElementById("download-gif");
+      var statusEl = document.getElementById("gif-status");
+      gifBtn.addEventListener("click", function () {
+        Promise.resolve(map).then(async function (m) {
+          if (!m || !m.loadCDIDataForDate) { m = await map; }
+          var dates = IDM.buildDateList().map(function (d) { return d; });
+          var startIso = document.getElementById("anim_start_date").value;
+          var endIso = document.getElementById("anim_end_date").value;
+          var fps = parseInt(document.getElementById("anim_fps").value, 10) || 4;
+          var frames = dates.filter(function (d) { return d.iso >= startIso && d.iso <= endIso; });
+          if (!frames.length) { return; }
+
+          m.stopCDIAnimation && m.stopCDIAnimation();
+          gifBtn.disabled = true;
+          statusEl.style.display = "block";
+          statusEl.textContent = "Building GIF… 0/" + frames.length;
+
+          var w = m.canvases.raster.width, h = m.canvases.raster.height;
+          var gif = new GIF({ workers: 2, quality: 10, width: w, height: h,
+                              workerScript: "assets/vendor/gif.worker.js", background: "#ffffff" });
+
+          for (var i = 0; i < frames.length; i++) {
+            var ok = await m.loadCDIDataForDate(frames[i].compact);
+            if (ok) {
+              m.renderStaticMap();
+              var c = m.captureRasterCanvas();   // white bg + data, flattened
+              gif.addFrame(c, { copy: true, delay: Math.round(1000 / fps) });
+            }
+            statusEl.textContent = "Building GIF… " + (i + 1) + "/" + frames.length;
+          }
+
+          gif.on("progress", function (p) { statusEl.textContent = "Encoding GIF… " + Math.round(p * 100) + "%"; });
+          gif.on("finished", function (blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            a.href = url; a.download = "india-drought-animation.gif";
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            statusEl.textContent = "GIF downloaded (" + frames.length + " frames).";
+            gifBtn.disabled = false;
+            setTimeout(function () { statusEl.style.display = "none"; }, 4000);
+          });
+          gif.render();
+        });
+      });
+    });
+  </script>
+  <script src="assets/ai/idm-ai.js"></script>
+  <script src="assets/ai/idm-chatbot.js"></script>
+</body></html>

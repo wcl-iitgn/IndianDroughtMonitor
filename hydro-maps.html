@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Individual Maps | Hydrological Outlook | India Drought Monitor</title>
+  <meta name="theme-color" content="#da3910" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/hydro/hydro.css" />
+  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
+</head>
+<body>
+  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
+  <nav class="usdm-nav" aria-label="Primary">
+    <div class="usdm-nav-inner">
+      <a href="index.html">Current</a>
+      <a href="maps.html">Maps</a>
+      <a href="data.html">Data</a>
+      <a href="hydro.html" class="active">Hydrological Outlook</a>
+      <a href="summary.html">Summary</a>
+      <a href="conditions.html">Conditions &amp; Outlooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+  <main class="usdm-main">
+    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="hydro.html">Hydrological Outlook</a> <span class="sep">/</span> Individual Maps</div>
+    <h1 class="page-title">Individual Maps</h1>
+    <p style="font-size:16.5px;max-width:82ch;color:#3a3431;">
+      These are the individual maps that make up each Hydrological Outlook dashboard, shown separately
+      so you can inspect any single month at full size. Choose a variable, then click any map to open
+      it full-size in a new tab.
+    </p>
+
+    <div class="hydro-toolbar">
+      <div class="idm-tool-group">
+        <span class="idm-tool-label">Variable</span>
+        <select id="param-select" aria-label="Choose variable"></select>
+      </div>
+      <div class="hydro-month-badge" id="month-badge">February 2026</div>
+      <div class="hydro-toolbar-spacer"></div>
+      <a class="idm-btn ghost" href="hydro.html">&#8862; Back to dashboard view</a>
+    </div>
+
+    <p class="hydro-param-desc" id="param-desc"></p>
+
+    <div class="hydro-loading" id="maps-loading"><div class="idm-spinner"></div><div>Loading maps&hellip;</div></div>
+    <div class="hydro-map-grid" id="map-grid"></div>
+
+    <!-- lightbox -->
+    <div class="hydro-lightbox" id="lightbox" hidden>
+      <button class="hydro-lightbox-close" id="lightbox-close" aria-label="Close">&times;</button>
+      <img id="lightbox-img" alt="" />
+      <div class="hydro-lightbox-cap" id="lightbox-cap"></div>
+    </div>
+  </main>
+  <footer class="usdm-footer">
+    <div class="usdm-footer-inner">
+      <div class="partner-logos">
+        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
+        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
+        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
+      </div>
+      <p class="partner-blurb">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+      <div class="contact-block">
+        <div>
+          <h3>Contact Us</h3>
+          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
+          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
+          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+        </div>
+        <div>
+          <h3>Maps</h3>
+          <ul>
+            <li><a href="index.html">Current Map</a></li>
+            <li><a href="compare.html">Compare Two Weeks</a></li>
+            <li><a href="slider.html">Comparison Slider</a></li>
+            <li><a href="animations.html">Animations</a></li>
+            <li><a href="archive.html">Map Archive</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Hydrological Outlook</h3>
+          <ul>
+            <li><a href="hydro.html">Dashboards</a></li>
+            <li><a href="hydro-maps.html">Individual Maps</a></li>
+            <li><a href="hydro-reports.html">PDF Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="data.html">Data Download</a></li>
+            <li><a href="data-query.html">Query the Data</a></li>
+            <li><a href="summary.html">National Summary</a></li>
+            <li><a href="about.html">What is the IDM?</a></li>
+            <li><a href="contact.html">Contact Authors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+    </div>
+  </footer>
+  <script src="assets/hydro/hydro.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      IHO.initMaps({
+        select: "param-select", grid: "map-grid", loading: "maps-loading",
+        desc: "param-desc", monthBadge: "month-badge",
+        lightbox: "lightbox", lightboxImg: "lightbox-img", lightboxCap: "lightbox-cap", lightboxClose: "lightbox-close"
+      });
+    });
+  </script>
+  <script src="assets/vendor/papaparse.min.js"></script>
+  <script src="assets/vendor/alasql.min.js"></script>
+  <script src="assets/ai/idm-ai.js"></script>
+  <script src="assets/ai/idm-chatbot.js"></script>
+</body>
+</html>

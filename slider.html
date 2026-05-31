@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Comparison Slider | India Drought Monitor</title>
+  <meta name="theme-color" content="#da3910" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/interactive/drought-map.css" />
+  <script src="assets/vendor/papaparse.min.js"></script>
+  <script src="assets/vendor/alasql.min.js"></script>
+  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
+</head>
+<body>
+  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
+    <nav class="usdm-nav" aria-label="Primary">
+    <div class="usdm-nav-inner">
+      <a href="index.html">Current</a>
+      <a href="maps.html" class="active">Maps</a>
+      <a href="data.html">Data</a>
+      <a href="hydro.html">Hydrological Outlook</a>
+      <a href="summary.html">Summary</a>
+      <a href="conditions.html">Conditions &amp; Outlooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+  <main class="usdm-main">
+    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="maps.html">Maps</a> <span class="sep">/</span> Comparison Slider</div>
+    <h1 class="page-title">Comparison Slider</h1>
+    <p style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+      Drag the handle to wipe between two weeks of the Combined Drought Index. Both maps are
+      rendered live from the data. Choose the weeks below.
+    </p>
+
+    <div class="idm-toolbar">
+      <div class="idm-tool-group"><span class="idm-tool-label">Older (left)</span><select id="date-old" aria-label="Older week"></select></div>
+      <div class="idm-tool-group"><span class="idm-tool-label">Newer (right)</span><select id="date-new" aria-label="Newer week"></select></div>
+    </div>
+
+    <div class="idm-slider-stage" id="slider-stage">
+      <div id="slider-loading"><div class="idm-spinner"></div><div>Loading data&hellip;</div></div>
+      <!-- base (newer) -->
+      <div class="idm-slider-layer">
+        <canvas id="N_raster" width="700" height="700"></canvas>
+        <canvas id="N_vector" width="700" height="700" style="display:none"></canvas>
+      </div>
+      <!-- clipped (older) on top -->
+      <div class="idm-slider-clip" id="slider-clip">
+        <canvas id="O_raster" width="700" height="700"></canvas>
+        <canvas id="O_vector" width="700" height="700" style="display:none"></canvas>
+      </div>
+      <div class="idm-slider-handle" id="slider-handle"></div>
+      <div class="idm-slider-tag left" id="tag-old">older</div>
+      <div class="idm-slider-tag right" id="tag-new">newer</div>
+    </div>
+
+    <div class="idm-legend-inline">
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span>No Drought</span>
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span>D0</span>
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span>D1</span>
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span>D2</span>
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span>D3</span>
+      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span>D4</span>
+    </div>
+  </main>
+    <footer class="usdm-footer">
+    <div class="usdm-footer-inner">
+      <div class="partner-logos">
+        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
+        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
+        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
+      </div>
+      <p class="partner-blurb">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+      <div class="contact-block">
+        <div>
+          <h3>Contact Us</h3>
+          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
+          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
+          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+        </div>
+        <div>
+          <h3>Maps</h3>
+          <ul>
+            <li><a href="index.html">Current Map</a></li>
+            <li><a href="compare.html">Compare Two Weeks</a></li>
+            <li><a href="slider.html">Comparison Slider</a></li>
+            <li><a href="animations.html">Animations</a></li>
+            <li><a href="archive.html">Map Archive</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Hydrological Outlook</h3>
+          <ul>
+            <li><a href="hydro.html">Dashboards</a></li>
+            <li><a href="hydro-maps.html">Individual Maps</a></li>
+            <li><a href="hydro-reports.html">PDF Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="data.html">Data Download</a></li>
+            <li><a href="data-query.html">Query the Data</a></li>
+            <li><a href="summary.html">National Summary</a></li>
+            <li><a href="about.html">What is the IDM?</a></li>
+            <li><a href="contact.html">Contact Authors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+    </div>
+  </footer>
+  <script src="assets/interactive/drought-map.colormaps.js"></script>
+  <script src="assets/interactive/drought-map.engine.js"></script>
+  <script src="assets/interactive/drought-map.app.js"></script>
+  <script>
+    window.addEventListener("DOMContentLoaded", function () {
+      IDM.fillDateSelect(document.getElementById("date-old"), "2025-05-21");
+      IDM.fillDateSelect(document.getElementById("date-new"), "2026-05-20");
+      document.getElementById("tag-old").textContent = "2025-05-21";
+      document.getElementById("tag-new").textContent = "2026-05-20";
+
+      (async function () {
+        // Non-interactive renderers (display only). size 700 to match canvas.
+        var older = IDM.buildMap(document.getElementById("O_raster"), document.getElementById("O_vector"), "cdi", { interactive:false, size:700 });
+        var newer = IDM.buildMap(document.getElementById("N_raster"), document.getElementById("N_vector"), "cdi", { interactive:false, size:700 });
+        await newer.init(); newer.renderStaticMap();   // newer shows current by default
+        await older.init();
+        await older.loadCDIDataForDate("20250521"); older.renderStaticMap();
+        document.getElementById("slider-loading").classList.add("idm-hidden");
+
+        document.getElementById("date-old").addEventListener("change", function(e){
+          document.getElementById("tag-old").textContent = e.target.value;
+          older.loadCDIDataForDate(e.target.value.replace(/-/g,"")).then(function(k){ if(k) older.renderStaticMap(); });
+        });
+        document.getElementById("date-new").addEventListener("change", function(e){
+          document.getElementById("tag-new").textContent = e.target.value;
+          newer.loadCDIDataForDate(e.target.value.replace(/-/g,"")).then(function(k){ if(k) newer.renderStaticMap(); });
+        });
+
+        // wipe handle
+        var stage=document.getElementById("slider-stage"), clip=document.getElementById("slider-clip"), handle=document.getElementById("slider-handle");
+        var dragging=false;
+        function setPct(p){ p=Math.max(2,Math.min(98,p)); stage.style.setProperty("--wipe", p+"%"); }
+        function fromX(clientX){ var r=stage.getBoundingClientRect(); setPct((clientX-r.left)/r.width*100); }
+        handle.addEventListener("mousedown", function(){ dragging=true; });
+        window.addEventListener("mouseup", function(){ dragging=false; });
+        window.addEventListener("mousemove", function(e){ if(dragging) fromX(e.clientX); });
+        stage.addEventListener("click", function(e){ fromX(e.clientX); });
+        handle.addEventListener("touchstart", function(){ dragging=true; }, {passive:true});
+        window.addEventListener("touchend", function(){ dragging=false; });
+        window.addEventListener("touchmove", function(e){ if(dragging&&e.touches[0]) fromX(e.touches[0].clientX); }, {passive:true});
+        setPct(50);
+      })();
+    });
+  </script>
+  <script src="assets/ai/idm-ai.js"></script>
+  <script src="assets/ai/idm-chatbot.js"></script>
+</body></html>

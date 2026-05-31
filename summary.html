@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-IN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>National Drought Summary | India Drought Monitor</title>
+  <meta name="theme-color" content="#da3910" />
+  <link rel="stylesheet" href="assets/styles.css" />
+  
+  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
+</head>
+<body>
+
+  <header class="usdm-header">
+    <div class="usdm-header-inner">
+      <h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1>
+    </div>
+  </header>
+
+      <nav class="usdm-nav" aria-label="Primary">
+    <div class="usdm-nav-inner">
+      <a href="index.html">Current</a>
+      <a href="maps.html">Maps</a>
+      <a href="data.html">Data</a>
+      <a href="hydro.html">Hydrological Outlook</a>
+      <a href="summary.html" class="active">Summary</a>
+      <a href="conditions.html">Conditions &amp; Outlooks</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <main class="usdm-main">
+<div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> Summary</div>
+
+    <h1 class="page-title">National Drought Summary</h1>
+
+    <div class="idm-summary-ai">
+      <div class="idm-summary-controls">
+        <div class="idm-tool-group">
+          <label class="idm-tool-label" for="sum-date">Week</label>
+          <select id="sum-date" aria-label="Choose summary week"></select>
+        </div>
+        <div class="idm-summary-controls-spacer"></div>
+        <button type="button" class="idm-btn ghost" id="sum-download">&#11015; Download summary</button>
+      </div>
+      <div class="idm-summary-box">
+        <h2 class="idm-summary-title" id="sum-title">National Drought Summary</h2>
+        <div class="idm-summary-text" id="sum-text">Loading the latest summary&hellip;</div>
+        <p class="idm-summary-author">
+          <strong>Water and Climate Lab</strong>, Indian Institute of Technology Gandhinagar
+        </p>
+      </div>
+    </div>
+
+
+
+    <h2>Dryness Categories</h2>
+    <p>
+      The India Drought Monitor uses a five-category system to identify the unusualness of dry
+      conditions. The categories range from <strong>D0 (Abnormally Dry)</strong> through
+      <strong>D4 (Exceptional Drought)</strong>. Each weekly map represents an integrated
+      assessment combining objective indicators and on-the-ground observations from a network of
+      local experts.
+    </p>
+
+    <div class="legend-grid" style="margin-top:16px;">
+      <div class="legend-item"><span class="legend-swatch d0"></span> <strong>D0</strong> Abnormally Dry</div>
+      <div class="legend-item"><span class="legend-swatch d1"></span> <strong>D1</strong> Moderate Drought</div>
+      <div class="legend-item"><span class="legend-swatch d2"></span> <strong>D2</strong> Severe Drought</div>
+      <div class="legend-item"><span class="legend-swatch d3"></span> <strong>D3</strong> Extreme Drought</div>
+      <div class="legend-item"><span class="legend-swatch d4"></span> <strong>D4</strong> Exceptional Drought</div>
+      <div></div><div></div><div></div>
+    </div>
+
+  </main>
+
+    <footer class="usdm-footer">
+    <div class="usdm-footer-inner">
+      <div class="partner-logos">
+        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
+        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
+        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
+      </div>
+      <p class="partner-blurb">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+      <div class="contact-block">
+        <div>
+          <h3>Contact Us</h3>
+          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
+          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
+          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+        </div>
+        <div>
+          <h3>Maps</h3>
+          <ul>
+            <li><a href="index.html">Current Map</a></li>
+            <li><a href="compare.html">Compare Two Weeks</a></li>
+            <li><a href="slider.html">Comparison Slider</a></li>
+            <li><a href="animations.html">Animations</a></li>
+            <li><a href="archive.html">Map Archive</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Hydrological Outlook</h3>
+          <ul>
+            <li><a href="hydro.html">Dashboards</a></li>
+            <li><a href="hydro-maps.html">Individual Maps</a></li>
+            <li><a href="hydro-reports.html">PDF Reports</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="data.html">Data Download</a></li>
+            <li><a href="data-query.html">Query the Data</a></li>
+            <li><a href="summary.html">National Summary</a></li>
+            <li><a href="about.html">What is the IDM?</a></li>
+            <li><a href="contact.html">Contact Authors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copy">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script src="assets/vendor/papaparse.min.js"></script>
+  <script src="assets/vendor/alasql.min.js"></script>
+  <script src="assets/ai/idm-ai.js"></script>
+  <script src="assets/ai/idm-chatbot.js"></script>
+  <script>
+    // Summary page: load dated summaries from the archive, with a week picker and download.
+    (function () {
+      var textEl = document.getElementById("sum-text");
+      var titleEl = document.getElementById("sum-title");
+      var dateSel = document.getElementById("sum-date");
+      var dlBtn = document.getElementById("sum-download");
+      var ARCHIVE = "data/summaries/";
+      var current = { label: "", date: "", body: "" };
+
+      function stripHeader(t) { return t.replace(/^#[^\n]*\n+/, "").trim(); }
+
+      function show(item) {
+        textEl.textContent = "Loading\u2026";
+        fetch(ARCHIVE + item.file).then(function (r) {
+          if (!r.ok) throw new Error(); return r.text();
+        }).then(function (t) {
+          current = { label: item.label, date: item.date, body: stripHeader(t) };
+          titleEl.textContent = "National Drought Summary \u2014 " + item.label;
+          textEl.textContent = current.body;
+        }).catch(function () {
+          textEl.textContent = "This summary could not be loaded.";
+        });
+      }
+
+      fetch(ARCHIVE + "index.json").then(function (r) { return r.json(); }).then(function (j) {
+        var list = (j && j.summaries) || [];
+        if (!list.length) { textEl.textContent = "No summaries are available yet."; return; }
+        list.forEach(function (it, i) {
+          var o = document.createElement("option");
+          o.value = it.file; o.textContent = it.label;
+          if (i === 0) o.selected = true;
+          dateSel.appendChild(o);
+        });
+        show(list[0]);
+        dateSel.addEventListener("change", function () {
+          var it = list.filter(function (x) { return x.file === dateSel.value; })[0];
+          if (it) show(it);
+        });
+      }).catch(function () {
+        textEl.textContent = "The summary archive could not be loaded.";
+      });
+
+      dlBtn.addEventListener("click", function () {
+        if (!current.body) return;
+        var header = "India Drought Monitor \u2014 National Drought Summary\n" +
+                     "Week ending " + (current.label || current.date) + "\n\n";
+        var blob = new Blob([header + current.body + "\n"], { type: "text/plain" });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url; a.download = "IDM_summary_" + (current.date || "latest") + ".txt";
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    })();
+  </script>
+</body>
+</html>
