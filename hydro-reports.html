@@ -41,7 +41,9 @@
       <section class="hydro-reports-viewer">
         <div class="hydro-reports-viewer-bar">
           <span id="viewer-title">Select a report</span>
-          <a class="idm-btn" id="report-download" href="#" download style="display:none;">&#11015; Download PDF</a>
+          <span class="hydro-bar-spacer"></span>
+          <a class="idm-btn ghost" id="report-download-current" href="#" download style="display:none;">&#11015; Download current month PDF</a>
+          <a class="idm-btn" id="report-download" href="#" download style="display:none;">&#11015; Download this report</a>
         </div>
         <div class="hydro-pdf-frame-wrap">
           <iframe id="report-frame" class="hydro-pdf-frame" title="Hydrological Outlook report preview"></iframe>
@@ -111,7 +113,8 @@
     window.addEventListener("DOMContentLoaded", function () {
       IHO.initReports({
         list: "report-list", frame: "report-frame", title: "viewer-title",
-        download: "report-download", fallback: "pdf-fallback", fallbackLink: "fallback-link"
+        download: "report-download", downloadCurrent: "report-download-current",
+        fallback: "pdf-fallback", fallbackLink: "fallback-link"
       });
     });
   </script>

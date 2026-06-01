@@ -847,6 +847,16 @@ hr.soft {
 html, body { max-width: 100%; overflow-x: hidden; }
 img, svg, canvas, iframe, table { max-width: 100%; }
 
+/* Belt-and-braces against the canvas stage ever exceeding the viewport — caps
+   against BOTH the container (100%) and the visual viewport (100vw). This makes
+   Chrome DevTools device-mode match a real device (DevTools is more sensitive to
+   elements sized at exactly the viewport width). The 840px backing store is
+   unaffected; only the displayed size is capped, and hit-testing is scale-aware. */
+.idm-canvas-stage, .idm-stage-sm {
+  max-width: min(100%, 100vw) !important;
+}
+.idm-map-panel, .idm-compare-panel { max-width: 100%; overflow: hidden; }
+
 /* Tablet / small laptop */
 @media (max-width: 900px) {
   :root { --nav-h: 50px; }

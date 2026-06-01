@@ -178,7 +178,8 @@
   // ---------------------------------------------------------------------------
   function initReports(cfg) {
     var listEl = el(cfg.list), frame = el(cfg.frame), title = el(cfg.title),
-        dl = el(cfg.download), fallback = el(cfg.fallback), fallbackLink = el(cfg.fallbackLink);
+        dl = el(cfg.download), fallback = el(cfg.fallback), fallbackLink = el(cfg.fallbackLink),
+        dlCurrent = cfg.downloadCurrent ? el(cfg.downloadCurrent) : null;
 
     fetch(REPORTS_URL).then(function (r) {
       if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
@@ -188,6 +189,16 @@
       if (!reports.length) {
         listEl.innerHTML = "<li class='hydro-empty'>No reports available yet.</li>";
         return;
+      }
+
+      // "Download current month PDF" always points at the newest report (manifest is newest-first).
+      if (dlCurrent) {
+        var cur = reports[0];
+        var curSrc = encPath(PDF_DIR + "/" + cur.file);
+        dlCurrent.href = curSrc;
+        dlCurrent.setAttribute("download", cur.file);
+        dlCurrent.title = "Download the current month report (" + cur.label + ")";
+        dlCurrent.style.display = "";
       }
 
       function select(rep, liEl) {

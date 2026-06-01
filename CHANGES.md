@@ -1,45 +1,63 @@
-# India Drought Monitor — Change Summary (v10: show-query + Query the Data page)
+# India Drought Monitor — Change Summary (v13: PDF summary overflow fix + pages 7-8 removed)
 
-## Verified: the chatbot's national answer is now correct
+## 1. Page-1 SUMMARY no longer overflows its box
 
-Confirmed against the raw data — for "How much of India is in drought right now?" the bot
-answers **15.303% in drought (d0_pct) / 84.697% normal (normal_pct)**, which exactly matches
-the latest weekly row (2026-05-20), via the query
-`SELECT normal_pct, d0_pct FROM drought_timeseries ORDER BY date DESC LIMIT 1`.
+The model sometimes wrote a much longer SUMMARY than the 151-word budget (your last run was
+~232 words), and it spilled past the box into the "Rainfall and Temperature" heading. Fixed by a
+hard word-budget clamp that can never be exceeded:
+- `_clamp_to_budget(text, high_words)` keeps whole sentences until adding the next would exceed the
+  box budget (target x (1 + tolerance); for the summary that is 151 x 1.07 = 162 words).
+- Applied to every generated paragraph (and every offline-template paragraph), so no paragraph can
+  overflow its fixed-height region regardless of how verbose the model is.
+- Verified: a 232-word summary is trimmed to 158 words ending on a complete sentence, and page 1
+  renders with clear space before the "Rainfall and Temperature" heading even with all three body
+  sections present.
 
-## 1. "Show query" in the chatbot
+The clamp keeps all of the current-month text plus as much of the forecast as fits — same density
+as the published reference (whose summary was ~151 words and fit the same box).
 
-Each chatbot answer is now followed by a collapsible **"Show query"** disclosure that reveals
-the exact AlaSQL that produced it (shown in a dark code block, collapsed by default). It also
-appears on the "couldn't answer" path so you can see what was attempted. This is an explicit,
-opt-in transparency control — distinct from the model narrating its process in prose.
+## 2. Streamflow pages 7 & 8 removed (data no longer available)
 
-## 2. New page — "Query the Data" (data-query.html)
+The two streamflow products (Streamflow at Gauge Stations, Streamflow at Stream Network) are gone
+from the PDF, which is now **7 pages**: cover (page 1), the five grid variables (pages 2-6), and the
+About page (now page 7, was 9). Specifically:
+- The PAGE 7 and PAGE 8 blocks were deleted from the LaTeX template and the About page renumbered
+  to `\pagenum{7}`.
+- The PDF now builds only the five grid dashboards (Rainfall, Temperature, Relative Wetness, Total
+  Runoff, Evapotranspiration) — the two streamflow dashboards are no longer rendered.
+- The streamflow yellow-banner paragraphs (page7/page8) are never generated.
+- Streamflow is now fully **data-driven**: the page-1 "River flows" section and the streamflow
+  clause in the page-1 SUMMARY appear only if the streamflow Input files (`Q_*`, `Station_Q_*`) are
+  present. With the data present (as in your current run) page 1 keeps the River flows section; once
+  those files stop arriving, that section and the summary's streamflow mention drop out automatically
+  and the SUMMARY covers the five remaining parameters.
 
-A page where users run their own **read-only SQL** (AlaSQL) against the same three in-browser
-tables the assistant uses. It includes:
+This means: if you keep dropping `Q_*` / `Station_Q_*` into `Input/`, the only change vs. before is
+that pages 7-8 are gone. If you stop providing them, the PDF stays coherent with no dangling
+streamflow references.
 
-- A SQL editor with **Run** (also Ctrl/Cmd+Enter), **Clear**, and **Download CSV**.
-- A results table (sortable-width, horizontally scrollable on small screens) with a row count.
-- A **schema reference** in the sidebar: every table and column with its type and meaning, plus
-  the key notes (cumulative vs per-class, percentile vs anomaly).
-- **Eight example queries** (current national drought, worst/least states, week-on-week trend,
-  D3+ filter, all-time peak, hydro outlook, rainfall detail) that load and run on click.
-- The same **read-only guard** as the chatbot: only a single `SELECT` runs; INSERT/UPDATE/
-  DELETE/DROP/CREATE are rejected with a clear message. Everything executes locally in the
-  browser — nothing is sent to a server.
+## 3. Robustness fix
 
-Linked from the Data landing page (a new card) and the footer Resources column on every page.
+`build_latex_pdf` now resolves the repo / output / dashboard paths to absolute before invoking
+xelatex, so generation works whether you pass a relative or absolute `--repo` (previously a relative
+path could break the compile because xelatex runs in the build directory).
 
-## Files added / touched
+## Unchanged
+The LLM swap is exactly as before — the 11 (now up to 9) paragraphs are written by your Ollama
+server (`/api/generate`, non-thinking, qwen3.5:4b); that is still the only change from the notebook's
+PDF logic. The 5-dashboard rendering, colormaps, legend, layout, and the rest of the template are
+verbatim.
 
-- `assets/ai/idm-chatbot.js` — collapsible "Show query" after each answer.
-- `data-query.html` (new), `assets/query/query.js` (new), `assets/query/query.css` (new).
-- `data.html` — "Query the Data" card; footer "Query the Data" link added site-wide.
+## How to regenerate
+```
+cd IDM
+python3 generate_hydro_outputs.py              # exact 7-page PDF, prose via Ollama
+python3 generate_hydro_outputs.py --no-llm     # exact 7-page PDF, offline template prose
+```
+Output: Hydrologic_Outlook/Output/Hydrolook_<date>.pdf (+ a copy in PDF_Archive/).
 
 ## Validation
-
-All 18 pages load with the chatbot present and **zero JS errors**. The new page was verified
-headless: schema (3 tables) and 8 examples render; example + custom queries return correct rows
-(e.g. worst states Delhi 52.2%, Arunachal 39.7%, J&K 38.2%); the read-only guard blocks `DROP`;
-CSV export works. The chatbot "Show query" reveals the exact SQL that ran.
+Compiled in-environment (xelatex present): a 7-page, 20x20-inch PDF; page 1 SUMMARY fits cleanly
+even at the worst-case clamped length; page 7 (About) renumbered correctly; no streamflow pages.
+The Ollama path was verified by mocking the endpoint (correct slots with/without streamflow, never
+pages 7-8, clamp applied, request still non-thinking qwen3.5:4b).

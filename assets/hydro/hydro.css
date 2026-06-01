@@ -137,3 +137,7 @@
 .hydro-pdf-frame { width: 100%; height: 78vh; min-height: 520px; border: 0; display: block; background: #525659; }
 .hydro-pdf-fallback { padding: 24px; font-size: 14.5px; color: var(--usdm-text); }
 .hydro-pdf-fallback[hidden] { display: none; }
+
+/* Push download buttons to the right of the report viewer bar */
+.hydro-reports-viewer-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.hydro-bar-spacer { flex: 1 1 auto; }
