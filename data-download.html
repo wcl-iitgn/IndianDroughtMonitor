@@ -1,139 +1,135 @@
 <!DOCTYPE html>
+
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Data Download | India Drought Monitor</title>
-  <meta name="theme-color" content="#da3910" />
-  <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
-</head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-i18n="data_download.data_download_india_drought">Data Download | India Drought Monitor</title>
+<meta content="#da3910" name="theme-color"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/ai/idm-ai.css" rel="stylesheet"/>
+<link href="assets/i18n/i18n.css" rel="stylesheet"/><script src="assets/i18n/i18n.js"></script></head>
 <body>
-  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
-    <nav class="usdm-nav" aria-label="Primary">
-    <div class="usdm-nav-inner">
-      <a href="index.html">Current</a>
-      <a href="maps.html">Maps</a>
-      <a href="data.html" class="active">Data</a>
-      <a href="hydro.html">Hydrological Outlook</a>
-      <a href="summary.html">Summary</a>
-      <a href="conditions.html">Conditions &amp; Outlooks</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-  <main class="usdm-main">
-    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="data.html">Data</a> <span class="sep">/</span> Data Download</div>
-    <h1 class="page-title">Data Download</h1>
-    <p style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1><div class="idm-lang-switcher" data-i18n-switcher="1"></div></div></header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:data_download.primary">
+<div class="usdm-nav-inner">
+<a data-i18n="common_nav.current" href="index.html">Current</a>
+<a data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a class="active" data-i18n="common_nav.data" href="data.html">Data</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.summary" href="summary.html">Summary</a>
+<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.about" href="about.html">About</a>
+<a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+</div>
+</nav>
+<main class="usdm-main">
+<div class="usdm-breadcrumbs"><a data-i18n="data_download.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="data_download.data" href="data.html">Data</a> <span class="sep">/</span> <span data-i18n="data_download.data_download">Data Download</span></div>
+<h1 class="page-title" data-i18n="data_download.data_download">Data Download</h1>
+<p data-i18n="data_download.all_india_drought_monitor_pr" data-i18n-html="1" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
       All India Drought Monitor products are provided as plain-text gridded files. Each line is
-      <code>latitude longitude value</code> on a 0.25&deg; grid. The Combined Drought Index also
+      <code>latitude longitude value</code> on a 0.25° grid. The Combined Drought Index also
       has a weekly time series back to July 2021.
     </p>
-
-    <h2>Current grids</h2>
-    <table class="usdm-table">
-      <thead><tr><th>Product</th><th>Description</th><th>File</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Combined Drought Index</strong></td><td>Latest weekly CDI (drier &lt; 0)</td><td><a href="data/Current_CDI.txt" download>Current_CDI.txt</a></td></tr>
-        <tr><td>CDI forecast — 7 day</td><td>Expected CDI one week ahead</td><td><a href="data/Future_CDI_7day.txt" download>Future_CDI_7day.txt</a></td></tr>
-        <tr><td>CDI forecast — 15 day</td><td>Expected CDI two weeks ahead</td><td><a href="data/Future_CDI_15day.txt" download>Future_CDI_15day.txt</a></td></tr>
-        <tr><td>CDI forecast — 30 day</td><td>Expected CDI one month ahead</td><td><a href="data/Future_CDI_30day.txt" download>Future_CDI_30day.txt</a></td></tr>
-      </tbody>
-    </table>
-
-    <h2>Standardised indices</h2>
-    <table class="usdm-table">
-      <thead><tr><th>Index</th><th>Meaning</th><th>Accumulation windows</th></tr></thead>
-      <tbody>
-        <tr><td><strong>SPI</strong></td><td>Standardised Precipitation Index</td>
-          <td><a href="data/SPI_1month.txt" download>1mo</a> &middot; <a href="data/SPI_3month.txt" download>3mo</a> &middot; <a href="data/SPI_6month.txt" download>6mo</a> &middot; <a href="data/SPI_12month.txt" download>12mo</a></td></tr>
-        <tr><td><strong>SRI</strong></td><td>Standardised Runoff Index</td>
-          <td><a href="data/SRI_1month.txt" download>1mo</a> &middot; <a href="data/SRI_3month.txt" download>3mo</a> &middot; <a href="data/SRI_6month.txt" download>6mo</a> &middot; <a href="data/SRI_12month.txt" download>12mo</a></td></tr>
-        <tr><td><strong>SSMI</strong></td><td>Standardised Soil Moisture Index</td>
-          <td><a href="data/SSMI_1month.txt" download>1mo</a> &middot; <a href="data/SSMI_3month.txt" download>3mo</a> &middot; <a href="data/SSMI_6month.txt" download>6mo</a></td></tr>
-      </tbody>
-    </table>
-
-    <h2>Time series</h2>
-    <table class="usdm-table">
-      <thead><tr><th>Product</th><th>Description</th><th>File</th></tr></thead>
-      <tbody>
-        <tr><td><strong>National drought area</strong></td><td>Weekly % of India in each class (year, month, day, then class shares)</td><td><a href="data/India_Drought_Area_Timeseries.txt" download>India_Drought_Area_Timeseries.txt</a></td></tr>
-        <tr><td>Weekly CDI frames</td><td>One grid per week, <code>data/Drough_TS/CDI_YYYYMMDD.txt</code></td><td><a href="data/Drough_TS/CDI_20260520.txt" download>latest week</a></td></tr>
-      </tbody>
-    </table>
-
-    <h2>Boundaries</h2>
-    <table class="usdm-table">
-      <thead><tr><th>File</th><th>Description</th></tr></thead>
-      <tbody>
-        <tr><td><a href="state_vector_boundaries.json" download>state_vector_boundaries.json</a></td><td>State / UT polygon paths with names and ids</td></tr>
-        <tr><td><a href="states_with_boundaries.csv" download>states_with_boundaries.csv</a></td><td>Rasterised state-id grid (0.0625&deg;)</td></tr>
-        <tr><td><a href="india_mainland_boundary.csv" download>india_mainland_boundary.csv</a></td><td>National outline</td></tr>
-      </tbody>
-    </table>
-
-    <div class="alert-info" style="margin-top:24px;">
+<h2 data-i18n="data_download.current_grids">Current grids</h2>
+<table class="usdm-table">
+<thead><tr><th data-i18n="data_download.product">Product</th><th data-i18n="data_download.description">Description</th><th data-i18n="data_download.file">File</th></tr></thead>
+<tbody>
+<tr><td data-i18n="data_download.strong_combined_drought_inde" data-i18n-html="1"><strong>Combined Drought Index</strong></td><td data-i18n="data_download.latest_weekly_cdi_drier_0">Latest weekly CDI (drier &lt; 0)</td><td><a data-i18n="data_download.current_cdi_txt" download="" href="data/Current_CDI.txt">Current_CDI.txt</a></td></tr>
+<tr><td data-i18n="data_download.cdi_forecast_7_day">CDI forecast — 7 day</td><td data-i18n="data_download.expected_cdi_one_week_ahead">Expected CDI one week ahead</td><td><a data-i18n="data_download.future_cdi_7day_txt" download="" href="data/Future_CDI_7day.txt">Future_CDI_7day.txt</a></td></tr>
+<tr><td data-i18n="data_download.cdi_forecast_15_day">CDI forecast — 15 day</td><td data-i18n="data_download.expected_cdi_two_weeks_ahead">Expected CDI two weeks ahead</td><td><a data-i18n="data_download.future_cdi_15day_txt" download="" href="data/Future_CDI_15day.txt">Future_CDI_15day.txt</a></td></tr>
+<tr><td data-i18n="data_download.cdi_forecast_30_day">CDI forecast — 30 day</td><td data-i18n="data_download.expected_cdi_one_month_ahead">Expected CDI one month ahead</td><td><a data-i18n="data_download.future_cdi_30day_txt" download="" href="data/Future_CDI_30day.txt">Future_CDI_30day.txt</a></td></tr>
+</tbody>
+</table>
+<h2 data-i18n="data_download.standardised_indices">Standardised indices</h2>
+<table class="usdm-table">
+<thead><tr><th data-i18n="data_download.index">Index</th><th data-i18n="data_download.meaning">Meaning</th><th data-i18n="data_download.accumulation_windows">Accumulation windows</th></tr></thead>
+<tbody>
+<tr><td data-i18n="data_download.strong_spi_strong" data-i18n-html="1"><strong>SPI</strong></td><td data-i18n="data_download.standardised_precipitation_i">Standardised Precipitation Index</td>
+<td><a data-i18n="data_download.1mo" download="" href="data/SPI_1month.txt">1mo</a> · <a data-i18n="data_download.3mo" download="" href="data/SPI_3month.txt">3mo</a> · <a data-i18n="data_download.6mo" download="" href="data/SPI_6month.txt">6mo</a> · <a data-i18n="data_download.12mo" download="" href="data/SPI_12month.txt">12mo</a></td></tr>
+<tr><td data-i18n="data_download.strong_sri_strong" data-i18n-html="1"><strong>SRI</strong></td><td data-i18n="data_download.standardised_runoff_index">Standardised Runoff Index</td>
+<td><a data-i18n="data_download.1mo" download="" href="data/SRI_1month.txt">1mo</a> · <a data-i18n="data_download.3mo" download="" href="data/SRI_3month.txt">3mo</a> · <a data-i18n="data_download.6mo" download="" href="data/SRI_6month.txt">6mo</a> · <a data-i18n="data_download.12mo" download="" href="data/SRI_12month.txt">12mo</a></td></tr>
+<tr><td data-i18n="data_download.strong_ssmi_strong" data-i18n-html="1"><strong>SSMI</strong></td><td data-i18n="data_download.standardised_soil_moisture_i">Standardised Soil Moisture Index</td>
+<td><a data-i18n="data_download.1mo" download="" href="data/SSMI_1month.txt">1mo</a> · <a data-i18n="data_download.3mo" download="" href="data/SSMI_3month.txt">3mo</a> · <a data-i18n="data_download.6mo" download="" href="data/SSMI_6month.txt">6mo</a></td></tr>
+</tbody>
+</table>
+<h2 data-i18n="data_download.time_series">Time series</h2>
+<table class="usdm-table">
+<thead><tr><th data-i18n="data_download.product">Product</th><th data-i18n="data_download.description">Description</th><th data-i18n="data_download.file">File</th></tr></thead>
+<tbody>
+<tr><td data-i18n="data_download.strong_national_drought_area" data-i18n-html="1"><strong>National drought area</strong></td><td data-i18n="data_download.weekly_of_india_in_each_clas">Weekly % of India in each class (year, month, day, then class shares)</td><td><a data-i18n="data_download.india_drought_area_timeserie" download="" href="data/India_Drought_Area_Timeseries.txt">India_Drought_Area_Timeseries.txt</a></td></tr>
+<tr><td data-i18n="data_download.weekly_cdi_frames">Weekly CDI frames</td><td data-i18n="data_download.one_grid_per_week_code_data" data-i18n-html="1">One grid per week, <code>data/Drough_TS/CDI_YYYYMMDD.txt</code></td><td><a data-i18n="data_download.latest_week" download="" href="data/Drough_TS/CDI_20260520.txt">latest week</a></td></tr>
+</tbody>
+</table>
+<h2 data-i18n="data_download.boundaries">Boundaries</h2>
+<table class="usdm-table">
+<thead><tr><th data-i18n="data_download.file">File</th><th data-i18n="data_download.description">Description</th></tr></thead>
+<tbody>
+<tr><td><a data-i18n="data_download.state_vector_boundaries_json" download="" href="state_vector_boundaries.json">state_vector_boundaries.json</a></td><td data-i18n="data_download.state_ut_polygon_paths_with">State / UT polygon paths with names and ids</td></tr>
+<tr><td><a data-i18n="data_download.states_with_boundaries_csv" download="" href="states_with_boundaries.csv">states_with_boundaries.csv</a></td><td data-i18n="data_download.rasterised_state_id_grid_0_0">Rasterised state-id grid (0.0625°)</td></tr>
+<tr><td><a data-i18n="data_download.india_mainland_boundary_csv" download="" href="india_mainland_boundary.csv">india_mainland_boundary.csv</a></td><td data-i18n="data_download.national_outline">National outline</td></tr>
+</tbody>
+</table>
+<div class="alert-info" data-i18n="data_download.please_cite_the_strong_india" data-i18n-html="1" style="margin-top:24px;">
       Please cite the <strong>India Drought Monitor</strong> and the Water and Climate Lab,
       IIT Gandhinagar, when using these data in publications.
     </div>
-  </main>
-    <footer class="usdm-footer">
-    <div class="usdm-footer-inner">
-      <div class="partner-logos">
-        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
-        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
-        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
-      </div>
-      <p class="partner-blurb">
+</main>
+<footer class="usdm-footer">
+<div class="usdm-footer-inner">
+<div class="partner-logos">
+<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
+<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
+</div>
+<p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
-      <div class="contact-block">
-        <div>
-          <h3>Contact Us</h3>
-          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
-          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
-          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
-        </div>
-        <div>
-          <h3>Maps</h3>
-          <ul>
-            <li><a href="index.html">Current Map</a></li>
-            <li><a href="compare.html">Compare Two Weeks</a></li>
-            <li><a href="slider.html">Comparison Slider</a></li>
-            <li><a href="animations.html">Animations</a></li>
-            <li><a href="archive.html">Map Archive</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Hydrological Outlook</h3>
-          <ul>
-            <li><a href="hydro.html">Dashboards</a></li>
-            <li><a href="hydro-maps.html">Individual Maps</a></li>
-            <li><a href="hydro-reports.html">PDF Reports</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="data.html">Data Download</a></li>
-            <li><a href="data-query.html">Query the Data</a></li>
-            <li><a href="summary.html">National Summary</a></li>
-            <li><a href="about.html">What is the IDM?</a></li>
-            <li><a href="contact.html">Contact Authors</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-copy">
+<div class="contact-block">
+<div>
+<h3 data-i18n="common_footer.contact_us">Contact Us</h3>
+<p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
+<p><span class="contact-icon">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon">@</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+</div>
+<div>
+<h3 data-i18n="common_footer.maps">Maps</h3>
+<ul>
+<li><a data-i18n="common_footer.current_map" href="index.html">Current Map</a></li>
+<li><a data-i18n="common_footer.compare_two_weeks" href="compare.html">Compare Two Weeks</a></li>
+<li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
+<li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
+<li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.hydrological_outlook">Hydrological Outlook</h3>
+<ul>
+<li><a data-i18n="common_footer.dashboards" href="hydro.html">Dashboards</a></li>
+<li><a data-i18n="common_footer.individual_maps" href="hydro-maps.html">Individual Maps</a></li>
+<li><a data-i18n="common_footer.pdf_reports" href="hydro-reports.html">PDF Reports</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.resources">Resources</h3>
+<ul>
+<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
+<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
+<li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
         © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
       </div>
-    </div>
-  </footer>
-  <script src="assets/vendor/papaparse.min.js"></script>
-  <script src="assets/vendor/alasql.min.js"></script>
-  <script src="assets/ai/idm-ai.js"></script>
-  <script src="assets/ai/idm-chatbot.js"></script>
+</div>
+</footer>
+<script src="assets/vendor/papaparse.min.js"></script>
+<script src="assets/vendor/alasql.min.js"></script>
+<script src="assets/ai/idm-ai.js"></script>
+<script src="assets/ai/idm-chatbot.js"></script>
 </body></html>

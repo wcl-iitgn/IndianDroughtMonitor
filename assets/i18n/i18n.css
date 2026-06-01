@@ -1,0 +1,42 @@
+/* India Drought Monitor — language switcher (i18n) */
+.idm-lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;          /* push to the right edge of the header row */
+}
+.usdm-header-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.idm-lang-label {
+  font-size: 16px;
+  line-height: 1;
+  opacity: 0.9;
+}
+.idm-lang-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 6px;
+  padding: 5px 28px 5px 10px;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M0 0l5 6 5-6z' fill='white'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 9px center;
+  max-width: 60vw;
+}
+.idm-lang-select:hover { background-color: rgba(255, 255, 255, 0.22); }
+.idm-lang-select:focus-visible { outline: 2px solid #fff; outline-offset: 1px; }
+/* options render in the page background, so give them readable colors */
+.idm-lang-select option { color: #1a1a1a; background: #fff; }
+
+@media (max-width: 640px) {
+  .idm-lang-switcher { width: 100%; margin: 6px 0 0; justify-content: flex-end; }
+  .idm-lang-select { font-size: 13px; }
+}

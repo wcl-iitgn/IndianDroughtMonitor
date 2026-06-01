@@ -15,7 +15,7 @@
   var BASE = "Hydrologic_Outlook/Output";
   var DASH_DIR = BASE + "/Dashboards";
   var MAPS_DIR = BASE + "/All_Maps";
-  var PDF_DIR = BASE + "/PDF_Archive";
+  // PDFs are resolved per-language at runtime via langPdfDir() -> Output/<Language>/PDF_Archive
   var MANIFEST_URL = "assets/hydro/hydro-manifest.json";
   var REPORTS_URL = "assets/hydro/reports-manifest.json";
 
@@ -176,61 +176,71 @@
   // ---------------------------------------------------------------------------
   // PDF REPORTS PAGE
   // ---------------------------------------------------------------------------
+  function langPdfDir() {
+    // PDFs are generated per language into Output/<Language>/PDF_Archive/.
+    var lang = (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English";
+    return BASE + "/" + encodeURIComponent(lang) + "/PDF_Archive";
+  }
+
   function initReports(cfg) {
     var listEl = el(cfg.list), frame = el(cfg.frame), title = el(cfg.title),
         dl = el(cfg.download), fallback = el(cfg.fallback), fallbackLink = el(cfg.fallbackLink),
         dlCurrent = cfg.downloadCurrent ? el(cfg.downloadCurrent) : null;
 
-    fetch(REPORTS_URL).then(function (r) {
-      if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
-      return r.json();
-    }).then(function (j) {
-      var reports = j.reports || [];
-      if (!reports.length) {
-        listEl.innerHTML = "<li class='hydro-empty'>No reports available yet.</li>";
-        return;
-      }
+    function render() {
+      var PDF_DIR = langPdfDir();
+      fetch(REPORTS_URL).then(function (r) {
+        if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
+        return r.json();
+      }).then(function (j) {
+        var reports = j.reports || [];
+        listEl.innerHTML = "";
+        if (!reports.length) {
+          listEl.innerHTML = "<li class='hydro-empty'>No reports available yet.</li>";
+          return;
+        }
 
-      // "Download current month PDF" always points at the newest report (manifest is newest-first).
-      if (dlCurrent) {
-        var cur = reports[0];
-        var curSrc = encPath(PDF_DIR + "/" + cur.file);
-        dlCurrent.href = curSrc;
-        dlCurrent.setAttribute("download", cur.file);
-        dlCurrent.title = "Download the current month report (" + cur.label + ")";
-        dlCurrent.style.display = "";
-      }
+        if (dlCurrent) {
+          var cur = reports[0];
+          dlCurrent.href = encPath(PDF_DIR + "/" + cur.file);
+          dlCurrent.setAttribute("download", cur.file);
+          dlCurrent.title = "Download the current month report (" + cur.label + ")";
+          dlCurrent.style.display = "";
+        }
 
-      function select(rep, liEl) {
-        var src = encPath(PDF_DIR + "/" + rep.file);
-        // cache-bust-free; #toolbar=1 keeps the native PDF toolbar where supported
-        frame.src = src + "#view=FitH";
-        if (title) title.textContent = "India Hydrological Outlook \u2014 " + rep.label;
-        if (dl) { dl.href = src; dl.setAttribute("download", rep.file); dl.style.display = ""; }
-        if (fallback) fallback.hidden = true;
-        if (fallbackLink) fallbackLink.href = src;
-        Array.prototype.forEach.call(listEl.children, function (c) { c.classList.remove("active"); });
-        if (liEl) liEl.classList.add("active");
-      }
+        function select(rep, liEl) {
+          var src = encPath(PDF_DIR + "/" + rep.file);
+          frame.src = src + "#view=FitH";
+          if (title) title.textContent = "India Hydrological Outlook \u2014 " + rep.label;
+          if (dl) { dl.href = src; dl.setAttribute("download", rep.file); dl.style.display = ""; }
+          if (fallback) fallback.hidden = true;
+          if (fallbackLink) fallbackLink.href = src;
+          Array.prototype.forEach.call(listEl.children, function (c) { c.classList.remove("active"); });
+          if (liEl) liEl.classList.add("active");
+        }
 
-      reports.forEach(function (rep, i) {
-        var li = document.createElement("li");
-        li.innerHTML =
-          '<button type="button" class="hydro-report-btn">' +
-          '<span class="hydro-report-label">' + rep.label + '</span>' +
-          '<span class="hydro-report-sub">' + (rep.date || rep.file) + '</span>' +
-          '</button>' +
-          '<a class="hydro-report-dl" href="' + encPath(PDF_DIR + "/" + rep.file) + '" download title="Download ' + rep.label + ' report">&#11015;</a>';
-        li.querySelector(".hydro-report-btn").addEventListener("click", function () { select(rep, li); });
-        listEl.appendChild(li);
-        if (i === 0) select(rep, li);   // preview the newest by default
+        reports.forEach(function (rep, i) {
+          var li = document.createElement("li");
+          li.innerHTML =
+            '<button type="button" class="hydro-report-btn">' +
+            '<span class="hydro-report-label">' + rep.label + '</span>' +
+            '<span class="hydro-report-sub">' + (rep.date || rep.file) + '</span>' +
+            '</button>' +
+            '<a class="hydro-report-dl" href="' + encPath(PDF_DIR + "/" + rep.file) + '" download title="Download ' + rep.label + ' report">&#11015;</a>';
+          li.querySelector(".hydro-report-btn").addEventListener("click", function () { select(rep, li); });
+          listEl.appendChild(li);
+          if (i === 0) select(rep, li);   // preview the newest by default
+        });
+
+        frame.addEventListener("error", function () { if (fallback) fallback.hidden = false; });
+      }).catch(function (e) {
+        listEl.innerHTML = "<li class='hydro-empty'>" + e.message + "</li>";
       });
+    }
 
-      // If the iframe fails to render a PDF (some browsers block inline PDFs), show fallback.
-      frame.addEventListener("error", function () { if (fallback) fallback.hidden = false; });
-    }).catch(function (e) {
-      listEl.innerHTML = "<li class='hydro-empty'>" + e.message + "</li>";
-    });
+    render();
+    // re-point the viewer/downloads at the selected language's PDFs
+    document.addEventListener("idm:languagechange", render);
   }
 
   window.IHO = {

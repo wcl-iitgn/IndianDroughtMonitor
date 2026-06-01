@@ -1,135 +1,134 @@
 <!DOCTYPE html>
+
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Compare Two Weeks | India Drought Monitor</title>
-  <meta name="theme-color" content="#da3910" />
-  <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/interactive/drought-map.css" />
-  <script src="assets/vendor/papaparse.min.js"></script>
-  <script src="assets/vendor/alasql.min.js"></script>
-  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-i18n="compare.compare_two_weeks_india_drou">Compare Two Weeks | India Drought Monitor</title>
+<meta content="#da3910" name="theme-color"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/interactive/drought-map.css" rel="stylesheet"/>
+<script src="assets/vendor/papaparse.min.js"></script>
+<script src="assets/vendor/alasql.min.js"></script>
+<link href="assets/ai/idm-ai.css" rel="stylesheet"/>
+<link href="assets/i18n/i18n.css" rel="stylesheet"/><script src="assets/i18n/i18n.js"></script></head>
 <body>
-  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
-    <nav class="usdm-nav" aria-label="Primary">
-    <div class="usdm-nav-inner">
-      <a href="index.html">Current</a>
-      <a href="maps.html" class="active">Maps</a>
-      <a href="data.html">Data</a>
-      <a href="hydro.html">Hydrological Outlook</a>
-      <a href="summary.html">Summary</a>
-      <a href="conditions.html">Conditions &amp; Outlooks</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-  <main class="usdm-main">
-    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="maps.html">Maps</a> <span class="sep">/</span> Compare Two Weeks</div>
-    <h1 class="page-title">Compare Two Weeks</h1>
-    <p style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1><div class="idm-lang-switcher" data-i18n-switcher="1"></div></div></header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:compare.primary">
+<div class="usdm-nav-inner">
+<a data-i18n="common_nav.current" href="index.html">Current</a>
+<a class="active" data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a data-i18n="common_nav.data" href="data.html">Data</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.summary" href="summary.html">Summary</a>
+<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.about" href="about.html">About</a>
+<a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+</div>
+</nav>
+<main class="usdm-main">
+<div class="usdm-breadcrumbs"><a data-i18n="compare.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="compare.maps" href="maps.html">Maps</a> <span class="sep">/</span> <span data-i18n="compare.compare_two_weeks">Compare Two Weeks</span></div>
+<h1 class="page-title" data-i18n="compare.compare_two_weeks">Compare Two Weeks</h1>
+<p data-i18n="compare.view_two_weeks_of_the_combin" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
       View two weeks of the Combined Drought Index side by side, each rendered live from the
       gridded data. Pick any two weeks to see how conditions changed. Hover either map for exact
       values.
     </p>
-
-    <div class="idm-compare-grid">
-      <div>
-        <div class="idm-tool-group" style="margin-bottom:10px;">
-          <span class="idm-tool-label">Left week</span>
-          <select id="date-left" aria-label="Left week"></select>
-        </div>
-        <div class="idm-map-panel idm-compare-panel">
-          <div id="loading-left" class="idm-map-loading-sm"><div class="idm-spinner"></div></div>
-          <div class="idm-canvas-stage idm-stage-sm">
-            <canvas id="L_vector" width="520" height="520"></canvas>
-            <canvas id="L_raster" width="520" height="520"></canvas>
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="idm-tool-group" style="margin-bottom:10px;">
-          <span class="idm-tool-label">Right week</span>
-          <select id="date-right" aria-label="Right week"></select>
-        </div>
-        <div class="idm-map-panel idm-compare-panel">
-          <div id="loading-right" class="idm-map-loading-sm"><div class="idm-spinner"></div></div>
-          <div class="idm-canvas-stage idm-stage-sm">
-            <canvas id="R_vector" width="520" height="520"></canvas>
-            <canvas id="R_raster" width="520" height="520"></canvas>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="idm-legend-inline">
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span>No Drought</span>
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span>D0</span>
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span>D1</span>
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span>D2</span>
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span>D3</span>
-      <span class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span>D4</span>
-    </div>
-  </main>
-    <footer class="usdm-footer">
-    <div class="usdm-footer-inner">
-      <div class="partner-logos">
-        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
-        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
-        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
-      </div>
-      <p class="partner-blurb">
+<div class="idm-compare-grid">
+<div>
+<div class="idm-tool-group" style="margin-bottom:10px;">
+<span class="idm-tool-label" data-i18n="compare.left_week">Left week</span>
+<select aria-label="Left week" data-i18n-attr="aria-label:compare.left_week" id="date-left"></select>
+</div>
+<div class="idm-map-panel idm-compare-panel">
+<div class="idm-map-loading-sm" id="loading-left"><div class="idm-spinner"></div></div>
+<div class="idm-canvas-stage idm-stage-sm">
+<canvas height="520" id="L_vector" width="520"></canvas>
+<canvas height="520" id="L_raster" width="520"></canvas>
+</div>
+</div>
+</div>
+<div>
+<div class="idm-tool-group" style="margin-bottom:10px;">
+<span class="idm-tool-label" data-i18n="compare.right_week">Right week</span>
+<select aria-label="Right week" data-i18n-attr="aria-label:compare.right_week" id="date-right"></select>
+</div>
+<div class="idm-map-panel idm-compare-panel">
+<div class="idm-map-loading-sm" id="loading-right"><div class="idm-spinner"></div></div>
+<div class="idm-canvas-stage idm-stage-sm">
+<canvas height="520" id="R_vector" width="520"></canvas>
+<canvas height="520" id="R_raster" width="520"></canvas>
+</div>
+</div>
+</div>
+</div>
+<div class="idm-legend-inline">
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span><span data-i18n="compare.no_drought">No Drought</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span><span data-i18n="compare.d0">D0</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span><span data-i18n="compare.d1">D1</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span><span data-i18n="compare.d2">D2</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span><span data-i18n="compare.d3">D3</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span><span data-i18n="compare.d4">D4</span></span>
+</div>
+</main>
+<footer class="usdm-footer">
+<div class="usdm-footer-inner">
+<div class="partner-logos">
+<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
+<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
+</div>
+<p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
-      <div class="contact-block">
-        <div>
-          <h3>Contact Us</h3>
-          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
-          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
-          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
-        </div>
-        <div>
-          <h3>Maps</h3>
-          <ul>
-            <li><a href="index.html">Current Map</a></li>
-            <li><a href="compare.html">Compare Two Weeks</a></li>
-            <li><a href="slider.html">Comparison Slider</a></li>
-            <li><a href="animations.html">Animations</a></li>
-            <li><a href="archive.html">Map Archive</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Hydrological Outlook</h3>
-          <ul>
-            <li><a href="hydro.html">Dashboards</a></li>
-            <li><a href="hydro-maps.html">Individual Maps</a></li>
-            <li><a href="hydro-reports.html">PDF Reports</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="data.html">Data Download</a></li>
-            <li><a href="data-query.html">Query the Data</a></li>
-            <li><a href="summary.html">National Summary</a></li>
-            <li><a href="about.html">What is the IDM?</a></li>
-            <li><a href="contact.html">Contact Authors</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-copy">
+<div class="contact-block">
+<div>
+<h3 data-i18n="common_footer.contact_us">Contact Us</h3>
+<p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
+<p><span class="contact-icon">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon">@</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+</div>
+<div>
+<h3 data-i18n="common_footer.maps">Maps</h3>
+<ul>
+<li><a data-i18n="common_footer.current_map" href="index.html">Current Map</a></li>
+<li><a data-i18n="common_footer.compare_two_weeks" href="compare.html">Compare Two Weeks</a></li>
+<li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
+<li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
+<li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.hydrological_outlook">Hydrological Outlook</h3>
+<ul>
+<li><a data-i18n="common_footer.dashboards" href="hydro.html">Dashboards</a></li>
+<li><a data-i18n="common_footer.individual_maps" href="hydro-maps.html">Individual Maps</a></li>
+<li><a data-i18n="common_footer.pdf_reports" href="hydro-reports.html">PDF Reports</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.resources">Resources</h3>
+<ul>
+<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
+<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
+<li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
         © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
       </div>
-    </div>
-  </footer>
-  <script src="assets/interactive/drought-map.colormaps.js"></script>
-  <script src="assets/interactive/drought-map.engine.js"></script>
-  <script src="assets/interactive/drought-map.app.js"></script>
-  <script>
+</div>
+</footer>
+<script src="assets/interactive/drought-map.colormaps.js"></script>
+<script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/drought-map.app.js"></script>
+<script>
     window.addEventListener("DOMContentLoaded", function () {
       IDM.fillDateSelect(document.getElementById("date-left"), "2026-05-20");
       IDM.fillDateSelect(document.getElementById("date-right"), "2025-05-21");
@@ -159,7 +158,7 @@
       })();
     });
   </script>
-  <script src="assets/ai/idm-ai.js"></script>
-  <script src="assets/ai/idm-chatbot.js"></script>
+<script src="assets/ai/idm-ai.js"></script>
+<script src="assets/ai/idm-chatbot.js"></script>
 </body>
 </html>

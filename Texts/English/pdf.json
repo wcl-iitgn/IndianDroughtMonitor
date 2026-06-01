@@ -1,0 +1,68 @@
+{
+  "doc_title": "India Hydrological Outlook",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "India Hydrological Outlook",
+  "footer_blurb": "India Hydrological Outlook provides a comprehensive monthly summary of key meteorological and hydrological variables for current conditions alongside a four-month retrospective and one month forecast. For more information, please visit the website:",
+  "summary_heading": "SUMMARY:",
+  "section_rainfall_temp": "Rainfall and Temperature:",
+  "section_sm_ro_et": "Soil moisture, Total runoff, and Evapotranspiration:",
+  "section_rivers": "River flows:",
+  "figure_caption": "Indian sub-continental river basins. Shaded background shows elevation (m).",
+  "figure_label": "Figure.",
+  "page_titles": {
+    "rainfall": "Observed and Forecast Rainfall Conditions",
+    "temperature": "Observed and Forecast Surface Air Temperature",
+    "wetness": "Observed and Forecast Relative Wetness",
+    "runoff": "Observed and Forecast Total Runoff",
+    "et": "Observed and Forecast Evapotranspiration"
+  },
+  "page_intros": {
+    "rainfall": "These maps are prepared from daily gridded rainfall observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as total monthly rainfall in percentile for period 1955 to present. These rainfall percentile maps highlight the regions with unusual dry, wet, or near-average rainfall for that time of year. High rainfall percentiles in forecast month, along with high relative wetness (maps available on page 4) in current month, may indicate a potential region for unusual wet conditions. Areas with low precipitation percentiles in forecast month, particularly those with minimal or no rainfall along with high relative dryness, may be at risk of drought conditions.",
+    "temperature": "These maps are prepared from daily gridded temperature observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a monthly-averaged temperature anomaly from the historical mean (1955 to present). These temperature anomaly maps highlight regions with higher and lower temperatures than usual. Low-temperature anomalies may lead to a decrease in crop yield or delayed crop growth. Areas with higher temperature anomalies paired with relatively low rainfall and low soil moisture (maps available on page 4) may be at risk of drought conditions with increased potential evapotranspiration.",
+    "wetness": "These maps are prepared from daily simulated soil moisture (60 cm depth) using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a monthly-averaged soil moisture anomaly from the historical mean (1955 to present). The soil moisture anomalies are presented as relative to historical extremes to highlight the regions with unusual wet or dry conditions. High relative wetness (wetter) in current month paired with a high rainfall percentile in forecast month may lead to above-normal flows and unusual wetter conditions in the coming days/weeks. Areas with low relative wetness (drier) in current month and no or minimal predicted rainfall in forecast month may be at risk of lower than normal flow and moisture availability.",
+    "runoff": "These maps are prepared from daily simulated total runoff using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a total runoff monthly anomaly from the historic mean (1955 to present). These total runoff anomalies highlight the regions with relative surplus or deficit in total runoff than typical for that time of year. A surplus in total runoff in forecast month paired with relatively higher soil moisture in current month may lead to above-normal streamflow in the coming days/weeks. Areas with a high deficit in total runoff in forecast month, particularly those with high dryness in current month, may be at risk of relatively low streamflow in the coming days/weeks.",
+    "et": "These maps are prepared from daily simulated evapotranspiration (ET) using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a total monthly ET anomaly from the historic (1955 to present). These ET anomalies highlight the regions with less or more water lost than usual from land and plants, helping to pinpoint areas at risk of extreme weather impacts, especially crop water stress. Low ET anomalies indicate increased crop water stress and relatively less moisture availability. High ET anomalies may lead to rapid depletion of soil moisture (flash drought) or may worsen the pre-existed droughts."
+  },
+  "about": {
+    "about_heading": "About the India Hydrological Outlook",
+    "about_body": "This document provides a comprehensive water outlook for India, covering the current month, the past four months, and a one-month forecast. The outlook is generated using observational data and an extended-range forecasting system for meteorological variables, combined with advanced hydrological modeling tools. These tools analyze relative changes and predict water availability across various regions, offering valuable insights into hydrological situation in India. Developed by the Water and Climate Lab at IIT Gandhinagar, this outlook aims to support water resource management, planning, and decision-making by offering reliable information on rainfall, temperature, soil moisture (60 cm), runoff, and streamflow patterns across different timescales.",
+    "datasets_heading": "Datasets",
+    "datasets_body_pre": "The India Hydrological Outlook is made possible through the valuable cooperation of numerous data providers, whose contributions are gratefully acknowledged. Contemporary daily observations and extended range forecast data are supplied by the India Meteorological Department (IMD)",
+    "datasets_body_mid": "These datasets are used for initializing hydrological models and generating reliable outlook information through statistical analysis of historical analogues. Hydrological model is calibrated and validated using daily streamflow for sufficient long duration from India-Water Information System",
+    "model_heading": "Hydrological Model",
+    "model_body": "The India Hydrological Outlook utilizes the Variable Infiltration Capacity (VIC) model, a large-scale, semi-distributed hydrological model that computes water and energy budgets for each grid. The VIC model captures sub-grid variability in vegetation and elevation, providing a more accurate representation of hydrological processes at a regional scale. VIC model simulations are performed at a daily temporal resolution to provide accurate hydrological forecasts and enhance water resource management across India.",
+    "disclaimer_heading": "Disclaimer and Liability",
+    "disclaimer_body": "The India Hydrological Outlook aims to ensure that all content provided is accurate and aligns with the current scientific understanding. However, the science underlying the meteorological and hydrological forecasts, as well as climate projections, is continuously evolving. As such, any forecast or prediction included in the content should not be regarded as a definitive statement of fact. To the fullest extent permitted by applicable law, the India Hydrological Outlook disclaims all warranties or representations, whether express or implied, regarding the content. Your use of the content is entirely at your own risk, and we make no guarantees that the content is error-free or suitable for your specific needs.",
+    "funding_body": "The India Hydrological Outlook is supported by the Major Research and Development Programme (MRDP) in Hydro Climate Extremes, funded by the Department of Science and Technology (DST).",
+    "contact_heading": "Contact Information",
+    "contact_address": "India Hydrological Outlook, Water and Climate Lab, Indian Institute of Technology Gandhinagar, Gujarat, India.",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "India Hydrological Outlook Portal:",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "Email",
+    "person1_office_label": "Office",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "PhD Research Scholar",
+    "person3_name": "Paras Sharma",
+    "person3_role": "PhD Research Scholar",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (\u00b0C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

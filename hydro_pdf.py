@@ -367,9 +367,11 @@ TEX_TEMPLATE = r'''
 \usepackage{hyperref}
 \usepackage{array}
 \usepackage{fontspec}
-\setmainfont{Carlito}
-\setsansfont{Carlito}
+\setmainfont{{{T_pdf_font}}}
+\setsansfont{{{T_pdf_font}}}
+\newfontfamily\latinfont{Carlito}
 \renewcommand{\familydefault}{\sfdefault}
+{{T_fontfallback}}
 \usepackage{microtype}
 \tcbuselibrary{skins}
 \usetikzlibrary{positioning, calc}
@@ -408,8 +410,8 @@ TEX_TEMPLATE = r'''
   \node[anchor=center, text=titleblue, font=\Large\bfseries, align=center, text width=14in]
     at (9.5,-0.55) {#1};
   \node[anchor=center, text=textblack, font=\normalsize, align=center]
-    at (9.5,-1.05) {Based on daily observations till {{OBSERVATION_DATE}}};
-  \node[anchor=east, text=textblack, font=\normalsize] at (18.95,-1.05) {Issue date: {{ISSUE_DATE}}};
+    at (9.5,-1.05) { {{T_based_on}} };
+  \node[anchor=east, text=textblack, font=\normalsize] at (18.95,-1.05) { {{T_issue_date_label}} };
 \end{tikzpicture}%
 }
 
@@ -426,7 +428,7 @@ TEX_TEMPLATE = r'''
     \begin{minipage}{18.4in}
       \begin{tcolorbox}[colback=footerblue, colframe=footerblue, boxrule=0.8pt, arc=8pt,
                         left=18pt, right=18pt, top=14pt, bottom=14pt]
-      {\normalsize\textcolor{textblack}{India Hydrological Outlook provides a comprehensive monthly summary of key meteorological and hydrological variables for current conditions alongside a four-month retrospective and one month forecast. For more information, please visit the website:~\href{http://www.indiahydrolook.in}{www.indiahydrolook.in}}}
+      {\normalsize\textcolor{textblack}{ {{T_footer_blurb}}~\href{http://www.indiahydrolook.in}{{\latinfont www.indiahydrolook.in}}}}
       \end{tcolorbox}
     \end{minipage}%
   };
@@ -439,16 +441,16 @@ TEX_TEMPLATE = r'''
     \begin{minipage}{18.4in}
       \begin{tcolorbox}[colback=footerblue, colframe=footerblue, boxrule=0.8pt, arc=8pt,
                         left=18pt, right=18pt, top=14pt, bottom=14pt]
-      {\normalsize\textcolor{textblack}{India Hydrological Outlook provides a comprehensive monthly summary of key meteorological and hydrological variables for current conditions alongside a four-month retrospective and one month forecast. For more information, please visit the website:~\href{http://www.indiahydrolook.in}{www.indiahydrolook.in}}}
+      {\normalsize\textcolor{textblack}{ {{T_footer_blurb}}~\href{http://www.indiahydrolook.in}{{\latinfont www.indiahydrolook.in}}}}
       \end{tcolorbox}
     \end{minipage}%
   };
   \node[anchor=west, inner sep=0pt] at (0.5,1.0) {\includegraphics[height=1.55in]{IITGN.png}};
   \node[anchor=west, inner sep=0pt, text=textblack] at (2.3,1.0) {%
     \begin{tabular}{@{}l@{}}
-      {\large\textbf{\textcolor{titleblue}{IIT Gandhinagar}}}\\[3pt]
-      {\normalsize\textcolor{textblack}{Indian Institute of}}\\[2pt]
-      {\normalsize\textcolor{textblack}{Technology Gandhinagar}}
+      {\large\textbf{\textcolor{titleblue}{\latinfont IIT Gandhinagar}}}\\[3pt]
+      {\normalsize\textcolor{textblack}{\latinfont Indian Institute of}}\\[2pt]
+      {\normalsize\textcolor{textblack}{\latinfont Technology Gandhinagar}}
     \end{tabular}};
   \node[anchor=center, inner sep=0pt] at (9.5,1.0) {\includegraphics[height=1.6in]{WCL_Logo_cropped.png}};
   \node[anchor=east, inner sep=0pt] at (18.85,1.0) {\includegraphics[height=1.75in]{IMD_nobg.png}};
@@ -501,100 +503,100 @@ TEX_TEMPLATE = r'''
 
 % ========== PAGE 1 ==========
 \pageribbon
-\pageheader{India Hydrological Outlook}
+\pageheader{ {{T_ribbon_title}} }
 \summaryone{1.7}{{{page1_summary}}}
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-5.9) {%
     \begin{minipage}[t]{8.2in}\vspace{0pt}
-      {\textbf{\textcolor{titleblue}{\Large Rainfall and Temperature:}}}\\[0.5em]
+      {\textbf{\textcolor{titleblue}{\Large {{T_section_rainfall_temp}} }}}\\[0.5em]
       {\justifying\normalsize {{page1_rainfall_temp}}\par}
       \vspace{1.4em}
-      {\textbf{\textcolor{titleblue}{\Large Soil moisture, Total runoff, and Evapotranspiration:}}}\\[0.5em]
+      {\textbf{\textcolor{titleblue}{\Large {{T_section_sm_ro_et}} }}}\\[0.5em]
       {\justifying\normalsize {{page1_sm_ro_et}}\par}
       {{PAGE1_RIVERS_BLOCK}}
     \end{minipage}};
   \node[anchor=north west, inner sep=0pt] at (9.2,-5.9) {%
     \begin{minipage}[t]{9.5in}\vspace{0pt}\centering
       \includegraphics[width=\linewidth]{1-s2_0-S0022169421010271-gr1_lrg.png}\\[0.5em]
-      {\justifying\normalsize\textbf{Figure.} Indian sub-continental river basins. Shaded background shows elevation (m).}
+      {\justifying\normalsize\textbf{ {{T_figure_label}} } {{T_figure_caption}} }
     \end{minipage}};
 \end{tikzpicture}
 \pagefooterfull\pagenum{1}\null\clearpage
 
 % ========== PAGE 2 — Rainfall ==========
-\pageribbon\pageheader{Observed and Forecast Rainfall Conditions}
-\introat{1.9}{These maps are prepared from daily gridded rainfall observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as total monthly rainfall in percentile for period 1955 to present. These rainfall percentile maps highlight the regions with unusual dry, wet, or near-average rainfall for that time of year. High rainfall percentiles in forecast month, along with high relative wetness (maps available on page 4) in current month, may indicate a potential region for unusual wet conditions. Areas with low precipitation percentiles in forecast month, particularly those with minimal or no rainfall along with high relative dryness, may be at risk of drought conditions.}
+\pageribbon\pageheader{ {{T_title_rainfall}} }
+\introat{1.9}{ {{T_intro_rainfall}} }
 \summaryat{4.3}{{{page2_rainfall_yellow}}}
 \imageat{5.7}{12.5}{Rainfall_dashboard.png}
 \pagefooterbanner\pagenum{2}\null\clearpage
 
 % ========== PAGE 3 — Temperature ==========
-\pageribbon\pageheader{Observed and Forecast Surface Air Temperature}
-\introat{1.9}{These maps are prepared from daily gridded temperature observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a monthly-averaged temperature anomaly from the historical mean (1955 to present). These temperature anomaly maps highlight regions with higher and lower temperatures than usual. Low-temperature anomalies may lead to a decrease in crop yield or delayed crop growth. Areas with higher temperature anomalies paired with relatively low rainfall and low soil moisture (maps available on page 4) may be at risk of drought conditions with increased potential evapotranspiration.}
+\pageribbon\pageheader{ {{T_title_temperature}} }
+\introat{1.9}{ {{T_intro_temperature}} }
 \summaryat{4.3}{{{page3_temperature_yellow}}}
 \imageat{5.7}{12.5}{Temperature_dashboard.png}
 \pagefooterbanner\pagenum{3}\null\clearpage
 
 % ========== PAGE 4 — Relative Wetness ==========
-\pageribbon\pageheader{Observed and Forecast Relative Wetness}
-\introat{1.9}{These maps are prepared from daily simulated soil moisture (60 cm depth) using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a monthly-averaged soil moisture anomaly from the historical mean (1955 to present). The soil moisture anomalies are presented as relative to historical extremes to highlight the regions with unusual wet or dry conditions. High relative wetness (wetter) in current month paired with a high rainfall percentile in forecast month may lead to above-normal flows and unusual wetter conditions in the coming days/weeks. Areas with low relative wetness (drier) in current month and no or minimal predicted rainfall in forecast month may be at risk of lower than normal flow and moisture availability.}
+\pageribbon\pageheader{ {{T_title_wetness}} }
+\introat{1.9}{ {{T_intro_wetness}} }
 \summaryat{4.3}{{{page4_wetness_yellow}}}
 \imageat{5.7}{12.5}{Relative_Wetness_dashboard.png}
 \pagefooterbanner\pagenum{4}\null\clearpage
 
 % ========== PAGE 5 — Total Runoff ==========
-\pageribbon\pageheader{Observed and Forecast Total Runoff}
-\introat{1.9}{These maps are prepared from daily simulated total runoff using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a total runoff monthly anomaly from the historic mean (1955 to present). These total runoff anomalies highlight the regions with relative surplus or deficit in total runoff than typical for that time of year. A surplus in total runoff in forecast month paired with relatively higher soil moisture in current month may lead to above-normal streamflow in the coming days/weeks. Areas with a high deficit in total runoff in forecast month, particularly those with high dryness in current month, may be at risk of relatively low streamflow in the coming days/weeks.}
+\pageribbon\pageheader{ {{T_title_runoff}} }
+\introat{1.9}{ {{T_intro_runoff}} }
 \summaryat{4.3}{{{page5_runoff_yellow}}}
 \imageat{5.7}{12.5}{Total_Runoff_dashboard.png}
 \pagefooterbanner\pagenum{5}\null\clearpage
 
 % ========== PAGE 6 — Evapotranspiration ==========
-\pageribbon\pageheader{Observed and Forecast Evapotranspiration}
-\introat{1.9}{These maps are prepared from daily simulated evapotranspiration (ET) using gridded meteorological forcing from observations and Extended Range Forecast System (ERFS) from India Meteorological Department (IMD), expressed as a total monthly ET anomaly from the historic (1955 to present). These ET anomalies highlight the regions with less or more water lost than usual from land and plants, helping to pinpoint areas at risk of extreme weather impacts, especially crop water stress. Low ET anomalies indicate increased crop water stress and relatively less moisture availability. High ET anomalies may lead to rapid depletion of soil moisture (flash drought) or may worsen the pre-existed droughts.}
+\pageribbon\pageheader{ {{T_title_et}} }
+\introat{1.9}{ {{T_intro_et}} }
 \summaryat{4.3}{{{page6_et_yellow}}}
 \imageat{5.7}{12.5}{Evapotranspiration_dashboard.png}
 \pagefooterbanner\pagenum{6}\null\clearpage
 
 % ========== PAGE 7 — About / Disclaimer / Contact (STATIC) ==========
-\pageribbon\pageheader{India Hydrological Outlook}
+\pageribbon\pageheader{ {{T_ribbon_title}} }
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-2.2) {%
     \begin{minipage}[t]{9.0in}\vspace{0pt}
-      {\textcolor{titleblue}{\LARGE About the India Hydrological Outlook}}\\[0.5em]
-      {\justifying\normalsize\textcolor{textblack}{This document provides a comprehensive water outlook for India, covering the current month, the past four months, and a one-month forecast. The outlook is generated using observational data and an extended-range forecasting system for meteorological variables, combined with advanced hydrological modeling tools. These tools analyze relative changes and predict water availability across various regions, offering valuable insights into hydrological situation in India. Developed by the Water and Climate Lab at IIT Gandhinagar, this outlook aims to support water resource management, planning, and decision-making by offering reliable information on rainfall, temperature, soil moisture (60 cm), runoff, and streamflow patterns across different timescales.}\par}
+      {\textcolor{titleblue}{\LARGE {{T_about_heading}} }}\\[0.5em]
+      {\justifying\normalsize\textcolor{textblack}{ {{T_about_body}} }\par}
       \vspace{1.3em}
-      {\textcolor{titleblue}{\LARGE Datasets}}\\[0.5em]
-      {\justifying\normalsize\textcolor{textblack}{The India Hydrological Outlook is made possible through the valuable cooperation of numerous data providers, whose contributions are gratefully acknowledged. Contemporary daily observations and extended range forecast data are supplied by the India Meteorological Department (IMD)~\href{https://www.imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html}{https://www.imdpune.gov.in/cmpg/Griddata/Rainfall\_25\_Bin.html}. These datasets are used for initializing hydrological models and generating reliable outlook information through statistical analysis of historical analogues. Hydrological model is calibrated and validated using daily streamflow for sufficient long duration from India-Water Information System~\href{https://indiawris.gov.in/wris\#RiverMonitoring}{https://indiawris.gov.in/wris\#RiverMonitoring}.}\par}
+      {\textcolor{titleblue}{\LARGE {{T_datasets_heading}} }}\\[0.5em]
+      {\justifying\normalsize\textcolor{textblack}{ {{T_datasets_body_pre}}~\href{https://www.imdpune.gov.in/cmpg/Griddata/Rainfall_25_Bin.html}{{\latinfont https://www.imdpune.gov.in/cmpg/Griddata/Rainfall\_25\_Bin.html}}. {{T_datasets_body_mid}}~\href{https://indiawris.gov.in/wris\#RiverMonitoring}{{\latinfont https://indiawris.gov.in/wris\#RiverMonitoring}}.}\par}
       \vspace{1.3em}
-      {\textcolor{titleblue}{\LARGE Hydrological Model}}\\[0.5em]
-      {\justifying\normalsize\textcolor{textblack}{The India Hydrological Outlook utilizes the Variable Infiltration Capacity (VIC) model, a large-scale, semi-distributed hydrological model that computes water and energy budgets for each grid. The VIC model captures sub-grid variability in vegetation and elevation, providing a more accurate representation of hydrological processes at a regional scale. VIC model simulations are performed at a daily temporal resolution to provide accurate hydrological forecasts and enhance water resource management across India.}\par}
+      {\textcolor{titleblue}{\LARGE {{T_model_heading}} }}\\[0.5em]
+      {\justifying\normalsize\textcolor{textblack}{ {{T_model_body}} }\par}
     \end{minipage}};
   \node[anchor=north west, inner sep=0pt] at (9.9,-2.2) {%
     \begin{minipage}[t]{8.9in}\vspace{0pt}
-      {\textcolor{titleblue}{\LARGE Disclaimer and Liability}}\\[0.5em]
-      {\justifying\normalsize\textcolor{textblack}{The India Hydrological Outlook aims to ensure that all content provided is accurate and aligns with the current scientific understanding. However, the science underlying the meteorological and hydrological forecasts, as well as climate projections, is continuously evolving. As such, any forecast or prediction included in the content should not be regarded as a definitive statement of fact. To the fullest extent permitted by applicable law, the India Hydrological Outlook disclaims all warranties or representations, whether express or implied, regarding the content. Your use of the content is entirely at your own risk, and we make no guarantees that the content is error-free or suitable for your specific needs.}\par}
+      {\textcolor{titleblue}{\LARGE {{T_disclaimer_heading}} }}\\[0.5em]
+      {\justifying\normalsize\textcolor{textblack}{ {{T_disclaimer_body}} }\par}
       \vspace{0.7em}
-      {\justifying\normalsize\textcolor{textblack}{The India Hydrological Outlook is supported by the Major Research and Development Programme (MRDP) in Hydro Climate Extremes, funded by the Department of Science and Technology (DST).}\par}
+      {\justifying\normalsize\textcolor{textblack}{ {{T_funding_body}} }\par}
       \vspace{1.3em}
-      {\textcolor{titleblue}{\LARGE Contact Information}}\\[0.5em]
-      {\normalsize\textcolor{textblack}{India Hydrological Outlook, Water and Climate Lab, Indian Institute of Technology Gandhinagar, Gujarat, India.~\href{http://www.indiahydrolook.in}{Water \& Climate Lab}}\par}
+      {\textcolor{titleblue}{\LARGE {{T_contact_heading}} }}\\[0.5em]
+      {\normalsize\textcolor{textblack}{ {{T_contact_address}}~\href{http://www.indiahydrolook.in}{ {{T_contact_lab_link}} }}\par}
       \vspace{0.4em}
-      {\normalsize\textcolor{textblack}{India Hydrological Outlook Portal:~\href{http://www.indiahydrolook.in}{www.indiahydrolook.in}}\par}
+      {\normalsize\textcolor{textblack}{ {{T_contact_portal_label}}~\href{http://www.indiahydrolook.in}{{\latinfont www.indiahydrolook.in}}}\par}
       \vspace{1.0em}
       \begin{tabular}{@{}m{2.0in}@{\hspace{0.3in}}m{6.5in}@{}}
       \circphoto{prof_vimal_circle.png}{1.9} &
-      \normalsize\textcolor{textblack}{Prof. Vimal Mishra (Professor)\newline
-      Department of Civil Engineering, IIT Gandhinagar\newline
-      \textbf{Email}: vmishra@iitgn.ac.in\newline
-      \textbf{Office}: AB6/330, IIT Gandhinagar}
+      \normalsize\textcolor{textblack}{ {{T_person1_name}}\newline
+      {{T_person1_dept}}\newline
+      \textbf{ {{T_person1_email_label}} }: {\latinfont vmishra@iitgn.ac.in}\newline
+      \textbf{ {{T_person1_office_label}} }: {{T_person1_office}} }
       \end{tabular}
       \vspace{1.2em}
       \begin{tabular}{@{}>{\centering\arraybackslash}m{4.2in}@{\hspace{0.3in}}>{\centering\arraybackslash}m{4.2in}@{}}
       \circphoto{devesh_circle.png}{1.9} &
       \circphoto{paras_circle.png}{1.9} \\[0.4em]
-      \normalsize\textcolor{textblack}{Devesh Mani\newline PhD Research Scholar\newline IIT Gandhinagar\newline 24350007@iitgn.ac.in} &
-      \normalsize\textcolor{textblack}{Paras Sharma\newline PhD Research Scholar\newline IIT Gandhinagar\newline paras.sharma@iitgn.ac.in}
+      \normalsize\textcolor{textblack}{ {{T_person2_name}}\newline {{T_person2_role}}\newline {{T_affiliation}}\newline {\latinfont 24350007@iitgn.ac.in}} &
+      \normalsize\textcolor{textblack}{ {{T_person3_name}}\newline {{T_person3_role}}\newline {{T_affiliation}}\newline {\latinfont paras.sharma@iitgn.ac.in}}
       \end{tabular}
     \end{minipage}};
 \end{tikzpicture}
@@ -615,6 +617,27 @@ def latex_escape(s):
     return s
 
 
+# Latin run = letters/digits plus the punctuation that holds URLs/emails together.
+_LATIN_RUN = re.compile(r"[A-Za-z0-9][A-Za-z0-9 .,:/@()\-]*[A-Za-z0-9)]|[A-Za-z0-9]")
+
+def _wrap_latin(escaped):
+    """Wrap maximal Latin/ASCII runs in \\latinfont{...} so they render in Carlito even when the
+    document's main font is an Indic script font (which lacks Latin glyphs). Operates on an
+    ALREADY latex-escaped string; leaves Devanagari/other-script text untouched."""
+    out = []
+    last = 0
+    for m in _LATIN_RUN.finditer(escaped):
+        run = m.group(0)
+        # skip pure spaces/punctuation with no alphanumerics (regex guarantees >=1, but be safe)
+        if not re.search(r"[A-Za-z0-9]", run):
+            continue
+        out.append(escaped[last:m.start()])
+        out.append(r"{\latinfont " + run + "}")
+        last = m.end()
+    out.append(escaped[last:])
+    return "".join(out)
+
+
 def _ordinal(d):
     if 10 <= d % 100 <= 20:
         suf = "th"
@@ -623,10 +646,61 @@ def _ordinal(d):
     return "%d%s" % (d, suf)
 
 
+def _flatten_pdf_texts(texts, pdf_font):
+    """Map the pdf.json structure to the flat {{T_...}} placeholder names used in the template."""
+    pt = texts.get("page_titles", {}); pi = texts.get("page_intros", {}); ab = texts.get("about", {})
+    is_latin = (pdf_font or "Carlito").strip().lower() == "carlito"
+    # For non-Latin main fonts we wrap Latin/digit runs (URLs, emails, acronyms) in \latinfont
+    # at substitution time (see _wrap_latin). No global font-switching package — those break
+    # inside TikZ nodes and braced macro arguments.
+    fontfallback = ""
+    m = {
+        "T_pdf_font": pdf_font,
+        "T_fontfallback": fontfallback,
+        "T_ribbon_title": texts.get("ribbon_title", "India Hydrological Outlook"),
+        "T_based_on": texts.get("based_on", "Based on daily observations till {observation_date}"),
+        "T_issue_date_label": texts.get("issue_date", "Issue date: {issue_date}"),
+        "T_footer_blurb": texts.get("footer_blurb", ""),
+        "T_section_rainfall_temp": texts.get("section_rainfall_temp", "Rainfall and Temperature:"),
+        "T_section_sm_ro_et": texts.get("section_sm_ro_et", "Soil moisture, Total runoff, and Evapotranspiration:"),
+        "T_section_rivers": texts.get("section_rivers", "River flows:"),
+        "T_figure_label": texts.get("figure_label", "Figure."),
+        "T_figure_caption": texts.get("figure_caption", ""),
+        "T_title_rainfall": pt.get("rainfall", ""), "T_title_temperature": pt.get("temperature", ""),
+        "T_title_wetness": pt.get("wetness", ""), "T_title_runoff": pt.get("runoff", ""),
+        "T_title_et": pt.get("et", ""),
+        "T_intro_rainfall": pi.get("rainfall", ""), "T_intro_temperature": pi.get("temperature", ""),
+        "T_intro_wetness": pi.get("wetness", ""), "T_intro_runoff": pi.get("runoff", ""),
+        "T_intro_et": pi.get("et", ""),
+        "T_about_heading": ab.get("about_heading", ""), "T_about_body": ab.get("about_body", ""),
+        "T_datasets_heading": ab.get("datasets_heading", ""),
+        "T_datasets_body_pre": ab.get("datasets_body_pre", ""),
+        "T_datasets_body_mid": ab.get("datasets_body_mid", ""),
+        "T_model_heading": ab.get("model_heading", ""), "T_model_body": ab.get("model_body", ""),
+        "T_disclaimer_heading": ab.get("disclaimer_heading", ""),
+        "T_disclaimer_body": ab.get("disclaimer_body", ""),
+        "T_funding_body": ab.get("funding_body", ""),
+        "T_contact_heading": ab.get("contact_heading", ""),
+        "T_contact_address": ab.get("contact_address", ""),
+        "T_contact_lab_link": ab.get("contact_lab_link", "Water & Climate Lab"),
+        "T_contact_portal_label": ab.get("contact_portal_label", ""),
+        "T_person1_name": ab.get("person1_name", ""), "T_person1_dept": ab.get("person1_dept", ""),
+        "T_person1_email_label": ab.get("person1_email_label", "Email"),
+        "T_person1_office_label": ab.get("person1_office_label", "Office"),
+        "T_person1_office": ab.get("person1_office", ""),
+        "T_person2_name": ab.get("person2_name", ""), "T_person2_role": ab.get("person2_role", ""),
+        "T_person3_name": ab.get("person3_name", ""), "T_person3_role": ab.get("person3_role", ""),
+        "T_affiliation": ab.get("affiliation", "IIT Gandhinagar"),
+    }
+    return m
+
+
 def build_latex_pdf(repo, out_base, date_str, labels, year, month, day,
-                    paragraphs, dashboards_src, log=print):
+                    paragraphs, dashboards_src, texts=None, pdf_font="Carlito",
+                    out_name=None, log=print):
     """Assemble images + substitute paragraphs into the verbatim template + compile
-    with XeLaTeX (twice). Writes Output/Hydrolook_<date>.pdf and the archive copy."""
+    with XeLaTeX (twice). Writes Output/<out_name> and the archive copy.
+    `texts` is the loaded pdf.json dict for the target language; `pdf_font` the script font."""
     repo = Path(repo).resolve(); out_base = Path(out_base).resolve()
     dashboards_src = Path(dashboards_src).resolve()
     build_dir = repo / ".pdf_build"
@@ -663,26 +737,46 @@ def build_latex_pdf(repo, out_base, date_str, labels, year, month, day,
     snap = datetime(year, month, day)
     issue = snap + timedelta(days=1)
     observation_date = "%s %s %d" % (_ordinal(day), labels["current"], year)
-    issue_date = "%02d.%02d.%d" % (issue.day, issue.month, issue.year)
+    issue_date_str = "%02d.%02d.%d" % (issue.day, issue.month, issue.year)
     ribbon_date = "%s %d" % (labels["current"], year)
 
+    texts = texts or {}
+    tmap = _flatten_pdf_texts(texts, pdf_font)
+    is_latin_font = (pdf_font or "Carlito").strip().lower() == "carlito"
+
+    def esc(s):
+        """Escape for LaTeX; for Indic fonts also wrap Latin runs in \\latinfont."""
+        e = latex_escape(s)
+        return e if is_latin_font else _wrap_latin(e)
+
+    # the "based on" / "issue date" header strings carry their own date placeholders
+    tmap["T_based_on"] = esc(tmap["T_based_on"].replace("{observation_date}", observation_date))
+    tmap["T_issue_date_label"] = esc(tmap["T_issue_date_label"].replace("{issue_date}", issue_date_str))
+
     tex = TEX_TEMPLATE
-    tex = tex.replace("{{RIBBON_DATE}}", ribbon_date)
-    tex = tex.replace("{{OBSERVATION_DATE}}", observation_date)
-    tex = tex.replace("{{ISSUE_DATE}}", issue_date)
+    tex = tex.replace("{{RIBBON_DATE}}", esc(ribbon_date))
 
     # Page-1 "River flows" section is included only when streamflow prose was produced
     # (i.e. that data was available). Otherwise the section is omitted entirely.
     if paragraphs.get("page1_rivers"):
+        rivers_heading = tmap.get("T_section_rivers", "River flows:")
         rivers_block = (r"\vspace{1.4em}" + "\n"
-                        r"{\textbf{\textcolor{titleblue}{\Large River flows:}}}\\[0.5em]" + "\n"
-                        r"{\justifying\normalsize " + latex_escape(paragraphs["page1_rivers"]) + r"\par}")
+                        r"{\textbf{\textcolor{titleblue}{\Large " + esc(rivers_heading) + r"}}}\\[0.5em]" + "\n"
+                        r"{\justifying\normalsize " + esc(paragraphs["page1_rivers"]) + r"\par}")
     else:
         rivers_block = ""
     tex = tex.replace("{{PAGE1_RIVERS_BLOCK}}", rivers_block)
 
+    # static UI text (titles, intros, About page, captions). T_pdf_font/T_fontfallback are raw
+    # LaTeX/font names and must not be escaped or wrapped; the date strings were handled above.
+    no_escape = {"T_pdf_font", "T_based_on", "T_issue_date_label", "T_fontfallback"}
+    for k, v in tmap.items():
+        val = v if k in no_escape else esc(v)
+        tex = tex.replace("{{" + k + "}}", val)
+
+    # dynamic LLM paragraphs
     for slot, text in paragraphs.items():
-        tex = tex.replace("{{" + slot + "}}", latex_escape(text))
+        tex = tex.replace("{{" + slot + "}}", esc(text))
 
     tex_path = build_dir / "hydrolook.tex"
     tex_path.write_text(tex, encoding="utf-8")
@@ -706,13 +800,16 @@ def build_latex_pdf(repo, out_base, date_str, labels, year, month, day,
     if not out_pdf_local.exists():
         raise RuntimeError("xelatex returned 0 but no PDF found")
 
-    final_name = "Hydrolook_%s.pdf" % date_str
+    final_name = out_name or ("Hydrolook_%s.pdf" % date_str)
     archive_dir = out_base / "PDF_Archive"
     out_base.mkdir(parents=True, exist_ok=True)
     archive_dir.mkdir(parents=True, exist_ok=True)
-    for old in out_base.glob("Hydrolook_*.pdf"):
-        try: old.unlink()
-        except OSError: pass
+    # remove only a prior copy with the SAME name (don't wipe other languages/months)
+    for d in (out_base, archive_dir):
+        old = d / final_name
+        if old.exists():
+            try: old.unlink()
+            except OSError: pass
     latest_path = out_base / final_name
     shutil.copy(out_pdf_local, latest_path)
     archive_path = archive_dir / final_name

@@ -1,115 +1,114 @@
 <!DOCTYPE html>
+
 <html lang="en-IN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>PDF Reports | Hydrological Outlook | India Drought Monitor</title>
-  <meta name="theme-color" content="#da3910" />
-  <link rel="stylesheet" href="assets/styles.css" />
-  <link rel="stylesheet" href="assets/hydro/hydro.css" />
-  <link rel="stylesheet" href="assets/ai/idm-ai.css" />
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-i18n="hydro_reports.pdf_reports_hydrological_out">PDF Reports | Hydrological Outlook | India Drought Monitor</title>
+<meta content="#da3910" name="theme-color"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/hydro/hydro.css" rel="stylesheet"/>
+<link href="assets/ai/idm-ai.css" rel="stylesheet"/>
+<link href="assets/i18n/i18n.css" rel="stylesheet"/><script src="assets/i18n/i18n.js"></script></head>
 <body>
-  <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a href="index.html">India Drought Monitor</a></h1></div></header>
-  <nav class="usdm-nav" aria-label="Primary">
-    <div class="usdm-nav-inner">
-      <a href="index.html">Current</a>
-      <a href="maps.html">Maps</a>
-      <a href="data.html">Data</a>
-      <a href="hydro.html" class="active">Hydrological Outlook</a>
-      <a href="summary.html">Summary</a>
-      <a href="conditions.html">Conditions &amp; Outlooks</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </div>
-  </nav>
-  <main class="usdm-main">
-    <div class="usdm-breadcrumbs"><a href="index.html">Home</a> <span class="sep">/</span> <a href="hydro.html">Hydrological Outlook</a> <span class="sep">/</span> PDF Reports</div>
-    <h1 class="page-title">Hydrological Outlook Reports</h1>
-    <p style="font-size:16.5px;max-width:82ch;color:#3a3431;">
+<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1><div class="idm-lang-switcher" data-i18n-switcher="1"></div></div></header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:hydro_reports.primary">
+<div class="usdm-nav-inner">
+<a data-i18n="common_nav.current" href="index.html">Current</a>
+<a data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a data-i18n="common_nav.data" href="data.html">Data</a>
+<a class="active" data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.summary" href="summary.html">Summary</a>
+<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.about" href="about.html">About</a>
+<a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+</div>
+</nav>
+<main class="usdm-main">
+<div class="usdm-breadcrumbs"><a data-i18n="hydro_reports.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="hydro_reports.hydrological_outlook" href="hydro.html">Hydrological Outlook</a> <span class="sep">/</span> <span data-i18n="hydro_reports.pdf_reports">PDF Reports</span></div>
+<h1 class="page-title" data-i18n="hydro_reports.hydrological_outlook_reports">Hydrological Outlook Reports</h1>
+<p data-i18n="hydro_reports.each_month_the_water_and_cli" style="font-size:16.5px;max-width:82ch;color:#3a3431;">
       Each month the Water and Climate Lab compiles the full India Hydrological Outlook into a single
       PDF report. Browse the archive below: pick a date to preview the report inline, or download any
       report directly.
     </p>
-
-    <div class="hydro-reports-layout">
-      <aside class="hydro-reports-list" aria-label="Report archive">
-        <h2>Report Archive</h2>
-        <ul id="report-list"></ul>
-      </aside>
-
-      <section class="hydro-reports-viewer">
-        <div class="hydro-reports-viewer-bar">
-          <span id="viewer-title">Select a report</span>
-          <span class="hydro-bar-spacer"></span>
-          <a class="idm-btn ghost" id="report-download-current" href="#" download style="display:none;">&#11015; Download current month PDF</a>
-          <a class="idm-btn" id="report-download" href="#" download style="display:none;">&#11015; Download this report</a>
-        </div>
-        <div class="hydro-pdf-frame-wrap">
-          <iframe id="report-frame" class="hydro-pdf-frame" title="Hydrological Outlook report preview"></iframe>
-          <div class="hydro-pdf-fallback" id="pdf-fallback" hidden>
-            <p>Your browser can't display the PDF inline. <a id="fallback-link" href="#" target="_blank" rel="noopener">Open it in a new tab</a> instead.</p>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <footer class="usdm-footer">
-    <div class="usdm-footer-inner">
-      <div class="partner-logos">
-        <img src="assets/logos/wcl.png" alt="Water and Climate Lab, IIT Gandhinagar" />
-        <img src="assets/logos/iitgn.png" alt="Indian Institute of Technology Gandhinagar" />
-        <img src="assets/logos/imd.png" alt="India Meteorological Department" />
-      </div>
-      <p class="partner-blurb">
+<div class="hydro-reports-layout">
+<aside aria-label="Report archive" class="hydro-reports-list" data-i18n-attr="aria-label:hydro_reports.report_archive_2">
+<h2 data-i18n="hydro_reports.report_archive">Report Archive</h2>
+<ul id="report-list"></ul>
+</aside>
+<section class="hydro-reports-viewer">
+<div class="hydro-reports-viewer-bar">
+<span data-i18n="hydro_reports.select_a_report" id="viewer-title">Select a report</span>
+<span class="hydro-bar-spacer"></span>
+<a class="idm-btn ghost" data-i18n="hydro_reports.download_current_month_pdf" download="" href="#" id="report-download-current" style="display:none;">⬇ Download current month PDF</a>
+<a class="idm-btn" data-i18n="hydro_reports.download_this_report" download="" href="#" id="report-download" style="display:none;">⬇ Download this report</a>
+</div>
+<div class="hydro-pdf-frame-wrap">
+<iframe class="hydro-pdf-frame" data-i18n-attr="title:hydro_reports.hydrological_outlook_report" id="report-frame" title="Hydrological Outlook report preview"></iframe>
+<div class="hydro-pdf-fallback" hidden="" id="pdf-fallback">
+<p><span data-i18n="hydro_reports.your_browser_can_t_display_t">Your browser can't display the PDF inline.</span> <a data-i18n="hydro_reports.open_it_in_a_new_tab" href="#" id="fallback-link" rel="noopener" target="_blank">Open it in a new tab</a> <span data-i18n="hydro_reports.instead">instead.</span></p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<footer class="usdm-footer">
+<div class="usdm-footer-inner">
+<div class="partner-logos">
+<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
+<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
+</div>
+<p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
-      <div class="contact-block">
-        <div>
-          <h3>Contact Us</h3>
-          <p><strong>Water and Climate Lab</strong><br />Indian Institute of Technology Gandhinagar</p>
-          <p><span class="contact-icon">📍</span>Palaj, Gandhinagar</p>
-          <p><span class="contact-icon">@</span><a href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
-        </div>
-        <div>
-          <h3>Maps</h3>
-          <ul>
-            <li><a href="index.html">Current Map</a></li>
-            <li><a href="compare.html">Compare Two Weeks</a></li>
-            <li><a href="slider.html">Comparison Slider</a></li>
-            <li><a href="animations.html">Animations</a></li>
-            <li><a href="archive.html">Map Archive</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Hydrological Outlook</h3>
-          <ul>
-            <li><a href="hydro.html">Dashboards</a></li>
-            <li><a href="hydro-maps.html">Individual Maps</a></li>
-            <li><a href="hydro-reports.html">PDF Reports</a></li>
-          </ul>
-        </div>
-        <div>
-          <h3>Resources</h3>
-          <ul>
-            <li><a href="data.html">Data Download</a></li>
-            <li><a href="data-query.html">Query the Data</a></li>
-            <li><a href="summary.html">National Summary</a></li>
-            <li><a href="about.html">What is the IDM?</a></li>
-            <li><a href="contact.html">Contact Authors</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-copy">
+<div class="contact-block">
+<div>
+<h3 data-i18n="common_footer.contact_us">Contact Us</h3>
+<p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
+<p><span class="contact-icon">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon">@</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+</div>
+<div>
+<h3 data-i18n="common_footer.maps">Maps</h3>
+<ul>
+<li><a data-i18n="common_footer.current_map" href="index.html">Current Map</a></li>
+<li><a data-i18n="common_footer.compare_two_weeks" href="compare.html">Compare Two Weeks</a></li>
+<li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
+<li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
+<li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.hydrological_outlook">Hydrological Outlook</h3>
+<ul>
+<li><a data-i18n="common_footer.dashboards" href="hydro.html">Dashboards</a></li>
+<li><a data-i18n="common_footer.individual_maps" href="hydro-maps.html">Individual Maps</a></li>
+<li><a data-i18n="common_footer.pdf_reports" href="hydro-reports.html">PDF Reports</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.resources">Resources</h3>
+<ul>
+<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
+<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
+<li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
         © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
       </div>
-    </div>
-  </footer>
-  <script src="assets/hydro/hydro.js"></script>
-  <script>
+</div>
+</footer>
+<script src="assets/hydro/hydro.js"></script>
+<script>
     window.addEventListener("DOMContentLoaded", function () {
       IHO.initReports({
         list: "report-list", frame: "report-frame", title: "viewer-title",
@@ -118,9 +117,9 @@
       });
     });
   </script>
-  <script src="assets/vendor/papaparse.min.js"></script>
-  <script src="assets/vendor/alasql.min.js"></script>
-  <script src="assets/ai/idm-ai.js"></script>
-  <script src="assets/ai/idm-chatbot.js"></script>
+<script src="assets/vendor/papaparse.min.js"></script>
+<script src="assets/vendor/alasql.min.js"></script>
+<script src="assets/ai/idm-ai.js"></script>
+<script src="assets/ai/idm-chatbot.js"></script>
 </body>
 </html>

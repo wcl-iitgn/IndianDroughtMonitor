@@ -1,0 +1,12 @@
+{
+  "default": "English",
+  "languages": [
+    { "key": "English",  "code": "eng_Latn", "label": "English",  "native": "English",   "dir": "ltr", "pdf_font": "Carlito",                "script": "latin" },
+    { "key": "Hindi",    "code": "hin_Deva", "label": "Hindi",    "native": "\u0939\u093f\u0928\u094d\u0926\u0940", "dir": "ltr", "pdf_font": "Noto Sans Devanagari", "script": "devanagari" },
+    { "key": "Marathi",  "code": "mar_Deva", "label": "Marathi",  "native": "\u092e\u0930\u093e\u0920\u0940",        "dir": "ltr", "pdf_font": "Noto Sans Devanagari", "script": "devanagari" },
+    { "key": "Bengali",  "code": "ben_Beng", "label": "Bengali",  "native": "\u09ac\u09be\u0982\u09b2\u09be",        "dir": "ltr", "pdf_font": "Noto Sans Bengali",    "script": "bengali" },
+    { "key": "Tamil",    "code": "tam_Taml", "label": "Tamil",    "native": "\u0ba4\u0bae\u0bbf\u0bb4\u0bcd",        "dir": "ltr", "pdf_font": "Noto Sans Tamil",      "script": "tamil" },
+    { "key": "Telugu",   "code": "tel_Telu", "label": "Telugu",   "native": "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41",  "dir": "ltr", "pdf_font": "Noto Sans Telugu",     "script": "telugu" },
+    { "key": "Gujarati", "code": "guj_Gujr", "label": "Gujarati", "native": "\u0a97\u0ac1\u0a9c\u0ab0\u0abe\u0aa4\u0ac0", "dir": "ltr", "pdf_font": "Noto Sans Gujarati", "script": "gujarati" }
+  ]
+}

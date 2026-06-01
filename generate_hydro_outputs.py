@@ -691,6 +691,61 @@ def step_month(base, n):
     return datetime(yy, mm, 1)
 
 
+def load_pdf_languages(repo):
+    """Read Texts/languages.json; fall back to English-only if missing."""
+    p = Path(repo) / "Texts" / "languages.json"
+    if p.exists():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))["languages"]
+        except Exception as e:
+            print(f"  ! could not read languages.json ({e}); English only")
+    return [{"key": "English", "code": "eng_Latn", "pdf_font": "Carlito"}]
+
+
+def load_pdf_texts(repo, lang_key):
+    """Load Texts/<lang_key>/pdf.json (the static PDF strings) for the target language."""
+    p = Path(repo) / "Texts" / lang_key / "pdf.json"
+    if not p.exists():
+        return None
+    return json.loads(p.read_text(encoding="utf-8"))
+
+
+def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="sarvam-fp"):
+    """Translate the dynamic LLM paragraphs (dict slot->text) into the target language
+    with sarvam-translate via Ollama. Returns a new dict, or None if Ollama is unreachable."""
+    try:
+        import translate_texts as TT
+    except Exception:
+        TT = None
+    slots = list(paragraphs.keys())
+    texts = [paragraphs[s] for s in slots]
+    try:
+        if TT is not None:
+            tr = TT.Translator(api_url, tgt_lang_name, model=model)
+            out = tr.translate_many(texts)
+        else:
+            out = _simple_translate(texts, tgt_lang_name, api_url, model)
+    except Exception as e:
+        print(f"    (paragraph translation failed: {e})")
+        return None
+    return {s: out[i] for i, s in enumerate(slots)}
+
+
+def _simple_translate(texts, tgt_lang_name, api_url, model="sarvam-fp"):
+    """Minimal fallback translator (used only if translate_texts.py isn't importable):
+    one sarvam-translate call per paragraph via Ollama /api/generate."""
+    import urllib.request
+    out = []
+    system = "Translate the text below to %s." % tgt_lang_name
+    for t in texts:
+        body = json.dumps({"model": model, "system": system, "prompt": t,
+                           "stream": False, "options": {"temperature": 0.1}}).encode("utf-8")
+        req = urllib.request.Request(api_url, data=body, headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=180) as r:
+            out.append(json.loads(r.read().decode("utf-8")).get("response", t).strip())
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser(description="Generate IDM hydro maps, dashboards, PDF, and summaries.")
     ap.add_argument("--repo", default=".", help="Path to the IDM repo root (default: current dir)")
@@ -706,6 +761,13 @@ def main():
     ap.add_argument("--pdf-engine", default="latex", choices=["latex", "matplotlib"],
                     help="latex = exact 9-page XeLaTeX outlook (needs xelatex+Carlito); "
                          "matplotlib = lightweight fallback PDF")
+    ap.add_argument("--langs", nargs="*", default=None,
+                    help="languages to build PDFs for (default: all in Texts/languages.json). "
+                         "English is always built. e.g. --langs English Hindi Tamil")
+    ap.add_argument("--translate-api", default="http://10.0.60.193:11434/api/generate",
+                    help="Ollama /api/generate URL used to translate non-English PDF prose")
+    ap.add_argument("--translate-model", default="sarvam-fp",
+                    help="Ollama model for translation (default: sarvam-fp)")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
@@ -762,27 +824,54 @@ def main():
             import hydro_pdf
             if not shutil.which("xelatex"):
                 print("  ! xelatex not found on PATH. Install TeX Live (with fontspec/tikz/tcolorbox + "
-                      "the Carlito font), or rerun with --pdf-engine matplotlib.")
+                      "the Carlito/Noto fonts), or rerun with --pdf-engine matplotlib.")
             else:
-                # The PDF has 9 pages and needs all 7 dashboards (incl. both streamflow).
                 pdf_dash_dir = repo / ".pdf_dashboards"
-                print("  generating the 5 dashboards the PDF needs…")
+                print("  generating the 5 dashboards the PDF needs (shared across languages)…")
                 generate_dashboards_for_pdf(input_dir, pdf_dash_dir, date_str)
-                # Evidence packet (verbatim Section 7) feeds the LLM.
+                # Evidence packet (verbatim Section 7) feeds the LLM — English prose first.
                 EVIDENCE = hydro_pdf.build_evidence(load_param, input_dir, date_str)
-                # Paragraphs: via Ollama (the only change from the notebook), or offline template.
                 if args.no_llm:
                     print("  paragraphs: offline template (LLM disabled)")
-                    paragraphs = hydro_pdf.offline_paragraphs(EVIDENCE, LABELS, y)
+                    en_paragraphs = hydro_pdf.offline_paragraphs(EVIDENCE, LABELS, y)
                 else:
                     try:
-                        paragraphs = hydro_pdf.generate_all_paragraphs(EVIDENCE, LABELS, y, args.api, args.model)
+                        en_paragraphs = hydro_pdf.generate_all_paragraphs(EVIDENCE, LABELS, y, args.api, args.model)
                     except Exception as e:
                         print(f"  ! Ollama paragraph generation failed ({e}); using offline template.")
-                        paragraphs = hydro_pdf.offline_paragraphs(EVIDENCE, LABELS, y)
+                        en_paragraphs = hydro_pdf.offline_paragraphs(EVIDENCE, LABELS, y)
+
+                # which languages to build
+                langs = load_pdf_languages(repo)
+                if args.langs:
+                    want = set(x.lower() for x in args.langs)
+                    sel = [l for l in langs if l["key"].lower() in want or l["code"].lower() in want]
+                    if not any(l["key"] == "English" for l in sel):
+                        eng = [l for l in langs if l["key"] == "English"]
+                        sel = eng + sel  # always include English
+                    langs = sel or langs
                 try:
-                    hydro_pdf.build_latex_pdf(repo, out_base, date_str, LABELS, y, m, d,
-                                              paragraphs, dashboards_src=pdf_dash_dir)
+                    for lang in langs:
+                        key = lang["key"]
+                        texts = load_pdf_texts(repo, key)
+                        if texts is None:
+                            print(f"  ! {key}: Texts/{key}/pdf.json not found — run translate_texts.py; skipping")
+                            continue
+                        # paragraphs: English as-is; otherwise translate the English prose
+                        if key == "English":
+                            paragraphs = en_paragraphs
+                        else:
+                            paragraphs = translate_paragraphs(
+                                en_paragraphs, lang.get("label") or lang["key"],
+                                args.translate_api, model=args.translate_model)
+                            if paragraphs is None:
+                                print(f"  ! {key}: translation server unavailable — skipping (English PDF still built)")
+                                continue
+                        lang_out = out_base / key
+                        print(f"  [{key}] building PDF (font: {lang['pdf_font']}) -> Output/{key}/")
+                        hydro_pdf.build_latex_pdf(repo, lang_out, date_str, LABELS, y, m, d,
+                                                  paragraphs, dashboards_src=pdf_dash_dir,
+                                                  texts=texts, pdf_font=lang["pdf_font"])
                 finally:
                     shutil.rmtree(pdf_dash_dir, ignore_errors=True)
         else:
@@ -792,7 +881,7 @@ def main():
     print("\nDone. Outputs written under:")
     print(f"  {out_base/'All_Maps'}")
     print(f"  {out_base/'Dashboards'}")
-    print(f"  {out_base/'PDF_Archive'}")
+    print(f"  {out_base}/<Language>/  (per-language PDFs + PDF_Archive)")
     print(f"  {repo/'data'/'summaries'}")
 
 

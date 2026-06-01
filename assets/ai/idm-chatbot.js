@@ -15,13 +15,20 @@
 (function () {
   "use strict";
 
-  var SUGGESTIONS = [
-    "How much of India is in drought right now?",
-    "Which five states are worst affected?",
-    "Has drought expanded or contracted since last week?",
-    "What's the rainfall outlook this month?",
-    "Which states have the most extreme (D3+) drought?"
-  ];
+  // i18n helper — falls back to English if the i18n layer isn't present/loaded yet.
+  function t(key, fallback) {
+    if (window.IDM_I18N && typeof window.IDM_I18N.t === "function") return window.IDM_I18N.t("chatbot." + key, fallback);
+    return fallback;
+  }
+  function suggestions() {
+    return [
+      t("suggest_1", "How much of India is in drought right now?"),
+      t("suggest_2", "Which five states are worst affected?"),
+      t("suggest_3", "Has drought expanded or contracted since last week?"),
+      t("suggest_4", "What's the rainfall outlook this month?"),
+      t("suggest_5", "Which states have the most extreme (D3+) drought?")
+    ];
+  }
 
   function elFromHTML(html) {
     var d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild;
@@ -35,22 +42,22 @@
   function build() {
     // launcher
     var launcher = elFromHTML(
-      '<button class="idm-chat-launch" aria-label="Open the drought data assistant" title="Ask about the data">' +
-      '<span class="idm-chat-launch-icon">&#128172;</span><span class="idm-chat-launch-text">Ask IDM</span></button>');
+      '<button class="idm-chat-launch" aria-label="' + esc(t("launch_aria","Open the drought data assistant")) + '" title="' + esc(t("launch_title","Ask about the data")) + '">' +
+      '<span class="idm-chat-launch-icon">&#128172;</span><span class="idm-chat-launch-text">' + esc(t("launch","Ask IDM")) + '</span></button>');
 
     var panel = elFromHTML(
-      '<section class="idm-chat-panel" hidden aria-label="Drought data assistant">' +
+      '<section class="idm-chat-panel" hidden aria-label="' + esc(t("launch_aria","Drought data assistant")) + '">' +
         '<header class="idm-chat-head">' +
-          '<div><strong>Ask IDM</strong><span class="idm-chat-sub">drought &amp; hydro-outlook data</span></div>' +
-          '<button class="idm-chat-close" aria-label="Close">&times;</button>' +
+          '<div><strong>' + esc(t("head_title","Ask IDM")) + '</strong><span class="idm-chat-sub">' + esc(t("head_sub","drought & hydro-outlook data")) + '</span></div>' +
+          '<button class="idm-chat-close" aria-label="' + esc(t("close_aria","Close")) + '">&times;</button>' +
         '</header>' +
         '<div class="idm-chat-log" id="idm-chat-log"></div>' +
         '<div class="idm-chat-suggest" id="idm-chat-suggest"></div>' +
         '<form class="idm-chat-form" id="idm-chat-form">' +
-          '<input type="text" id="idm-chat-input" autocomplete="off" placeholder="Ask about drought or the hydrological outlook…" />' +
-          '<button type="submit" class="idm-chat-send" aria-label="Send">&#10148;</button>' +
+          '<input type="text" id="idm-chat-input" autocomplete="off" placeholder="' + esc(t("input_placeholder","Ask about drought or the hydrological outlook…")) + '" />' +
+          '<button type="submit" class="idm-chat-send" aria-label="' + esc(t("send_aria","Send")) + '">&#10148;</button>' +
         '</form>' +
-        '<div class="idm-chat-foot">Answers are generated from the site\u2019s data. Verify important figures.</div>' +
+        '<div class="idm-chat-foot">' + esc(t("foot","Answers are generated from the site\u2019s data. Verify important figures.")) + '</div>' +
       '</section>');
 
     document.body.appendChild(launcher);
@@ -67,7 +74,7 @@
       panel.hidden = false; launcher.classList.add("is-open");
       setTimeout(function () { input.focus(); }, 50);
       if (!log.dataset.greeted) {
-        addBot("Hi! Ask me about India\u2019s current drought conditions, the weekly trend, the worst-affected states, or the monthly hydrological outlook (rainfall, temperature, soil moisture, runoff, ET).");
+        addBot(t("greeting","Hi! Ask me about India\u2019s current drought conditions, the weekly trend, the worst-affected states, or the monthly hydrological outlook (rainfall, temperature, soil moisture, runoff, ET)."));
         log.dataset.greeted = "1";
       }
     }
@@ -76,7 +83,7 @@
     launcher.addEventListener("click", function () { panel.hidden ? open() : close(); });
     panel.querySelector(".idm-chat-close").addEventListener("click", close);
 
-    SUGGESTIONS.forEach(function (q) {
+    suggestions().forEach(function (q) {
       var b = elFromHTML('<button type="button" class="idm-chat-chip">' + esc(q) + "</button>");
       b.addEventListener("click", function () { if (!busy) { input.value = q; submit(); } });
       suggestWrap.appendChild(b);
@@ -97,7 +104,7 @@
     function addQueryDetails(sql) {
       if (!sql) return;
       var d = elFromHTML(
-        '<details class="idm-chat-sql"><summary>Show query</summary><pre></pre></details>');
+        '<details class="idm-chat-sql"><summary>' + esc(t("show_query","Show query")) + '</summary><pre></pre></details>');
       d.querySelector("pre").textContent = sql;   // textContent avoids any HTML-escaping issues
       log.appendChild(d); scroll();
     }
@@ -112,11 +119,11 @@
         var res = await IDM_AI.ask(q, history.slice());
         thinking.remove();
         if (res.error) {
-          addBot("Sorry, I couldn't find an answer to that. Try rephrasing your question.");
+          addBot(t("err_no_answer","Sorry, I couldn\u2019t find an answer to that. Try rephrasing your question."));
           if (res.sql) addQueryDetails(res.sql);   // still show what it attempted
           // don't poison history with a failed turn
         } else {
-          addBot(res.answer || "Sorry, I couldn't find an answer to that.");
+          addBot(res.answer || t("err_no_answer","Sorry, I couldn\u2019t find an answer to that."));
           if (res.sql) addQueryDetails(res.sql);
           // record the successful exchange so follow-up questions have context
           history.push({ role: "user", content: q });
@@ -130,7 +137,7 @@
           addBot("I couldn\u2019t reach the language model service. The assistant needs the LAN Ollama " +
                  "server to be running and reachable from this page.");
         } else {
-          addBot("Something went wrong, please try again.");
+          addBot(t("err_generic","Something went wrong, please try again."));
         }
       } finally {
         busy = false;
@@ -140,6 +147,13 @@
     form.addEventListener("submit", function (e) { e.preventDefault(); submit(); });
   }
 
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", build);
-  else build();
+  function mount() {
+    // remove any previous instance (e.g. on language change) then build fresh
+    document.querySelectorAll(".idm-chat-launch, .idm-chat-panel").forEach(function (n) { n.remove(); });
+    build();
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", mount);
+  else mount();
+  // re-render the widget in the newly selected language
+  document.addEventListener("idm:languagechange", function () { mount(); });
 })();
