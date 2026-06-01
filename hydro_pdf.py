@@ -398,7 +398,7 @@ TEX_TEMPLATE = r'''
   \node[rotate=-90, text=white, font=\Huge\bfseries, anchor=center]
     at ([xshift=-0.42in,yshift=-4.0in]current page.north east) {{{RIBBON_DATE}}};
   \node[rotate=-90, text=white, font=\Huge\bfseries, anchor=center]
-    at ([xshift=-0.42in,yshift=-13.5in]current page.north east) {India Hydrological Outlook};
+    at ([xshift=-0.42in,yshift=-13.5in]current page.north east) { {{T_ribbon_title}} };
 \end{tikzpicture}%
 }
 
@@ -464,7 +464,7 @@ TEX_TEMPLATE = r'''
       \begin{tcolorbox}[colback=summarygold, colframe=summarygoldborder,
                         boxrule=0pt, leftrule=3pt, arc=0pt, sharp corners,
                         left=14pt, right=14pt, top=10pt, bottom=10pt]
-      {\normalsize\textbf{Summary:} #2}
+      {\normalsize\textbf{ {{T_summary_label}} } #2}
       \end{tcolorbox}
     \end{minipage}%
   };
@@ -477,7 +477,7 @@ TEX_TEMPLATE = r'''
     \begin{minipage}{18.4in}
       \begin{tcolorbox}[colback=footerblue, colframe=footerblue, boxrule=0.8pt, arc=8pt,
                         left=18pt, right=18pt, top=14pt, bottom=14pt]
-      {\normalsize\textcolor{textblack}{\textbf{SUMMARY:} #2}}
+      {\normalsize\textcolor{textblack}{\textbf{ {{T_summary_heading}} } #2}}
       \end{tcolorbox}
     \end{minipage}%
   };
@@ -646,6 +646,19 @@ def _ordinal(d):
     return "%d%s" % (d, suf)
 
 
+def _fill_date(text, placeholder, date_str):
+    """Substitute a date into a (possibly translated) label string.
+    If the placeholder is intact, replace it. If the translator mangled it into stray
+    digits/punctuation (e.g. 'मुद्दे की तारीख: 0000'), strip that trailing junk and append
+    the real date, so the header never shows a corrupted value."""
+    if placeholder in text:
+        return text.replace(placeholder, date_str)
+    # placeholder lost in translation: drop a trailing run of digit/space/punct junk
+    base = re.sub(r"[\s0-9Oo।.:：/\\\-]+$", "", text).rstrip()
+    sep = ": " if base and base[-1] not in ":：" else " "
+    return (base + sep + date_str).strip()
+
+
 def _flatten_pdf_texts(texts, pdf_font):
     """Map the pdf.json structure to the flat {{T_...}} placeholder names used in the template."""
     pt = texts.get("page_titles", {}); pi = texts.get("page_intros", {}); ab = texts.get("about", {})
@@ -660,6 +673,8 @@ def _flatten_pdf_texts(texts, pdf_font):
         "T_ribbon_title": texts.get("ribbon_title", "India Hydrological Outlook"),
         "T_based_on": texts.get("based_on", "Based on daily observations till {observation_date}"),
         "T_issue_date_label": texts.get("issue_date", "Issue date: {issue_date}"),
+        "T_summary_heading": texts.get("summary_heading", "SUMMARY:"),
+        "T_summary_label": texts.get("summary_label") or texts.get("summary_heading", "Summary:"),
         "T_footer_blurb": texts.get("footer_blurb", ""),
         "T_section_rainfall_temp": texts.get("section_rainfall_temp", "Rainfall and Temperature:"),
         "T_section_sm_ro_et": texts.get("section_sm_ro_et", "Soil moisture, Total runoff, and Evapotranspiration:"),
@@ -749,9 +764,11 @@ def build_latex_pdf(repo, out_base, date_str, labels, year, month, day,
         e = latex_escape(s)
         return e if is_latin_font else _wrap_latin(e)
 
-    # the "based on" / "issue date" header strings carry their own date placeholders
-    tmap["T_based_on"] = esc(tmap["T_based_on"].replace("{observation_date}", observation_date))
-    tmap["T_issue_date_label"] = esc(tmap["T_issue_date_label"].replace("{issue_date}", issue_date_str))
+    # the "based on" / "issue date" header strings carry their own date placeholders.
+    # sarvam-translate sometimes mangles the placeholder token (e.g. turning it into stray
+    # digits like "0000"); _fill_date is tolerant of that so the date is always correct.
+    tmap["T_based_on"] = esc(_fill_date(tmap["T_based_on"], "{observation_date}", observation_date))
+    tmap["T_issue_date_label"] = esc(_fill_date(tmap["T_issue_date_label"], "{issue_date}", issue_date_str))
 
     tex = TEX_TEMPLATE
     tex = tex.replace("{{RIBBON_DATE}}", esc(ribbon_date))
