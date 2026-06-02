@@ -33,6 +33,8 @@ function createDroughtMap(opts) {
   if (!opts.paths.stateGrid) opts.paths.stateGrid = "./states_with_boundaries.csv";
   if (!opts.paths.mainland) opts.paths.mainland = "./india_mainland_boundary.csv";
   if (!opts.paths.stateVectors) opts.paths.stateVectors = "./state_vector_boundaries.json";
+  // Per-state district boundary files (lazy-loaded on state click): <dir>/state_<id>.json
+  if (!opts.paths.districtsDir) opts.paths.districtsDir = "./data/districts";
 
   const C_raster = opts.rasterCanvas;
   const c_raster = C_raster.getContext("2d");
@@ -74,6 +76,11 @@ const state = {
 
     mainlandBoundary: [],
     stateVectorBoundaries: [],
+
+    // District boundaries for the CURRENTLY selected state only (lazy-loaded on
+    // click). _districtCache memoises per-state fetches so re-clicking is instant.
+    districtsForState: null,
+    _districtCache: {},
 
     // Place this inside your existing const state = { ... } object definition:
     isAnimating: false,
@@ -174,6 +181,38 @@ async function loadStateVectorBoundaries() {
 }
 
 /**
+ * Lazily fetch the district boundaries for a single state (only when that state
+ * is clicked), cache them, and trigger a redraw. District data is NOT loaded up
+ * front — nothing is fetched until the user actually selects a state. Failures
+ * (e.g. a state with no district file) degrade gracefully to "no districts".
+ */
+async function ensureDistrictsLoaded(stateId) {
+    if (stateId == null) return;
+    if (Object.prototype.hasOwnProperty.call(state._districtCache, stateId)) {
+        state.districtsForState = state._districtCache[stateId];
+        return;
+    }
+    state._districtCache[stateId] = null;   // mark in-flight so we don't double-fetch
+    try {
+        const url = opts.paths.districtsDir.replace(/\/+$/, "") + "/state_" + stateId + ".json";
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error("HTTP " + resp.status);
+        const obj = await resp.json();
+        const districts = (obj && obj.districts) || [];
+        state._districtCache[stateId] = districts;
+        // only apply if this state is still the selected one
+        if (state.selectedStateId === stateId) {
+            state.districtsForState = districts;
+            renderStaticMap();
+            renderDynamicHUD();
+        }
+    } catch (e) {
+        state._districtCache[stateId] = [];
+        console.warn("No district boundaries for state " + stateId + ":", e.message || e);
+    }
+}
+
+/**
  * Handles mainland country boundary coordinates acquisition
  */
 async function loadMainlandBoundaryData() {
@@ -217,6 +256,7 @@ function resetZoom() {
     state.long_S = state.base.long_S;
 
     state.selectedStateId = null;
+    state.districtsForState = null;
 
     renderStaticMap();
     renderDynamicHUD();
@@ -230,6 +270,9 @@ function zoomToStateBoundingBox(stateId) {
     if (!state.gridState) return;
 
     state.selectedStateId = stateId;
+    // show districts for this state (cached -> immediate; else fetch + redraw)
+    state.districtsForState = state._districtCache[stateId] || null;
+    ensureDistrictsLoaded(stateId);
 
     let minR = Infinity, maxR = -Infinity;
     let minC = Infinity, maxC = -Infinity;
@@ -447,6 +490,35 @@ function renderStaticMap() {
         });
         
         c_raster.stroke(); // Draw all paths at once (extremely fast)
+        c_raster.restore();
+    }
+
+    // ============================================================
+    // Render District Boundaries for the SELECTED state (lazy-loaded on click).
+    // Thin grey lines, subordinate to the black state border. Drawn only when a
+    // state is selected and its district file has finished loading.
+    // ============================================================
+    if (state.selectedStateId !== null && state.districtsForState && state.districtsForState.length > 0) {
+        const dW = state.lat_E - state.lat_W;
+        const dH = state.long_N - state.long_S;
+        c_raster.save();
+        c_raster.beginPath();
+        c_raster.strokeStyle = "#5b5b5b";
+        c_raster.lineWidth = 0.7;
+        c_raster.lineJoin = "round";
+        state.districtsForState.forEach(d => {
+            (d.rings || []).forEach(ring => {
+                let first = true;
+                for (let i = 0; i < ring.length; i++) {
+                    const lng = ring[i][0], lat = ring[i][1];
+                    const px = state.margin.left + ((lng - state.lat_W) / dW) * state.plotWidth;
+                    const py = state.margin.top + ((state.long_N - lat) / dH) * state.plotHeight;
+                    if (first) { c_raster.moveTo(px, py); first = false; }
+                    else { c_raster.lineTo(px, py); }
+                }
+            });
+        });
+        c_raster.stroke();
         c_raster.restore();
     }
 
@@ -949,6 +1021,7 @@ function formatDateToYYYYMMDD(date) {
     state: state,
     zoomToStateBoundingBox: zoomToStateBoundingBox,
     zoomToStateAtPixel: zoomToStateAtPixel,
+    ensureDistrictsLoaded: ensureDistrictsLoaded,
     resetZoom: resetZoom,
     setZoomMode: function (mode) { state.zoomMode = (mode === "rect") ? "rect" : "state"; },
     getZoomMode: function () { return state.zoomMode; },

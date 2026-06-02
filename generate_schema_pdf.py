@@ -77,6 +77,21 @@ TABLES = [
         "note": "Only Rainfall is a 0\u2013100 percentile; the others are anomalies "
                 "(negative = below normal). Source: the monthly Hydrological Outlook means.",
     },
+    {
+        "name": "drought_district_latest",
+        "desc": "Per-district drought breakdown for the most recent week. Loaded with the assistant "
+                "data; district boundaries themselves load only when a state is clicked on the map.",
+        "cols": [
+            ("district", "TEXT", "District name."),
+            ("state", "TEXT", "State or Union Territory the district belongs to."),
+            ("state_id", "INTEGER", "Numeric state id (matches the state layer)."),
+            ("none_pct", "FLOAT", "Percent of the district in no drought."),
+            ("d0_pct \u2026 d4_pct", "FLOAT", "Percent of the district in EXACTLY that class (not cumulative)."),
+            ("drought_pct", "FLOAT", "Percent of the district in ANY drought (= 100 \u2212 none_pct)."),
+        ],
+        "note": "Each row is ONE district \u2014 never a state or national total. Computed by "
+                "point-in-polygon of the district boundaries against the latest CDI grid.",
+    },
 ]
 
 EXAMPLES = [
@@ -90,6 +105,8 @@ EXAMPLES = [
      "SELECT state, (d3_pct + d4_pct) AS d3plus FROM drought_state_latest WHERE (d3_pct + d4_pct) > 5 ORDER BY d3plus DESC"),
     ("Rainfall outlook detail",
      "SELECT * FROM hydro_outlook WHERE parameter = 'Rainfall'"),
+    ("Worst-affected districts in a state",
+     "SELECT district, drought_pct, d2_pct, d3_pct FROM drought_district_latest WHERE state = 'Maharashtra' ORDER BY drought_pct DESC LIMIT 10"),
 ]
 
 

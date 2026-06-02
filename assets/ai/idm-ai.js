@@ -43,6 +43,7 @@
       stateVectors: "state_vector_boundaries.json",
       currentCDI: "data/Current_CDI.txt",
       hydroStats: "assets/ai/hydro-stats.json",
+      districtStats: "data/districts/district-stats.json",
       cachedSummary: "data/summary_latest.txt"
     }
   };
@@ -242,7 +243,21 @@
       alasql.tables.drought_state_latest.data = stateRows;
       alasql.tables.hydro_outlook.data = hydroRows;
 
-      return { ts: tsRows, states: stateRows, hydro: hydroRows };
+      // 5) per-DISTRICT latest-week breakdown (precomputed offline by
+      //    build_districts.py). Optional: only registered if the file is present.
+      var districtRows = [];
+      try {
+        var dj = JSON.parse(await fetchText(CFG.paths.districtStats));
+        districtRows = (dj && dj.districts) || [];
+        try { alasql("DROP TABLE IF EXISTS drought_district_latest"); } catch (e) {}
+        alasql("CREATE TABLE drought_district_latest");
+        alasql.tables.drought_district_latest.data = districtRows;
+        META.hasDistricts = districtRows.length > 0;
+      } catch (e) {
+        META.hasDistricts = false;
+      }
+
+      return { ts: tsRows, states: stateRows, hydro: hydroRows, districts: districtRows };
     })();
     return _loaded;
   }
@@ -251,8 +266,8 @@
   // SCHEMA — the full description handed to the LLM (no data, just structure)
   // ===========================================================================
   function schemaDoc() {
-    return [
-      "You can query an in-browser SQL database (AlaSQL dialect) with THREE tables.",
+    var L = [
+      "You can query an in-browser SQL database (AlaSQL dialect). Tables available:",
       "",
       "TABLE drought_timeseries  -- national weekly Combined Drought Index (CDI) area, Jul 2021 to present, one row per week",
       "  year        INT",
@@ -292,7 +307,25 @@
       "  last_year_same_month  FLOAT  -- same calendar month, previous year",
       "  driest                FLOAT  -- historically driest/lowest analogue month",
       "  wettest               FLOAT  -- historically wettest/highest analogue month",
-      "  -- Only Rainfall is a 0-100 percentile; the others are anomalies where negative = below normal.",
+      "  -- Only Rainfall is a 0-100 percentile; the others are anomalies where negative = below normal."
+    ];
+    if (META.hasDistricts) L = L.concat([
+      "",
+      "TABLE drought_district_latest  -- per-DISTRICT drought breakdown for the MOST RECENT week only",
+      "  district     TEXT   -- district name",
+      "  state        TEXT   -- state/UT the district belongs to",
+      "  state_id     INT    -- numeric state id (matches the state layer)",
+      "  none_pct     FLOAT  -- % of the district in no drought",
+      "  d0_pct       FLOAT  -- % of the district exactly in class D0 (NOT cumulative)",
+      "  d1_pct       FLOAT  -- % exactly in D1",
+      "  d2_pct       FLOAT  -- % exactly in D2",
+      "  d3_pct       FLOAT  -- % exactly in D3",
+      "  d4_pct       FLOAT  -- % exactly in D4",
+      "  drought_pct  FLOAT  -- % of the district in ANY drought (= 100 - none_pct)",
+      "  -- Each row is ONE district. For a NAMED district, or 'which districts in <state>',",
+      "  -- use this table; filter a state's districts with WHERE state = '<State Name>'."
+    ]);
+    L = L.concat([
       "",
       "Rules for writing SQL:",
       "- Output a SINGLE read-only SELECT statement. No INSERT/UPDATE/DELETE/DROP/CREATE.",
@@ -304,8 +337,11 @@
       "- PER-STATE questions (a named state, 'which states', rankings across states) use",
       "  drought_state_latest. Each row is ONE state; never present a single state's value as national.",
       "- Rainfall / temperature / soil-moisture / runoff / ET questions use hydro_outlook (match",
-      "  the parameter name exactly)."
-    ].join("\n");
+      "  the parameter name exactly).",
+      "- A NAMED district, or 'which districts in <state>', uses drought_district_latest (one row",
+      "  per district). Never read a national or state total from it."
+    ]);
+    return L.join("\n");
   }
 
   // ===========================================================================

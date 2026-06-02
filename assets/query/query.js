@@ -52,6 +52,22 @@
     }
   ];
 
+  // Per-district table (drought_district_latest) is appended to the schema after the
+  // assistant data loads, only when data/districts/district-stats.json is present.
+  var DISTRICT_SCHEMA = {
+    name: "drought_district_latest",
+    desc: "Per-district drought breakdown for the most recent week (loaded with the assistant data).",
+    cols: [
+      ["district", "TEXT", "District name"],
+      ["state", "TEXT", "State or Union Territory the district belongs to"],
+      ["state_id", "INT", "Numeric state id"],
+      ["none_pct", "FLOAT", "% of the district in no drought"],
+      ["d0_pct … d4_pct", "FLOAT", "% of the district in exactly that class (NOT cumulative)"],
+      ["drought_pct", "FLOAT", "% of the district in ANY drought (= 100 − none_pct)"]
+    ],
+    note: "Each row is ONE district. Filter a state's districts with WHERE state = '…'."
+  };
+
   var EXAMPLES = [
     {
       label: "Current national drought",
@@ -84,6 +100,10 @@
     {
       label: "Rainfall outlook detail",
       sql: "SELECT *\nFROM hydro_outlook\nWHERE parameter = 'Rainfall'"
+    },
+    {
+      label: "Worst-affected districts in a state",
+      sql: "SELECT district, drought_pct, d2_pct, d3_pct\nFROM drought_district_latest\nWHERE state = 'Maharashtra'\nORDER BY drought_pct DESC\nLIMIT 10"
     }
   ];
 
@@ -199,6 +219,12 @@
 
     setStatus("Loading data…");
     IDM_AI.loadData().then(function () {
+      // surface the per-district table once it's actually available
+      if (IDM_AI.META && IDM_AI.META.hasDistricts &&
+          !SCHEMA.some(function (t) { return t.name === "drought_district_latest"; })) {
+        SCHEMA.push(DISTRICT_SCHEMA);
+        renderSchema();
+      }
       setStatus("Ready. Write a query or pick an example.");
     }).catch(function (e) {
       setStatus("Could not load the data: " + (e && e.message || e), true);
