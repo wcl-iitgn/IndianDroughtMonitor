@@ -18,9 +18,9 @@
 <a data-i18n="common_nav.current" href="index.html">Current</a>
 <a class="active" data-i18n="common_nav.maps" href="maps.html">Maps</a>
 <a data-i18n="common_nav.data" href="data.html">Data</a>
-<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.summary" href="summary.html">Summary</a>
-<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 </div>
@@ -28,10 +28,7 @@
 <main class="usdm-main">
 <div class="usdm-breadcrumbs"><a data-i18n="slider.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="slider.maps" href="maps.html">Maps</a> <span class="sep">/</span> <span data-i18n="slider.comparison_slider">Comparison Slider</span></div>
 <h1 class="page-title" data-i18n="slider.comparison_slider">Comparison Slider</h1>
-<p data-i18n="slider.drag_the_handle_to_wipe_betw" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
-      Drag the handle to wipe between two weeks of the Combined Drought Index. Both maps are
-      rendered live from the data. Choose the weeks below.
-    </p>
+<p data-i18n="slider.drag_the_handle_to_wipe_betw" style="font-size:16.5px;color:#3a3431;">Drag the handle to compare drought conditions between any two weeks.</p>
 <div class="idm-toolbar">
 <div class="idm-tool-group"><span class="idm-tool-label" data-i18n="slider.older_left">Older (left)</span><select aria-label="Older week" data-i18n-attr="aria-label:slider.older_week" id="date-old"></select></div>
 <div class="idm-tool-group"><span class="idm-tool-label" data-i18n="slider.newer_right">Newer (right)</span><select aria-label="Newer week" data-i18n-attr="aria-label:slider.newer_week" id="date-new"></select></div>
@@ -54,11 +51,11 @@
 </div>
 <div class="idm-legend-inline">
 <span class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span><span data-i18n="slider.no_drought">No Drought</span></span>
-<span class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span><span data-i18n="slider.d0">D0</span></span>
-<span class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span><span data-i18n="slider.d1">D1</span></span>
-<span class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span><span data-i18n="slider.d2">D2</span></span>
-<span class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span><span data-i18n="slider.d3">D3</span></span>
-<span class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span><span data-i18n="slider.d4">D4</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span><span data-i18n="slider.d0">D0 – Abnormally Dry</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span><span data-i18n="slider.d1">D1 – Moderate Drought</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span><span data-i18n="slider.d2">D2 – Severe Drought</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span><span data-i18n="slider.d3">D3 – Extreme Drought</span></span>
+<span class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span><span data-i18n="slider.d4">D4 – Exceptional Drought</span></span>
 </div>
 </main>
 <footer class="usdm-footer">
@@ -89,6 +86,7 @@
 <li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
 <li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
 <li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
 </ul>
 </div>
 <div>
@@ -102,9 +100,10 @@
 <div>
 <h3 data-i18n="common_footer.resources">Resources</h3>
 <ul>
-<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
-<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
 <li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
 <li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
 <li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
 </ul>

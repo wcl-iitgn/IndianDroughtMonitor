@@ -102,8 +102,60 @@
     nodataColor: null
   };
 
+  // ---- Forecast PRECIPITATION magnitude (mm) --------------------------------
+  // NOTE: WCL's legend set had no physical-magnitude colormap; this is a
+  // conventional sequential "Blues" ramp with thresholds from the data range.
+  // Swap thresholds/colours here if WCL provides an official precip colormap.
+  var PRECIP = {
+    label: "Precipitation (mm)",
+    bands: [
+      { upTo: 1,   color: "#FFFFFF", cls: "0–1 mm" },
+      { upTo: 5,   color: "#DEEBF7", cls: "1–5" },
+      { upTo: 10,  color: "#C6DBEF", cls: "5–10" },
+      { upTo: 25,  color: "#9ECAE1", cls: "10–25" },
+      { upTo: 50,  color: "#6BAED6", cls: "25–50" },
+      { upTo: 75,  color: "#4292C6", cls: "50–75" },
+      { upTo: 100, color: "#2171B5", cls: "75–100" },
+      { upTo: 150, color: "#08519C", cls: "100–150" },
+      { upTo: 200, color: "#08306B", cls: "150–200" }
+    ],
+    aboveColor: "#08306B", aboveCls: "> 200 mm", nodataColor: null
+  };
+
+  // ---- Forecast RUNOFF magnitude (mm) ---------------------------------------
+  var RUNOFF = {
+    label: "Runoff (mm)",
+    bands: [
+      { upTo: 0.5, color: "#FFFFFF", cls: "0–0.5 mm" },
+      { upTo: 1,   color: "#E0F3DB", cls: "0.5–1" },
+      { upTo: 2,   color: "#CCEBC5", cls: "1–2" },
+      { upTo: 5,   color: "#A8DDB5", cls: "2–5" },
+      { upTo: 10,  color: "#7BCCC4", cls: "5–10" },
+      { upTo: 20,  color: "#4EB3D3", cls: "10–20" },
+      { upTo: 40,  color: "#2B8CBE", cls: "20–40" },
+      { upTo: 80,  color: "#0868AC", cls: "40–80" }
+    ],
+    aboveColor: "#084081", aboveCls: "> 80 mm", nodataColor: null
+  };
+
+  // ---- Forecast SOIL MOISTURE magnitude (v/v) -------------------------------
+  // Dry (brown) -> wet (teal/green), BrBG-style.
+  var SOILMOIST = {
+    label: "Soil Moisture (v/v)",
+    bands: [
+      { upTo: 0.05, color: "#8C510A", cls: "0.00–0.05 (dry)" },
+      { upTo: 0.10, color: "#BF812D", cls: "0.05–0.10" },
+      { upTo: 0.15, color: "#DFC27D", cls: "0.10–0.15" },
+      { upTo: 0.20, color: "#F6E8C3", cls: "0.15–0.20" },
+      { upTo: 0.25, color: "#C7EAE5", cls: "0.20–0.25" },
+      { upTo: 0.30, color: "#80CDC1", cls: "0.25–0.30" },
+      { upTo: 0.40, color: "#35978F", cls: "0.30–0.40" },
+      { upTo: 0.50, color: "#01665E", cls: "0.40–0.50" }
+    ],
+    aboveColor: "#003C30", aboveCls: "> 0.50 (wet)", nodataColor: null
+  };
+
   // ---------------------------------------------------------------------------
-  // Evaluate a colormap at a value. Returns {color, cls}.
   // For band maps: first band whose upTo >= v; else aboveColor.
   // For discrete maps: exact integer lookup.
   // ---------------------------------------------------------------------------
@@ -129,6 +181,9 @@
   // Map a product key (from IDM.PRODUCTS) to the right colormap.
   function forProduct(key) {
     if (!key) return CDI;
+    if (key.indexOf("pmag") === 0) return PRECIP;
+    if (key.indexOf("rmag") === 0) return RUNOFF;
+    if (key.indexOf("smmag") === 0) return SOILMOIST;
     if (key.indexOf("spi") === 0 || key.indexOf("sri") === 0 || key.indexOf("ssmi") === 0) return DIVERGING;
     if (key.indexOf("stream") === 0) return STREAMFLOW;
     if (key.indexOf("persist") === 0) return PERSIST;
@@ -141,6 +196,9 @@
     DIVERGING: DIVERGING,
     STREAMFLOW: STREAMFLOW,
     PERSIST: PERSIST,
+    PRECIP: PRECIP,
+    RUNOFF: RUNOFF,
+    SOILMOIST: SOILMOIST,
     evaluate: evaluate,
     hexToRgb: hexToRgb,
     forProduct: forProduct

@@ -18,9 +18,9 @@
 <a data-i18n="common_nav.current" href="index.html">Current</a>
 <a data-i18n="common_nav.maps" href="maps.html">Maps</a>
 <a class="active" data-i18n="common_nav.data" href="data.html">Data</a>
-<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.summary" href="summary.html">Summary</a>
-<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 </div>
@@ -28,20 +28,13 @@
 <main class="usdm-main">
 <div class="usdm-breadcrumbs"><a data-i18n="data_graphs.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="data_graphs.data" href="data.html">Data</a> <span class="sep">/</span> <span data-i18n="data_graphs.data_graphs">Data Graphs</span></div>
 <h1 class="page-title" data-i18n="data_graphs.data_graphs">Data Graphs</h1>
-<p data-i18n="data_graphs.the_percent_of_india_s_area" data-i18n-html="1" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
-      The percent of India's area in each drought class, every week from July 2021 to the present.
-      This stacked-area chart is drawn live from <code>India_Drought_Area_Timeseries.txt</code>.
-    </p>
+<p data-i18n="data_graphs.the_percent_of_india_s_area" style="font-size:16.5px;color:#3a3431;">The percent of India’s area in each drought class, every week from July 2021 to the present.</p>
 <div class="dsci-bar-wrap" style="padding:16px;">
 <div class="muted" data-i18n="data_graphs.loading_time_series" id="chart-loading" style="padding:40px;text-align:center;">Loading time series…</div>
 <svg id="ts-chart" style="width:100%;height:auto;display:none;background:#fff;border:1px solid #e2dfdc;border-radius:6px;" viewbox="0 0 1140 380" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
-<h2 data-i18n="data_graphs.reading_the_chart">Reading the chart</h2>
-<p data-i18n="data_graphs.each_coloured_band_is_the_sh" style="max-width:78ch;">
-      Each coloured band is the share of the country in that drought class for a given week
-      (D0 abnormally dry through D4 exceptional). The pre-monsoon peaks and post-monsoon recovery
-      repeat each year; wider dark-red bands mark the most severe, widespread drought weeks.
-    </p>
+<h2 data-i18n="data_graphs.reading_the_chart" data-i18n-html="1">Reading the<br>Chart</h2>
+<p data-i18n="data_graphs.each_coloured_band_is_the_sh">Each coloured band represents the percentage of India’s area classified within a specific drought category during a given week (D0: Abnormally Dry through D4: Exceptional Drought). Seasonal drought expansion before the monsoon and recovery after the monsoon are visible each year, while wider dark-red bands indicate the most severe and widespread drought events.</p>
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
@@ -71,6 +64,7 @@
 <li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
 <li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
 <li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
 </ul>
 </div>
 <div>
@@ -84,9 +78,10 @@
 <div>
 <h3 data-i18n="common_footer.resources">Resources</h3>
 <ul>
-<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
-<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
 <li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
 <li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
 <li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
 </ul>
@@ -150,12 +145,12 @@
           }
         }
         // legend
-        var lx=W-padR-150, ly=padT+6;
-        var labels=["D0","D1","D2","D3","D4"];
-        svg+='<rect x="'+lx+'" y="'+ly+'" width="140" height="118" fill="#fff" stroke="#ccc" opacity="0.95"/>';
+        var lx=W-padR-220, ly=padT+6;
+        var labels=["D0 – Abnormally Dry","D1 – Moderate Drought","D2 – Severe Drought","D3 – Extreme Drought","D4 – Exceptional Drought"];
+        svg+='<rect x="'+lx+'" y="'+ly+'" width="210" height="118" fill="#fff" stroke="#ccc" opacity="0.95"/>';
         for(var k=0;k<5;k++){
           svg+='<rect x="'+(lx+12)+'" y="'+(ly+12+k*20)+'" width="14" height="14" fill="'+COLORS[k]+'" stroke="#666"/>'+
-               '<text x="'+(lx+34)+'" y="'+(ly+24+k*20)+'" font-size="12" fill="#222">'+labels[k]+'</text>';
+               '<text x="'+(lx+34)+'" y="'+(ly+24+k*20)+'" font-size="11" fill="#222">'+labels[k]+'</text>';
         }
         var chart=document.getElementById("ts-chart");
         chart.innerHTML=svg; chart.style.display="block";

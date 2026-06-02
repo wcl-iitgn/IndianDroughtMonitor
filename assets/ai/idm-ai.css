@@ -88,10 +88,7 @@
   border-radius: 6px; background: #fff; min-width: 180px; cursor: pointer; color: var(--usdm-text, #1f1d1c);
 }
 .idm-summary-controls-spacer { flex: 1 1 auto; }
-.idm-summary-box {
-  background: #fff; border: 1px solid var(--usdm-border, #e2dfdc); border-left: 4px solid var(--usdm-red, #da3910);
-  border-radius: 8px; padding: 20px 22px;
-}
+.idm-summary-box { background: transparent; border: 0; padding: 0; }
 .idm-summary-title { margin: 0 0 12px; font-size: 21px; }
 .idm-summary-text { font-size: 16.5px; line-height: 1.7; color: #2c2826; white-space: pre-wrap; }
 .idm-summary-author { margin: 16px 0 0; font-style: italic; color: var(--usdm-muted, #7a716c); font-size: 14px; }

@@ -39,9 +39,20 @@
     ssmi1:      { label: "SSMI — 1 month", file: "./data/SSMI_1month.txt" },
     ssmi3:      { label: "SSMI — 3 month", file: "./data/SSMI_3month.txt" },
     ssmi6:      { label: "SSMI — 6 month", file: "./data/SSMI_6month.txt" },
+    ssmi12:     { label: "SSMI — 12 month", file: "./data/SSMI_12month.txt" },
     fcdi7:      { label: "Forecast CDI — 7 day",  file: "./data/Future_CDI_7day.txt" },
     fcdi15:     { label: "Forecast CDI — 15 day", file: "./data/Future_CDI_15day.txt" },
-    fcdi30:     { label: "Forecast CDI — 30 day", file: "./data/Future_CDI_30day.txt" }
+    fcdi30:     { label: "Forecast CDI — 30 day", file: "./data/Future_CDI_30day.txt" },
+    // Forecast magnitudes (physical units) — used by the Forecast tab
+    pmag7:      { label: "Forecast Rainfall — 7 day",  file: "./data/P_mag_7day.txt",  units: "mm" },
+    pmag15:     { label: "Forecast Rainfall — 15 day", file: "./data/P_mag_15day.txt", units: "mm" },
+    pmag30:     { label: "Forecast Rainfall — 30 day", file: "./data/P_mag_30day.txt", units: "mm" },
+    rmag7:      { label: "Forecast Runoff — 7 day",  file: "./data/R_mag_7day.txt",  units: "mm" },
+    rmag15:     { label: "Forecast Runoff — 15 day", file: "./data/R_mag_15day.txt", units: "mm" },
+    rmag30:     { label: "Forecast Runoff — 30 day", file: "./data/R_mag_30day.txt", units: "mm" },
+    smmag7:     { label: "Forecast Soil Moisture — 7 day",  file: "./data/SM_mag_7day.txt",  units: "v/v" },
+    smmag15:    { label: "Forecast Soil Moisture — 15 day", file: "./data/SM_mag_15day.txt", units: "v/v" },
+    smmag30:    { label: "Forecast Soil Moisture — 30 day", file: "./data/SM_mag_30day.txt", units: "v/v" }
   };
 
   // ---- weekly dates (derived from the CDI time series filenames) -------------
@@ -307,11 +318,15 @@
       interpSlider.addEventListener("change", applyInterp);
     }
 
-    // greyscale toggle (checkbox)
+    // greyscale toggle (checkbox) — also switches the legend to matching greys
     var grayChk = el(cfg.grayscaleChk);
     if (grayChk) {
       grayChk.checked = !!map.getGrayscale();
-      grayChk.addEventListener("change", function () { map.setGrayscale(grayChk.checked); });
+      greyscaleLegend(grayChk.checked);
+      grayChk.addEventListener("change", function () {
+        map.setGrayscale(grayChk.checked);
+        greyscaleLegend(grayChk.checked);
+      });
     }
 
     // download-PNG button
@@ -355,6 +370,69 @@
     map.renderStaticMap(); map.renderDynamicHUD();
   }
 
+  // ---------------------------------------------------------------------------
+  // Legend helpers (used by the Conditions / Forecast pages and greyscale toggle)
+  // ---------------------------------------------------------------------------
+  function _isWhite(hex) { return /^#?f{3}$|^#?f{6}$/i.test((hex || "").replace("#", "")); }
+
+  // Render a legend (swatch + label rows) into a host element from a colormap.
+  function renderLegend(elOrId, cmap) {
+    var host = (typeof elOrId === "string") ? document.getElementById(elOrId) : elOrId;
+    if (!host || !cmap) return;
+    host.innerHTML = "";
+    var items = [];
+    if (cmap.discrete) {
+      var seen = {};
+      Object.keys(cmap.discrete).forEach(function (k) {
+        var d = cmap.discrete[k];
+        var sig = d.color + "|" + d.cls;
+        if (!seen[sig]) { seen[sig] = 1; items.push({ color: d.color, label: d.cls }); }
+      });
+    } else {
+      cmap.bands.forEach(function (b) { items.push({ color: b.color, label: b.cls }); });
+      if (cmap.aboveColor) items.push({ color: cmap.aboveColor, label: cmap.aboveCls });
+    }
+    items.forEach(function (it) {
+      var row = document.createElement("div");
+      row.className = "idm-legend-item";
+      var sw = document.createElement("span");
+      sw.className = "idm-legend-swatch";
+      sw.style.background = it.color;
+      if (_isWhite(it.color)) sw.style.border = "1px solid #c9c4c0";
+      var lab = document.createElement("span");
+      lab.textContent = it.label;
+      row.appendChild(sw); row.appendChild(lab);
+      host.appendChild(row);
+    });
+  }
+
+  // Convert a CSS colour string to the engine's perceptual-luminance grey.
+  function _lumaGrey(cssColor) {
+    var m = /rgba?\(([^)]+)\)/.exec(cssColor || "");
+    if (!m) return null;
+    var p = m[1].split(",").map(function (s) { return parseFloat(s); });
+    var y = Math.round(0.299 * p[0] + 0.587 * p[1] + 0.114 * p[2]);
+    return "rgb(" + y + "," + y + "," + y + ")";
+  }
+
+  // Switch every legend swatch on the page to/from greyscale, matching the map's
+  // greyscale transform (same 0.299/0.587/0.114 luminance the engine uses).
+  function greyscaleLegend(on) {
+    var sws = document.querySelectorAll(".idm-legend-swatch, .legend-swatch");
+    Array.prototype.forEach.call(sws, function (sw) {
+      if (on) {
+        if (sw.getAttribute("data-orig-bg") == null) {
+          sw.setAttribute("data-orig-bg", getComputedStyle(sw).backgroundColor || "");
+        }
+        var g = _lumaGrey(sw.getAttribute("data-orig-bg"));
+        if (g) sw.style.backgroundColor = g;
+      } else {
+        var orig = sw.getAttribute("data-orig-bg");
+        if (orig != null) sw.style.backgroundColor = orig;
+      }
+    });
+  }
+
   // expose
   window.IDM = {
     PRODUCTS: PRODUCTS,
@@ -366,6 +444,8 @@
     wireStateSelect: wireStateSelect,
     wireReadout: wireReadout,
     fillProductSelect: fillProductSelect,
-    fillDateSelect: fillDateSelect
+    fillDateSelect: fillDateSelect,
+    renderLegend: renderLegend,
+    greyscaleLegend: greyscaleLegend
   };
 })();

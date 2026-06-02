@@ -3,7 +3,7 @@
 <html lang="en-IN">
 <head>
 <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title data-i18n="conditions.conditions_outlooks_india_dr">Conditions &amp; Outlooks | India Drought Monitor</title>
+<title data-i18n="conditions.conditions_outlooks_india_dr">Hydrometeorological Conditions | India Drought Monitor</title>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/interactive/drought-map.css" rel="stylesheet"/>
@@ -16,38 +16,41 @@
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:conditions.primary">
 <div class="usdm-nav-inner">
 <a data-i18n="common_nav.current" href="index.html">Current</a>
-<a data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a class="active" data-i18n="common_nav.maps" href="maps.html">Maps</a>
 <a data-i18n="common_nav.data" href="data.html">Data</a>
-<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.summary" href="summary.html">Summary</a>
-<a class="active" data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 </div>
 </nav>
 <main class="usdm-main">
-<div class="usdm-breadcrumbs"><a data-i18n="conditions.home" href="index.html">Home</a> <span class="sep">/</span> <span data-i18n="conditions.conditions_outlooks">Conditions &amp; Outlooks</span></div>
-<h1 class="page-title" data-i18n="conditions.conditions_outlooks">Conditions &amp; Outlooks</h1>
-<p data-i18n="conditions.the_combined_drought_index_b" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
-      The Combined Drought Index blends several standardised indicators. Switch between them here
-      to see the inputs behind the map — precipitation (SPI), runoff (SRI) and soil moisture
-      (SSMI) at multiple accumulation periods — plus short-range CDI forecasts. Every layer is
-      rendered live from the gridded data.
-    </p>
+<div class="usdm-breadcrumbs"><a data-i18n="conditions.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="conditions.maps" href="maps.html">Maps</a> <span class="sep">/</span> <span data-i18n="conditions.hydrometeorological_conditions">Hydrometeorological Conditions</span></div>
+<h1 class="page-title" data-i18n="conditions.hydrometeorological_conditions">Hydrometeorological Conditions</h1>
+<p data-i18n="conditions.the_combined_drought_index_b" style="font-size:16.5px;color:#3a3431;">Current-condition maps for the drought-related variables behind the Combined Drought Index — rainfall (SPI), runoff (SRI) and soil moisture (SSMI). Choose a variable and accumulation period; every layer is rendered live from the gridded data.</p>
 <div class="idm-toolbar">
 <div class="idm-tool-group">
-<span class="idm-tool-label" data-i18n="conditions.product">Product</span>
-<select aria-label="Choose product" data-i18n-attr="aria-label:conditions.choose_product" id="product-select"></select>
+<span class="idm-tool-label" data-i18n="conditions.variable">Variable</span>
+<div class="idm-vartabs" id="var-tabs" role="tablist">
+<button class="active" data-i18n="conditions.rainfall" data-var="rainfall" type="button">Rainfall</button>
+<button data-i18n="conditions.runoff" data-var="runoff" type="button">Runoff</button>
+<button data-i18n="conditions.soil_moisture" data-var="soil" type="button">Soil Moisture</button>
+</div>
 </div>
 <div class="idm-tool-group">
-<span class="idm-tool-label" data-i18n="conditions.jump_to_state">Jump to State</span>
+<span class="idm-tool-label" data-i18n="conditions.period">Period</span>
+<select aria-label="Accumulation period" data-i18n-attr="aria-label:conditions.accumulation_period" id="period-select"></select>
+</div>
+<div class="idm-tool-group">
+<span class="idm-tool-label" data-i18n="conditions.jump_to_state">State</span>
 <select id="state-select"><option data-i18n="conditions.select_a_state" value="">— Select a state —</option></select>
 </div>
 <button class="idm-btn ghost" data-i18n="conditions.reset_view" id="reset-view" type="button">↻ Reset view</button>
 <button aria-pressed="false" class="idm-btn ghost" data-i18n="conditions.rectangle_zoom_off" id="zoom-mode" type="button">☷ Rectangle zoom: OFF</button>
 <label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="conditions.greyscale">Greyscale</span></label>
 <button class="idm-btn ghost" data-i18n="conditions.download_png" id="download-png" type="button">⬇ Download PNG</button>
-<label class="idm-interp" data-i18n-attr="title:conditions.higher_smoother_interpolatio" title="Higher = smoother interpolation between grid cells"><span data-i18n="conditions.detail">Detail</span> <input aria-label="Interpolation detail" data-i18n-attr="aria-label:conditions.interpolation_detail" id="interp-slider" max="6" min="1" step="1" type="range" value="3"/><span class="idm-interp-val" id="interp-value">3</span></label>
+<span class="idm-lastupd"><span data-i18n="conditions.last_updated">Last Updated</span>: <span id="last-updated">May 20, 2026</span></span>
 </div>
 <div class="idm-viewer-grid">
 <div class="idm-map-panel">
@@ -72,11 +75,16 @@
 <p class="idm-readout-hint" data-i18n="conditions.negative_index_values_indica">Negative index values indicate drier-than-normal conditions.</p>
 </div>
 <div class="idm-card">
+<h3 data-i18n="conditions.legend">Legend</h3>
+<div class="idm-legend-list" id="legend-host"></div>
+</div>
+<div class="idm-card">
 <h3 data-i18n="conditions.about_the_indices">About the Indices</h3>
 <p data-i18n="conditions.strong_spi_strong_standardis" data-i18n-html="1" style="font-size:13.5px;color:#3a3431;line-height:1.55;margin:0;">
 <strong>SPI</strong> standardises precipitation; <strong>SRI</strong> standardises
             runoff; <strong>SSMI</strong> standardises soil moisture. The number of months is the
-            accumulation window. Forecast layers show the expected CDI 7–30 days ahead.
+            accumulation window — shorter windows track recent conditions, longer windows reflect
+            more persistent deficits.
           </p>
 </div>
 </aside>
@@ -110,6 +118,7 @@
 <li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
 <li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
 <li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
 </ul>
 </div>
 <div>
@@ -123,9 +132,10 @@
 <div>
 <h3 data-i18n="common_footer.resources">Resources</h3>
 <ul>
-<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
-<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
 <li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
 <li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
 <li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
 </ul>
@@ -141,12 +151,53 @@
 <script src="assets/interactive/drought-map.app.js"></script>
 <script>
     window.addEventListener("DOMContentLoaded", function () {
-      IDM.fillProductSelect(document.getElementById("product-select"), "cdi");
+      var VAR = {
+        rainfall: { prefix: "spi" },
+        runoff:   { prefix: "sri" },
+        soil:     { prefix: "ssmi" }
+      };
+      var PERIODS = [["1","1 month"],["3","3 month"],["6","6 month"],["12","12 month"]];
+      var current = "rainfall";
+      var periodSel = document.getElementById("period-select");
+      var grayChk = document.getElementById("grayscale-toggle");
+
+      function productKey() { return VAR[current].prefix + periodSel.value; }
+      function fillPeriods() {
+        periodSel.innerHTML = "";
+        PERIODS.forEach(function (p) {
+          var o = document.createElement("option"); o.value = p[0]; o.textContent = p[1];
+          periodSel.appendChild(o);
+        });
+        periodSel.value = "3";
+      }
+      function refreshLegend() {
+        var cmap = window.IDM_COLORMAPS.forProduct(productKey());
+        IDM.renderLegend("legend-host", cmap);
+        if (grayChk && grayChk.checked) IDM.greyscaleLegend(true);
+      }
+      fillPeriods();
+
       IDM.mountMap({
-        raster:"C_raster", vector:"C_vector", product:"cdi",
-        productSelect:"product-select", stateSelect:"state-select", resetBtn:"reset-view", zoomModeBtn:"zoom-mode",
-        readout:{lat:"ro-lat",lng:"ro-lng",val:"ro-val",state:"ro-state",cls:"ro-cls", stateBig:"ro-state-big"},
-        interpSlider:"interp-slider", interpValue:"interp-value", grayscaleChk:"grayscale-toggle", downloadBtn:"download-png", downloadName:"india-drought-product", loader:"#idm-map-loading"
+        raster: "C_raster", vector: "C_vector", product: productKey(),
+        stateSelect: "state-select", resetBtn: "reset-view", zoomModeBtn: "zoom-mode",
+        readout: { lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
+        grayscaleChk: "grayscale-toggle", downloadBtn: "download-png", downloadName: "india-hydromet", loader: "#idm-map-loading"
+      }).then(function (map) {
+        refreshLegend();
+        document.querySelectorAll("#var-tabs button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll("#var-tabs button").forEach(function (b) { b.classList.remove("active"); });
+            btn.classList.add("active");
+            current = btn.getAttribute("data-var");
+            fillPeriods();
+            IDM.switchProduct(map, productKey());
+            refreshLegend();
+          });
+        });
+        periodSel.addEventListener("change", function () {
+          IDM.switchProduct(map, productKey());
+          refreshLegend();
+        });
       });
     });
   </script>

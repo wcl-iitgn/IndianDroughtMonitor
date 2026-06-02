@@ -20,9 +20,9 @@
 <a data-i18n="common_nav.current" href="index.html">Current</a>
 <a data-i18n="common_nav.maps" href="maps.html">Maps</a>
 <a data-i18n="common_nav.data" href="data.html">Data</a>
-<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a class="active" data-i18n="common_nav.summary" href="summary.html">Summary</a>
-<a data-i18n="common_nav.conditions_outlooks" href="conditions.html">Conditions &amp; Outlooks</a>
+<a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 </div>
@@ -37,7 +37,7 @@
 <select aria-label="Choose summary week" data-i18n-attr="aria-label:summary.choose_summary_week" id="sum-date"></select>
 </div>
 <div class="idm-summary-controls-spacer"></div>
-<button class="idm-btn ghost" data-i18n="summary.download_summary" id="sum-download" type="button">⬇ Download summary</button>
+<a class="idm-btn" data-i18n="summary.download_pdf" download="" href="#" id="sum-download">⬇ Download PDF</a>
 </div>
 <div class="idm-summary-box">
 <h2 class="idm-summary-title" data-i18n="summary.national_drought_summary" id="sum-title">National Drought Summary</h2>
@@ -92,6 +92,7 @@
 <li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
 <li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
 <li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
 </ul>
 </div>
 <div>
@@ -105,9 +106,10 @@
 <div>
 <h3 data-i18n="common_footer.resources">Resources</h3>
 <ul>
-<li><a data-i18n="common_footer.data_download" href="data.html">Data Download</a></li>
-<li><a data-i18n="common_footer.query_the_data" href="data-query.html">Query the Data</a></li>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
 <li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
 <li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
 <li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
 </ul>
@@ -124,58 +126,72 @@
 <script src="assets/ai/idm-ai.js"></script>
 <script src="assets/ai/idm-chatbot.js"></script>
 <script>
-    // Summary page: load dated summaries from the archive, with a week picker and download.
+    // Summary page: a week picker drives the on-page summary TEXT and the
+    // pre-generated, language-aware Summary PDF download button. PDFs are built
+    // offline by generate_summary_pdfs.py into data/summaries/<Language>/PDF_Archive/.
     (function () {
       var textEl = document.getElementById("sum-text");
       var titleEl = document.getElementById("sum-title");
       var dateSel = document.getElementById("sum-date");
       var dlBtn = document.getElementById("sum-download");
       var ARCHIVE = "data/summaries/";
-      var current = { label: "", date: "", body: "" };
+      var current = { label: "", date: "" };
 
       function stripHeader(t) { return t.replace(/^#[^\n]*\n+/, "").trim(); }
+      function encPath(p) { return p.split("/").map(encodeURIComponent).join("/"); }
+      function curLang() {
+        return (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English";
+      }
+      function pdfUrl(lang, date) {
+        return encPath(ARCHIVE + lang + "/PDF_Archive/IDM_Summary_" + date + ".pdf");
+      }
+      // Point the download at the selected language's PDF, falling back to English.
+      function setDownload(date) {
+        var lang = curLang();
+        function apply(url) {
+          dlBtn.href = url;
+          dlBtn.setAttribute("download", "IDM_Summary_" + date + ".pdf");
+        }
+        var primary = pdfUrl(lang, date);
+        if (lang === "English") { apply(primary); return; }
+        fetch(primary, { method: "HEAD" })
+          .then(function (r) { apply(r.ok ? primary : pdfUrl("English", date)); })
+          .catch(function () { apply(pdfUrl("English", date)); });
+      }
 
       function show(item) {
         textEl.textContent = "Loading\u2026";
-        fetch(ARCHIVE + item.file).then(function (r) {
+        current = { label: item.label, date: item.date };
+        fetch(encPath(ARCHIVE + item.file)).then(function (r) {
           if (!r.ok) throw new Error(); return r.text();
         }).then(function (t) {
-          current = { label: item.label, date: item.date, body: stripHeader(t) };
           titleEl.textContent = "National Drought Summary \u2014 " + item.label;
-          textEl.textContent = current.body;
+          textEl.textContent = stripHeader(t);
         }).catch(function () {
           textEl.textContent = "This summary could not be loaded.";
         });
+        setDownload(item.date);
       }
 
-      fetch(ARCHIVE + "index.json").then(function (r) { return r.json(); }).then(function (j) {
+      fetch(encPath(ARCHIVE + "index.json")).then(function (r) { return r.json(); }).then(function (j) {
         var list = (j && j.summaries) || [];
         if (!list.length) { textEl.textContent = "No summaries are available yet."; return; }
         list.forEach(function (it, i) {
           var o = document.createElement("option");
-          o.value = it.file; o.textContent = it.label;
+          o.value = it.date; o.textContent = it.label;
           if (i === 0) o.selected = true;
           dateSel.appendChild(o);
         });
         show(list[0]);
         dateSel.addEventListener("change", function () {
-          var it = list.filter(function (x) { return x.file === dateSel.value; })[0];
+          var it = list.filter(function (x) { return x.date === dateSel.value; })[0];
           if (it) show(it);
+        });
+        document.addEventListener("idm:languagechange", function () {
+          if (current.date) setDownload(current.date);
         });
       }).catch(function () {
         textEl.textContent = "The summary archive could not be loaded.";
-      });
-
-      dlBtn.addEventListener("click", function () {
-        if (!current.body) return;
-        var header = "India Drought Monitor \u2014 National Drought Summary\n" +
-                     "Week ending " + (current.label || current.date) + "\n\n";
-        var blob = new Blob([header + current.body + "\n"], { type: "text/plain" });
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement("a");
-        a.href = url; a.download = "IDM_summary_" + (current.date || "latest") + ".txt";
-        document.body.appendChild(a); a.click(); document.body.removeChild(a);
-        URL.revokeObjectURL(url);
       });
     })();
   </script>

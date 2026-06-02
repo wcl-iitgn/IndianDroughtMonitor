@@ -1,3 +1,12 @@
 # India Drought Monitor — National Summary for week ending 2026-04-29
 
 For the week ending April 29, 2026, about 20.5% of India's area was in some level of drought (D0 or worse), with 79.5% at normal conditions. Severe-to-extreme drought (D2 or worse) covered roughly 0.6% of the country. Compared with the previous week, the drought-affected area expanded (+3.3 percentage points). Conditions were driven by the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.
+
+Regional conditions this week:
+- North shows widespread drought: about 42% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
+- Northwest shows largely normal conditions: about 2% of the region is in drought (D0–D4).
+- Northeast shows moderate, scattered drought: about 21% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
+- East shows moderate, scattered drought: about 26% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
+- Central shows moderate, scattered drought: about 25% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
+- West shows mostly normal conditions with localised dryness: about 12% of the region is in drought (D0–D4).
+- South shows moderate, scattered drought: about 20% of the region is in drought (D0–D4).

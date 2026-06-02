@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+<html lang="en-IN">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-i18n="forecast.forecast_india_drought_monit">Forecast | India Drought Monitor</title>
+<meta content="#da3910" name="theme-color"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/interactive/drought-map.css" rel="stylesheet"/>
+<script src="assets/vendor/papaparse.min.js"></script>
+<script src="assets/vendor/alasql.min.js"></script>
+<link href="assets/ai/idm-ai.css" rel="stylesheet"/>
+<link href="assets/i18n/i18n.css" rel="stylesheet"/><script src="assets/i18n/i18n.js"></script></head>
+<body>
+<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1><div class="idm-lang-switcher" data-i18n-switcher="1"></div></div></header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:conditions.primary">
+<div class="usdm-nav-inner">
+<a data-i18n="common_nav.current" href="index.html">Current</a>
+<a data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a data-i18n="common_nav.data" href="data.html">Data</a>
+<a data-i18n="common_nav.summary" href="summary.html">Summary</a>
+<a class="active" data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.about" href="about.html">About</a>
+<a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+</div>
+</nav>
+<main class="usdm-main">
+<div class="usdm-breadcrumbs"><a data-i18n="forecast.home" href="index.html">Home</a> <span class="sep">/</span> <span data-i18n="forecast.forecast">Forecast</span></div>
+<h1 class="page-title" data-i18n="forecast.forecast">Forecast</h1>
+<p data-i18n="forecast.intro" style="font-size:16.5px;color:#3a3431;">Short-range outlooks for drought and the key hydrometeorological variables. Pick a variable and lead time; maps are rendered live from the forecast grids on the same interactive interface used across the portal.</p>
+<p class="idm-validity" id="validity"></p>
+<p style="margin:2px 0 14px;">
+<a class="idm-btn ghost" data-i18n="forecast.view_outlook_summary" href="forecast-summary.html">📄 Forecast outlook &amp; PDF (7 / 15 / 30 day) →</a>
+</p>
+<div class="idm-toolbar">
+<div class="idm-tool-group">
+<span class="idm-tool-label" data-i18n="forecast.variable">Variable</span>
+<div class="idm-vartabs" id="var-tabs" role="tablist">
+<button class="active" data-i18n="forecast.drought" data-var="drought" type="button">Drought</button>
+<button data-i18n="forecast.rainfall" data-var="rainfall" type="button">Rainfall</button>
+<button data-i18n="forecast.runoff" data-var="runoff" type="button">Runoff</button>
+<button data-i18n="forecast.soil_moisture" data-var="soil" type="button">Soil Moisture</button>
+</div>
+</div>
+<div class="idm-tool-group">
+<span class="idm-tool-label" data-i18n="forecast.lead_time">Lead time</span>
+<select aria-label="Forecast lead time" data-i18n-attr="aria-label:forecast.forecast_lead_time" id="lead-select">
+<option value="7">7-day</option>
+<option value="15">15-day</option>
+<option value="30">30-day</option>
+</select>
+</div>
+<div class="idm-tool-group">
+<span class="idm-tool-label" data-i18n="forecast.jump_to_state">State</span>
+<select id="state-select"><option data-i18n="forecast.select_a_state" value="">— Select a state —</option></select>
+</div>
+<button class="idm-btn ghost" data-i18n="forecast.reset_view" id="reset-view" type="button">↻ Reset view</button>
+<button aria-pressed="false" class="idm-btn ghost" data-i18n="forecast.rectangle_zoom_off" id="zoom-mode" type="button">☷ Rectangle zoom: OFF</button>
+<label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="forecast.greyscale">Greyscale</span></label>
+<button class="idm-btn ghost" data-i18n="forecast.download_png" id="download-png" type="button">⬇ Download PNG</button>
+</div>
+<div class="idm-viewer-grid">
+<div class="idm-map-panel">
+<div id="idm-map-loading"><div class="idm-spinner"></div><div data-i18n="forecast.loading_data">Loading data…</div></div>
+<div class="idm-canvas-stage">
+<canvas height="840" id="C_vector" width="840"></canvas>
+<canvas height="840" id="C_raster" width="840"></canvas>
+</div>
+</div>
+<aside class="idm-rail">
+<div class="idm-card idm-state-card">
+<h3 data-i18n="forecast.state">State</h3>
+<div class="idm-state-name" id="ro-state-big">—</div>
+</div>
+<div class="idm-card">
+<h3 data-i18n="forecast.cursor_readout">Cursor Readout</h3>
+<div class="idm-readout-row"><span class="k" data-i18n="forecast.latitude">Latitude</span><span class="v" id="ro-lat">—</span></div>
+<div class="idm-readout-row"><span class="k" data-i18n="forecast.longitude">Longitude</span><span class="v" id="ro-lng">—</span></div>
+<div class="idm-readout-row"><span class="k" data-i18n="forecast.value">Value</span><span class="v" id="ro-val">—</span></div>
+<div class="idm-readout-row"><span class="k" data-i18n="forecast.state">State</span><span class="v" id="ro-state">—</span></div>
+<div class="idm-readout-row"><span class="k" data-i18n="forecast.class">Class</span><span class="v" id="ro-cls">—</span></div>
+</div>
+<div class="idm-card">
+<h3 data-i18n="forecast.legend">Legend</h3>
+<div class="idm-legend-list" id="legend-host"></div>
+</div>
+<div class="idm-card">
+<h3 data-i18n="forecast.about_the_forecast">About the Forecast</h3>
+<p data-i18n="forecast.about_text" style="font-size:13.5px;color:#3a3431;line-height:1.55;margin:0;">Drought is the forecast Combined Drought Index. Rainfall, runoff and soil moisture show the predicted magnitude (mm, mm and v/v) over the selected lead time. Forecasts are driven by the IMD Extended Range Forecast System.</p>
+</div>
+</aside>
+</div>
+</main>
+<footer class="usdm-footer">
+<div class="usdm-footer-inner">
+<div class="partner-logos">
+<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
+<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
+</div>
+<p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+<div class="contact-block">
+<div>
+<h3 data-i18n="common_footer.contact_us">Contact Us</h3>
+<p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
+<p><span class="contact-icon">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon">@</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+</div>
+<div>
+<h3 data-i18n="common_footer.maps">Maps</h3>
+<ul>
+<li><a data-i18n="common_footer.current_map" href="index.html">Current Map</a></li>
+<li><a data-i18n="common_footer.compare_two_weeks" href="compare.html">Compare Two Weeks</a></li>
+<li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
+<li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
+<li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.hydrological_outlook">Hydrological Outlook</h3>
+<ul>
+<li><a data-i18n="common_footer.dashboards" href="hydro.html">Dashboards</a></li>
+<li><a data-i18n="common_footer.individual_maps" href="hydro-maps.html">Individual Maps</a></li>
+<li><a data-i18n="common_footer.pdf_reports" href="hydro-reports.html">PDF Reports</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.resources">Resources</h3>
+<ul>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
+<li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
+<li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
+<li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+</div>
+</footer>
+<script src="assets/interactive/drought-map.colormaps.js"></script>
+<script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/drought-map.app.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var VAR = {
+        drought:  { prefix: "fcdi" },
+        rainfall: { prefix: "pmag" },
+        runoff:   { prefix: "rmag" },
+        soil:     { prefix: "smmag" }
+      };
+      var current = "drought";
+      var leadSel = document.getElementById("lead-select");
+      var grayChk = document.getElementById("grayscale-toggle");
+      var INIT = new Date(2026, 4, 20); // forecast initialization: 20 May 2026
+      var DOPTS = { year: "numeric", month: "short", day: "numeric" };
+
+      function productKey() { return VAR[current].prefix + leadSel.value; }
+      function refreshValidity() {
+        var lead = parseInt(leadSel.value, 10);
+        var v = new Date(INIT.getTime() + lead * 86400000);
+        document.getElementById("validity").textContent =
+          "Initialized " + INIT.toLocaleDateString("en-US", DOPTS) +
+          " \u00b7 valid through " + v.toLocaleDateString("en-US", DOPTS) + " (" + lead + "-day forecast)";
+      }
+      function refreshLegend() {
+        var cmap = window.IDM_COLORMAPS.forProduct(productKey());
+        IDM.renderLegend("legend-host", cmap);
+        if (grayChk && grayChk.checked) IDM.greyscaleLegend(true);
+      }
+      refreshValidity();
+
+      IDM.mountMap({
+        raster: "C_raster", vector: "C_vector", product: productKey(),
+        stateSelect: "state-select", resetBtn: "reset-view", zoomModeBtn: "zoom-mode",
+        readout: { lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
+        grayscaleChk: "grayscale-toggle", downloadBtn: "download-png", downloadName: "india-forecast", loader: "#idm-map-loading"
+      }).then(function (map) {
+        refreshLegend();
+        document.querySelectorAll("#var-tabs button").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            document.querySelectorAll("#var-tabs button").forEach(function (b) { b.classList.remove("active"); });
+            btn.classList.add("active");
+            current = btn.getAttribute("data-var");
+            IDM.switchProduct(map, productKey());
+            refreshLegend();
+          });
+        });
+        leadSel.addEventListener("change", function () {
+          IDM.switchProduct(map, productKey());
+          refreshValidity();
+          refreshLegend();
+        });
+      });
+    });
+  </script>
+<script src="assets/ai/idm-ai.js"></script>
+<script src="assets/ai/idm-chatbot.js"></script>
+</body></html>
