@@ -1,5 +1,14 @@
 # India Drought Monitor — National Summary for week ending 2026-05-20
 
-As of May 20, 2026, India's national conditions remain predominantly normal, with 84.7% of the country classified as such, while 15.3% of the total area experiences drought conditions ranging from abnormally dry to severe. The total drought area has contracted by 0.9 percentage points to 15.3% this week, following a decrease from 16.2% last week and 17.2% approximately one month ago. This week-on-week reduction marks a slight improvement in the overall national drought status, though significant pockets of affected land persist across the subcontinent.
+As of the week ending May 20, 2026, 84.7% of India's area remains in normal conditions, while 15.3% of the country is classified under drought conditions ranging from D0 to D4. The national drought footprint has contracted slightly this week, decreasing by 0.9 percentage points to 15.3% from 16.2% last week, following a peak of 17.2% one month ago. This reduction indicates a gradual easing of drought pressures across the nation.
 
-The most severely impacted regions include the NCT of Delhi, where 52.2% of the area is under drought conditions, followed by Manipur at 42.3%, Mizoram at 40.8%, Arunanchal Pradesh at 40.3%, and Jammu & Kashmir at 38.9%. Meghalaya also faces substantial challenges with 34.1% of its area affected. In contrast, the southern and western states show notably better conditions, with West Bengal reporting zero affected area, Rajasthan at 1.0%, Gujarat at 2.1%, and Telangana at 3.4%. While the national trend moves toward recovery, the high concentration of drought in northeastern and northern states indicates that localized water stress remains a critical issue requiring continued monitoring.
+The impact of drought is highly concentrated in specific regions, with the NCT of Delhi experiencing the most severe situation at 52.2% of its area under drought conditions. Other significantly affected states include Manipur at 42.3%, Mizoram at 40.8%, Arunanchal Pradesh at 40.3%, Jammu & Kashmir at 38.9%, and Meghalaya at 34.1%. In contrast, certain states show notably better conditions, with West Bengal reporting 0.0% drought coverage, followed closely by Rajasthan at 1.0%, Gujarat at 2.1%, and Telangana at 3.4%. The cumulative nature of the severity classes means that the 3.1% area classified as D1 or worse already encompasses the more extreme D2, D3, and D4 categories, which together affect a negligible 0.2% of the total national area.
+
+Regional conditions this week:
+- North: Moderate, scattered drought. About 28% of the area is in drought (D0–D4).
+- Northwest: Largely normal conditions. About 4% of the area is in drought (D0–D4).
+- Northeast: Moderate, scattered drought. About 27% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- East: Mostly normal, with localised dryness. About 7% of the area is in drought (D0–D4).
+- Central: Mostly normal, with localised dryness. About 15% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Moderate, scattered drought. About 22% of the area is in drought (D0–D4).
+- South: Mostly normal, with localised dryness. About 16% of the area is in drought (D0–D4).

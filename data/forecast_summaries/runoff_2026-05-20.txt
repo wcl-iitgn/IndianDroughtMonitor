@@ -2,11 +2,11 @@
 
 Nationally, expected runoff averages about 4.41 mm (7-day), 15 mm (15-day) and 38 mm (30-day).
 
-Regional outlook (7 to 30 days):
-- North — expected runoff: 3.03 mm (7d), 6.16 mm (15d), 13 mm (30d).
-- Northwest — expected runoff: 1.05 mm (7d), 2.23 mm (15d), 5.73 mm (30d).
-- Northeast — expected runoff: 25 mm (7d), 103 mm (15d), 218 mm (30d).
-- East — expected runoff: 4.58 mm (7d), 12 mm (15d), 29 mm (30d).
-- Central — expected runoff: 1.52 mm (7d), 3.95 mm (15d), 14 mm (30d).
-- West — expected runoff: 1.73 mm (7d), 4.97 mm (15d), 28 mm (30d).
-- South — expected runoff: 3.57 mm (7d), 15 mm (15d), 45 mm (30d).
+Regional outlook — expected runoff (7 / 15 / 30-day):
+- North: 3.03 mm / 6.16 mm / 13 mm
+- Northwest: 1.05 mm / 2.23 mm / 5.73 mm
+- Northeast: 25 mm / 103 mm / 218 mm
+- East: 4.58 mm / 12 mm / 29 mm
+- Central: 1.52 mm / 3.95 mm / 14 mm
+- West: 1.73 mm / 4.97 mm / 28 mm
+- South: 3.57 mm / 15 mm / 45 mm

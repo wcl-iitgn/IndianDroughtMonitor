@@ -3,10 +3,10 @@
 For the week ending April 8, 2026, about 14.2% of India's area was in some level of drought (D0 or worse), with 85.8% at normal conditions. Severe-to-extreme drought (D2 or worse) covered roughly 0.4% of the country. Compared with the previous week, the drought-affected area contracted (-3.8 percentage points). Conditions were driven by the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.
 
 Regional conditions this week:
-- North shows widespread drought: about 40% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- Northwest shows largely normal conditions: about 1% of the region is in drought (D0–D4).
-- Northeast shows mostly normal conditions with localised dryness: about 9% of the region is in drought (D0–D4).
-- East shows mostly normal conditions with localised dryness: about 13% of the region is in drought (D0–D4).
-- Central shows mostly normal conditions with localised dryness: about 18% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- West shows mostly normal conditions with localised dryness: about 8% of the region is in drought (D0–D4).
-- South shows largely normal conditions: about 4% of the region is in drought (D0–D4).
+- North: Widespread drought. About 40% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Northwest: Largely normal conditions. About 1% of the area is in drought (D0–D4).
+- Northeast: Mostly normal, with localised dryness. About 9% of the area is in drought (D0–D4).
+- East: Mostly normal, with localised dryness. About 13% of the area is in drought (D0–D4).
+- Central: Mostly normal, with localised dryness. About 18% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Mostly normal, with localised dryness. About 8% of the area is in drought (D0–D4).
+- South: Largely normal conditions. About 4% of the area is in drought (D0–D4).

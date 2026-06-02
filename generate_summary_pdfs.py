@@ -2,37 +2,27 @@
 # =============================================================================
 # generate_summary_pdfs.py  --  India Drought Monitor (WCL, IIT Gandhinagar)
 # -----------------------------------------------------------------------------
-# Pre-generates the downloadable "National Drought Summary" PDFs, one per weekly
-# date and per language. Each PDF contains:
-#     - WCL + partner branding, the title and the week-ending date
-#     - the Combined Drought Index (CDI) map for that week (same DATA + COLORMAP
-#       as the interactive site, interpolated the normal way -- see idm_maps.py)
-#     - the national summary text, followed by a data-derived REGIONAL OUTLOOK
-#       (North, Northwest, Northeast, East, Central, West, South)
-#
-# Separate from the Hydrological-Outlook report pipeline. Mirrors its conventions
-# (XeLaTeX, per-language output folders).
+# Pre-generates the downloadable "National Drought Summary" PDFs (one per weekly
+# date, per language): WCL branding + a persistent footer on EVERY page, the
+# week's CDI map (same DATA + COLORMAP as the site, interpolated normally), the
+# national summary text, and a REGIONAL OUTLOOK with a bold sub-heading per
+# region (North, Northwest, Northeast, East, Central, West, South).
 #
 # OUTPUT:  data/summaries/<Language>/PDF_Archive/IDM_Summary_<YYYY-MM-DD>.pdf
 # MAP CACHE: data/summaries/_maps/CDI_<YYYY-MM-DD>.png
 #
-# The week list comes from data/summaries/index.json. The English national text
-# is read from data/summaries/summary_<date>.txt; this script ALSO writes a
-# data-derived "Regional conditions this week:" section back into that file
-# (idempotent) so the website's text view and the PDF stay identical. Translated
-# text for other languages: data/summaries/<Language>/summary_<date>.txt (from
-# the lab's Sarvam-Translate step); missing -> that language is skipped.
+# Week list: data/summaries/index.json. English national text:
+# data/summaries/summary_<date>.txt (this script ALSO writes the data-derived
+# "Regional conditions this week:" block back into it, idempotently, so the
+# website text view and the PDF match). Other languages:
+# data/summaries/<Language>/summary_<date>.txt (Sarvam-Translate; missing=skip).
 #
 # REQUIREMENTS (Ubuntu): python3 (numpy scipy matplotlib Pillow); XeLaTeX
-#   (texlive-xetex texlive-latex-extra); fonts Carlito + the per-language Noto
-#   fonts in Texts/languages.json (fonts-crosextra-carlito fonts-noto-core
-#   fonts-noto-extra fonts-noto-ui-core fonts-noto-nastaliq-urdu).
+#   (texlive-xetex texlive-latex-extra) with fancyhdr; fonts Carlito + the
+#   per-language Noto fonts in Texts/languages.json.
 #
-# USAGE:
-#   python3 generate_summary_pdfs.py                 # English (default)
-#   python3 generate_summary_pdfs.py --langs all
-#   python3 generate_summary_pdfs.py --dates 2026-05-20
-#   python3 generate_summary_pdfs.py --maps-only
+# USAGE: python3 generate_summary_pdfs.py [--langs all|English ...]
+#        [--dates 2026-05-20 ...] [--fine-step 0.05] [--maps-only]
 # =============================================================================
 
 import argparse
@@ -50,25 +40,26 @@ import idm_maps as M
 # ----------------------------------------------------------------------------- regional outlook
 def _describe_cdi(drought_pct, severe_pct):
     if drought_pct < 5:
-        tone = "largely normal conditions"
+        tone = "Largely normal conditions"
     elif drought_pct < 20:
-        tone = "mostly normal conditions with localised dryness"
+        tone = "Mostly normal, with localised dryness"
     elif drought_pct < 40:
-        tone = "moderate, scattered drought"
+        tone = "Moderate, scattered drought"
     elif drought_pct < 65:
-        tone = "widespread drought"
+        tone = "Widespread drought"
     else:
-        tone = "extensive drought"
-    extra = ""
+        tone = "Extensive drought"
     if severe_pct >= 10:
-        extra = ", including a notable share in severe-or-worse categories"
+        extra = " A notable share is in severe-or-worse categories (D2\u2013D4)."
     elif severe_pct >= 2:
-        extra = ", with pockets of severe-or-worse conditions"
-    return tone, extra
+        extra = " Pockets of severe-or-worse conditions are present."
+    else:
+        extra = ""
+    return "%s. About %.0f%% of the area is in drought (D0\u2013D4).%s" % (tone, drought_pct, extra)
 
 
 def compute_regional_cdi(repo, date_str):
-    """Return a list of (region, sentence) computed from the real CDI grid for the week."""
+    """Return [(region, description)] from the real CDI grid (description has NO region prefix)."""
     ymd = date_str.replace("-", "")
     grid = Path(repo) / "data" / "Drough_TS" / ("CDI_%s.txt" % ymd)
     if not grid.exists():
@@ -79,29 +70,22 @@ def compute_regional_cdi(repo, date_str):
     out = []
     for i, region in enumerate(M.REGION_ORDER):
         mask = (rid == i) & ~np.isnan(Z)
-        n = int(mask.sum())
-        if n == 0:
+        if int(mask.sum()) == 0:
             continue
         vals = Z[mask]
-        drought = float((vals <= -0.5).mean() * 100.0)   # D0 or worse
-        severe = float((vals <= -1.3).mean() * 100.0)     # D2 or worse
-        tone, extra = _describe_cdi(drought, severe)
-        out.append((region,
-                    "%s shows %s: about %.0f%% of the region is in drought (D0\u2013D4)%s."
-                    % (region, tone, drought, extra)))
+        drought = float((vals <= -0.5).mean() * 100.0)
+        severe = float((vals <= -1.3).mean() * 100.0)
+        out.append((region, _describe_cdi(drought, severe)))
     return out
 
 
+_REGION_SENTINEL = "Regional conditions this week:"
+
+
 def regional_block_text(region_lines):
-    """Plain-text block appended to the .txt and shown on the website."""
     if not region_lines:
         return ""
-    lines = ["Regional conditions this week:"]
-    lines += ["- %s" % s for _, s in region_lines]
-    return "\n".join(lines)
-
-
-_REGION_SENTINEL = "Regional conditions this week:"
+    return "\n".join([_REGION_SENTINEL] + ["- %s: %s" % (r, d) for r, d in region_lines])
 
 
 def national_part(raw_text):
@@ -114,11 +98,14 @@ def national_part(raw_text):
 
 
 # ----------------------------------------------------------------------------- LaTeX
+# A persistent footer (logos + blurb + copyright) is placed via fancyhdr on EVERY
+# page, inside the reserved bottom margin -- body text can never seep into it.
 TEX_TEMPLATE = r"""\documentclass[11pt]{article}
-\usepackage[a4paper,margin=1.9cm]{geometry}
+\usepackage[a4paper,top=1.5cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{ragged2e}
+\usepackage{fancyhdr}
 \usepackage{fontspec}
 \setmainfont{{{T_pdf_font}}}
 \setsansfont{{{T_pdf_font}}}
@@ -129,7 +116,26 @@ TEX_TEMPLATE = r"""\documentclass[11pt]{article}
 \definecolor{rule}{HTML}{C9C4C0}
 \definecolor{muted}{HTML}{6B635E}
 \setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
-\pagestyle{empty}
+
+\setlength{\headheight}{0pt}\setlength{\headsep}{0pt}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancyfoot[C]{%
+  \begin{minipage}{\textwidth}
+    {\color{rule}\hrule height 0.7pt}\vspace{4pt}
+    \noindent
+    \begin{minipage}[c]{0.66\textwidth}{\scriptsize\color{muted}{{T_footer_blurb}}}\end{minipage}\hfill
+    \begin{minipage}[c]{0.32\textwidth}\raggedleft
+      \includegraphics[height=0.62cm]{wcl.png}\hspace{6pt}%
+      \includegraphics[height=0.62cm]{iitgn.png}\hspace{6pt}%
+      \includegraphics[height=0.62cm]{imd.png}
+    \end{minipage}\\[3pt]
+    {\scriptsize\color{muted}{{T_copyright}}}
+  \end{minipage}%
+}
+
 \begin{document}
 {{BODYDIR}}
 \noindent
@@ -140,25 +146,15 @@ TEX_TEMPLATE = r"""\documentclass[11pt]{article}
 \end{minipage}
 \vspace{6pt}{\color{rule}\hrule height 1pt}\vspace{10pt}
 \begin{center}
-  \includegraphics[width=0.58\textwidth]{cdi_map.png}\\[3pt]
+  \includegraphics[width=0.60\textwidth]{cdi_map.png}\\[3pt]
   {\small\color{muted}{{T_caption}}}
 \end{center}
 \vspace{2pt}
-{\large\bfseries\color{titleblue}{{T_summary_heading}}}\\[2pt]
+{\large\bfseries\color{titleblue}{{T_summary_heading}}}\\[3pt]
 {\justifying\normalsize\color{textblack}{{T_summary_body}}\par}
-\vspace{6pt}
+\vspace{8pt}
 {\large\bfseries\color{titleblue}{{T_regional_heading}}}\\[2pt]
-{\small\color{textblack}{{T_regional_body}}\par}
-\vfill
-{\color{rule}\hrule height 0.7pt}\vspace{8pt}
-\noindent
-\begin{minipage}[c]{0.62\textwidth}{\footnotesize\color{muted}{{T_footer_blurb}}}\end{minipage}\hfill
-\begin{minipage}[c]{0.34\textwidth}\raggedleft
-  \includegraphics[height=0.95cm]{wcl.png}\hspace{8pt}%
-  \includegraphics[height=0.95cm]{iitgn.png}\hspace{8pt}%
-  \includegraphics[height=0.95cm]{imd.png}
-\end{minipage}
-\vspace{6pt}\noindent{\scriptsize\color{muted}{{T_copyright}}}
+{{T_regional_body}}
 \end{document}
 """
 
@@ -177,14 +173,23 @@ PDF_STRINGS = {
 }
 
 
+def regional_tex(region_lines, esc):
+    """One bold sub-heading per region (run-in heading), each its own paragraph."""
+    if not region_lines:
+        return esc("Not available.")
+    parts = []
+    for region, desc in region_lines:
+        parts.append(r"{\normalsize\color{titleblue}\textbf{%s}}\enspace {\normalsize\color{textblack}%s}"
+                     % (esc(region), esc(desc)))
+    return r" \par\smallskip ".join(parts)
+
+
 def build_summary_pdf(repo, lang, date_str, label, national, region_lines, map_png, out_pdf, log=print):
     repo = Path(repo)
     pdf_font = lang.get("pdf_font", "Carlito")
     is_rtl = (lang.get("dir") or "ltr").lower() == "rtl"
     S = PDF_STRINGS.get(lang.get("key", "English"), PDF_STRINGS["English"])
     esc = M.make_escaper(pdf_font)
-
-    regional_tex = r" \\ ".join("%s" % esc(s) for _, s in region_lines) if region_lines else esc("Not available.")
 
     tmap = {
         "T_pdf_font": pdf_font,
@@ -194,7 +199,7 @@ def build_summary_pdf(repo, lang, date_str, label, national, region_lines, map_p
         "T_summary_heading": esc(S["summary_heading"]),
         "T_summary_body": M.tex_paragraphs(national, esc) if national else esc("Summary text not available."),
         "T_regional_heading": esc(S["regional_heading"]),
-        "T_regional_body": regional_tex,
+        "T_regional_body": regional_tex(region_lines, esc),
         "T_footer_blurb": esc(S["footer_blurb"]),
         "T_copyright": esc(S["copyright"]),
         "BODYDIR": r"\textdir TRT\pardir TRT\relax" if is_rtl else "",
@@ -229,9 +234,9 @@ def build_summary_pdf(repo, lang, date_str, label, national, region_lines, map_p
 def main():
     ap = argparse.ArgumentParser(description="Pre-generate IDM National Drought Summary PDFs.")
     ap.add_argument("--repo", default=str(Path(__file__).resolve().parent))
-    ap.add_argument("--langs", nargs="+", default=["English"], help="languages or 'all' (default English)")
-    ap.add_argument("--dates", nargs="+", default=None, help="YYYY-MM-DD weeks (default: all in index.json)")
-    ap.add_argument("--fine-step", type=float, default=0.05, help="interpolation grid step in degrees")
+    ap.add_argument("--langs", nargs="+", default=["English"])
+    ap.add_argument("--dates", nargs="+", default=None)
+    ap.add_argument("--fine-step", type=float, default=0.05)
     ap.add_argument("--maps-only", action="store_true")
     args = ap.parse_args()
 
@@ -243,12 +248,10 @@ def main():
     if not weeks:
         print("No matching weeks in index.json."); return 1
 
-    # 1) CDI map per week (language-independent), with the corrected normal interpolation.
     print("Rendering CDI maps (%d week(s)) ..." % len(weeks))
     map_for, region_for = {}, {}
     for w in weeks:
-        d = w["date"]
-        ymd = d.replace("-", "")
+        d = w["date"]; ymd = d.replace("-", "")
         grid = repo / "data" / "Drough_TS" / ("CDI_%s.txt" % ymd)
         if not grid.exists():
             alt = repo / "data" / "Current_CDI.txt"
@@ -262,8 +265,7 @@ def main():
         except Exception as e:
             print("  ! failed for %s: %s" % (d, e))
 
-    # 2) Write the data-derived regional block back into the English source .txt
-    #    (idempotent) so the website text view and the PDF show the same content.
+    # Write the data-derived regional block into the English source .txt (idempotent).
     for w in weeks:
         d = w["date"]
         if d not in region_for:
@@ -272,14 +274,11 @@ def main():
         if not txt.exists():
             continue
         raw = txt.read_text(encoding="utf-8")
-        header = ""
         m = re.match(r"^(#[^\n]*\n+)", raw)
-        if m:
-            header = m.group(1)
+        header = m.group(1) if m else ""
         nat = national_part(raw)
         block = regional_block_text(region_for[d])
-        new = header + nat + ("\n\n" + block if block else "") + "\n"
-        txt.write_text(new, encoding="utf-8")
+        txt.write_text(header + nat + ("\n\n" + block if block else "") + "\n", encoding="utf-8")
     print("Regional sections written into English summary_*.txt")
 
     if args.maps_only:
@@ -309,8 +308,6 @@ def main():
                 print("  ! %-9s %s : %s" % (key, d, e)); skipped += 1
 
     print("\nDone. PDFs built: %d, skipped: %d" % (built, skipped))
-    print("English PDFs: data/summaries/English/PDF_Archive/")
-    print("Non-English weeks need data/summaries/<Language>/summary_<date>.txt (Sarvam-Translate).")
     return 0
 
 

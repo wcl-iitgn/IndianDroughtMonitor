@@ -3,10 +3,10 @@
 For the week ending May 6, 2026, about 15.0% of India's area was in some level of drought (D0 or worse), with 85.0% at normal conditions. Severe-to-extreme drought (D2 or worse) covered roughly 0.2% of the country. Compared with the previous week, the drought-affected area contracted (-5.5 percentage points). Conditions were driven by the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.
 
 Regional conditions this week:
-- North shows moderate, scattered drought: about 32% of the region is in drought (D0–D4).
-- Northwest shows largely normal conditions: about 0% of the region is in drought (D0–D4).
-- Northeast shows moderate, scattered drought: about 22% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- East shows mostly normal conditions with localised dryness: about 8% of the region is in drought (D0–D4).
-- Central shows mostly normal conditions with localised dryness: about 17% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- West shows mostly normal conditions with localised dryness: about 15% of the region is in drought (D0–D4).
-- South shows mostly normal conditions with localised dryness: about 18% of the region is in drought (D0–D4).
+- North: Moderate, scattered drought. About 32% of the area is in drought (D0–D4).
+- Northwest: Largely normal conditions. About 0% of the area is in drought (D0–D4).
+- Northeast: Moderate, scattered drought. About 22% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- East: Mostly normal, with localised dryness. About 8% of the area is in drought (D0–D4).
+- Central: Mostly normal, with localised dryness. About 17% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Mostly normal, with localised dryness. About 15% of the area is in drought (D0–D4).
+- South: Mostly normal, with localised dryness. About 18% of the area is in drought (D0–D4).

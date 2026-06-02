@@ -558,7 +558,14 @@
     "suggest_2": "Which five states are worst affected?",
     "suggest_3": "Has drought expanded or contracted since last week?",
     "suggest_4": "What’s the rainfall outlook this month?",
-    "suggest_5": "Which states have the most extreme (D3+) drought?"
+    "suggest_5": "Which states have the most extreme (D3+) drought?",
+    "model": "Model",
+    "provider_deepseek": "DeepSeek (cloud)",
+    "provider_ollama": "Ollama (local)",
+    "key_placeholder": "DeepSeek API key",
+    "need_key": "Add your DeepSeek API key in the box above, or switch the model to Ollama (local).",
+    "err_ollama": "I couldn’t reach the local Ollama server. Make sure it’s running and reachable from this page.",
+    "err_deepseek": "I couldn’t reach the DeepSeek API. Check your internet connection and that your API key is valid (browser calls also require the API to allow this origin)."
   },
   "forecast": {
     "home": "Home",
@@ -589,7 +596,7 @@
     "about_the_forecast": "About the Forecast",
     "about_text": "Drought is the forecast Combined Drought Index. Rainfall, runoff and soil moisture show the predicted magnitude (mm, mm and v/v) over the selected lead time. Forecasts are driven by the IMD Extended Range Forecast System.",
     "primary": "Primary",
-    "view_outlook_summary": "📄 Forecast outlook & PDF (7 / 15 / 30 day) →"
+    "view_outlook_summary": "Read the regional forecast outlook and download the report (PDF)"
   },
   "forecast_summary": {
     "forecast_outlook_india_droug": "Forecast Outlook | India Drought Monitor",

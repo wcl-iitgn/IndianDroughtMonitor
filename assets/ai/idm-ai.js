@@ -20,9 +20,22 @@
 
   // ---- configuration ---------------------------------------------------------
   var CFG = {
-    // The LAN Ollama endpoint. Override at runtime via IDM_AI.configure({...}).
-    apiUrl: "http://10.0.60.193:11434/api/generate",
-    model: "qwen3.5:4b",
+    // Which backend the chatbot/LLM calls use. User-switchable in the chat UI.
+    //   "ollama"   -> LAN Ollama server (/api/generate)
+    //   "deepseek" -> DeepSeek cloud API (OpenAI-compatible /v1/chat/completions)
+    provider: "deepseek",
+    ollama: {
+      apiUrl: "http://10.0.60.193:11434/api/generate",
+      model: "qwen3.5:4b"
+    },
+    deepseek: {
+      apiUrl: "https://api.deepseek.com/v1/chat/completions",
+      model: "deepseek-chat",
+      // Hardcoded key (usage-capped on the DeepSeek dashboard, per the project owner).
+      // NOTE: this ships in the static site and is visible to anyone who views source.
+      // The chat settings field can override it per-browser; rotate the key if needed.
+      apiKey: "sk-c3bd196cbb2f46b6b6a559f42fb99d68"
+    },
     // data file locations (relative to the site root)
     paths: {
       timeseries: "data/India_Drought_Area_Timeseries.txt",
@@ -36,20 +49,31 @@
 
   function configure(opts) {
     if (!opts) return;
-    if (opts.apiUrl) CFG.apiUrl = opts.apiUrl;
-    if (opts.model) CFG.model = opts.model;
+    if (opts.provider) CFG.provider = opts.provider;
+    if (opts.apiUrl) CFG.ollama.apiUrl = opts.apiUrl;   // backward-compat
+    if (opts.model) CFG.ollama.model = opts.model;       // backward-compat
+    if (opts.ollama) Object.assign(CFG.ollama, opts.ollama);
+    if (opts.deepseek) Object.assign(CFG.deepseek, opts.deepseek);
     if (opts.paths) Object.assign(CFG.paths, opts.paths);
   }
+  function getProvider() { return CFG.provider; }
+  function getConfig() { return CFG; }
 
-  // ---- low-level LLM call (Ollama /api/generate, non-thinking) ---------------
+  // ---- low-level LLM call (routes to the selected provider) ------------------
   // Returns the model's text. Throws on network/HTTP error.
   async function llm(prompt, opts) {
     opts = opts || {};
+    if (CFG.provider === "deepseek") return llmDeepSeek(prompt, opts);
+    return llmOllama(prompt, opts);
+  }
+
+  // Ollama /api/generate, non-thinking mode.
+  async function llmOllama(prompt, opts) {
     var body = {
-      model: CFG.model,
+      model: CFG.ollama.model,
       prompt: prompt,
       stream: false,
-      think: false,                 // NON-THINKING mode (as required)
+      think: false,
       options: {
         temperature: opts.temperature != null ? opts.temperature : 0.7,
         top_p: 0.8,
@@ -58,7 +82,7 @@
       }
     };
     if (opts.system) body.system = opts.system;
-    var r = await fetch(CFG.apiUrl, {
+    var r = await fetch(CFG.ollama.apiUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body)
@@ -66,7 +90,35 @@
     if (!r.ok) throw new Error("LLM HTTP " + r.status + ": " + (await r.text()).slice(0, 200));
     var j = await r.json();
     var txt = (j && j.response != null) ? String(j.response) : "";
-    // Safety: if a stray think block slips through, keep only the part after it.
+    if (txt.indexOf("</think>") !== -1) txt = txt.split("</think>").pop();
+    return txt.trim();
+  }
+
+  // DeepSeek (OpenAI-compatible) /v1/chat/completions with a Bearer key.
+  async function llmDeepSeek(prompt, opts) {
+    var key = (CFG.deepseek.apiKey || "").trim();
+    if (!key) throw new Error("DeepSeek API key not set");
+    var messages = [];
+    if (opts.system) messages.push({ role: "system", content: opts.system });
+    messages.push({ role: "user", content: prompt });
+    var body = {
+      model: CFG.deepseek.model,
+      messages: messages,
+      stream: false,
+      temperature: opts.temperature != null ? opts.temperature : 0.7,
+      max_tokens: opts.maxTokens || 512
+    };
+    var r = await fetch(CFG.deepseek.apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) throw new Error("LLM HTTP " + r.status + ": " + (await r.text()).slice(0, 200));
+    var j = await r.json();
+    var txt = "";
+    if (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content != null) {
+      txt = String(j.choices[0].message.content);
+    }
     if (txt.indexOf("</think>") !== -1) txt = txt.split("</think>").pop();
     return txt.trim();
   }
@@ -413,6 +465,8 @@
   // ---- expose ---------------------------------------------------------------
   window.IDM_AI = {
     configure: configure,
+    getProvider: getProvider,
+    getConfig: getConfig,
     llm: llm,
     loadData: loadData,
     schemaDoc: schemaDoc,

@@ -3,10 +3,10 @@
 For the week ending March 25, 2026, about 19.5% of India's area was in some level of drought (D0 or worse), with 80.5% at normal conditions. Severe-to-extreme drought (D2 or worse) covered roughly 0.9% of the country. Compared with the previous week, the drought-affected area contracted (-8.1 percentage points). Conditions were driven by the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.
 
 Regional conditions this week:
-- North shows widespread drought: about 57% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- Northwest shows largely normal conditions: about 3% of the region is in drought (D0–D4).
-- Northeast shows moderate, scattered drought: about 22% of the region is in drought (D0–D4).
-- East shows moderate, scattered drought: about 28% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- Central shows moderate, scattered drought: about 21% of the region is in drought (D0–D4), with pockets of severe-or-worse conditions.
-- West shows mostly normal conditions with localised dryness: about 8% of the region is in drought (D0–D4).
-- South shows mostly normal conditions with localised dryness: about 6% of the region is in drought (D0–D4).
+- North: Widespread drought. About 57% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Northwest: Largely normal conditions. About 3% of the area is in drought (D0–D4).
+- Northeast: Moderate, scattered drought. About 22% of the area is in drought (D0–D4).
+- East: Moderate, scattered drought. About 28% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Central: Moderate, scattered drought. About 21% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Mostly normal, with localised dryness. About 8% of the area is in drought (D0–D4).
+- South: Mostly normal, with localised dryness. About 6% of the area is in drought (D0–D4).

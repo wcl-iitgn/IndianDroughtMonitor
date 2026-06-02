@@ -33,6 +33,25 @@
 .idm-chat-sub { display: block; font-size: 11.5px; opacity: .9; margin-top: 1px; }
 .idm-chat-close { background: none; border: 0; color: #fff; font-size: 26px; line-height: 1; cursor: pointer; }
 
+.idm-chat-settings {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  padding: 8px 12px; border-bottom: 1px solid var(--usdm-border, #e2dfdc);
+  background: #fbfaf9;
+}
+.idm-chat-set-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+  color: var(--usdm-charcoal, #4d4847);
+}
+.idm-chat-provider {
+  font: inherit; font-size: 12.5px; padding: 4px 8px; border-radius: 6px;
+  border: 1px solid var(--usdm-border, #e2dfdc); background: #fff; color: #2c2826;
+}
+.idm-chat-key {
+  flex: 1 1 130px; min-width: 110px; font: inherit; font-size: 12.5px; padding: 5px 9px;
+  border-radius: 6px; border: 1px solid var(--usdm-border, #e2dfdc); background: #fff; color: #2c2826;
+}
+.idm-chat-key:focus, .idm-chat-provider:focus { outline: none; border-color: var(--usdm-red, #da3910); }
+
 .idm-chat-log {
   flex: 1 1 auto; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 10px;
   background: var(--usdm-bg-tint, #faf9f8);
