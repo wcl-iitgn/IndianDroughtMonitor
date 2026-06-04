@@ -26,7 +26,7 @@
     provider: "deepseek",
     ollama: {
       apiUrl: "http://10.0.60.193:11434/api/generate",
-      model: "qwen3.5:4b"
+      model: "gemma4:e2b"
     },
     deepseek: {
       apiUrl: "https://api.deepseek.com/v1/chat/completions",
@@ -79,6 +79,7 @@
         temperature: opts.temperature != null ? opts.temperature : 0.7,
         top_p: 0.8,
         top_k: 20,
+        num_ctx: 8192,
         num_predict: opts.maxTokens || 512
       }
     };
@@ -447,13 +448,12 @@
   // Full 3-step ask: returns {answer, sql, rows, error?}. `onStage` optional callback.
   // Format prior turns as a compact transcript the model can use for follow-ups
   // ("what about Kerala?", "and last year?"). history = [{role:'user'|'assistant', content}]
+  // Conversation memory is intentionally DISABLED: every question is answered with a
+  // fresh, independent inference (no prior turns are sent to the model). The `ask`
+  // signature still accepts a `history` argument for backward compatibility, but it is
+  // ignored here, so follow-ups are treated as standalone questions.
   function historyBlock(history) {
-    if (!history || !history.length) return "";
-    var lines = history.slice(-8).map(function (m) {   // last few turns is plenty
-      return (m.role === "user" ? "User" : "Assistant") + ": " + m.content;
-    });
-    return "Conversation so far (for context; the latest user question is below):\n" +
-           lines.join("\n") + "\n\n";
+    return "";
   }
 
   // Full multi-turn ask. `history` is the prior turns (excluding the current

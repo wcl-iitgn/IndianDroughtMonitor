@@ -35,6 +35,7 @@ from pathlib import Path
 import numpy as np
 
 import idm_maps as M
+import idm_llm
 
 
 # ----------------------------------------------------------------------------- regional outlook
@@ -202,7 +203,9 @@ def build_summary_pdf(repo, lang, date_str, label, national, region_lines, map_p
         "T_regional_body": regional_tex(region_lines, esc),
         "T_footer_blurb": esc(S["footer_blurb"]),
         "T_copyright": esc(S["copyright"]),
-        "BODYDIR": r"\textdir TRT\pardir TRT\relax" if is_rtl else "",
+        "BODYDIR": "",  # XeLaTeX has no \textdir/\pardir (those are LuaTeX); match the
+                        # hydro PDF, which builds RTL via the script font. Proper bidi
+                        # (right-alignment of mixed text) is a separate, testable upgrade.
     }
     tex = TEX_TEMPLATE
     for k, v in tmap.items():
@@ -238,6 +241,8 @@ def main():
     ap.add_argument("--dates", nargs="+", default=None)
     ap.add_argument("--fine-step", type=float, default=0.05)
     ap.add_argument("--maps-only", action="store_true")
+    ap.add_argument("--force", action="store_true",
+                    help="re-translate per-language text even if it already exists")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
@@ -287,6 +292,32 @@ def main():
     langs = M.load_languages(repo, args.langs)
     if not langs:
         print("No valid languages."); return 1
+
+    # Translate the English national narrative into each non-English language via
+    # gemma4 (idm_llm) and write data/summaries/<lang>/summary_<date>.txt. This is the
+    # per-language on-site text, and it's what the render loop below reads. Only the
+    # dynamic narrative is translated; PDF labels and the regional block stay English
+    # for now (static-text localisation is the separate, later task).
+    todo = [l for l in langs if l["key"] != "English"]
+    if todo:
+        print("Translating summary text -> %d language(s) via %s ..." % (len(todo), idm_llm.MODEL))
+    for lang in todo:
+        key = lang["key"]; label = lang.get("label") or key
+        for w in weeks:
+            d = w["date"]
+            eng = sumdir / ("summary_%s.txt" % d)
+            per = sumdir / key / ("summary_%s.txt" % d)
+            if not eng.exists():
+                continue
+            if per.exists() and not args.force:
+                continue
+            try:
+                nat = national_part(eng.read_text(encoding="utf-8"))
+                per.parent.mkdir(parents=True, exist_ok=True)
+                per.write_text(idm_llm.translate(nat, label) + "\n", encoding="utf-8")
+                print("  translated %-9s %s" % (key, d))
+            except Exception as e:
+                print("  ! translate %-9s %s : %s" % (key, d, e))
 
     built = skipped = 0
     for lang in langs:

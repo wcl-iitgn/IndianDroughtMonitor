@@ -259,10 +259,11 @@ def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=15
 def latex_escape(s):
     if s is None:
         return ""
-    repl = [("\\", r"\textbackslash{}"), ("&", r"\&"), ("%", r"\%"), ("$", r"\$"),
-            ("#", r"\#"), ("_", r"\_"), ("{", r"\{"), ("}", r"\}"),
-            ("~", r"\textasciitilde{}"), ("^", r"\textasciicircum{}")]
-    for a, b in repl:
+    # Drop grouping/command chars prose never needs (\ { }) plus caret/tilde, which expand
+    # to \textasciicircum{}/\textasciitilde{} whose letters the Latin-run wrapper mangles.
+    for ch in ("\\", "{", "}", "^", "~"):
+        s = s.replace(ch, "")
+    for a, b in [("&", r"\&"), ("%", r"\%"), ("$", r"\$"), ("#", r"\#"), ("_", r"\_")]:
         s = s.replace(a, b)
     return s
 

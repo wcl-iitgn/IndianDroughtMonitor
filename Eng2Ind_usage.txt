@@ -1,2 +1,0 @@
-~$ curl -X POST "http://10.0.60.193:8000/translate" -H "Content-Type: application/json" -d '{"sentences": ["Hello world, this is a network test."], "tgt_lang": "hin_Deva"}'
-{"status":"success","translations":["हैलो वर्ल्ड, यह एक नेटवर्क परीक्षण है।"]}

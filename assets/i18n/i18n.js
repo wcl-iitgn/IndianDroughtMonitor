@@ -1,151 +1,176 @@
-/* India Drought Monitor — runtime internationalization (i18n)
+/* =============================================================================
+ * i18n.js — India Drought Monitor website localisation + language picker
+ * -----------------------------------------------------------------------------
+ * The pages already carry data-i18n="group.key" on every static string (and
+ * data-i18n-attr="attr:group.key" for attributes like aria-label). This script:
+ *   1. reads the chosen language from localStorage (default English),
+ *   2. for non-English, fetches assets/i18n/<Language>.json and swaps the text
+ *      of every [data-i18n] element and every [data-i18n-attr] attribute,
+ *   3. injects a language picker into the header,
+ *   4. exposes window.IDM_I18N = { current, t(key, fallback), languages },
+ *      which the dynamic pages (summary / forecast / hydro / chatbot) read to
+ *      load their per-language content.
  *
- * - Loads Texts/<Language>/ui.json for the active language and replaces the text of
- *   every element carrying a data-i18n="scope.key" attribute (and attributes via
- *   data-i18n-attr="attr:scope.key;attr2:scope.key2").
- * - English is the source of truth; its file lives at Texts/English/ui.json. When a
- *   key is missing in a target language, the existing (English) DOM text is kept.
- * - Renders a language <select> into [data-i18n-switcher] (added to the header).
- * - Remembers the choice in localStorage and honors ?lang=Hindi in the URL.
- *
- * No build step, no framework. Safe to include on every page.
- */
+ * English needs no JSON — the English text is already in the HTML. The picker
+ * list and per-language fonts/direction come from Texts/languages.json.
+ * ============================================================================= */
 (function () {
   "use strict";
 
-  var LS_KEY = "idm_lang";
-  var BASE = "Texts/";                 // relative to the page (site served from repo root)
-  var LANGS_URL = BASE + "languages.json";
+  var STORAGE_KEY = "idm_lang";
+  var DEFAULT_LANG = "English";
+  var current = "";
+  try { current = localStorage.getItem(STORAGE_KEY) || ""; } catch (e) { current = ""; }
+  if (!current) current = DEFAULT_LANG;
 
-  function qs(name) {
-    var m = new RegExp("[?&]" + name + "=([^&]+)").exec(window.location.search);
-    return m ? decodeURIComponent(m[1]) : null;
-  }
+  var strings = null;     // loaded translation table (null for English)
+  var languages = [];     // [{key, native, dir, ...}] from languages.json
 
-  // Resolve "scope.key" (dot path) inside the loaded dictionary.
-  function lookup(dict, dotted) {
-    var parts = dotted.split(".");
-    var cur = dict;
+  // ---- key lookup: "group.key" -> string -----------------------------------
+  function lookup(table, dottedKey) {
+    if (!table) return undefined;
+    var node = table;
+    var parts = dottedKey.split(".");
     for (var i = 0; i < parts.length; i++) {
-      if (cur == null) return undefined;
-      cur = cur[parts[i]];
+      if (node == null || typeof node !== "object") return undefined;
+      node = node[parts[i]];
     }
-    return typeof cur === "string" ? cur : undefined;
+    return (typeof node === "string") ? node : undefined;
   }
 
-  function applyDict(dict) {
-    // text content
-    document.querySelectorAll("[data-i18n]").forEach(function (el) {
-      var key = el.getAttribute("data-i18n");
-      var val = lookup(dict, key);
-      if (val != null) {
-        // keep child elements that are marked to be preserved (e.g. icons) — replace only text nodes
-        if (el.hasAttribute("data-i18n-html")) el.innerHTML = val;
-        else el.textContent = val;
+  function t(key, fallback) {
+    var v = lookup(strings, key);
+    if (v != null) return v;
+    return (fallback != null) ? fallback : key;
+  }
+
+  // ---- apply translations to the DOM ---------------------------------------
+  function setText(el, val) {
+    if (el.children.length === 0) { el.textContent = val; return; }
+    // element has child elements: replace only its own text node(s), keep children
+    var done = false;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      var n = el.childNodes[i];
+      if (n.nodeType === 3 && n.textContent.trim()) {
+        n.textContent = done ? "" : val; done = true;
       }
-    });
-    // attributes: data-i18n-attr="placeholder:home.search;title:home.searchTitle"
-    document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
-      el.getAttribute("data-i18n-attr").split(";").forEach(function (pair) {
-        pair = pair.trim(); if (!pair) return;
-        var bits = pair.split(":");
-        if (bits.length !== 2) return;
-        var attr = bits[0].trim(), key = bits[1].trim();
-        var val = lookup(dict, key);
-        if (val != null) el.setAttribute(attr, val);
-      });
-    });
+    }
+    if (!done) el.insertBefore(document.createTextNode(val), el.firstChild);
   }
 
-  function buildSwitcher(languages, active, onChange) {
-    var hosts = document.querySelectorAll("[data-i18n-switcher]");
-    if (!hosts.length) return;
-    hosts.forEach(function (host) {
-      host.innerHTML = "";
-      var label = document.createElement("span");
-      label.className = "idm-lang-label";
-      label.textContent = "\uD83C\uDF10";          // globe
-      label.setAttribute("aria-hidden", "true");
-      var sel = document.createElement("select");
-      sel.className = "idm-lang-select";
-      sel.setAttribute("aria-label", "Choose language");
-      languages.forEach(function (l) {
-        var o = document.createElement("option");
-        o.value = l.key;
-        o.textContent = l.native && l.native !== l.label ? (l.label + " — " + l.native) : l.label;
-        if (l.key === active) o.selected = true;
-        sel.appendChild(o);
-      });
-      sel.addEventListener("change", function () { onChange(sel.value); });
-      host.appendChild(label);
-      host.appendChild(sel);
-    });
+  function applyTranslations() {
+    if (!strings) return;  // English: leave the HTML as-is
+    var els = document.querySelectorAll("[data-i18n]");
+    for (var i = 0; i < els.length; i++) {
+      var key = els[i].getAttribute("data-i18n");
+      var val = lookup(strings, key);
+      if (val != null) setText(els[i], val);
+    }
+    var ael = document.querySelectorAll("[data-i18n-attr]");
+    for (var j = 0; j < ael.length; j++) {
+      var spec = ael[j].getAttribute("data-i18n-attr");  // "aria-label:index.primary, title:..."
+      var pairs = spec.split(",");
+      for (var k = 0; k < pairs.length; k++) {
+        var idx = pairs[k].indexOf(":");
+        if (idx === -1) continue;
+        var attr = pairs[k].slice(0, idx).trim();
+        var akey = pairs[k].slice(idx + 1).trim();
+        var av = lookup(strings, akey);
+        if (av != null) ael[j].setAttribute(attr, av);
+      }
+    }
   }
 
-  function setHtmlLang(langObj) {
-    if (!langObj) return;
-    document.documentElement.setAttribute("lang", langObj.code ? langObj.code.split("_")[0] : "en");
-    document.documentElement.setAttribute("dir", langObj.dir || "ltr");
+  // ---- language picker ------------------------------------------------------
+  function nativeName(key) {
+    for (var i = 0; i < languages.length; i++) if (languages[i].key === key) return languages[i].native || key;
+    return key;
+  }
+  function dirOf(key) {
+    for (var i = 0; i < languages.length; i++) if (languages[i].key === key) return languages[i].dir || "ltr";
+    return "ltr";
   }
 
+  function buildPicker() {
+    if (!languages.length || document.getElementById("idm-lang-select")) return;
+    var sel = document.createElement("select");
+    sel.id = "idm-lang-select";
+    sel.setAttribute("aria-label", "Choose language");
+    sel.style.cssText =
+      "margin-left:auto;padding:4px 8px;border:1px solid #b9c2c9;border-radius:6px;" +
+      "background:#fff;color:#1a1a1a;font-size:13px;cursor:pointer;";
+    for (var i = 0; i < languages.length; i++) {
+      var o = document.createElement("option");
+      o.value = languages[i].key;
+      o.textContent = languages[i].native ? (languages[i].native + " — " + languages[i].key) : languages[i].key;
+      if (languages[i].key === current) o.selected = true;
+      sel.appendChild(o);
+    }
+    sel.addEventListener("change", function () { setLanguage(sel.value); });
+
+    var nav = document.querySelector(".usdm-nav");
+    if (nav) {
+      nav.style.display = nav.style.display || "flex";
+      nav.style.alignItems = nav.style.alignItems || "center";
+      nav.appendChild(sel);
+    } else {
+      sel.style.position = "fixed"; sel.style.top = "8px"; sel.style.right = "8px"; sel.style.zIndex = "9999";
+      document.body.appendChild(sel);
+    }
+  }
+
+  function setLanguage(key) {
+    try { localStorage.setItem(STORAGE_KEY, key); } catch (e) {}
+    // simplest correct swap: reload so every script re-reads the new language
+    window.location.reload();
+  }
+
+  // ---- boot -----------------------------------------------------------------
   function fetchJSON(url) {
     return fetch(url, { cache: "no-cache" }).then(function (r) {
-      if (!r.ok) throw new Error(url + " -> " + r.status);
+      if (!r.ok) throw new Error(url + " -> HTTP " + r.status);
       return r.json();
     });
   }
 
-  var IDM_I18N = {
-    languages: [],
-    current: "English",
-    dict: {},
-    /** translate a key at runtime (for JS-built UI, e.g. the chatbot) */
-    t: function (key, fallback) {
-      var v = lookup(this.dict, key);
-      return v != null ? v : (fallback != null ? fallback : key);
-    },
-    /** expose the active language object */
-    lang: function () {
-      var self = this;
-      return this.languages.filter(function (l) { return l.key === self.current; })[0] || null;
-    },
-    setLanguage: function (key) {
-      var self = this;
-      var langObj = this.languages.filter(function (l) { return l.key === key; })[0];
-      if (!langObj) { key = "English"; langObj = this.languages.filter(function (l){return l.key==="English";})[0]; }
-      return fetchJSON(BASE + encodeURIComponent(key) + "/ui.json")
-        .catch(function () { return fetchJSON(BASE + "English/ui.json"); })
-        .then(function (dict) {
-          self.current = key;
-          self.dict = dict;
-          try { localStorage.setItem(LS_KEY, key); } catch (e) {}
-          setHtmlLang(langObj);
-          applyDict(dict);
-          buildSwitcher(self.languages, key, function (k) { self.setLanguage(k); });
-          document.dispatchEvent(new CustomEvent("idm:languagechange", { detail: { language: key, dict: dict } }));
-          return dict;
+  function start() {
+    // direction first (cheap, avoids a flash for RTL)
+    var loadStrings = (current === DEFAULT_LANG)
+      ? Promise.resolve(null)
+      : fetchJSON("assets/i18n/" + current + ".json").catch(function (e) {
+          console.warn("i18n: could not load " + current + " (" + e.message + "); showing English.");
+          return null;
         });
-    },
-    init: function () {
-      var self = this;
-      return fetchJSON(LANGS_URL).then(function (data) {
-        self.languages = data.languages || [];
-        var initial = qs("lang");
-        if (!initial) { try { initial = localStorage.getItem(LS_KEY); } catch (e) {} }
-        if (!initial) initial = data.default || "English";
-        if (!self.languages.some(function (l) { return l.key === initial; })) initial = data.default || "English";
-        return self.setLanguage(initial);
-      }).catch(function (e) {
-        // languages.json missing/unreachable: leave the page in its built-in English
-        if (window.console) console.warn("i18n init skipped:", e && e.message);
-      });
-    }
-  };
 
-  window.IDM_I18N = IDM_I18N;
+    var loadLangs = fetchJSON("Texts/languages.json")
+      .then(function (d) { languages = (d && d.languages) || []; })
+      .catch(function () { languages = []; });
+
+    Promise.all([loadStrings, loadLangs]).then(function (res) {
+      strings = res[0];
+      // If the language's UI-strings file isn't there yet, keep the chosen language
+      // selected anyway (the picker reflects the choice, dynamic content still switches);
+      // only the static labels fall back to the English already in the HTML.
+      if (strings === null && current !== DEFAULT_LANG) {
+        console.info("i18n: assets/i18n/" + current + ".json not found — labels stay English "
+                     + "until you run translate_ui_strings.py; dynamic content still uses " + current + ".");
+      }
+      document.documentElement.lang = current;
+      document.documentElement.dir = dirOf(current);
+      window.IDM_I18N.current = current;
+      applyTranslations();
+      buildPicker();
+      // let dynamic pages know the language is settled
+      try { window.dispatchEvent(new CustomEvent("idm:i18n-ready", { detail: { lang: current } })); } catch (e) {}
+    });
+  }
+
+  // expose early (synchronously) so other scripts read the right current language
+  window.IDM_I18N = { current: current, t: t, languages: languages, setLanguage: setLanguage };
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", function () { IDM_I18N.init(); });
+    document.addEventListener("DOMContentLoaded", start);
   } else {
-    IDM_I18N.init();
+    start();
   }
 })();

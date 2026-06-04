@@ -1,0 +1,68 @@
+{
+  "doc_title": "India er jalbhabar darshana",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "India er jalbhabar darshana",
+  "footer_blurb": "India Hydrological Outlook current sthitiya ke jonno mukhya mausam o jal-bhabna bishoygulo ke masik saraansh, vartaman sthiti ke sathe char maser pichhader o ek maser bhavishyot thake. aro jankari jonno kripya website e janan.",
+  "summary_heading": "ସାରା",
+  "section_rainfall_temp": "barasai aru taampar:",
+  "section_sm_ro_et": "Miti jor, Somo nikal, aru Jhoran:",
+  "section_rivers": "nadi bebe",
+  "figure_caption": "Bharatiya sub-kontinental nadiya basin gulo shaded background e unchaai (m) dekhai",
+  "figure_label": "चित्र",
+  "page_titles": {
+    "rainfall": "Maanai aabai raalna obshorj aabai forecast khoro",
+    "temperature": "निरीक्षण अउ पूर्वानुमान পৃষ্ঠ वायु तापमान",
+    "wetness": "निरीक्षण अउ पूर्वानुमान सापेक्ष आर्द्रता",
+    "runoff": "निरीक्षण अउ पूर्वानुमान कुल बहाव",
+    "et": "अवलोकन अभाज्य वाष्पोत्सर्जन"
+  },
+  "page_intros": {
+    "rainfall": "Ei nakha gora dinar gridded rainfall observation aru India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) theke toiri, 1955 theke aji porjano samay er total monthly rainfall percentile hisebe deya. Ei rainfall percentile maps gulo oi samay er jonno asadharon shukno, jhol, ba modhyo rainfall er kshetre gulo highlight kore. Forecast month e uchcho rainfall percentile aaru current month e uchcho relative wetness (page 4 e map gulo ache) thakle asadharon jhol obosthar ekta sambhabo darshate pare. Forecast month e nichcho precipitation percentile, bishes kore jekhane rainfall kom ba nei aaru relative dryness uchcho thakle, oi jayga gulo drought obosthar jonne jhamela hote pare.",
+    "temperature": "ei nakha gora tapanor poriborton aadharit aaiye India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) theke asha thaka monthik madhyam tapanor anomali jeta itihasik madhyam mean (1955 theke aji) theke tulona kora hoyeche. ei tapanor anomali nakha gora jayga gulo ke darshane, jekhane tapanor aamti theke beshi ba kom thake. Kom tapanor anomali crop yield koma ba crop grower modhye delay hote pare. Beshi tapanor anomali jeta shomvabona ropna o soil moisture kom thakle (page 4 e nakha map gulo aache) sei jayga gulo drought obostha er jonyo o potential evapotranspiration baranor jonyo jhamela hote pare.",
+    "wetness": "ei nakha gora dinik simuleet mitti moisture (60 cm depth) thikana gridded meteorologic forcing thikana observation aru India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) thikana theke liya hoye historical mean (1955 theke aji) theke soil moisture anomaly hisabey masik average hisabey deya hoye. soil moisture anomaly gulo historical extreme theke tulana deya hoye asha region gulo jete anomala wet athaba sukha obostha thikana highlight koribe. vartaman mas e high relative wetness (jyaad wet) aru forecast mas e high rainfall percentile thikana pair hoye aagale din/saptah e upar-normal flow aru anomala wet obostha thikana hoya sakibe. vartaman mas e low relative wetness (sukha) aru forecast mas e no athaba minimal predicted rainfall thikana lower than normal flow aru moisture availability er risk thikana hoya sakibe.",
+    "runoff": "ei nakha gora dinar simulete total runoff se gridded meteorological forcing thikana observation aru India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) theke nikalia, je ta historic mean (1955 theke aji) theke monthly total runoff anomaly hisaabey deya. ei total runoff anomaly gulo ta region gulo dikhaye je ta time of year er typical theke total runoff rekhai surplus athaba deficit thakay. forecast month e total runoff surplus aru current month e soil moisture thikana relatively higher thakle aagun din/week e streamflow upar normal hote pare. forecast month e total runoff high deficit thaka region gulo, jeta current month e high dryness thakay, ta aagun din/week e relatively low streamflow er risk thakay.",
+    "et": "ei nakha gora dinar simulete evapotranspiration (et) thikana gridded meteorologic forcing thikana observation aru India Meteorological Department (imd) er Extended Range Forecast System (erfs) thikana theke tola masik et anomaly historik (1955 theke aji) theke. ei et anomaly gulo janiye thikana gulo jaha jola aru jhol land aru plant theke aju jola ba beshi jola hoyeche, je crop water stress er khatare thikana gulo ke pinpoint koribe, khas kore extreme weather impact aru crop water stress. Low et anomaly gulo crop water stress barai aru thikana moisture availability kom thikana darai. High et anomaly gulo soil moisture joldi khali hoye jao (flash drought) ba aage thaka drought gulo kharap koribe."
+  },
+  "about": {
+    "about_heading": "Bharater jalogoto darshana baare",
+    "about_body": "ei dastaa aji india barua paani dekhaai de, jahaa aji maah, pichhha chaar maah, aaru ek maah er bhabna de. ei dekhaai observational data aaru meteorological variable gureyee extended-range forecasting system aaru advanced hydrological modeling tools use kore toiri. ei tools gulo relative poriborton aaru alada alada kshetre paani upalabdhi bhabnaa anuman kore, India barua hydrological sthiti barua gyan de. IIT Gandhinagar er Water and Climate Lab dwara bikriyo, ei dekhaai barsha, temperature, mitti moisture (60 cm), runoff, aaru streamflow pattern gulo alada alada samayere bharosho jankari deke paani resource management, planning, aaru nirnoy nele support koribo chahe.",
+    "datasets_heading": "deta set",
+    "datasets_body_pre": "India er jalgonar darshana ta onek data provider er mulyo sahyog dwara sambhav hoy jara tader yogdaan gurutwo thake India Meteorological Department (IMD) dwara samayik dinik darshana aru bishal range forecast data pradan kora hoy",
+    "datasets_body_mid": "ei dataset gulo hydrological model gulo initialize ra aageya o itihasik analogue gulo statistical analysis dwara bharosom outlook information generate korar jate byabohar kora hoy hydrological model ke India-Water Information System theke porichito samay pora streamflow dwara calibrate o validate kora hoy jate poriman thaka",
+    "model_heading": "jalalogikal model",
+    "model_body": "India Hydrological Outlook eka Variable Infiltration Capacity (VIC) model use kare, eka ekda large-scale, semi-distributed hydrological model je grid har water a energy budget calculate kare. VIC model vegetation a elevation er sub-grid variability capture kare, je regional scale e hydrological process er more accurate representation provide kare. VIC model simulation daily temporal resolution e perform kare je accurate hydrological forecast provide a enhance water resource management across India.",
+    "disclaimer_heading": "manjhi aibha o jhamal",
+    "disclaimer_body": "India Hydrological Outlook a janiye ki sabu jaankari thik thak ahe ane vartaman vaigyanik samaj thi meli hoye che. pan meteorologic ane hydrological forecast ane climate projection thi joiye vaigyan thodare niyamit roop thi badal rahe che. aisi karan aavti ke content ma koi pan forecast athva prediction satya ni nishchit statement na hoy. lagu niyam dwara anumati aapele, India Hydrological Outlook content sambandhi jya warranty athva pratinidhan na aape che, jya spasht athva anupatmak hoy. content no aapno upyog tamara nijee jokhim par ahe, ane aamne guarantee nathi ke content bhul-mukt athva tamara vishesh jaruriyat mate upyogi ahe.",
+    "funding_body": "India er jalgoner darshana Major Research and Development Programme (MRDP) e Hydro Climate Extremes e support re DST Department of Science and Technology dwara fund kora hoya.",
+    "contact_heading": "संपर्क जानकारी",
+    "contact_address": "India er jalbhabo bhabna Water and Climate Lab Indian Institute of Technology Gandhinagar Gujarat India",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "India Jalbhabh Drishti Portal",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "ইমেইল",
+    "person1_office_label": "karyalok",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "phd research scholar",
+    "person3_name": "Paras Sharma",
+    "person3_role": "phd research scholar",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (°C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

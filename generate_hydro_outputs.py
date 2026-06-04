@@ -567,7 +567,7 @@ def llm_summary(context, api_url, model):
               "national conditions this week, (2) the week-on-week trend, and (3) which regions/states "
               "are most affected and any notably better.")
     body = {"model": model, "prompt": prompt, "system": SUMMARY_SYSTEM, "stream": False,
-            "think": False, "options": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "num_predict": 600}}
+            "think": False, "options": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "num_predict": 600, "num_ctx": 8192}}
     r = requests.post(api_url, json=body, timeout=300)
     r.raise_for_status()
     txt = r.json().get("response", "").strip()
@@ -703,47 +703,38 @@ def load_pdf_languages(repo):
 
 
 def load_pdf_texts(repo, lang_key):
-    """Load Texts/<lang_key>/pdf.json (the static PDF strings) for the target language."""
+    """Load Texts/<lang_key>/pdf.json (the static PDF strings) for the target language.
+    Static-string translation is a separate, later task, so if a language has no
+    pdf.json we fall back to the English labels (the dynamic prose is still
+    translated). Returns None only if even English/pdf.json is missing."""
     p = Path(repo) / "Texts" / lang_key / "pdf.json"
     if not p.exists():
-        return None
+        p = Path(repo) / "Texts" / "English" / "pdf.json"
+        if not p.exists():
+            return None
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="sarvam-fp"):
+def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="gemma4:e2b"):
     """Translate the dynamic LLM paragraphs (dict slot->text) into the target language
-    with sarvam-translate via Ollama. Returns a new dict, or None if Ollama is unreachable."""
-    try:
-        import translate_texts as TT
-    except Exception:
-        TT = None
+    via the shared idm_llm module (one model, sanitised output). Returns a new dict,
+    or None if the translation server is unreachable."""
     slots = list(paragraphs.keys())
     texts = [paragraphs[s] for s in slots]
     try:
-        if TT is not None:
-            tr = TT.Translator(api_url, tgt_lang_name, model=model)
-            out = tr.translate_many(texts)
-        else:
-            out = _simple_translate(texts, tgt_lang_name, api_url, model)
+        out = _simple_translate(texts, tgt_lang_name, api_url, model)
     except Exception as e:
         print(f"    (paragraph translation failed: {e})")
         return None
     return {s: out[i] for i, s in enumerate(slots)}
 
 
-def _simple_translate(texts, tgt_lang_name, api_url, model="sarvam-fp"):
-    """Minimal fallback translator (used only if translate_texts.py isn't importable):
-    one sarvam-translate call per paragraph via Ollama /api/generate."""
-    import urllib.request
-    out = []
-    system = "Translate the text below to %s." % tgt_lang_name
-    for t in texts:
-        body = json.dumps({"model": model, "system": system, "prompt": t,
-                           "stream": False, "options": {"temperature": 0.1}}).encode("utf-8")
-        req = urllib.request.Request(api_url, data=body, headers={"Content-Type": "application/json"})
-        with urllib.request.urlopen(req, timeout=180) as r:
-            out.append(json.loads(r.read().decode("utf-8")).get("response", t).strip())
-    return out
+def _simple_translate(texts, tgt_lang_name, api_url, model="gemma4:e2b"):
+    """Translate each paragraph through idm_llm, which uses the proper translation
+    prompt and sanitises the result for LaTeX (strips markdown/preamble, collapses
+    blank lines). `api_url` is honoured so a direct run's --translate-api wins."""
+    import idm_llm
+    return [idm_llm.translate(t, tgt_lang_name, model=model, url=api_url) for t in texts]
 
 
 def main():
@@ -751,7 +742,7 @@ def main():
     ap.add_argument("--repo", default=".", help="Path to the IDM repo root (default: current dir)")
     ap.add_argument("--date", default=None, help="Forecast date YYYY_MM_DD (default: latest in Input/)")
     ap.add_argument("--api", default="http://10.0.60.193:11434/api/generate", help="Ollama /api/generate URL")
-    ap.add_argument("--model", default="qwen3.5:4b", help="Ollama model name")
+    ap.add_argument("--model", default="gemma4:e2b", help="Ollama model name (prose generation)")
     ap.add_argument("--no-llm", action="store_true", help="Skip the LLM; use a template summary")
     ap.add_argument("--boundaries", default=None, help="Optional admin-boundary file (shapefile/GeoJSON) for outlines")
     ap.add_argument("--include-streamflow", action="store_true",
@@ -766,8 +757,8 @@ def main():
                          "English is always built. e.g. --langs English Hindi Tamil")
     ap.add_argument("--translate-api", default="http://10.0.60.193:11434/api/generate",
                     help="Ollama /api/generate URL used to translate non-English PDF prose")
-    ap.add_argument("--translate-model", default="sarvam-fp",
-                    help="Ollama model for translation (default: sarvam-fp)")
+    ap.add_argument("--translate-model", default="gemma4:e2b",
+                    help="Ollama model for translation (same model as prose by default)")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()

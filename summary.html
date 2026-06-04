@@ -8,12 +8,13 @@
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/ai/idm-ai.css" rel="stylesheet"/>
-<link href="assets/i18n/i18n.css" rel="stylesheet"/><script src="assets/i18n/i18n.js"></script></head>
+<script src="assets/i18n/i18n.js"></script>
+</head>
 <body>
 <header class="usdm-header">
 <div class="usdm-header-inner">
 <h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1>
-<div class="idm-lang-switcher" data-i18n-switcher="1"></div></div>
+</div>
 </header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:summary.primary">
 <div class="usdm-nav-inner">
@@ -162,8 +163,13 @@
       function show(item) {
         textEl.textContent = "Loading\u2026";
         current = { label: item.label, date: item.date };
-        fetch(encPath(ARCHIVE + item.file)).then(function (r) {
-          if (!r.ok) throw new Error(); return r.text();
+        var lang = curLang();
+        var engUrl = encPath(ARCHIVE + item.file);
+        var url = (lang === "English") ? engUrl : encPath(ARCHIVE + lang + "/" + item.file);
+        fetch(url).then(function (r) {
+          if (!r.ok) throw new Error("nolang"); return r.text();
+        }).catch(function () {
+          return fetch(engUrl).then(function (r) { if (!r.ok) throw new Error(); return r.text(); });
         }).then(function (t) {
           titleEl.textContent = "National Drought Summary \u2014 " + item.label;
           textEl.textContent = stripHeader(t);

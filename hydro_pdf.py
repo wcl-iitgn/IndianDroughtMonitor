@@ -198,7 +198,7 @@ def _ollama_chat(system, user, api_url, model, num_predict=400):
     """The ONLY change from the notebook: BACKEND.chat(...) -> Ollama /api/generate."""
     import requests
     body = {"model": model, "prompt": user, "system": system, "stream": False, "think": False,
-            "options": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "num_predict": num_predict}}
+            "options": {"temperature": 0.7, "top_p": 0.8, "top_k": 20, "num_predict": num_predict, "num_ctx": 8192}}
     r = requests.post(api_url, json=body, timeout=300)
     r.raise_for_status()
     txt = r.json().get("response", "").strip()
@@ -609,10 +609,12 @@ TEX_TEMPLATE = r'''
 def latex_escape(s):
     if s is None:
         return ""
-    repl = [("\\", r"\textbackslash{}"), ("&", r"\&"), ("%", r"\%"), ("$", r"\$"),
-            ("#", r"\#"), ("_", r"\_"), ("{", r"\{"), ("}", r"\}"),
-            ("~", r"\textasciitilde{}"), ("^", r"\textasciicircum{}")]
-    for a, b in repl:
+    # Drop chars prose never needs and that break LaTeX grouping or the Latin-run wrapper:
+    # backslash and braces (grouping), plus caret/tilde — those expand to \textasciicircum{}
+    # / \textasciitilde{} whose LETTERS the wrapper then wraps, yielding "Too many }'s".
+    for ch in ("\\", "{", "}", "^", "~"):
+        s = s.replace(ch, "")
+    for a, b in [("&", r"\&"), ("%", r"\%"), ("$", r"\$"), ("#", r"\#"), ("_", r"\_")]:
         s = s.replace(a, b)
     return s
 

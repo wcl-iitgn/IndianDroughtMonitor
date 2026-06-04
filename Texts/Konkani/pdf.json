@@ -1,0 +1,68 @@
+{
+  "doc_title": "India cha jalvigyanik darshan",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "India cha jalvigyanik darshan",
+  "footer_blurb": "India Hydrological Outlook vartatya sthiti sathi mukhya mausam ani jal sambandhit charan varpoin mahiti ek samagra masik saraansh dete aani char mahana pichheche samay ani ek mahana bhavishya dete. अधूनिथ माहिती खाती वेबसाइटवर जाव:",
+  "summary_heading": "सारांश",
+  "section_rainfall_temp": "Varsha ani Tapmatra",
+  "section_sm_ro_et": "Mitti cha nam, Total runoff, ani Evapotranspiration",
+  "section_rivers": "Nadi bega:",
+  "figure_caption": "Bharati sub-kontinental nadi basin. Shade background elevation (m) show karto.",
+  "figure_label": "चित्र",
+  "page_titles": {
+    "rainfall": "Mausi ani bhavishyavani varshni paristhiti",
+    "temperature": "निरीक्षण केलेला आणि अंदाजित पृष्ठ हवा तापमान",
+    "wetness": "निरीक्षण केलेला आणि अंदाज सापेक्ष ओलावा",
+    "runoff": "निरीक्षण केलेला आणि अंदाजित एकूण रनऑफ",
+    "et": "अवलोकन आणि अंदाज बाष्पोत्सर्जन"
+  },
+  "page_intros": {
+    "rainfall": "He nakshe daily gridded rainfall observation aani India Meteorological Department (IMD) sathi Extended Range Forecast System (ERFS) tapanun tayar kelele aani 1955 toun present varpa varak monthly total rainfall percentile madhe prastut kelele ahe. He rainfall percentile nakshe tyat varasache tya samayache asatun vishisht dry, wet kiva average-madhe rainfall aslele kshetranna highlight kelele ahe. Forecast month madhe high rainfall percentile aani current month madhe high relative wetness (page 4 var nakshe uplabdh) punha unusual wet conditions sathi ek potential region dakhvu shaktat. Forecast month madhe low precipitation percentile, visheshatah minimal kiva na rainfall aani high relative dryness aslele kshetranna drought conditions sathi risk asu shaktat.",
+    "temperature": "He nakshe daily gridded temperature observation ani India Meteorological Department (IMD) चे Extended Range Forecast System (ERFS) मधून तयार केलेली आतील सरासरी तापमान विसंगती ऐतिहासिक सरासरीपासून (1955 ते सध्या) व्यक्त केली आहे. हे तापमान विसंगती नकाशे सामान्यपेक्षा जास्त आणि कमी तापमानाच्या प्रदेशांवर प्रकाश टाकतात. कमी तापमानाची विसंगतीमुळे पीक उत्पादनात घट किंवा पिकाच्या वाढीमध्ये विलंब होऊ शकतो. जास्त तापमान विसंगती असलेले क्षेत्र, ज्यांच्यासोबत तुलनेने कमी पाऊस आणि कमी मातीचे आर्द्रतेचे प्रमाण आहे (पान ४ वर नकाशे उपलब्ध आहेत), वाढलेल्या बाष्पोत्सर्जन संभाव्यतेसह दुष्काळाच्या परिस्थितीचा धोका असू शकतात.",
+    "wetness": "He nakshee darshane tya dincha mittiache nam (60 cm depth) upyog karnyaat gridded meteorologic forcing observation aani India Meteorological Department (IMD) sathi Extended Range Forecast System (ERFS) thevun, itihasik madhyal (1955 to present) madhe mittiache namache masik-madhyal anomali (anomaly) darshavle. Mittiache namache anomali itihasik uttamata (extremes) sathi prastut kelelelelelelelelelelelelelelelelelelelelelelelelelelelelelelele",
+    "runoff": "He nakshemi darshane observation aani India Meteorological Department (IMD) sathi gridded meteorological forcing aani Extended Range Forecast System (ERFS) temnu vaprun daily simulated total runoff tapan historic mean (1955 to present) madhe monthly total runoff anomaly roopatit. He total runoff anomalies forecast monthat relative surplus kiva deficit regionsn darshavte je te varshatich typical naslele total runoff madhe aslele. Forecast monthat total runoffat surplus aani current monthat relatively higher soil moisture aslele tar future days/weeksat streamflow upar naslele vellele. Forecast monthat total runoffat high deficit aslele, visheshitane current monthat high dryness aslele, te future days/weeksat relatively low streamflowat risk aslele.",
+    "et": "He nakshemi tya dinchya simulat evapotranspiration (ET) punha kelyan gridded meteorological forcing observation aani India Meteorological Department (IMD) sathi Extended Range Forecast System (ERFS) punthi vaparun tayar kelele aani historic (1955 to present) madhe total monthly ET anomaly roopat. Ya ET anomalies zameen aani paudhaatun tyamule uttamane kiti paani ghetle te darshavun, je extreme weather impact, visheshatah crop water stress, sathi khatre aslele kshetre nirdharit karnyaat madat dete. Low ET anomalies crop water stress ani thoda kam namak uplabdhata darshavun, ani High ET anomalies mittiache moisture jald ghetlyane (flash drought) kinva purvache droughts kharaasit karu shaktat."
+  },
+  "about": {
+    "about_heading": "India cha jalvigyanik darshana",
+    "about_body": "Hee dastavej Bharat sathi ek samagra jal darshana dete je aamcha mahit, pawna char mahit ani ek mahit bhavishya ahe. Ha darshana mausamya charan var observational data ani meteorological variables sathi extended-range forecasting system ani advanced hydrological modeling tools vaprun banavlele ahe. Ya tools relative changes analyze kartat ani vibhinn kshetrano var jal uplabdhata baddal predict kartat, je Bharatat hydrological sthiti sathi mulyapunyo mahiti dete. IIT Gandhinagar madhe Water and Climate Lab dwara vikasit, ha darshana varsha, tapman, mittiache moisture (60 cm), runoff ani streamflow patterns var vibhinn samayala sathi bharospiy mahiti dineto je jal sanrakshan, yojanane ani nirnay ghetlyasathi madat dete.",
+    "datasets_heading": "Dataset",
+    "datasets_body_pre": "India Hydrological Outlook muley tumchya anek data providerche mulyaful sahyogantar, jyaanchi yogdan aadarne ghetle. Samayik ratri darshane ani vistarit range forecast data India Meteorological Department (IMD) dwara pradan kelele.",
+    "datasets_body_mid": "He datasets hydrological models initialize karnyaat ani historical analogues sathi statistical analysis dwara bharospiy outlook information generate karnyaat. Hydrological model India-Water Information System thevun daily streamflow vaparun paryant samayache long duration sathi calibrate ani validate karnyaat.",
+    "model_heading": "Jaligyan Model",
+    "model_body": "India Hydrological Outlook Variable Infiltration Capacity मॉडलचा वापर करते जे प्रत्येक ग्रिडसाठी पाणी आणि ऊर्जेचे बजेट मोजणारे एक मोठे वितरित जलविज्ञान मॉडेल आहे. VIC मॉडेल वनस्पती आणि उंचीमधील सब-ग्रिड परिवर्तनांना पकडते, ज्यामुळे प्रादेशिक स्तरावर जलविज्ञान प्रक्रियेचे अधिक अचूक प्रतिनिधित्व मिळते. अचूक जलविज्ञान अंदाज देण्यासाठी आणि संपूर्ण भारतात जलस्रोत व्यवस्थापन सुधारण्यासाठी VIC मॉडेल सिम्युलेशन दैनंदिन कालावधीत केले जातात.",
+    "disclaimer_heading": "अस्वीकरण आणि दायित्व",
+    "disclaimer_body": "India Hydrological Outlook cha uddeshya he nischit karnya ki tolalele sagla samagri satyache ahe ani vartaman vaigyanik samajat melat ahe. तथापि मौसम विज्ञान आणि जलविज्ञान अंदाज तसेच हवामान अंदाजांचा आधार असलेला विज्ञान सतत विकसित होत आहे. म्हणून, सामग्रीमध्ये समाविष्ट केलेला कोणताही अंदाज किंवा भविष्यवाणी तथ्याची निश्चित विधान म्हणून मानला जाऊ नये. लागू कायद्याने परवानगी दिलेल्या जास्तीत जास्त मर्यादेत, India Hydrological Outlook सामग्रीबद्दल कोणतेही हमी किंवा प्रतिनिधित्व, स्पष्ट किंवा निहित, नाकारतो. तुम्ही सामग्रीचा वापर पूर्णपणे तुमच्या स्वतःच्या जोखमीवर आहे, आणि आम्ही सामग्री निर्दोष किंवा तुमच्या विशिष्ट गरजांसाठी योग्य आहे याची कोणतीही हमी देत नाही.",
+    "funding_body": "India Hydrological Outlook Major Research and Development Programme (MRDP) Hydro Climate Extremes मध्ये समर्थित आहे ज्याला विज्ञान आणि तंत्रज्ञान विभाग (DST) द्वारे निधी दिला आहे",
+    "contact_heading": "Sampark mahiti",
+    "contact_address": "India Hydrological Outlook Water and Climate Lab Indian Institute of Technology Gandhinagar Gujarat India",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "India Hydrological Outlook Portal",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "ईमेल",
+    "person1_office_label": "कार्यालय",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "PhD शोध विद्यार्थी",
+    "person3_name": "Paras Sharma",
+    "person3_role": "phd research scholar",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (°C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

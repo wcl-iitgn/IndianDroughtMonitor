@@ -1,0 +1,68 @@
+{
+  "doc_title": "भारतৰ জলবিজ্ঞানৰ দৃষ্টিভংগী",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "भारतৰ জলবিজ্ঞানৰ দৃষ্টিভংগী",
+  "footer_blurb": "ভারত জলবিজ্ঞান দৃষ্টিভঙ্গি বর্তমান অবস্থার জন্য মূল আবহাওয়া এবং জলবিজ্ঞান চলকहरूको एक व्यापक मासिक सारांश चार महिनाको पश्चात्ताप र एक महिनाको पूर्वानुमानसहित प्रदान गर्दछ। थप जानकारीको लागि कृपया वेबसाइटमा जानुहोस्:",
+  "summary_heading": "sumari",
+  "section_rainfall_temp": "ৰত্ন আৰু তাপমাত্ৰা",
+  "section_sm_ro_et": "মাটিৰ আর্দ্রতা, মুঠ বৰষুণ, আৰু বাষ্পমোচন:",
+  "section_rivers": "নদী সোমাই",
+  "figure_caption": "ভারতীয় উপ-মহাদেশৰ নদী উপত্যকা। ছডেড পটভূমি উচ্চতা (মি)।",
+  "figure_label": "चित्र",
+  "page_titles": {
+    "rainfall": "দেখা আৰু পূর্বাভাসৰ বৰষুণৰ অৱস্থা",
+    "temperature": "দেখা আৰু পূর্বাভাস পৃষ্ঠ বায়ু তাপ",
+    "wetness": "দেখা আৰু পূর্বাভাস সম্পৰ|wetness",
+    "runoff": "দেখা আৰু পূর্বাভাস কৰা মুঠ প্ৰবাহ",
+    "et": "দেখা আৰু পূর্বাভাস ঘাম নিঃসরণ"
+  },
+  "page_intros": {
+    "rainfall": "Ei map-gale daily gridded rainfall observationa aru India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) thongpaa, 1955 thanga present pora samayta masik rainfall percentile hisaabde. Ei rainfall percentile map-gale sei samayta baro, naba, athuba aaru average rainfall thanga region-gale highlighta. Forecast month-gale high rainfall percentilea, aru current month-gale high relative wetness (page 4-gale map-gale aaba) may unusual wet condition-gale potential region-gale indicatea. Forecast month-gale low precipitation percentilea, khasiya naba minimal athuba rainfall aaru high relative dryness thanga area-gale drought condition-gale risk-gale aaba.",
+    "temperature": "Ei map-gale India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) aipai daily gridded temperature observation-aipai thak-khal-mean (1955 to present) thak-khal-mean thi aipai maas-thak-khal-mean temperature anomaly-aipai thak-khal-mean thi prepare-aipai. Ei temperature anomaly map-gale aipai thak-khal-mean-aipai thak-khal-mean-aipai temperature-gale usual-aipai higher aipai aipai low-aipai regions-gale highlight-aipai. Low-temperature anomalies may lead to crop yield-gale decrease baa-aipai crop growth delay. Higher temperature anomalies paired with relatively low rainfall and low soil moisture (maps available on page 4) drought conditions-gale risk-aipai increased potential evapotranspiration-gale.",
+    "wetness": "Ei map-gale aibai simuleet soil moisture (60 cm depth) thak gridded meteorological forcing observationa aipai India Meteorological Department (IMD) erod Extended Range Forecast System (ERFS) thak thek, historical mean (1955 to present) thak monthly-averaged soil moisture anomaly hisab. Soil moisture anomalies-gale historical extremes-gale relative-aipai paibai region-gale unusual wet or dry conditiona highlighta. Current month-gale high relative wetness (wetter) forecast month-gale high rainfall percentile-gale above-normal flowa and coming days/weeks-gale unusual wetter conditiona aipai. Current month-gale low relative wetness (drier) and forecast month-gale no or minimal predicted rainfall-gale lower than normal flow and moisture availability-gale risk aipai.",
+    "runoff": "Ei map-gale India Meteorological Department (IMD) ৰ পৰা নিৰীক্ষণ আৰু Extended Range Forecast System (ERFS) ৰ গ্রিড কৰা মেটৰ'িয়লজিকাল ফৰচিং ব্যৱহাৰ কৰি দৈনিক সিমুলেটেড মুঠ বানপানীৰ পৰা প্ৰস্তুত কৰা হৈছে আৰু ই ঐতিহাসিক গড়ৰ (১৯৫৫ ৰ পৰা বৰ্তমানলৈ) মুঠ বানপানীৰ মাহিলী অসঙ্গতি হিচাপে প্ৰকাশ কৰা হৈছে এই মুঠ বানপানীৰ অসঙ্গতিসমূহে সেই সময়ৰ বাবে সাধাৰণৰ তুলনাত মুঠ বানপানীৰ আধিক্য বা অভাৱ থকা অঞ্চলসমূহক আলোকপাত কৰে। ভৱিষ্যての মাহত মুঠ বানপানীৰ আধিক্য আৰু বৰ্তমান মাহত সম্পৰতুল্য উচ্চ মাটিৰ আৰ্দ্ৰতাৰ সৈতে একত্ৰিত হ'লে আহিবলগীয়া দিন/সপ্তাহসমূহত নদীৰ পানী অধিক হ'ব পাৰে। ভৱিষ্যての মাহত মুঠ বানপানীৰ উচ্চ অভাৱ থকা অঞ্চলসমূহ, বিশেষকৈ বৰ্তমান মাহত উচ্চ শুষ্কতা থকা স্থানসমূহ, আহিবলগীয়া দিন/সপ্তাহসমূহত তুলনামূলকভাৱে কম নদীৰ পানীৰ ঝুঁRiskত থাকিব পাৰে।",
+    "et": "Ei map-gale darjaba simulat evapotranspiration (ET) thakle gridded meteorological forcing observationa aipai India Meteorological Department (IMD) er Extended Range Forecast System (ERFS) thakle, historic (1955 to present) thekhe total monthly ET anomaly hisa. Ei ET anomaly-gale landa aipai plant-gale aipai aipai usual-a thakle kiti jao, extreme weather impact-gale risk-a thakle area-gale pinpointa, khasga crop water stress. Low ET anomaly-gale crop water stress aipai moisture availability kharoba. High ET anomaly-gale soil moisture rapid-a depletion (flash drought) baa, baa pre-existed droughts aipai kharoba."
+  },
+  "about": {
+    "about_heading": "भारतৰ জলবিজ্ঞানৰ দৃষ্টিভংগীৰ বিষয়ে",
+    "about_body": "এই নথিটো ভাৰতৰ বাবে এক বিস্তৃত পানী দৃষ্টিভঙ্গি প্ৰদান কৰে যিটো বৰ্তমান মাহ, বিগত চাৰি মাহ আৰু এক মাহৰ পূর্বাভাস সামৰি লয়। এই দৃষ্টিভঙ্গিটো পৰিদৰ্শন তথ্য আৰু আবহাওৱা ভৰিবিন্যাসৰ বাবে এক বিস্তৃত পৰিসৰৰ পূর্বাভাস ব্যৱস্থাৰ সৈতে উন্নত জলবিজ্ঞান মডেলিং আহিলাসমূহৰ সংমিশ্ৰণেৰে নিৰ্মাণ কৰা হৈছে। এই আহিলাসমূহে সম্পৰতুল্য পৰিৱৰ্তনসমূহ বিশ্লেষণ কৰে আৰু বিভিন্ন অঞ্চলত পানীৰ উপলব্ধতাৰ বাবে পূর্বাভাস দিয়ে, যিয়ে ভাৰতৰ জলবিজ্ঞানগত অৱস্থাৰ বিষয়ে মূল্যবান অন্তৰ্দৃষ্টি প্ৰদান কৰে। আইআইটি গান্ধীনগৰৰ পানী আৰু জলবায়ু ল্যাবৰ দ্বাৰা বিকশিত এই দৃষ্টিভঙ্গিটো বৰষুণ, উষ্ণতা, মাটিৰ আৰ্দ্ৰতা (৬০ সেমি), বানপানী আৰু নদীৰ প্ৰবাহৰ ধাৰণাসমূহৰ ওপৰত বিশ্বাসযোগ্য তথ্য প্ৰদান কৰি পানী সম্পদ ব্যৱস্থাপনা, পৰিকল্পনা আৰু সিদ্ধান্ত গ্ৰহণক সমৰ্থন কৰিবলৈ লক্ষ্য ৰাখে।",
+    "datasets_heading": "ডেটা সেটসমূহ",
+    "datasets_body_pre": "ভারত জলতাত্ত্বিক দৃষ্টিভঙ্গি অসংখ্য ডেটা সরবরাহকারীর মূল্যবান সহযোগিতার মাধ্যমে সম্ভব হয়েছে যাদের অবদান কৃতজ্ঞতার সাথে স্বীকার করা হয় সমসাময়িক দৈনিক পর্যবেক্ষণ এবং বিস্তৃত পরিসরের পূর্বাভাস ডেটা প্রদান করে ভারত আবহাওয়া দপ্তর (আইএমডি)",
+    "datasets_body_mid": "Ei datasetg India-Water Information Systema thak hitorik analogueg statisticsa thak pora khongun bhabnaa aindam hydrological modelg initiaalisatgabaa aindam aindam reliable outlook informationa generategabaa. Hydrological modela India-Water Information Systema thak daily streamflowa dujabaa long durationa baa calibrationa aindam validationaaba.",
+    "model_heading": "ଜଳବିଜ୍ଞାନ ମଡେଲ",
+    "model_body": "ভারত জলতাত্ত্বিক দৃষ্টিভঙ্গি ভ্যারিয়েবল ইনফিল্ট্রেশন ক্যাপাসিটি (ভিআইসি) মডেল ব্যবহার করে যা একটি বৃহৎ আকারের আধা-বিতরিত জলতাত্ত্বিক মডেল যা প্রতিটি গ্রিডের জন্য জল এবং শক্তির বাজেট গণনা করে ভিআইসি মডেলটি উদ্ভিদ এবং উচ্চতার সাব-গ্রিড পরিবর্তনগুলিকে ধারণ করে আঞ্চলিক স্কেলে জলতাত্ত্বিক প্রক্রিয়াগুলির আরও সঠিক উপস্থাপনা প্রদান করে দৈনিক সময়গত রেজোলিউশনে ভিআইসি মডেল সিমুলেশনগুলি সঠিক জলতাত্ত্বিক পূর্বাভাস প্রদান করতে এবং ভারতের সর্বত্র জল সম্পদ ব্যবস্থাপনাকে উন্নত করতে করা হয়",
+    "disclaimer_heading": "Tirangpaa aindam aindam",
+    "disclaimer_body": "ভারত জলতাত্ত্বিক দৃষ্টিভঙ্গি নিশ্চিত করে যে প্রদত্ত সমস্ত বিষয়বস্তু সঠিক এবং বর্তমান বৈজ্ঞানিক বোঝার সাথে সামঞ্জস্যপূর্ণ। তবে আবহাওয়া এবং জলতাত্ত্বিক পূর্বাভাস এবং জলবায়ু প্রক্ষেপণের ভিত্তি বিজ্ঞান ক্রমাগত বিকশিত হচ্ছে। সেই কারণে, বিষয়বস্তুতে অন্তর্ভুক্ত যেকোনো পূর্বাভাস বা ভবিষ্যদ্বাণীকে তথ্যের একটি চূড়ান্ত বিবৃতি হিসাবে গণ্য করা উচিত নয়। প্রযোজ্য আইনের দ্বারা অনুমোদিত সর্বোচ্চ সীমা পর্যন্ত, ভারত জলতাত্ত্বিক দৃষ্টিভঙ্গি বিষয়বস্তু সম্পর্কে সমস্ত ওয়ারেন্টি বা প্রতিনিধিত্ব অস্বীকার করে, তা প্রকাশ্য বা নিহিত। বিষয়বস্তুর আপনার ব্যবহার সম্পূর্ণভাবে আপনার নিজের ঝুঁকির উপর এবং আমরা এই বিষয়ে কোনো নিশ্চয়তা দিই না যে বিষয়বস্তুটি ত্রুটিমুক্ত বা আপনার নির্দিষ্ট প্রয়োজনের জন্য উপযুক্ত।",
+    "funding_body": "ইন্ডিয়া জলবিজ্ঞান দৃষ্টিভঙ্গি মেজর রিসার্চ অ্যান্ড ডেভেলপমেন্ট প্রোগ্রাম (এমআরডিপি) দ্বারা হাইড্রো ক্লাইমেট এক্সট্রিমসে সমর্থিত যা বিজ্ঞান ও প্রযুক্তির বিভাগ (ডিএসটি) দ্বারা অর্থায়নকৃত",
+    "contact_heading": "যোগাযোগ তথ্য",
+    "contact_address": "ইন্ডিয়া জলবিজ্ঞান দৃষ্টিভঙ্গি জল ও জলবায়ু ল্যাব ইন্ডিয়ান ইনস্টিটিউট অফ টেকনোলজি গান্ধীনগর গুজরাট ভারত",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "ᱡᱟᱦᱟᱸ ᱫᱚ ᱤᱱᱫᱤᱭᱟ ᱦᱟᱭ드ᱨᱚᱞᱚᱡᱤᱠᱟᱞ ᱚᱩᱴᱞᱩᱠ ᱯᱚᱨᱴᱟᱞ",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "ইমেইল",
+    "person1_office_label": "ofis",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "পিএইচডি গবেষণা ছাত্র",
+    "person3_name": "Paras Sharma",
+    "person3_role": "পিএইচডি গবেষণা ছাত্র",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (°C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

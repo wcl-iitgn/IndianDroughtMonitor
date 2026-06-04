@@ -1,212 +1,27 @@
 {
   "default": "English",
   "languages": [
-    {
-      "key": "English",
-      "code": "eng_Latn",
-      "label": "English",
-      "native": "English",
-      "dir": "ltr",
-      "pdf_font": "Carlito",
-      "script": "latin"
-    },
-    {
-      "key": "Assamese",
-      "code": "asm_Beng",
-      "label": "Assamese",
-      "native": "অসমীয়া",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Bengali",
-      "script": "bengali"
-    },
-    {
-      "key": "Bengali",
-      "code": "ben_Beng",
-      "label": "Bengali",
-      "native": "বাংলা",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Bengali",
-      "script": "bengali"
-    },
-    {
-      "key": "Bodo",
-      "code": "brx_Deva",
-      "label": "Bodo",
-      "native": "बड़ो",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Dogri",
-      "code": "doi_Deva",
-      "label": "Dogri",
-      "native": "डोगरी",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Gujarati",
-      "code": "guj_Gujr",
-      "label": "Gujarati",
-      "native": "ગુજરાતી",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Gujarati",
-      "script": "gujarati"
-    },
-    {
-      "key": "Hindi",
-      "code": "hin_Deva",
-      "label": "Hindi",
-      "native": "हिन्दी",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Kannada",
-      "code": "kan_Knda",
-      "label": "Kannada",
-      "native": "ಕನ್ನಡ",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Kannada",
-      "script": "kannada"
-    },
-    {
-      "key": "Kashmiri",
-      "code": "kas_Arab",
-      "label": "Kashmiri",
-      "native": "کٲشُر",
-      "dir": "rtl",
-      "pdf_font": "Noto Naskh Arabic",
-      "script": "arabic"
-    },
-    {
-      "key": "Konkani",
-      "code": "gom_Deva",
-      "label": "Konkani",
-      "native": "कोंकणी",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Maithili",
-      "code": "mai_Deva",
-      "label": "Maithili",
-      "native": "मैथिली",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Malayalam",
-      "code": "mal_Mlym",
-      "label": "Malayalam",
-      "native": "മലയാളം",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Malayalam",
-      "script": "malayalam"
-    },
-    {
-      "key": "Manipuri",
-      "code": "mni_Beng",
-      "label": "Manipuri",
-      "native": "মণিপুরী",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Bengali",
-      "script": "bengali"
-    },
-    {
-      "key": "Marathi",
-      "code": "mar_Deva",
-      "label": "Marathi",
-      "native": "मराठी",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Nepali",
-      "code": "npi_Deva",
-      "label": "Nepali",
-      "native": "नेपाली",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Odia",
-      "code": "ory_Orya",
-      "label": "Odia",
-      "native": "ଓଡ଼ିଆ",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Oriya",
-      "script": "odia"
-    },
-    {
-      "key": "Punjabi",
-      "code": "pan_Guru",
-      "label": "Punjabi",
-      "native": "ਪੰਜਾਬੀ",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Gurmukhi",
-      "script": "gurmukhi"
-    },
-    {
-      "key": "Sanskrit",
-      "code": "san_Deva",
-      "label": "Sanskrit",
-      "native": "संस्कृतम्",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
-      "script": "devanagari"
-    },
-    {
-      "key": "Santali",
-      "code": "sat_Olck",
-      "label": "Santali",
-      "native": "ᱥᱟᱱᱛᱟᱲᱤ",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Ol Chiki",
-      "script": "olchiki"
-    },
-    {
-      "key": "Sindhi",
-      "code": "snd_Arab",
-      "label": "Sindhi",
-      "native": "سنڌي",
-      "dir": "rtl",
-      "pdf_font": "Noto Naskh Arabic",
-      "script": "arabic"
-    },
-    {
-      "key": "Tamil",
-      "code": "tam_Taml",
-      "label": "Tamil",
-      "native": "தமிழ்",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Tamil",
-      "script": "tamil"
-    },
-    {
-      "key": "Telugu",
-      "code": "tel_Telu",
-      "label": "Telugu",
-      "native": "తెలుగు",
-      "dir": "ltr",
-      "pdf_font": "Noto Sans Telugu",
-      "script": "telugu"
-    },
-    {
-      "key": "Urdu",
-      "code": "urd_Arab",
-      "label": "Urdu",
-      "native": "اردو",
-      "dir": "rtl",
-      "pdf_font": "Noto Nastaliq Urdu",
-      "script": "arabic"
-    }
+    {"key": "English",  "code": "eng_Latn", "label": "English",   "native": "English",      "dir": "ltr", "pdf_font": "Carlito",             "script": "latin"},
+    {"key": "Assamese", "code": "asm_Beng", "label": "Assamese",  "native": "অসমীয়া",       "dir": "ltr", "pdf_font": "Noto Sans Bengali",   "script": "bengali"},
+    {"key": "Bengali",  "code": "ben_Beng", "label": "Bengali",   "native": "বাংলা",         "dir": "ltr", "pdf_font": "Noto Sans Bengali",   "script": "bengali"},
+    {"key": "Dogri",    "code": "doi_Deva", "label": "Dogri",     "native": "डोगरी",         "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Gujarati", "code": "guj_Gujr", "label": "Gujarati",  "native": "ગુજરાતી",       "dir": "ltr", "pdf_font": "Noto Sans Gujarati",  "script": "gujarati"},
+    {"key": "Hindi",    "code": "hin_Deva", "label": "Hindi",     "native": "हिन्दी",        "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Kannada",  "code": "kan_Knda", "label": "Kannada",   "native": "ಕನ್ನಡ",         "dir": "ltr", "pdf_font": "Noto Sans Kannada",   "script": "kannada"},
+    {"key": "Kashmiri", "code": "kas_Arab", "label": "Kashmiri",  "native": "کٲشُر",          "dir": "rtl", "pdf_font": "Noto Naskh Arabic",   "script": "arabic"},
+    {"key": "Konkani",  "code": "gom_Deva", "label": "Konkani",   "native": "कोंकणी",        "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Maithili", "code": "mai_Deva", "label": "Maithili",  "native": "मैथिली",        "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Malayalam","code": "mal_Mlym", "label": "Malayalam", "native": "മലയാളം",        "dir": "ltr", "pdf_font": "Noto Sans Malayalam", "script": "malayalam"},
+    {"key": "Manipuri", "code": "mni_Beng", "label": "Manipuri",  "native": "মৈতৈলোন্",      "dir": "ltr", "pdf_font": "Noto Sans Bengali",   "script": "bengali"},
+    {"key": "Marathi",  "code": "mar_Deva", "label": "Marathi",   "native": "मराठी",         "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Nepali",   "code": "npi_Deva", "label": "Nepali",    "native": "नेपाली",        "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Odia",     "code": "ory_Orya", "label": "Odia",      "native": "ଓଡ଼ିଆ",         "dir": "ltr", "pdf_font": "Noto Sans Oriya",     "script": "oriya"},
+    {"key": "Punjabi",  "code": "pan_Guru", "label": "Punjabi",   "native": "ਪੰਜਾਬੀ",        "dir": "ltr", "pdf_font": "Noto Sans Gurmukhi",  "script": "gurmukhi"},
+    {"key": "Sanskrit", "code": "san_Deva", "label": "Sanskrit",  "native": "संस्कृतम्",      "dir": "ltr", "pdf_font": "Noto Sans Devanagari","script": "devanagari"},
+    {"key": "Santali",  "code": "sat_Olck", "label": "Santali",   "native": "ᱥᱟᱱᱛᱟᱲᱤ",       "dir": "ltr", "pdf_font": "Noto Sans Ol Chiki",  "script": "olchiki"},
+    {"key": "Sindhi",   "code": "snd_Arab", "label": "Sindhi",    "native": "سنڌي",           "dir": "rtl", "pdf_font": "Noto Naskh Arabic",   "script": "arabic"},
+    {"key": "Tamil",    "code": "tam_Taml", "label": "Tamil",     "native": "தமிழ்",          "dir": "ltr", "pdf_font": "Noto Sans Tamil",     "script": "tamil"},
+    {"key": "Telugu",   "code": "tel_Telu", "label": "Telugu",    "native": "తెలుగు",         "dir": "ltr", "pdf_font": "Noto Sans Telugu",    "script": "telugu"},
+    {"key": "Urdu",     "code": "urd_Arab", "label": "Urdu",      "native": "اردو",           "dir": "rtl", "pdf_font": "Noto Nastaliq Urdu",  "script": "arabic"}
   ]
 }

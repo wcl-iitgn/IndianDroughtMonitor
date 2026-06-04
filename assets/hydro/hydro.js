@@ -28,7 +28,7 @@
   var _manifest = null;
   function loadManifest() {
     if (_manifest) return Promise.resolve(_manifest);
-    return fetch(MANIFEST_URL).then(function (r) {
+    return fetch(MANIFEST_URL, { cache: "no-cache" }).then(function (r) {
       if (!r.ok) throw new Error("could not load hydro manifest (" + r.status + ")");
       return r.json();
     }).then(function (j) { _manifest = j; return j; });
@@ -189,7 +189,7 @@
 
     function render() {
       var PDF_DIR = langPdfDir();
-      fetch(REPORTS_URL).then(function (r) {
+      fetch(REPORTS_URL, { cache: "no-cache" }).then(function (r) {
         if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
         return r.json();
       }).then(function (j) {

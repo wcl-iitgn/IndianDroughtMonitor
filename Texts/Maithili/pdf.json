@@ -1,0 +1,68 @@
+{
+  "doc_title": "India ke jalvayu darshak",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "India ke jalvayu darshak",
+  "footer_blurb": "India Hydrological Outlook वर्तमान स्थितियों के लिए प्रमुख मौसम संबंधी और जल संबंधी चर का एक व्यापक मासिक सारांश चार महीने के पूर्वव्यापी और एक महीने के पूर्वानुमान के साथ प्रदान करता है अधिक जानकारी के लिए कृपया वेबसाइट पर जाएं",
+  "summary_heading": "सारांश",
+  "section_rainfall_temp": "Barish aani tapman",
+  "section_sm_ro_et": "मिट्टी की नमी कुल अपवाह और वाष्पोत्सर्जन",
+  "section_rivers": "नदी बहती है",
+  "figure_caption": "Bharatiya sub-kontinental nadi kshetr. Shade background uttirta (m) darshati.",
+  "figure_label": "चित्र",
+  "page_titles": {
+    "rainfall": "अवलोकन अरण और पूर्वानुमान वर्षा की स्थिति",
+    "temperature": "अवलोकित और पूर्वानुमानित सतह वायु तापमान",
+    "wetness": "अवलोकन अपेक्षिक नमी और पूर्वानुमान",
+    "runoff": "अवलोकन अरण और पूर्वानुमानित कुल अपवाह",
+    "et": "अवलोकित और पूर्वानुमानित वाष्पोत्सर्जन"
+  },
+  "page_intros": {
+    "rainfall": "ई नक्शा दैनिक ग्रिड वर्षा अवलोकन और भारत मौसम विज्ञान विभाग (आईएमडी) के एक्सटेंडेड रेंज पूर्वानुमान प्रणाली (ईआरएफएस) से तैयार किए गए हैं जो 1955 से वर्तमान तक की अवधि के लिए कुल मासिक वर्षा प्रतिशत में व्यक्त किए गए हैं। ये वर्षा प्रतिशत नक्शे उस समय के लिए असामान्य रूप से शुष्क, गीला या औसत वर्षा वाले क्षेत्रों को उजागर करते हैं। पूर्वानुमान माह में उच्च वर्षा प्रतिशत और वर्तमान माह में उच्च सापेक्ष नमी (पृष्ठ 4 पर नक्शे उपलब्ध हैं) असामान्य गीली स्थितियों के लिए एक संभावित क्षेत्र का संकेत दे सकते हैं। पूर्वानुमान माह में कम वर्षा प्रतिशत वाले क्षेत्र, विशेष रूप से न्यूनतम या कोई वर्षा नहीं और उच्च सापेक्ष शुष्कता वाले क्षेत्र, सूखे की स्थिति के जोखिम में हो सकते हैं।",
+    "temperature": "ee nakhe nakshe dinik gridded tapman darshano ra Extended Range Forecast System ERFS se India Meteorological Department IMD se tayar kiyel ek masik-madhyam tapman anomali jahaal (1955 se aaja) se. Ei tapman anomali nakhe haru ke darshaucha jaha tapman aam tarapai se beshi ba kam. Kam tapman anomali se fasal utpadan mein kami ba fasal ugne samay mein deri hote paai. Jaha tapman anomali beshi ba aam rainfall ra mitti ke moisture kam (page 4 e nakhe map aai) thae, ote sukha obostha ra badha potential evapotranspiration ke jaha khatar thaa sakat.",
+    "wetness": "ee nakshe pratyek din ke anumanit mittier nam (60 cm gehrai) se aadharit gridded mausam bal (observations) ate India Meteorological Department (IMD) se Extended Range Forecast System (ERFS) se aadharit, aitihasik madhyam (1955 se vartaman) se tulna ma masee-madhyam mittier nam anomali prastut kiyel gaili. mittier nam anomali gauravmak sthiti ke darshawate ke liye aitihasik uttamata ke satikta mein prastut kiyel gaili. vartaman mas mein uchch sapekta wetness (jyada nami) ate anumanit mas mein uchch barish pratishat ke saath aage ke din/saptah mein upar-anumanit bahav ate asadharan nami sthiti ho sakti. vartaman mas mein nichli sapekta wetness (sukha) ate anumanit mas mein koi ya kam barish ke saath niche-anumanit bahav ate nami uplabdhata ke khatar ho sakti.",
+    "runoff": "ee naksha pratyek din ke anumanit kul bahav se tayar kiyel gyele chitre se aadharit gridded meteorological forcing observation ra India Meteorological Department (IMD) se Extended Range Forecast System (ERFS) se aadharit, jo aitihasik madhyam (1955 se vartaman) se tulna mein kul bahav ke masik anomali ke roop mein prastut kiyel gyele chhe. ei kul bahav anomali hara samay ke hisaab se kul bahav mein samanya se adhik ya kam hone wale kshetron ke darshak chhe. anumanit mahine mein kul bahav mein adhik aur vartaman mahine mein mitti ke moisture ke sambandh mein adhik hone par aagami din/saptah mein nadi ke bahav adhik ho sakat chhe. anumanit mahine mein kul bahav mein adhik kami wale kshetron, visheshkar jinme vartaman mahine mein adhik sukha chhe, aagami din/saptah mein kam nadi ke bahav ke khatar mein ho sakat chhe.",
+    "et": "ee nakhe nakshe observation ar gridded meteorological forcing ra extended range forecast system erfs se india meteorological department imd se liya daily simulated evapotranspiration et se tayar kiyel gaili historic 1955 se ab tak er total monthly et anomaly hisebe. ei et anomalies land ra paudha se aam se kam ba jyada paani ketele kshetr ke darshati, jisse extreme weather impact, khaas kar fasal er paani stress ke kshetr ke pinpoint karavai me madad miche. nichle et anomalies fasal er paani stress badhai ane thoda kam nami uplabdhata darshati. uchche et anomalies mitti er nami tezi se khatam ho sakai (flash drought) ba pehle se aawazat droughts ke kharab kar sakai."
+  },
+  "about": {
+    "about_heading": "भारत जलविज्ञान दृष्टिकोण के बारे में",
+    "about_body": "ई दस्तावेज़ भारत के लिए एक व्यापक जल दृष्टिकोण प्रदान करता है जिसमें वर्तमान महीना, पिछले चार महीने और एक महीने का पूर्वानुमान शामिल है। यह दृष्टिकोण अवलोकन डेटा और मौसम संबंधी चर के लिए विस्तारित-श्रेणी के पूर्वानुमान प्रणाली का उपयोग करके और उन्नत जलविज्ञान मॉडलिंग उपकरणों के साथ उत्पन्न किया गया है। ये उपकरण सापेक्ष परिवर्तनों का विश्लेषण करते हैं और विभिन्न क्षेत्रों में पानी की उपलब्धता की भविष्यवाणी करते हैं, जो भारत में जलविज्ञान की स्थिति के बारे में मूल्यवान जानकारी प्रदान करते हैं। आईआईटी गांधीनगर में जल और जलवायु प्रयोगशाला द्वारा विकसित, यह दृष्टिकोण वर्षा, तापमान, मिट्टी की नमी (60 सेमी), अपवाह और विभिन्न समयसीमाओं में धारा प्रवाह पैटर्न पर विश्वसनीय जानकारी प्रदान करके जल संसाधन प्रबंधन, योजना और निर्णय लेने का समर्थन करने का लक्ष्य रखता है।",
+    "datasets_heading": "dataset",
+    "datasets_body_pre": "भारत जलविज्ञान दृष्टिकोण कई डेटा प्रदाताओं के बहुमूल्य सहयोग से संभव हुआ है जिनके योगदान की कृतज्ञतापूर्वक स्वीकृति दी जाती है समकालीन दैनिक अवलोकन और विस्तारित रेंज पूर्वानुमान डेटा भारतीय मौसम विज्ञान विभाग (आईएमडी) द्वारा प्रदान किए जाते हैं",
+    "datasets_body_mid": "ee dataset gae jalvayu model ke shuru karne aur aitihasik anukaran ke sthitistikal vishleshan dwara bharosemand bhavishya ki jaankari utpann karne ke liye upyog kiyal jaate hain jalvayu model ko Bharat-Water Information System se dinik streamflow ka upyog karke poora samay ke liye calibrate aur validate kiyal jaate hain",
+    "model_heading": "Jalvigyan model",
+    "model_body": "India ke jalvigyan darshan Variable Infiltration Capacity (VIC) model ka upyog karela, jo ek bade paimane ka semi-distributed jalvigyan model ba ek grid ke liye jal aur urja ke budget ganna karela. VIC model vriksh aur unchaai mein sub-grid vibhinnata kee pakad lela, jisse kshetriya paimane par jalvigyan prakriya ke ek adhik sahi pratinidhitva milela. Jalvigyan bhavishyavani aur poore Bharat mein jal sansadhan prabandhan ko sudharne ke liye VIC model simulation dinik samay samay (temporal resolution) par kiyala jaela.",
+    "disclaimer_heading": "अस्वीकरण और दायित्व",
+    "disclaimer_body": "इंडिया हाइड्रोलॉजिकल आउटलुक का उद्देश्य यह सुनिश्चित करना है कि प्रदान की गई सभी सामग्री सटीक है और वर्तमान वैज्ञानिक समझ के अनुरूप है हालांकि मौसम विज्ञान और जल विज्ञान पूर्वानुमानों के साथ-साथ जलवायु अनुमानों के पीछे का विज्ञान लगातार विकसित हो रहा है इसलिए सामग्री में कोई भी पूर्वानुमान या भविष्यवाणी तथ्य का निश्चित बयान नहीं माना जाना चाहिए लागू कानून द्वारा अनुमत अधिकतम सीमा तक इंडिया हाइड्रोलॉजिकल आउटलुक सामग्री के संबंध में सभी वारंटी या प्रतिनिधित्व, चाहे वे स्पष्ट हों या निहित हों, से इनकार करता है आपकी सामग्री का उपयोग पूरी तरह से आपके अपने जोखिम पर है और हम यह गारंटी नहीं देते हैं कि सामग्री त्रुटि रहित है या आपकी विशिष्ट आवश्यकताओं के लिए उपयुक्त है",
+    "funding_body": "भारत जलविज्ञान दृष्टिकोण प्रमुख अनुसंधान और विकास कार्यक्रम हाइड्रो जलवायु चरम सीमाओं द्वारा समर्थित है जिसे विज्ञान और प्रौद्योगिकी विभाग द्वारा वित्त पोषित किया गया है",
+    "contact_heading": "संपर्क जानकारी",
+    "contact_address": "भारत जलविज्ञान दृष्टिकोण जल और जलवायु प्रयोगशाला भारतीय प्रौद्योगिकी संस्थान गांधीनगर गुजरात भारत",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "India Jalvayu Drishti Portal",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "इमेल",
+    "person1_office_label": "कार्यालय",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "phd anusandhan vidyarthi",
+    "person3_name": "Paras Sharma",
+    "person3_role": "phd anusandhan vidyarthi",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (°C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

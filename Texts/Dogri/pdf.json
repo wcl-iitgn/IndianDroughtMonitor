@@ -1,0 +1,68 @@
+{
+  "doc_title": "Bharat ke jal vigyan ka bhavishya",
+  "based_on": "Based on daily observations till {observation_date}",
+  "issue_date": "Issue date: {issue_date}",
+  "ribbon_title": "Bharat ka jal vigyan darshan",
+  "footer_blurb": "India Hydrological Outlook vartman sthiti ke liye mukhya mausam aur jal vigyan vibhagon ke pramanon ka ek poorn masik saaransh char mahine ke pichhle aur ek mahine ke bhavishya ke saath pradan karta hai adhik jaankari ke liye kripya website par jaye",
+  "summary_heading": "सारांश",
+  "section_rainfall_temp": "Barish aur taapmaan",
+  "section_sm_ro_et": "Mitti ki nami, kul bahav, aani vashpavaran",
+  "section_rivers": "Nadi behti hai",
+  "figure_caption": "Indian sub-continental nadiyon ke bains. Shade ki pichhadi oonchai (m) dikhati hai.",
+  "figure_label": "चित्र",
+  "page_titles": {
+    "rainfall": "अवलोकन अरण और पूर्वानुमान वर्षा की स्थितियां",
+    "temperature": "अवलोकित र पूर्वानुमान सतह हावा तापमान",
+    "wetness": "अवलोकन अपेक्षिक नमी और पूर्वानुमान",
+    "runoff": "अवलोकन र पूर्वानुमान कुल रनऑफ",
+    "et": "अवलोकित र पूर्वानुमानित वाष्पोत्सर्जन"
+  },
+  "page_intros": {
+    "rainfall": "Ei nakhe dinik gridded barish darshano aru India Meteorological Department (IMD) se Extended Range Forecast System (ERFS) se taiyar kiye gaye hain jo 1955 se vartaman tak ke samay mein mahine darshani kul barish ke percentile ke roop mein prastut hain. Ei barish percentile nakhe us samay ke liye asadharan sukhi, nami ya anumaanit barish wale kshetron ko darshate hain. Forecast mahine mein adhik barish percentile aur vartaman mahine mein adhik atyadhik nami (page 4 par uplabdh nakhe) asadharan nami ki sambhavit kshetra darsha sakti hai. Forecast mahine mein kam barish percentile, vishesh roop se kam ya koi barish na hone wale kshetron mein adhik atyadhik sukhi hone ke karan, sukha ki sthiti ka khatra ho sakta hai.",
+    "temperature": "Ei nakshe rozana gridded temperature observation aur India Meteorological Department IMD se Extended Range Forecast System ERFS se taiyar kiye gaye hain jo aitihasik average (1955 se vartaman tak) se monthly-averaged temperature anomaly ke roop mein prastut hain. Yeh temperature anomaly maps un kshetron ko darshate hain jahan aam se zyada aur kam temperature hai. Kam temperature anomalies fasal ki utpadan mein kami ya fasal ki vikas mein deri ka karan ban sakte hain. Zyada temperature anomalies jinhe thodi baarish aur kam mitti ki nami ke saath jodte hain (maps page 4 par uplabdh hain) woh sukhe ki sthiti ke khatre mein ho sakte hain jahan potential evapotranspiration badh jata hai.",
+    "wetness": "ee nakhe nakso rozana simuleet mitti ki nami (60 cm gehrai) ko upyog karke observation ra gridded meteorological forcing ra India Meteorological Department (IMD) ko Extended Range Forecast System (ERFS) bata paaye gaye data se tayar kiye gaye hain jo aitihasik madhyam (1955 se vartaman) ko nisit masee-dar mitti ki nami anomali ke roop mein prastut kiyee gaye hain mitti ki nami anomali ko aitihasik uttamon ke sambandh mein prastut kiya gaya hai jisse anokhe geela ya sookhe sthitiyon wale kshetron ko ubharaya ja sake vartaman mahine mein uchch nisit geelapan (zyada geela) aur forecast mahine mein uchch barsha pratishat ke saath aane wale din/saptah mein upar-anorma pravah ra anokhe geele sthitiyan ho sakti hain vartaman mahine mein nichhi nisit geelapan (sookha) aur forecast mahine mein koi ya kam barsha ki bhavishyavani wale kshetr niche-anorma pravah ra nami uplabdhata ke khatre mein ho sakte hain",
+    "runoff": "Ei nakhe dinan ke anumanit kul bahav se tayar kiye gaye hain jo nirikshan aur Bharat ke Mausam Vibhag (IMD) ke gridded meteorologic forcing aur Extended Range Forecast System (ERFS) se prapt hain jinhe aitihasik madhyam (1955 se vartaman tak) se tulna mein kul bahav ka mahine ka anomali bataya gaya hai. Ye kul bahav anomali un kshetron ko darshate hain jahan us samay ke liye kul bahav mein aam se adhik ya kam hota hai. Anumanit mahine mein kul bahav mein adhik aur vartaman mahine mein titiya mitti ki nami hone par aane wale dinon/saptah mein nadi ke bahav mein adhik ho sakta hai. Anumanit mahine mein kul bahav mein adhik kami wale kshetron, vishesh roop se jinme vartaman mahine mein adhik sookha hai, aane wale dinon/saptah mein kam nadi ke bahav ka khatra ho sakta hai.",
+    "et": "Ei nakhe nakso darshan aamne observationo aadharit gridded meteorological forcing aani India Meteorological Department IMD ton Extended Range Forecast System ERFS ton daily simulated evapotranspiration ET se taiyar kiye hoye historic 1955 ton vartaman tak daal vich total monthly ET anomaly ke roop deke. Ei ET anomalies zameen aani paudhon ton aamna se kam ya zyada paani khojne wale kshetron nu highlight karde hoye, jo khatarnak mausam ke asar, vishesh roop se fasal di paani stress, wale kshetron nu pinpoint karne vich madad karde hoye. Kam ET anomalies fasal di paani stress vich izafa aani thoda kam nami uplabdhata darshande hoye. Zyada ET anomalies mitti di nami jaldi khatam hone (flash drought) ya pehle se maujood sookhe nu aur kharaab kar sakde hoye."
+  },
+  "about": {
+    "about_heading": "Bharat ke jal vigyan ka drishtikon",
+    "about_body": "ei dastavez bharat ko lagi poora paani vistaar prastut karela hai jismein vartmaan mahina pichle chaar mahine aur ek mahine ka anumaan shaamil hai yeh vistaar nirikshan data aur mausam vibhagon ke liye vistarit anumaan pranali ka upyog karke aur aadhunik jalvigyan model tools se banaya gaya hai yeh tools rishte mein badlav ka vishleshan karte hain aur vibhinn kshetro mein paani ki uplabdhata ki bhavishyavani karte hain jo bharat mein jalvigyan sthiti par mahatvapurna jaankari dete hain is vistaar ko IIT gandhinagar mein paani aur mausam lab dwara viksit kiya gaya hai iska uddeshya baarish, taapmaan, mitti ki nami (60 cm), bahav, aur nadi ke bahav ke patterns par bharosemand jaankari pradan karke paani sansadhan prabandhan, yojana, aur nirnay lene mein sahayata karna hai vibhinn samay-rekhaon par.",
+    "datasets_heading": "dataset",
+    "datasets_body_pre": "India ke jal vigyan ka drishtikon kai data pradaan karne walon ke mulya purn sahyog se sambhav bana hai jinke yogdaanon ko aabhar vyakt kiya jata hai vartaman din ke nirikshan aur vistarit range forecast data India Meteorological Department (IMD) dwara pradan kiye jaate hain",
+    "datasets_body_mid": "Ei dataseton nu hydrological models lai shuru karnu ra aitihasik anukaran ko sthitistikal vishleshan dwara bharosee outlook jankari utpanna garnu lai upyog gariyeko chhan hydrological model lai India-Water Information System bata dinu daily streamflow le paryo samay ko lagi calibrate ra validate gariyeko chha",
+    "model_heading": "Jalvayu Model",
+    "model_body": "India Hydrological Outlook Variable Infiltration Capacity मॉडल का उपयोग करता है जो प्रत्येक ग्रिड के लिए पानी और ऊर्जा बजट की गणना करने वाला एक बड़े पैमाने का अर्ध-वितरित जल विज्ञान मॉडल है। VIC मॉडल वनस्पति और ऊंचाई में उप-ग्रिड परिवर्तनशीलता को पकड़ता है, जिससे क्षेत्रीय पैमाने पर जल विज्ञान प्रक्रियाओं का अधिक सटीक प्रतिनिधित्व मिलता है। सटीक जल विज्ञान पूर्वानुमान प्रदान करने और पूरे भारत में जल संसाधन प्रबंधन को बढ़ाने के लिए VIC मॉडल सिमुलेशन दैनिक अस्थायी विभेदन पर किए जाते हैं।",
+    "disclaimer_heading": "अस्वीकरण र दायित्व",
+    "disclaimer_body": "India Hydrological Outlook ka uddeshya yeh sunishchit karna hai ki di gayi sabhi samagri sahi ho aur vartaman vaigyanik samajh se mel khaye. Haalanki, meteorological aur hydrological forecast, tatha climate projections ke peeche ka vigyan lagataar viksit ho raha hai. Isliye, samagri mein koi bhi forecast ya anuman tathya ka nishchit bayan nahi hona chahiye. Lagu kanoon dwara anumati diye gaye poore star tak, India Hydrological Outlook samagri ke sambandh mein kisi bhi warranty ya pratinidhitva ko, chahe spasht ho ya nishiddh, tyag karta hai. Samagri ka aapka upyog poori tarah se aapke apne jokhim par hai, aur hum yeh guarantee nahi dete ki samagri trutipurvak ya aapki vishesh zarooraton ke liye upyukt hai.",
+    "funding_body": "India ka Jalvigyan Drishti Major Research and Development Programme (MRDP) mein Hydro Climate Extremes ke liye sahita hai jise Department of Science and Technology (DST) dwara fund kiya gaya hai",
+    "contact_heading": "संपर्क जानकारी",
+    "contact_address": "India ke jalvayu darshana Jal aur Mausam lab Indian Institute of Technology Gandhinagar Gujarat India",
+    "contact_lab_link": "Water & Climate Lab",
+    "contact_portal_label": "India Hydrological Outlook Portal",
+    "person1_name": "Prof. Vimal Mishra (Professor)",
+    "person1_dept": "Department of Civil Engineering, IIT Gandhinagar",
+    "person1_email_label": "इमेल",
+    "person1_office_label": "कार्यालय",
+    "person1_office": "AB6/330, IIT Gandhinagar",
+    "person2_name": "Devesh Mani",
+    "person2_role": "phd research scholar",
+    "person3_name": "Paras Sharma",
+    "person3_role": "phd research scholar",
+    "affiliation": "IIT Gandhinagar"
+  },
+  "legend_titles": {
+    "Rainfall": "Rainfall\nPercentile",
+    "Temperature": "Temperature\nAnomaly (°C)",
+    "Relative_Wetness": "Relative Wetness (%)",
+    "Total_Runoff": "Total Runoff\nAnomaly (mm)",
+    "Evapotranspiration": "Evapotranspiration\nAnomaly (mm)"
+  },
+  "panel_tags": {
+    "driest": "Driest",
+    "wettest": "Wettest",
+    "coldest": "Coldest month",
+    "warmest": "Warmest month",
+    "lowest": "Lowest",
+    "highest": "Highest"
+  }
+}

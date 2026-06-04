@@ -31,6 +31,7 @@ from pathlib import Path
 import numpy as np
 
 import idm_maps as M
+import idm_llm
 
 HORIZONS = [7, 15, 30]
 
@@ -233,7 +234,9 @@ def build_forecast_pdf(repo, lang, param, date_str, label, national, rows, maps,
         "T_table_rows": table_rows,
         "T_footer_blurb": esc(S["footer_blurb"]),
         "T_copyright": esc(S["copyright"]),
-        "BODYDIR": r"\textdir TRT\pardir TRT\relax" if is_rtl else "",
+        "BODYDIR": "",  # XeLaTeX has no \textdir/\pardir (those are LuaTeX); match the
+                        # hydro PDF, which builds RTL via the script font. Proper bidi
+                        # (right-alignment of mixed text) is a separate, testable upgrade.
     }
     tex = TEX_TEMPLATE
     for k, v in tmap.items():
@@ -262,6 +265,31 @@ def build_forecast_pdf(repo, lang, param, date_str, label, national, rows, maps,
     return out_pdf
 
 
+_MONTHS = {1: "January", 2: "February", 3: "March", 4: "April", 5: "May", 6: "June",
+           7: "July", 8: "August", 9: "September", 10: "October", 11: "November", 12: "December"}
+
+
+def _seed_forecast_index(fdir, repo):
+    """If index.json is absent (e.g. the archive was cleared), seed a single entry
+    from the latest week in data/India_Drought_Area_Timeseries.txt, so a fresh
+    'remove archive then regenerate' run works without manual setup."""
+    idx = fdir / "index.json"
+    if idx.exists():
+        return
+    ts = Path(repo) / "data" / "India_Drought_Area_Timeseries.txt"
+    date_str = None
+    try:
+        last = [ln for ln in ts.read_text(encoding="utf-8").splitlines() if ln.strip()][-1].split()
+        date_str = "%04d-%02d-%02d" % (int(float(last[0])), int(float(last[1])), int(float(last[2])))
+    except Exception:
+        date_str = dt.date.today().isoformat()
+    y, mo, d = (int(x) for x in date_str.split("-"))
+    label = "%s %d, %d" % (_MONTHS.get(mo, ""), d, y)
+    fdir.mkdir(parents=True, exist_ok=True)
+    idx.write_text(json.dumps({"forecasts": [{"date": date_str, "label": label}]}, indent=2))
+    print("  index.json missing -> seeded latest forecast date %s" % date_str)
+
+
 def main():
     ap = argparse.ArgumentParser(description="Pre-generate IDM Forecast Summary PDFs.")
     ap.add_argument("--repo", default=str(Path(__file__).resolve().parent))
@@ -270,10 +298,13 @@ def main():
     ap.add_argument("--dates", nargs="+", default=None)
     ap.add_argument("--fine-step", type=float, default=0.05)
     ap.add_argument("--maps-only", action="store_true")
+    ap.add_argument("--force", action="store_true",
+                    help="re-translate per-language text even if it already exists")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
     fdir = repo / "data" / "forecast_summaries"
+    _seed_forecast_index(fdir, repo)
     inits = json.loads((fdir / "index.json").read_text(encoding="utf-8")).get("forecasts", [])
     if args.dates:
         inits = [x for x in inits if x["date"] in args.dates]
@@ -309,6 +340,39 @@ def main():
     if not langs:
         print("No valid languages."); return 1
 
+    # Translate the English forecast narrative into each language via gemma4 (idm_llm),
+    # and write data/forecast_summaries/<lang>/<param>_<date>.txt for the site. Only the
+    # prose sentence is translated; the regional table (numbers) and PDF labels stay as-is.
+    nat_for = {}
+    todo = [l for l in langs if l["key"] != "English"]
+    if todo:
+        print("Translating forecast text -> %d language(s) via %s ..." % (len(todo), idm_llm.MODEL))
+    for lang in langs:
+        key = lang["key"]; label = lang.get("label") or key
+        for it in inits:
+            d = it["date"]
+            for param in params:
+                if (param, d) not in data_for:
+                    continue
+                national, _rows = data_for[(param, d)]
+                if key == "English":
+                    nat_for[(key, param, d)] = national
+                    continue
+                per = fdir / key / ("%s_%s.txt" % (param, d))
+                if per.exists() and not args.force:
+                    nat_for[(key, param, d)] = per.read_text(encoding="utf-8").strip()
+                    continue
+                try:
+                    tnat = idm_llm.translate(national, label)
+                except Exception as e:
+                    print("  ! translate %-9s %-8s %s : %s" % (key, param, d, e)); tnat = national
+                nat_for[(key, param, d)] = tnat
+                try:
+                    per.parent.mkdir(parents=True, exist_ok=True)
+                    per.write_text(tnat + "\n", encoding="utf-8")
+                except Exception:
+                    pass
+
     built = skipped = 0
     for lang in langs:
         key = lang["key"]
@@ -318,6 +382,7 @@ def main():
                 if (param, d) not in maps_for:
                     skipped += 1; continue
                 national, rows = data_for[(param, d)]
+                national = nat_for.get((key, param, d), national)
                 out_pdf = fdir / key / "PDF_Archive" / ("IDM_Forecast_%s_%s.pdf" % (PARAMS[param]["file_label"], d))
                 try:
                     build_forecast_pdf(repo, lang, param, d, label, national, rows, maps_for[(param, d)], out_pdf)
