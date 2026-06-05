@@ -35,6 +35,8 @@ function createDroughtMap(opts) {
   if (!opts.paths.stateVectors) opts.paths.stateVectors = "./state_vector_boundaries.json";
   // Per-state district boundary files (lazy-loaded on state click): <dir>/state_<id>.json
   if (!opts.paths.districtsDir) opts.paths.districtsDir = "./data/districts";
+  // Combined district boundaries (loaded once, drawn on the full map + hover readout).
+  if (!opts.paths.allDistricts) opts.paths.allDistricts = "./assets/interactive/india_districts.json";
 
   const C_raster = opts.rasterCanvas;
   const c_raster = C_raster.getContext("2d");
@@ -77,6 +79,11 @@ const state = {
     mainlandBoundary: [],
     stateVectorBoundaries: [],
 
+    // ALL district boundaries (loaded once at init) + an index by state_id for
+    // fast hovered-district hit-testing. Rendered as thin grey lines on the full map.
+    allDistricts: [],
+    _districtsByState: {},
+
     // District boundaries for the CURRENTLY selected state only (lazy-loaded on
     // click). _districtCache memoises per-state fetches so re-clicking is instant.
     districtsForState: null,
@@ -95,6 +102,7 @@ const state = {
 
     hoveredStateId: null,
     hoveredStateName: null,
+    hoveredDistrictName: null,
 
     // Zoom interaction mode: 'state' (click a state to zoom) or 'rect' (drag a box).
     // Toggled from the UI; defaults to click-state zoom.
@@ -178,6 +186,53 @@ async function loadStateVectorBoundaries() {
     } catch (e) {
         console.error("Failed to load vector boundaries:", e);
     }
+}
+
+/**
+ * Load ALL district boundaries once (single combined file) and index them by
+ * state_id, so every district can be drawn on the full map and the hovered
+ * district can be resolved for the cursor readout.
+ */
+async function loadAllDistricts() {
+    try {
+        const response = await fetch(opts.paths.allDistricts);
+        if (!response.ok) throw new Error("HTTP " + response.status);
+        state.allDistricts = await response.json();
+        const idx = {};
+        for (const d of state.allDistricts) {
+            (idx[d.state_id] = idx[d.state_id] || []).push(d);
+        }
+        state._districtsByState = idx;
+        console.log(`Loaded ${state.allDistricts.length} district polygons.`);
+    } catch (e) {
+        console.warn("Failed to load district boundaries:", e.message || e);
+        state.allDistricts = [];
+    }
+}
+
+/** Ray-casting point-in-polygon test against a single ring of [lng,lat] points. */
+function pointInRing(lng, lat, ring) {
+    let inside = false;
+    for (let i = 0, j = ring.length - 1; i < ring.length; j = i++) {
+        const xi = ring[i][0], yi = ring[i][1];
+        const xj = ring[j][0], yj = ring[j][1];
+        const intersect = ((yi > lat) !== (yj > lat)) &&
+            (lng < (xj - xi) * (lat - yi) / ((yj - yi) || 1e-12) + xi);
+        if (intersect) inside = !inside;
+    }
+    return inside;
+}
+
+/** Resolve the district name at a lng/lat, limited to one state's districts. */
+function districtAt(lng, lat, stateId) {
+    const cand = state._districtsByState[stateId];
+    if (!cand) return null;
+    for (const d of cand) {
+        for (const ring of d.rings) {
+            if (pointInRing(lng, lat, ring)) return d.name;
+        }
+    }
+    return null;
 }
 
 /**
@@ -457,6 +512,36 @@ function renderStaticMap() {
 
     // Render State Boundaries directly onto c_raster
     if (!state.gridState) return;
+
+    // ============================================================
+    // Render ALL District Boundaries (thin grey) on the full map. Skipped when a
+    // single state is isolated (the selected-state block below handles that), so
+    // we don't double-draw. Drawn before the black state borders stay crisp.
+    // ============================================================
+    if (state.allDistricts && state.allDistricts.length > 0
+        && !(state.isolateFocusedStateBoundaries && state.selectedStateId !== null)) {
+        const dW = state.lat_E - state.lat_W;
+        const dH = state.long_N - state.long_S;
+        c_raster.save();
+        c_raster.beginPath();
+        c_raster.strokeStyle = "rgba(90,90,90,0.45)";
+        c_raster.lineWidth = 0.5;
+        c_raster.lineJoin = "round";
+        for (const d of state.allDistricts) {
+            for (const ring of d.rings) {
+                let first = true;
+                for (let i = 0; i < ring.length; i++) {
+                    const lng = ring[i][0], lat = ring[i][1];
+                    const px = state.margin.left + ((lng - state.lat_W) / dW) * state.plotWidth;
+                    const py = state.margin.top + ((state.long_N - lat) / dH) * state.plotHeight;
+                    if (first) { c_raster.moveTo(px, py); first = false; }
+                    else { c_raster.lineTo(px, py); }
+                }
+            }
+        }
+        c_raster.stroke();
+        c_raster.restore();
+    }
 
     // ============================================================
     // Render Vector State Boundaries
@@ -791,9 +876,11 @@ function setupEventListeners() {
             }
             // ==========================================
 
+            state.hoveredDistrictName = newHoveredId ? districtAt(lng, lat, newHoveredId) : null;
             state.hoverCoords = { lat, lng, val, stateId };
         } else { 
             state.hoverCoords = null; 
+            state.hoveredDistrictName = null;
             
             // NEW: Clear highlight if mouse goes out of bounds
             if (state.hoveredStateId !== null) {
@@ -835,6 +922,7 @@ function setupEventListeners() {
 
     C_vector.addEventListener("mouseleave", () => { 
         state.hoverCoords = null; 
+        state.hoveredDistrictName = null;
         renderDynamicHUD(); 
     });
 }
@@ -865,6 +953,7 @@ async function init() {
     await loadStateData();
     await loadMainlandBoundaryData();
     await loadStateVectorBoundaries();
+    await loadAllDistricts();
     setupEventListeners();
 
     // Inside init() - Bind the control panel elements:

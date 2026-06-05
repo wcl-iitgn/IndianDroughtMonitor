@@ -173,7 +173,12 @@
         if (els.cls) { els.cls.textContent = "—"; els.cls.style.background = "transparent"; els.cls.style.color = "inherit"; }
       }
       if (els.state) els.state.textContent = map.state.hoveredStateName || "—";
+      if (els.district) els.district.textContent = map.state.hoveredDistrictName || "—";
       if (els.stateBig) els.stateBig.textContent = map.state.hoveredStateName || "—";
+      if (els.place) {
+        var _st = map.state.hoveredStateName, _di = map.state.hoveredDistrictName;
+        els.place.textContent = (_di && _st) ? (_di + ", " + _st) : (_st || "—");
+      }
     }
     window.addEventListener("mousemove", paint);
     map.canvases.vector.addEventListener("mouseleave", paint);
@@ -239,7 +244,8 @@
     wireStateSelect(el(cfg.stateSelect), map);
     wireReadout(map, cfg.readout && {
       lat: el(cfg.readout.lat), lng: el(cfg.readout.lng), val: el(cfg.readout.val),
-      state: el(cfg.readout.state), cls: el(cfg.readout.cls), stateBig: el(cfg.readout.stateBig)
+      state: el(cfg.readout.state), cls: el(cfg.readout.cls), stateBig: el(cfg.readout.stateBig),
+      place: el(cfg.readout.place), district: el(cfg.readout.district)
     });
 
     // reset button
@@ -332,11 +338,18 @@
     // download-PNG button
     var dlBtn = el(cfg.downloadBtn);
     if (dlBtn) {
+      function currentDateStr() {
+        var ds = cfg.dateSelect ? el(cfg.dateSelect) : null;
+        if (ds && ds.value) return ds.value;                                  // selected week
+        if (map.state && map.state.currentAnimationDateStr) return map.state.currentAnimationDateStr;
+        var L = buildDateList();
+        return L.length ? L[L.length - 1].iso : new Date().toISOString().slice(0, 10);
+      }
       dlBtn.addEventListener("click", function () {
         var url = map.toPNGDataURL(false); // data layer only (no HUD overlay) for a clean map
         var a = document.createElement("a");
         a.href = url;
-        a.download = (cfg.downloadName || "india-drought-map") + ".png";
+        a.download = (cfg.downloadName || "india-drought-map") + "_" + currentDateStr() + ".png";
         document.body.appendChild(a); a.click(); document.body.removeChild(a);
       });
     }

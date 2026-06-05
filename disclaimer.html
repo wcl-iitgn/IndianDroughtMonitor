@@ -4,54 +4,39 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title data-i18n="hydro_maps.individual_maps_hydrological">Individual Maps | Hydrological Outlook | India Drought Monitor</title>
+<title data-i18n="disclaimer.disclaimer_india_drought_monitor">Disclaimer | India Drought Monitor</title>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
-<link href="assets/hydro/hydro.css" rel="stylesheet"/>
 <link href="assets/ai/idm-ai.css" rel="stylesheet"/>
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
-<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
-<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:hydro_maps.primary">
+<header class="usdm-header">
+<div class="usdm-header-inner">
+<h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1>
+</div>
+</header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:disclaimer.primary">
 <div class="usdm-nav-inner">
 <a data-i18n="common_nav.current" href="index.html">Current</a>
 <a data-i18n="common_nav.maps" href="maps.html">Maps</a>
 <a data-i18n="common_nav.data" href="data.html">Data</a>
 <a data-i18n="common_nav.summary" href="summary.html">Summary</a>
 <a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
-<a class="active" data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
-<a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a class="active" data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
 </div>
 </nav>
 <main class="usdm-main">
-<div class="usdm-breadcrumbs"><a data-i18n="hydro_maps.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="hydro_maps.hydrological_outlook" href="hydro.html">Hydrological Outlook</a> <span class="sep">/</span> <span data-i18n="hydro_maps.individual_maps">Individual Maps</span></div>
-<h1 class="page-title" data-i18n="hydro_maps.individual_maps">Individual Maps</h1>
-<p data-i18n="hydro_maps.these_are_the_individual_map" style="font-size:16.5px;max-width:82ch;color:#3a3431;">
-      These are the individual maps that make up each Hydrological Outlook dashboard, shown separately
-      so you can inspect any single month at full size. Choose a variable, then click any map to open
-      it full-size in a new tab.
-    </p>
-<div class="hydro-toolbar">
-<div class="idm-tool-group">
-<span class="idm-tool-label" data-i18n="hydro_maps.variable">Variable</span>
-<select aria-label="Choose variable" data-i18n-attr="aria-label:hydro_maps.choose_variable" id="param-select"></select>
+<div class="usdm-breadcrumbs"><a data-i18n="disclaimer.home" href="index.html">Home</a> <span class="sep">/</span> <span data-i18n="disclaimer.disclaimer">Disclaimer</span></div>
+<h1 class="page-title" data-i18n="disclaimer.disclaimer">Disclaimer</h1>
+<div class="disclaimer-box">
+<p data-i18n="disclaimer.body_accuracy">The India Drought Monitor aims to ensure that all content provided is accurate and aligns with the current scientific understanding. However, the science underlying the meteorological and hydrological forecasts, as well as climate projections, is continuously evolving. As such, any forecast or prediction included in the content should not be regarded as a definitive statement of fact.</p>
+<p data-i18n="disclaimer.body_warranty">To the fullest extent permitted by applicable law, the India Drought Monitor disclaims all warranties or representations, whether express or implied, regarding the content. Your use of the content is entirely at your own risk, and we make no guarantees that the content is error-free or suitable for your specific needs.</p>
 </div>
-<div class="hydro-month-badge" data-i18n="hydro_maps.february_2026" id="month-badge">February 2026</div>
-<div class="hydro-toolbar-spacer"></div>
-<a class="idm-btn ghost" data-i18n="hydro_maps.back_to_dashboard_view" href="hydro.html">⊞ Back to dashboard view</a>
-</div>
-<p class="hydro-param-desc" id="param-desc"></p>
-<div class="hydro-loading" id="maps-loading"><div class="idm-spinner"></div><div data-i18n="hydro_maps.loading_maps">Loading maps…</div></div>
-<div class="hydro-map-grid" id="map-grid"></div>
-<!-- lightbox -->
-<div class="hydro-lightbox" hidden="" id="lightbox">
-<button aria-label="Close" class="hydro-lightbox-close" data-i18n-attr="aria-label:hydro_maps.close" id="lightbox-close">×</button>
-<img alt="" id="lightbox-img"/>
-<div class="hydro-lightbox-cap" id="lightbox-cap"></div>
-</div>
+<p class="disclaimer-fund" data-i18n="disclaimer.body_funding">The India Drought Monitor is supported by the Major Research and Development Programme (MRDP) in Hydro Climate Extremes, funded by the Department of Science and Technology (DST).</p>
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
@@ -110,16 +95,7 @@
       </div>
 </div>
 </footer>
-<script src="assets/hydro/hydro.js"></script>
-<script>
-    window.addEventListener("DOMContentLoaded", function () {
-      IHO.initMaps({
-        select: "param-select", grid: "map-grid", loading: "maps-loading",
-        desc: "param-desc", monthBadge: "month-badge",
-        lightbox: "lightbox", lightboxImg: "lightbox-img", lightboxCap: "lightbox-cap", lightboxClose: "lightbox-close"
-      });
-    });
-  </script>
+<script src="assets/app.js"></script>
 <script src="assets/vendor/papaparse.min.js"></script>
 <script src="assets/vendor/alasql.min.js"></script>
 <script src="assets/ai/idm-ai.js"></script>

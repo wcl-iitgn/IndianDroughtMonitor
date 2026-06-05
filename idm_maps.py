@@ -229,6 +229,24 @@ def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=15
     ax.imshow(rgba, extent=[fine_lon[0] - hs, fine_lon[-1] + hs, fine_lat[-1] - hs, fine_lat[0] + hs],
               origin="upper", interpolation="nearest", zorder=1)
 
+    # District boundaries: thin grey lines beneath the black state outlines.
+    # (Hydrologic-outlook maps use a separate renderer and are intentionally left
+    # district-free.) Sourced from the per-state files under data/districts/.
+    try:
+        dsegs = []
+        for dfp in sorted((repo / "data" / "districts").glob("state_*.json")):
+            dd = json.loads(dfp.read_text(encoding="utf-8"))
+            for dist in dd.get("districts", []):
+                for ring in dist.get("rings", []):
+                    if len(ring) > 1:
+                        dsegs.append([(pt[0], pt[1]) for pt in ring])
+        if dsegs:
+            ax.add_collection(LineCollection(dsegs, colors="#6b6b6b",
+                                             linewidths=0.25, alpha=0.55, zorder=1.5))
+            log("  districts: %d rings drawn" % len(dsegs))
+    except Exception as e:
+        log("  ! district boundaries not drawn (%s)" % e)
+
     try:
         sv = json.loads((repo / "state_vector_boundaries.json").read_text(encoding="utf-8"))
         segs = []

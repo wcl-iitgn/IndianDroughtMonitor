@@ -93,30 +93,33 @@
 
   function buildPicker() {
     if (!languages.length || document.getElementById("idm-lang-select")) return;
+    var wrap = document.createElement("div");
+    wrap.className = "idm-lang-picker";
+    var globe = document.createElement("span");
+    globe.className = "idm-lang-globe";
+    globe.setAttribute("aria-hidden", "true");
+    globe.textContent = "\uD83C\uDF10";  // 🌐
     var sel = document.createElement("select");
     sel.id = "idm-lang-select";
     sel.setAttribute("aria-label", "Choose language");
-    sel.style.cssText =
-      "margin-left:auto;padding:4px 8px;border:1px solid #b9c2c9;border-radius:6px;" +
-      "background:#fff;color:#1a1a1a;font-size:13px;cursor:pointer;";
     for (var i = 0; i < languages.length; i++) {
       var o = document.createElement("option");
       o.value = languages[i].key;
-      o.textContent = languages[i].native ? (languages[i].native + " — " + languages[i].key) : languages[i].key;
+      o.textContent = languages[i].native ? (languages[i].native + " \u2014 " + languages[i].key) : languages[i].key;
       if (languages[i].key === current) o.selected = true;
       sel.appendChild(o);
     }
     sel.addEventListener("change", function () { setLanguage(sel.value); });
-
-    var nav = document.querySelector(".usdm-nav");
-    if (nav) {
-      nav.style.display = nav.style.display || "flex";
-      nav.style.alignItems = nav.style.alignItems || "center";
-      nav.appendChild(sel);
-    } else {
-      sel.style.position = "fixed"; sel.style.top = "8px"; sel.style.right = "8px"; sel.style.zIndex = "9999";
-      document.body.appendChild(sel);
+    wrap.appendChild(globe);
+    wrap.appendChild(sel);
+    // place it in the masthead, in line with the "India Drought Monitor" title (right side)
+    var host = document.querySelector(".usdm-header-inner")
+            || document.querySelector(".usdm-header")
+            || document.body;
+    if (host === document.body) {
+      wrap.style.position = "fixed"; wrap.style.top = "8px"; wrap.style.right = "8px"; wrap.style.zIndex = "9999";
     }
+    host.appendChild(wrap);
   }
 
   function setLanguage(key) {

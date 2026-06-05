@@ -24,6 +24,7 @@
 <a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+<a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
 </div>
 </nav>
 <main class="usdm-main">
@@ -68,6 +69,7 @@
 </div>
 <div class="idm-card">
 <h3 data-i18n="conditions.cursor_readout">Cursor Readout</h3>
+<div class="idm-readout-place" id="ro-place">—</div>
 <div class="idm-readout-row"><span class="k" data-i18n="conditions.latitude">Latitude</span><span class="v" id="ro-lat">—</span></div>
 <div class="idm-readout-row"><span class="k" data-i18n="conditions.longitude">Longitude</span><span class="v" id="ro-lng">—</span></div>
 <div class="idm-readout-row"><span class="k" data-i18n="conditions.value">Value</span><span class="v" id="ro-val">—</span></div>
@@ -142,6 +144,7 @@
 </ul>
 </div>
 </div>
+<div class="footer-disclaimer"><span data-i18n="common_footer.disclaimer_short">The India Drought Monitor’s forecasts and indices are based on continuously evolving science and are provided “as is”, without warranties of any kind. Use of the content is entirely at your own risk.</span> <a data-i18n="common_footer.read_full_disclaimer" href="disclaimer.html">Read the full disclaimer →</a></div>
 <div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
         © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
       </div>
@@ -181,7 +184,7 @@
       IDM.mountMap({
         raster: "C_raster", vector: "C_vector", product: productKey(),
         stateSelect: "state-select", resetBtn: "reset-view", zoomModeBtn: "zoom-mode",
-        readout: { lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
+        readout: { place:"ro-place",lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
         grayscaleChk: "grayscale-toggle", downloadBtn: "download-png", downloadName: "india-hydromet", loader: "#idm-map-loading"
       }).then(function (map) {
         refreshLegend();
