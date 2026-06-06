@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  5 JUN 2026 02:51
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  6 JUN 2026 16:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 6/data/summaries/_build/U
-rdu_2026-05-20/summary.tex"
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/
+Urdu_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 6/data/summaries/_build/Urd
-u_2026-05-20/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/Ur
+du_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -360,22 +360,11 @@ LaTeX Font Warning: Font shape `TU/NotoNastaliqUrdu(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (13.9071pt too wide) in paragraph at lines 51--52
-[]\TU/NotoNastaliqUrdu(0)/m/n/10.95 اس ہفتے کی قومی خشک سالی کی صورتحال ظاہر کر
-تی ہے کہ ہندوستان کی اکثریت نارمل
- []
-
-
-Overfull \hbox (8.12497pt too wide) in paragraph at lines 51--52
-\TU/NotoNastaliqUrdu(0)/m/n/10.95 زمرے میں ہے، جس میں \TU/Carlito(0)/m/n/10.95 
-84.7\TU/NotoNastaliqUrdu(0)/m/n/10.95 % علاقہ نارمل کے طور پر درجہ بندی ہے۔ اس 
-ہفتے خشک سالی
- []
-
-
-Overfull \hbox (11.6295pt too wide) in paragraph at lines 51--52
-\TU/NotoNastaliqUrdu(0)/m/n/10.95 تھے۔ یہ اعداد و شمار پچھلے ادوار کے مقابلے می
-ں خشک سالی کے علاقے میں تنگی
+Overfull \hbox (11.68195pt too wide) in paragraph at lines 51--52
+\TU/NotoNastaliqUrdu(0)/m/n/10.95 متاثر ہونے کا کل علاقہ، خاص طور پر ڈی\TU/Carl
+ito(0)/m/n/10.95 0\TU/NotoNastaliqUrdu(0)/m/n/10.95 + کلاس، اس ہفتے \TU/Carlito
+(0)/m/n/10.95 15.3\TU/NotoNastaliqUrdu(0)/m/n/10.95 % تھا۔ یہ اعداد و شمار پچھل
+ے
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -394,8 +383,8 @@ File: iitgn.png Graphic file (type bmp)
 File: imd.png Graphic file (type bmp)
 <imd.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 6/data/summaries/_build/Urd
-u_2026-05-20/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/Ur
+du_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -407,12 +396,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5109 strings out of 468168
- 132706 string characters out of 5432816
- 586928 words of memory out of 5000000
+ 132713 string characters out of 5432816
+ 585928 words of memory out of 5000000
  33789 multiletter control sequences out of 15000+600000
  630684 words of font info for 77 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1865b,527s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1866b,527s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 6/data/sum
-maries/_build/Urdu_2026-05-20/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/su
+mmaries/_build/Urdu_2026-05-20/summary.pdf (2 pages).

@@ -93,7 +93,7 @@ const state = {
     isAnimating: false,
     currentAnimationDateStr: null,
 
-    INTERP: (opts.interp != null ? opts.interp : 6),   /* max smoothing by default (Detail control removed) */
+    INTERP: (opts.interp != null ? opts.interp : 3),   /* default smoothness 3; user-adjustable 1-6 via the toolbar slider */
 
     // Greyscale rendering toggle (affects on-screen map and exported PNG/GIF).
     grayscale: !!opts.grayscale,

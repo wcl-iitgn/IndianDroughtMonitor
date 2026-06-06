@@ -13,6 +13,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:animations.primary">
 <div class="usdm-nav-inner">
@@ -25,12 +26,13 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="animations.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="animations.maps" href="maps.html">Maps</a> <span class="sep">/</span> <span data-i18n="animations.animations">Animations</span></div>
 <h1 class="page-title" data-i18n="animations.animations">Animations</h1>
-<p data-i18n="animations.watch_the_combined_drought_i" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+<p data-i18n="animations.watch_the_combined_drought_i" class="page-lead">
       Watch the Combined Drought Index evolve week by week across the full record (July 2021 to
       the present). Set a date range and frame rate, then press play. Every frame is read live
       from that week's data grid.
@@ -74,17 +76,16 @@
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>

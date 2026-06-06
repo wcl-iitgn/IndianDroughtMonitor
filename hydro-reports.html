@@ -12,6 +12,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:hydro_reports.primary">
 <div class="usdm-nav-inner">
@@ -24,12 +25,13 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="hydro_reports.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="hydro_reports.hydrological_outlook" href="hydro.html">Hydrological Outlook</a> <span class="sep">/</span> <span data-i18n="hydro_reports.pdf_reports">PDF Reports</span></div>
 <h1 class="page-title" data-i18n="hydro_reports.hydrological_outlook_reports">Hydrological Outlook Reports</h1>
-<p data-i18n="hydro_reports.each_month_the_water_and_cli" style="font-size:16.5px;max-width:82ch;color:#3a3431;">
+<p data-i18n="hydro_reports.each_month_the_water_and_cli" class="page-lead">
       Each month the Water and Climate Lab compiles the full India Hydrological Outlook into a single
       PDF report. Browse the archive below: pick a date to preview the report inline, or download any
       report directly.
@@ -57,17 +59,16 @@
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>

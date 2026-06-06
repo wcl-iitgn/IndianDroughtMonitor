@@ -11,6 +11,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header">
 <div class="usdm-header-inner">
 <h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1>
@@ -27,9 +28,10 @@
 <a class="active" data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="about.home" href="index.html">Home</a> <span class="sep">/</span> <span data-i18n="about.about">About</span></div>
 <h1 class="page-title" data-i18n="about.about_the_india_drought_moni">About the India Drought Monitor</h1>
 
@@ -65,20 +67,28 @@
 <a class="btn" data-i18n="about.download_data" href="data.html">Explore the Data</a>
 <a class="btn" data-i18n="about.read_this_week_s_summary" href="summary.html">Read This Week's Summary</a>
 </p>
+<h2 data-i18n="ack.acknowledgements" id="acknowledgements">Acknowledgements</h2>
+<p class="ack-lead" data-i18n="ack.lead">The India Drought Monitor is built on data, products, and services generously made available by national and international agencies. We gratefully acknowledge the following data providers:</p>
+<ul class="ack-list">
+<li><strong data-i18n="ack.imd_name">India Meteorological Department (IMD)</strong><span data-i18n="ack.imd_desc">Hydro-meteorological observations and gridded datasets that underpin the Monitor’s drought indices.</span></li>
+<li><strong data-i18n="ack.cwc_name">Central Water Commission (CWC)</strong><span data-i18n="ack.cwc_desc">Hydrological data supporting the Monitor’s analyses and outlook products.</span></li>
+<li><strong data-i18n="ack.isro_name">Indian Space Research Organisation (ISRO) / National Remote Sensing Centre (NRSC)</strong><span data-i18n="ack.isro_desc">Satellite data products used in drought monitoring.</span></li>
+<li><strong data-i18n="ack.nasa_name">National Aeronautics and Space Administration (NASA)</strong><span data-i18n="ack.nasa_desc">Global datasets used in the Monitor’s analyses.</span></li>
+</ul>
+<p class="ack-note" data-i18n="ack.endorsement">The use of data from these organisations does not imply their endorsement of the India Drought Monitor or of any products derived from it.</p>
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>

@@ -13,6 +13,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:conditions.primary">
 <div class="usdm-nav-inner">
@@ -25,12 +26,13 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="forecast.home" href="index.html">Home</a> <span class="sep">/</span> <span data-i18n="forecast.forecast">Forecast</span></div>
 <h1 class="page-title" data-i18n="forecast.forecast">Forecast</h1>
-<p data-i18n="forecast.intro" style="font-size:16.5px;color:#3a3431;">Short-range outlooks for drought and the key hydrometeorological variables. Pick a variable and lead time; maps are rendered live from the forecast grids on the same interactive interface used across the portal.</p>
+<p data-i18n="forecast.intro" class="page-lead page-lead--full">Short-range outlooks for drought and the key hydrometeorological variables. Pick a variable and lead time; maps are rendered live from the forecast grids on the same interactive interface used across the portal.</p>
 <p class="idm-validity" id="validity"></p>
 <p style="margin:4px 0 16px;font-size:14.5px;">
 <a data-i18n="forecast.view_outlook_summary" href="forecast-summary.html" style="color:var(--usdm-red,#da3910);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(218,57,16,.4);padding-bottom:1px;">Read the regional forecast outlook and download the report (PDF)</a>
@@ -61,6 +63,7 @@
 <button aria-pressed="false" class="idm-btn ghost" data-i18n="forecast.rectangle_zoom_off" id="zoom-mode" type="button">☷ Rectangle zoom: OFF</button>
 <label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="forecast.greyscale">Greyscale</span></label>
 <button class="idm-btn ghost" data-i18n="forecast.download_png" id="download-png" type="button">⬇ Download PNG</button>
+<label class="idm-interp" data-i18n-attr="title:common_map.smoothness_title" title="Higher = smoother interpolation between grid cells"><span data-i18n="common_map.smoothness">Smoothness</span> <input aria-label="Map smoothness" data-i18n-attr="aria-label:common_map.smoothness_aria" id="interp-slider" max="6" min="1" step="1" type="range" value="3"/><span class="idm-interp-val" id="interp-value">3</span></label>
 </div>
 <div class="idm-viewer-grid">
 <div class="idm-map-panel">
@@ -97,17 +100,16 @@
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>
@@ -187,6 +189,7 @@
       IDM.mountMap({
         raster: "C_raster", vector: "C_vector", product: productKey(),
         stateSelect: "state-select", resetBtn: "reset-view", zoomModeBtn: "zoom-mode",
+        interpSlider:"interp-slider", interpValue:"interp-value",
         readout: { place:"ro-place",lat:"ro-lat", lng:"ro-lng", val:"ro-val", state:"ro-state", cls:"ro-cls", stateBig:"ro-state-big" },
         grayscaleChk: "grayscale-toggle", downloadBtn: "download-png", downloadName: "india-forecast", loader: "#idm-map-loading"
       }).then(function (map) {

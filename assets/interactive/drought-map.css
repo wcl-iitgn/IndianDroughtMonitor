@@ -499,3 +499,50 @@
 .idm-btn:disabled, .idm-btn.is-disabled {
   opacity: 0.5; cursor: not-allowed; pointer-events: none;
 }
+
+/* =============================================================================
+ * FINAL UI POLISH LAYER (map-page components; colour ramps untouched)
+ * ========================================================================== */
+
+/* Toolbar becomes a grouped control surface instead of floating widgets. */
+.idm-toolbar {
+  background: var(--usdm-surface, #fff);
+  border: 1px solid var(--usdm-border);
+  border-radius: var(--radius-lg, 10px);
+  padding: 12px 14px;
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(38,32,28,.05));
+}
+.idm-toolbar .idm-tool-group { border-radius: var(--radius-md, 8px); }
+.idm-btn { border-radius: var(--radius-sm, 6px); font-weight: 600; }
+.idm-btn.ghost:hover { border-color: var(--usdm-border-strong, #d2ccc6); }
+
+/* Side-rail cards: dashboard-style headers + tabular figures. */
+.idm-card {
+  border-radius: var(--radius-lg, 10px);
+  box-shadow: var(--shadow-sm, 0 1px 2px rgba(38,32,28,.05));
+}
+.idm-card h3 {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--usdm-charcoal-light, #6b6664);
+  border-bottom: 1px solid var(--usdm-border);
+  padding-bottom: 8px;
+}
+.idm-readout-row .v { font-variant-numeric: tabular-nums; font-weight: 600; }
+
+/* Smoothness value: small numeric chip. */
+.idm-interp-val {
+  background: #f5f1ec;
+  border: 1px solid var(--usdm-border);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Map-page legend chips: shape only — the class colours are sacrosanct. */
+.idm-legend-swatch, .sw-none, .sw-d0, .sw-d1, .sw-d2, .sw-d3, .sw-d4 {
+  border-radius: 4px;
+}

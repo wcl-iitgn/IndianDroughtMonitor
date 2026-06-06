@@ -1,6 +1,6 @@
 {
-  "month_label": "February 2026",
-  "generated": "2026-02-28",
+  "month_label": "April 2026",
+  "generated": "2026-04-30",
   "parameters": [
     {
       "key": "Rainfall",
@@ -10,13 +10,18 @@
       "dashboard": "Rainfall_dashboard.png",
       "maps": [
         {
-          "file": "August (2002).png",
-          "label": "August (2002)",
+          "file": "April (2025*).png",
+          "label": "April (2025*)",
           "role": "other"
         },
         {
-          "file": "December (1997).png",
-          "label": "December (1997)",
+          "file": "April (Current).png",
+          "label": "April (Current)",
+          "role": "other"
+        },
+        {
+          "file": "August (2002).png",
+          "label": "August (2002)",
           "role": "other"
         },
         {
@@ -25,14 +30,14 @@
           "role": "other"
         },
         {
-          "file": "February (2025_).png",
-          "label": "February (2025)",
+          "file": "December (1997).png",
+          "label": "December (1997)",
           "role": "other"
         },
         {
-          "file": "February (Current).png",
-          "label": "February (Current)",
-          "role": "current"
+          "file": "February.png",
+          "label": "February",
+          "role": "other"
         },
         {
           "file": "January.png",
@@ -40,18 +45,13 @@
           "role": "other"
         },
         {
-          "file": "March (Forecast).png",
-          "label": "March (Forecast)",
-          "role": "forecast"
-        },
-        {
-          "file": "November.png",
-          "label": "November",
+          "file": "March.png",
+          "label": "March",
           "role": "other"
         },
         {
-          "file": "October.png",
-          "label": "October",
+          "file": "May (Forecast).png",
+          "label": "May (Forecast)",
           "role": "other"
         }
       ]
@@ -69,19 +69,24 @@
           "role": "other"
         },
         {
+          "file": "April (2025*).png",
+          "label": "April (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "April (Current).png",
+          "label": "April (Current)",
+          "role": "other"
+        },
+        {
           "file": "December.png",
           "label": "December",
           "role": "other"
         },
         {
-          "file": "February (2025_).png",
-          "label": "February (2025)",
+          "file": "February.png",
+          "label": "February",
           "role": "other"
-        },
-        {
-          "file": "February (Current).png",
-          "label": "February (Current)",
-          "role": "current"
         },
         {
           "file": "January.png",
@@ -89,9 +94,9 @@
           "role": "other"
         },
         {
-          "file": "March (Forecast).png",
-          "label": "March (Forecast)",
-          "role": "forecast"
+          "file": "March.png",
+          "label": "March",
+          "role": "other"
         },
         {
           "file": "May (2023).png",
@@ -99,13 +104,8 @@
           "role": "other"
         },
         {
-          "file": "November.png",
-          "label": "November",
-          "role": "other"
-        },
-        {
-          "file": "October.png",
-          "label": "October",
+          "file": "May (Forecast).png",
+          "label": "May (Forecast)",
           "role": "other"
         }
       ]
@@ -118,6 +118,16 @@
       "dashboard": "Relative_Wetness_dashboard.png",
       "maps": [
         {
+          "file": "April (2025*).png",
+          "label": "April (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "April (Current).png",
+          "label": "April (Current)",
+          "role": "other"
+        },
+        {
           "file": "August (2002).png",
           "label": "August (2002)",
           "role": "other"
@@ -128,19 +138,14 @@
           "role": "other"
         },
         {
+          "file": "February.png",
+          "label": "February",
+          "role": "other"
+        },
+        {
           "file": "February (2022).png",
           "label": "February (2022)",
           "role": "other"
-        },
-        {
-          "file": "February (2025_).png",
-          "label": "February (2025)",
-          "role": "other"
-        },
-        {
-          "file": "February (Current).png",
-          "label": "February (Current)",
-          "role": "current"
         },
         {
           "file": "January.png",
@@ -148,18 +153,13 @@
           "role": "other"
         },
         {
-          "file": "March (Forecast).png",
-          "label": "March (Forecast)",
-          "role": "forecast"
-        },
-        {
-          "file": "November.png",
-          "label": "November",
+          "file": "March.png",
+          "label": "March",
           "role": "other"
         },
         {
-          "file": "October.png",
-          "label": "October",
+          "file": "May (Forecast).png",
+          "label": "May (Forecast)",
           "role": "other"
         }
       ]
@@ -172,6 +172,16 @@
       "dashboard": "Total_Runoff_dashboard.png",
       "maps": [
         {
+          "file": "April (2025*).png",
+          "label": "April (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "April (Current).png",
+          "label": "April (Current)",
+          "role": "other"
+        },
+        {
           "file": "August (2002).png",
           "label": "August (2002)",
           "role": "other"
@@ -182,14 +192,9 @@
           "role": "other"
         },
         {
-          "file": "February (2025_).png",
-          "label": "February (2025)",
+          "file": "February.png",
+          "label": "February",
           "role": "other"
-        },
-        {
-          "file": "February (Current).png",
-          "label": "February (Current)",
-          "role": "current"
         },
         {
           "file": "January.png",
@@ -197,23 +202,18 @@
           "role": "other"
         },
         {
-          "file": "March (Forecast).png",
-          "label": "March (Forecast)",
-          "role": "forecast"
+          "file": "March.png",
+          "label": "March",
+          "role": "other"
         },
         {
-          "file": "November.png",
-          "label": "November",
+          "file": "May (Forecast).png",
+          "label": "May (Forecast)",
           "role": "other"
         },
         {
           "file": "October (2019).png",
           "label": "October (2019)",
-          "role": "other"
-        },
-        {
-          "file": "October.png",
-          "label": "October",
           "role": "other"
         }
       ]
@@ -226,19 +226,24 @@
       "dashboard": "Evapotranspiration_dashboard.png",
       "maps": [
         {
+          "file": "April (2025*).png",
+          "label": "April (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "April (Current).png",
+          "label": "April (Current)",
+          "role": "other"
+        },
+        {
           "file": "December.png",
           "label": "December",
           "role": "other"
         },
         {
-          "file": "February (2025_).png",
-          "label": "February (2025)",
+          "file": "February.png",
+          "label": "February",
           "role": "other"
-        },
-        {
-          "file": "February (Current).png",
-          "label": "February (Current)",
-          "role": "current"
         },
         {
           "file": "January.png",
@@ -256,18 +261,13 @@
           "role": "other"
         },
         {
-          "file": "March (Forecast).png",
-          "label": "March (Forecast)",
-          "role": "forecast"
-        },
-        {
-          "file": "November.png",
-          "label": "November",
+          "file": "March.png",
+          "label": "March",
           "role": "other"
         },
         {
-          "file": "October.png",
-          "label": "October",
+          "file": "May (Forecast).png",
+          "label": "May (Forecast)",
           "role": "other"
         }
       ]

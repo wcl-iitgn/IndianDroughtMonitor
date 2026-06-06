@@ -28,6 +28,7 @@ import json
 import os
 import re
 import time
+import unicodedata
 import urllib.request
 
 OLLAMA_URL = os.environ.get("IDM_OLLAMA_URL", "http://10.0.60.193:11434/api/generate")
@@ -124,14 +125,17 @@ def generate(prompt, system=None, temperature=0.7, top_p=0.9,
     return _clean(_post(body, timeout=timeout, url=url).get("response", ""))
 
 
-def translate(text, target_language, model=None, timeout=None, url=None, num_predict=1536):
+def translate(text, target_language, model=None, timeout=None, url=None, num_predict=1536,
+              temperature=0.1, extra_rules=None):
     """Translate English `text` into `target_language`. English is a no-op.
 
     The prompt forbids markdown and preambles; the output is then sanitized so it is
     safe to drop straight into a LaTeX/PDF document (no stray ``**``, ``#`` or blank
     lines). Numbers, units, dates and place names are preserved. `num_predict` caps the
     output length so a low-resource language can't ramble toward the context limit (the
-    longest string we translate is a paragraph, well under this)."""
+    longest string we translate is a paragraph, well under this). `extra_rules` lets a
+    caller append further numbered rules to the system prompt (e.g. a length budget —
+    see translate_bounded)."""
     if not text or not text.strip() or is_english(target_language):
         return text
     system = (
@@ -143,13 +147,15 @@ def translate(text, target_language, model=None, timeout=None, url=None, num_pre
         "4. Write it as one flowing paragraph; do not insert blank lines."
         % target_language
     )
+    if extra_rules:
+        system += "\n" + extra_rules.strip()
     body = {
         "model": model or MODEL,
         "system": system,
         "prompt": text,
         "stream": False,
         "think": False,
-        "options": {"temperature": 0.1, "top_p": 0.9,
+        "options": {"temperature": temperature, "top_p": 0.9,
                     "num_ctx": NUM_CTX, "num_predict": num_predict},
     }
     out = _clean(_post(body, timeout=timeout, url=url).get("response", text))
@@ -159,6 +165,90 @@ def translate(text, target_language, model=None, timeout=None, url=None, num_pre
 def translate_many(texts, target_language, model=None):
     """Translate a list of strings one-by-one (keeps each segment aligned)."""
     return [translate(t, target_language, model=model) for t in texts]
+
+
+# --------------------------------------------------------------------------- length-bounded translation
+# A translation that must fit a fixed-height PDF box cannot be longer than the
+# English it replaces (the layout was budgeted around the English word targets).
+# translate_bounded() enforces that contract:
+#   1. it tells the model up front to match the source length,
+#   2. it measures the result (in code points excluding non-spacing marks, so
+#      viramas/anusvara/conjunct marks don't unfairly inflate the count),
+#   3. if too long it retries with explicit "you were N% over" feedback,
+#   4. it keeps the best attempt, and as a last resort trims whole sentences
+#      (never mid-sentence) down to the hard budget.
+TRANSLATE_SOFT_RATIO = 1.20    # accept immediately at or below this ratio to source
+TRANSLATE_HARD_RATIO = 1.30    # after all attempts, sentence-clamp down to this
+TRANSLATE_MAX_ATTEMPTS = 3     # 1 initial try + up to 2 "shorten" retries
+
+_CONCISE_RULE = (
+    "5. LENGTH LIMIT: the translation must be about the SAME LENGTH as the original "
+    "text, and never longer. Translate faithfully but economically; do not elaborate, "
+    "explain, or add anything that is not in the original."
+)
+
+# sentence terminators across the site's scripts: Latin . ! ?  Devanagari danda/double
+# danda (। ॥), Urdu full stop (۔) and Arabic question mark (؟).
+_SENT_SPLIT = re.compile(u"(?<=[.!?\u0964\u0965\u06d4\u061f])\\s+")
+
+
+def visual_len(s):
+    """Length excluding non-spacing marks (anusvara, virama, above/below vowel signs):
+    a fairer cross-script size measure, since those marks take no horizontal space.
+    Spacing matras still count, as they do consume width."""
+    return sum(1 for ch in (s or "") if unicodedata.category(ch) not in ("Mn", "Me"))
+
+
+def clamp_sentences_to_chars(text, max_chars):
+    """Drop whole sentences from the end until visual_len(text) <= max_chars.
+    Always keeps at least the first sentence; never cuts mid-sentence."""
+    if visual_len(text) <= max_chars:
+        return text
+    parts = _SENT_SPLIT.split(text.strip())
+    out, n = [], 0
+    for s in parts:
+        sl = visual_len(s) + (1 if out else 0)
+        if out and n + sl > max_chars:
+            break
+        out.append(s)
+        n += sl
+    return " ".join(out).strip() or text
+
+
+def translate_bounded(text, target_language, model=None, timeout=None, url=None,
+                      soft_ratio=TRANSLATE_SOFT_RATIO, hard_ratio=TRANSLATE_HARD_RATIO,
+                      attempts=TRANSLATE_MAX_ATTEMPTS, label=None, log=print):
+    """Translate `text` with a length budget relative to the source, for prose that
+    must fit a fixed PDF box. Returns text whose visual length is at most
+    hard_ratio x the source (except a single over-long sentence, which is never cut)."""
+    if not text or not text.strip() or is_english(target_language):
+        return text
+    src_len = max(1, visual_len(text))
+    best = None  # (ratio, output)
+    for attempt in range(1, attempts + 1):
+        rules = _CONCISE_RULE
+        if attempt > 1 and best is not None:
+            over = max(1, int(round((best[0] - 1.0) * 100)))
+            rules += ("\n6. Your previous translation was about %d%% longer than the "
+                      "original. This attempt MUST be shorter: keep every fact, but cut "
+                      "filler words and use the most compact natural phrasing." % over)
+        out = translate(text, target_language, model=model, timeout=timeout, url=url,
+                        temperature=(0.1 if attempt == 1 else 0.3), extra_rules=rules)
+        ratio = visual_len(out) / float(src_len)
+        if best is None or ratio < best[0]:
+            best = (ratio, out)
+        if ratio <= soft_ratio:
+            return out
+    ratio, out = best
+    if ratio > hard_ratio:
+        clamped = clamp_sentences_to_chars(out, int(src_len * hard_ratio))
+        if label:
+            log("    (%s: %.2fx source after %d tries -> clamped to %.2fx)"
+                % (label, ratio, attempts, visual_len(clamped) / float(src_len)))
+        return clamped
+    if label:
+        log("    (%s: %.2fx source, within the hard limit)" % (label, ratio))
+    return out
 
 
 def health():

@@ -11,6 +11,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header">
 <div class="usdm-header-inner">
 <h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1>
@@ -27,9 +28,10 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a class="active" data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="contact.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="contact.about" href="about.html">About</a> <span class="sep">/</span> <span data-i18n="contact.contact_us">Contact Us</span></div>
 <h1 class="page-title" data-i18n="contact.contact_us">Contact Us</h1>
 <p data-i18n="contact.for_questions_about_the_indi" style="font-size:17px;max-width:80ch;color:#3a3431;">
@@ -81,7 +83,7 @@
 </div>
 <div class="card">
 <h4 style="margin-top:0;">Pranav Joshi</h4>
-<p style="margin:0;">✉ <a href="mailto:pranav.joshi@iitgn.ac.in">pranav.joshi@iitgn.ac.in</a></p>
+<p style="margin:0;">✉ <a href="mailto:pranavajoshi04@gmail.com">pranavajoshi04@gmail.com</a></p>
 </div>
 </div>
 <h2 class="mt-3" data-i18n="contact.general_contact">General Contact</h2>
@@ -106,17 +108,16 @@
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>

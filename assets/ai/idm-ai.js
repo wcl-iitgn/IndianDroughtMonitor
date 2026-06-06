@@ -6,10 +6,13 @@
  *   2) A CHATBOT that answers questions about the drought + Hydrological Outlook
  *      data by writing AlaSQL queries against in-browser tables.
  *
- * LLM endpoint: an Ollama server on the LAN, using the /api/generate route.
- *   curl http://HOST:11434/api/generate -d '{"model":"qwen3.5:4b",
- *        "prompt":"...","stream":false,"think":false}'
- * We always use NON-THINKING mode ("think": false).
+ * LLM endpoint: the WCL OpenAI API — a Flask app on PythonAnywhere
+ * (https://wcliitgnopenaiapi.pythonanywhere.com) that holds the OpenAI key
+ * SERVER-SIDE. The browser talks to it as an anonymous, NON-privileged user:
+ *   POST /api/auth   {username}        -> {token}   (temporary session)
+ *   POST /api/chat   {token, prompt}   -> {reply}   (server calls OpenAI)
+ *   POST /api/logout {token}                        (ends the session)
+ * No API key ever ships in this file. Admin routes of that API are NOT used.
  *
  * The data the chatbot can query is loaded into AlaSQL as three tables; the LLM
  * is given the FULL SCHEMA (column names, types, meaning) in its system prompt —
@@ -20,21 +23,10 @@
 
   // ---- configuration ---------------------------------------------------------
   var CFG = {
-    // Which backend the chatbot/LLM calls use. User-switchable in the chat UI.
-    //   "ollama"   -> LAN Ollama server (/api/generate)
-    //   "deepseek" -> DeepSeek cloud API (OpenAI-compatible /v1/chat/completions)
-    provider: "deepseek",
-    ollama: {
-      apiUrl: "http://10.0.60.193:11434/api/generate",
-      model: "gemma4:e2b"
-    },
-    deepseek: {
-      apiUrl: "https://api.deepseek.com/v1/chat/completions",
-      model: "deepseek-chat",
-      // Hardcoded key (usage-capped on the DeepSeek dashboard, per the project owner).
-      // NOTE: this ships in the static site and is visible to anyone who views source.
-      // The chat settings field can override it per-browser; rotate the key if needed.
-      apiKey: "sk-c3bd196cbb2f46b6b6a559f42fb99d68"
+    // The WCL OpenAI API (key held server-side; model & temperature are decided
+    // by the server). Only the standard NON-ADMIN endpoints are used here.
+    wcl: {
+      baseUrl: "https://wcliitgnopenaiapi.pythonanywhere.com"
     },
     // data file locations (relative to the site root)
     paths: {
@@ -50,76 +42,224 @@
 
   function configure(opts) {
     if (!opts) return;
-    if (opts.provider) CFG.provider = opts.provider;
-    if (opts.apiUrl) CFG.ollama.apiUrl = opts.apiUrl;   // backward-compat
-    if (opts.model) CFG.ollama.model = opts.model;       // backward-compat
-    if (opts.ollama) Object.assign(CFG.ollama, opts.ollama);
-    if (opts.deepseek) Object.assign(CFG.deepseek, opts.deepseek);
+    if (opts.wcl) Object.assign(CFG.wcl, opts.wcl);
     if (opts.paths) Object.assign(CFG.paths, opts.paths);
   }
-  function getProvider() { return CFG.provider; }
   function getConfig() { return CFG; }
 
-  // ---- low-level LLM call (routes to the selected provider) ------------------
+  // ---- low-level LLM call (WCL OpenAI API, non-admin flow) -------------------
+  // The API keeps a conversation history SERVER-side per session token and has
+  // no separate "system" role, so every call here is made STATELESS:
+  //   /api/auth  (anonymous per-browser username -> fresh session token)
+  //   /api/chat  (the system prompt folded into the one prompt string)
+  //   /api/logout (always, so the next call starts a clean session)
+  // That keeps the big schema prompts out of any persistent history and stays
+  // clear of the server's 10-message / 5-minute caps on temporary sessions.
+  // Model and temperature are fixed server-side; opts.temperature/maxTokens are
+  // accepted for compatibility but not transmitted.
+
+  var LS_WCL_USER = "idm_chat_user";
+
+  // A stable anonymous username per browser ("idm-xxxxxxxx"), so the server's
+  // users table stays small and per-user message totals mean something.
+  function wclUsername() {
+    var u = null;
+    try { u = localStorage.getItem(LS_WCL_USER); } catch (e) {}
+    if (!u) {
+      u = "idm-" + Math.random().toString(16).slice(2, 10);
+      try { localStorage.setItem(LS_WCL_USER, u); } catch (e) {}
+    }
+    return u;
+  }
+
+  async function wclPost(route, body) {
+    var r = await fetch(CFG.wcl.baseUrl + route, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body || {})
+    });
+    var j = null;
+    try { j = await r.json(); } catch (e) { /* non-JSON error body */ }
+    if (!r.ok) {
+      var err = new Error("LLM " + ((j && j.error) ? j.error : ("HTTP " + r.status)));
+      err.status = r.status;
+      throw err;
+    }
+    return j || {};
+  }
+
+  // The API only accepts a plain user prompt, so the system prompt is folded in.
+  function composePrompt(prompt, opts) {
+    if (opts && opts.system) {
+      return "SYSTEM INSTRUCTIONS (follow these exactly):\n" + opts.system +
+        "\n\n--------\nUSER REQUEST:\n" + prompt;
+    }
+    return prompt;
+  }
+
   // Returns the model's text. Throws on network/HTTP error.
   async function llm(prompt, opts) {
     opts = opts || {};
-    if (CFG.provider === "deepseek") return llmDeepSeek(prompt, opts);
-    return llmOllama(prompt, opts);
-  }
-
-  // Ollama /api/generate, non-thinking mode.
-  async function llmOllama(prompt, opts) {
-    var body = {
-      model: CFG.ollama.model,
-      prompt: prompt,
-      stream: false,
-      think: false,
-      options: {
-        temperature: opts.temperature != null ? opts.temperature : 0.7,
-        top_p: 0.8,
-        top_k: 20,
-        num_ctx: 8192,
-        num_predict: opts.maxTokens || 512
+    var composed = composePrompt(prompt, opts);
+    var lastErr = null;
+    for (var attempt = 0; attempt < 2; attempt++) {
+      var auth = await wclPost("/api/auth", { username: wclUsername(), password: "" });
+      var token = auth && auth.token;
+      if (!token) throw new Error("LLM auth failed: no session token returned");
+      try {
+        var res = await wclPost("/api/chat", { token: token, prompt: composed });
+        var txt = (res && res.reply != null) ? String(res.reply) : "";
+        // Server sentinel when a (stale, reused) session hit its message cap:
+        // log out happened in `finally`, so one retry gets a clean session.
+        if (/^Chat too long/i.test(txt) && attempt === 0) {
+          lastErr = new Error("LLM session was full; retrying with a fresh one");
+          continue;
+        }
+        if (txt.indexOf("</think>") !== -1) txt = txt.split("</think>").pop();
+        return txt.trim();
+      } catch (e) {
+        lastErr = e;
+        // 401 = the session raced an expiry or another tab's logout; retry once.
+        if (e && e.status === 401 && attempt === 0) continue;
+        throw e;
+      } finally {
+        try { await wclPost("/api/logout", { token: token }); } catch (e2) { /* best effort */ }
       }
-    };
-    if (opts.system) body.system = opts.system;
-    var r = await fetch(CFG.ollama.apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(body)
-    });
-    if (!r.ok) throw new Error("LLM HTTP " + r.status + ": " + (await r.text()).slice(0, 200));
-    var j = await r.json();
-    var txt = (j && j.response != null) ? String(j.response) : "";
-    if (txt.indexOf("</think>") !== -1) txt = txt.split("</think>").pop();
-    return txt.trim();
+    }
+    throw lastErr || new Error("LLM call failed");
   }
 
-  // DeepSeek (OpenAI-compatible) /v1/chat/completions with a Bearer key.
-  async function llmDeepSeek(prompt, opts) {
-    var key = (CFG.deepseek.apiKey || "").trim();
-    if (!key) throw new Error("DeepSeek API key not set");
-    var messages = [];
-    if (opts.system) messages.push({ role: "system", content: opts.system });
-    messages.push({ role: "user", content: prompt });
-    var body = {
-      model: CFG.deepseek.model,
-      messages: messages,
-      stream: false,
-      temperature: opts.temperature != null ? opts.temperature : 0.7,
-      max_tokens: opts.maxTokens || 512
-    };
-    var r = await fetch(CFG.deepseek.apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + key },
-      body: JSON.stringify(body)
-    });
-    if (!r.ok) throw new Error("LLM HTTP " + r.status + ": " + (await r.text()).slice(0, 200));
-    var j = await r.json();
-    var txt = "";
-    if (j && j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content != null) {
-      txt = String(j.choices[0].message.content);
+  // ---- named user session (the visible chat identity) ------------------------
+  // The chatbot signs the visitor in with a username they TYPE (password only
+  // for privileged accounts). The SERVER keeps that session's conversation, so
+  // the same chat follows the person across devices: /api/auth with the same
+  // username returns the SAME active session token, and /api/chat/history
+  // returns everything said so far. Temporary (passwordless) sessions expire
+  // 5 minutes after creation on the server; that surfaces here as
+  // SESSION_EXPIRED and the widget asks the person to sign in again.
+  // Internal model calls (SQL generation, the Summary page) deliberately do NOT
+  // run on this session — they use the anonymous stateless path above — so the
+  // user's server-side history stays a clean question-and-answer transcript and
+  // the server's 10-message cap counts the user's questions, not plumbing.
+
+  var LS_SESS_TOKEN = "idm_chat_token";
+  var LS_SESS_USER = "idm_chat_username";
+
+  function getSession() {
+    var tk = null, un = null;
+    try { tk = localStorage.getItem(LS_SESS_TOKEN); un = localStorage.getItem(LS_SESS_USER); } catch (e) {}
+    return (tk && un) ? { token: tk, username: un } : null;
+  }
+  function _storeSession(token, username) {
+    try { localStorage.setItem(LS_SESS_TOKEN, token); localStorage.setItem(LS_SESS_USER, username); } catch (e) {}
+  }
+  function clearSession() {
+    try { localStorage.removeItem(LS_SESS_TOKEN); localStorage.removeItem(LS_SESS_USER); } catch (e) {}
+  }
+  function _codeErr(code, message) { var e = new Error(message); e.code = code; return e; }
+
+  // Sign in (or create) a NON-ADMIN user. Blank password = 5-minute temporary
+  // session; privileged accounts use their permanent password.
+  async function login(username, password) {
+    username = String(username || "").trim();
+    if (!username) throw _codeErr("BAD_INPUT", "Please enter a username.");
+    var data;
+    try {
+      data = await wclPost("/api/auth", { username: username, password: String(password || "").trim() });
+    } catch (e) {
+      if (e && e.status === 401) throw _codeErr("BAD_PASSWORD", "That username needs its permanent password.");
+      throw e;
+    }
+    if (data.is_admin) {
+      // This widget uses only the non-admin flow; admin accounts belong on the
+      // API's own admin console.
+      throw _codeErr("ADMIN_NOT_ALLOWED", "Admin accounts can't use this chat. Please pick a regular username.");
+    }
+    if (!data.token) throw _codeErr("AUTH_FAILED", "Sign-in failed: no session token returned.");
+    _storeSession(data.token, data.username || username);
+    return { username: data.username || username, isPrivileged: !!data.is_privileged };
+  }
+
+  // Is the locally stored token still active on the server?
+  async function verifySession() {
+    var s = getSession();
+    if (!s) return null;
+    try {
+      await wclPost("/api/auth/verify", { token: s.token });
+      return s;
+    } catch (e) {
+      clearSession();
+      return null;
+    }
+  }
+
+  async function logoutSession() {
+    var s = getSession();
+    if (s) { try { await wclPost("/api/logout", { token: s.token }); } catch (e) {} }
+    clearSession();
+  }
+
+  // The conversation as the server has it (used to restore the chat on another
+  // device / page load).
+  async function fetchSessionHistory() {
+    var s = getSession();
+    if (!s) return [];
+    try {
+      var rows = await wclPost("/api/chat/history", { token: s.token });
+      return Array.isArray(rows) ? rows : [];
+    } catch (e) { return []; }
+  }
+
+  // The answer call's stored prompt is composite (question + SQL + result rows),
+  // so when restoring history pull the human question back out of it.
+  function parseHistoryEntry(m) {
+    var role = (m && m.role) === "user" ? "user" : "assistant";
+    var text = String((m && m.content) || "");
+    if (role === "user") {
+      var q = /Latest user question:\s*([\s\S]*?)\n\nSQL used:/.exec(text);
+      if (q) return { role: "user", text: q[1].trim() };
+      var u = /USER REQUEST:\n([\s\S]*)$/.exec(text);
+      if (u) return { role: "user", text: u[1].trim() };
+    }
+    return { role: role, text: text.trim() };
+  }
+
+  // Ask the admins for a privileged (permanent-password) account. The server
+  // logs one pending request per username; an admin approves or rejects it.
+  async function requestPrivilege() {
+    var s = getSession();
+    if (!s) throw _codeErr("NO_SESSION", "Not signed in.");
+    try {
+      var res = await wclPost("/api/request-privilege", { token: s.token });
+      return (res && res.message) || "Privilege upgrade request logged.";
+    } catch (e) {
+      if (e && e.status === 401) {
+        clearSession();
+        throw _codeErr("SESSION_EXPIRED", "Your 5-minute session has ended.");
+      }
+      throw e;
+    }
+  }
+
+  // One chat turn on the user's NAMED session; the server appends it to that
+  // session's history (this is what other devices see).
+  async function llmSession(prompt, opts) {
+    var s = getSession();
+    if (!s) throw _codeErr("NO_SESSION", "Not signed in.");
+    var composed = composePrompt(prompt, opts || {});
+    var res;
+    try {
+      res = await wclPost("/api/chat", { token: s.token, prompt: composed });
+    } catch (e) {
+      if (e && e.status === 401) {
+        clearSession();
+        throw _codeErr("SESSION_EXPIRED", "Your 5-minute session has ended.");
+      }
+      throw e;
+    }
+    var txt = (res && res.reply != null) ? String(res.reply) : "";
+    if (/^Chat too long/i.test(txt)) {
+      throw _codeErr("SESSION_FULL", "This session reached its 10-message limit.");
     }
     if (txt.indexOf("</think>") !== -1) txt = txt.split("</think>").pop();
     return txt.trim();
@@ -452,8 +592,16 @@
   // fresh, independent inference (no prior turns are sent to the model). The `ask`
   // signature still accepts a `history` argument for backward compatibility, but it is
   // ignored here, so follow-ups are treated as standalone questions.
+  // Compact transcript for the STATELESS SQL-generation calls, so references
+  // like "that state" resolve. (The answer call doesn't need it: it runs on the
+  // named session, whose history the server replays to the model.)
   function historyBlock(history) {
-    return "";
+    if (!history || !history.length) return "";
+    var turns = history.slice(-8).map(function (m) {
+      var who = m.role === "user" ? "User" : "Assistant";
+      return who + ": " + String(m.content || "").replace(/\s+/g, " ").slice(0, 200);
+    });
+    return "Conversation so far:\n" + turns.join("\n") + "\n\n";
   }
 
   // Full multi-turn ask. `history` is the prior turns (excluding the current
@@ -490,8 +638,11 @@
     if (onStage) onStage("rows", rows);
 
     var preview = JSON.stringify((rows || []).slice(0, 30));
-    var answer = await llm(
-      hist + "Latest user question: " + question + "\n\nSQL used: " + sql +
+    // The final answer runs on the user's NAMED session: the server stores this
+    // turn (and replays it for context next time), which is what makes the same
+    // chat show up on the user's other devices.
+    var answer = await llmSession(
+      "Latest user question: " + question + "\n\nSQL used: " + sql +
       "\n\nResult rows (JSON): " + preview + "\n\nWrite a short, direct answer to the latest question.",
       { system: ANSWER_SYSTEM, temperature: 0.7, maxTokens: 350 });
     if (onStage) onStage("answer", answer);
@@ -501,12 +652,19 @@
   // ---- expose ---------------------------------------------------------------
   window.IDM_AI = {
     configure: configure,
-    getProvider: getProvider,
     getConfig: getConfig,
     llm: llm,
     loadData: loadData,
     schemaDoc: schemaDoc,
     META: META,
+    // named user session (chat identity)
+    login: login,
+    logoutSession: logoutSession,
+    verifySession: verifySession,
+    getSession: getSession,
+    fetchSessionHistory: fetchSessionHistory,
+    parseHistoryEntry: parseHistoryEntry,
+    requestPrivilege: requestPrivilege,
     // summary
     generateSummary: generateSummary,
     loadCachedSummary: loadCachedSummary,

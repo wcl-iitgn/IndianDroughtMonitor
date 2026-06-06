@@ -717,24 +717,31 @@ def load_pdf_texts(repo, lang_key):
 
 def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="gemma4:e2b"):
     """Translate the dynamic LLM paragraphs (dict slot->text) into the target language
-    via the shared idm_llm module (one model, sanitised output). Returns a new dict,
-    or None if the translation server is unreachable."""
+    via the shared idm_llm module. Each paragraph is LENGTH-BOUNDED relative to its
+    English source (the PDF layout's word budgets only constrain the English), so a
+    translation can never overflow its fixed-height box: the model is told to match
+    the source length, over-long attempts get "shorten" retries, and as a last resort
+    whole sentences are trimmed. Returns a new dict, or None if the server is down."""
     slots = list(paragraphs.keys())
     texts = [paragraphs[s] for s in slots]
+    labels = ["%s -> %s" % (s, tgt_lang_name) for s in slots]
     try:
-        out = _simple_translate(texts, tgt_lang_name, api_url, model)
+        out = _simple_translate(texts, tgt_lang_name, api_url, model, labels=labels)
     except Exception as e:
         print(f"    (paragraph translation failed: {e})")
         return None
     return {s: out[i] for i, s in enumerate(slots)}
 
 
-def _simple_translate(texts, tgt_lang_name, api_url, model="gemma4:e2b"):
-    """Translate each paragraph through idm_llm, which uses the proper translation
-    prompt and sanitises the result for LaTeX (strips markdown/preamble, collapses
-    blank lines). `api_url` is honoured so a direct run's --translate-api wins."""
+def _simple_translate(texts, tgt_lang_name, api_url, model="gemma4:e2b", labels=None):
+    """Translate each paragraph through idm_llm's length-bounded translator, which
+    uses the proper translation prompt, enforces the per-paragraph length budget and
+    sanitises the result for LaTeX (strips markdown/preamble, collapses blank
+    lines). `api_url` is honoured so a direct run's --translate-api wins."""
     import idm_llm
-    return [idm_llm.translate(t, tgt_lang_name, model=model, url=api_url) for t in texts]
+    labels = labels or [None] * len(texts)
+    return [idm_llm.translate_bounded(t, tgt_lang_name, model=model, url=api_url, label=lab)
+            for t, lab in zip(texts, labels)]
 
 
 def main():

@@ -1,9 +1,13 @@
 # Running the India Drought Monitor pipeline
 
-One model — **`gemma4:e2b`** on a local Ollama server — does everything: the PDF
-prose, the weekly national summary, the translation of that text (and the PDFs'
-static headings/About text) into all 22 languages, and the chatbot. There is no separate translation service and no
-multi-stage ordering to manage by hand.
+One model — **`gemma4:e2b`** on a local Ollama server — does the *build-time* text:
+the PDF prose, the weekly national summary, and the translation of that text (and
+the PDFs' static headings/About text) into all 22 languages. There is no separate
+translation service and no multi-stage ordering to manage by hand.
+
+The **chatbot is separate**: at runtime it talks to the WCL OpenAI API on
+PythonAnywhere (`wcliitgnopenaiapi.pythonanywhere.com`) — Ollama is *not* needed to
+run or test the chatbot. See section 3 for the port requirement that implies.
 
 ## 0. One-time setup (Mac)
 
@@ -136,3 +140,62 @@ per-language content).
 
 If you re-extract `Texts/ui.en.json` (e.g. after editing page text), re-run the
 extractor that reads the `data-i18n` keys before re-translating.
+
+## 3. Serve & test locally — **use port 5500**
+
+```bash
+python3 -m http.server 5500        # NOT 8000
+open http://localhost:5500
+```
+
+The chatbot's backend only allows the origins `localhost:5500`, `127.0.0.1:5500`
+and `indiadroughtmonitor.in` (+www). On any other port the site works but every
+chatbot call is blocked by CORS. (If production is still served from
+`wcl-iitgn.github.io`, Pranav must add that origin to the CORS list in
+`backend.py` before the chatbot works there.)
+
+Browser checklist after a build:
+
+1. **Current page** — hover the map: District fills in the readout; drag
+   *Smoothness* 1→6; switch a week; Download PNG.
+2. **Languages** — switch to Hindi etc.; untranslated strings (the pending
+   Gemini batch) intentionally show in English.
+3. **Chatbot** — sign in with any username (blank password = 5-minute session);
+   ask two questions; open a second browser, sign in with the *same* username:
+   the chat follows you. Wait 5 minutes → it asks you to sign in again. Try
+   "Request permanent access".
+4. **Admin console** — `http://localhost:5500/chatbot-admin.html` (unlinked).
+   Sign in with the seeded admin, approve a pending privilege request (copy the
+   one-time password it shows), then rotate the seeded admin: create a new
+   admin user, sign in as it, delete the old `admin` row.
+5. **Hydro / Summary / Forecast** — open the latest PDFs and the publications,
+   disclaimer and about (acknowledgements section) pages.
+
+## 4. Verified end-to-end run (fast path, no model)
+
+This exact sequence was run on a clean unzip of the delivered build and timed:
+
+```bash
+python3 -m pip install --break-system-packages numpy scipy pandas matplotlib reportlab requests
+python3 build.py --only schema     --skip-llm                            # ~1 s
+python3 build.py --only uistrings  --skip-llm                            # no-op (languages exist)
+python3 build.py --only pdfstrings --skip-llm                            # no-op (caches exist)
+python3 build.py --only hydro      --skip-llm --pdf-engine matplotlib    # ~52 s
+python3 build.py --only summary    --skip-llm                            # ~75 s (incremental: 1 new week)
+python3 build.py --only forecast   --skip-llm                            # ~27 s
+python3 -m http.server 5500
+```
+
+Notes from that run:
+
+* Stages are **incremental** — summary/forecast render only weeks that are
+  missing, so routine re-runs take minutes, not hours.
+* `--pdf-engine matplotlib` is the fallback when XeLaTeX/MacTeX isn't
+  installed; on the lab Mac with MacTeX, omit it to get the LaTeX PDFs.
+* Without `--skip-llm`, build.py first health-checks Ollama; if the LAN server
+  is unreachable that check burns ~3 minutes in timeouts before falling back —
+  pass `--skip-llm` (or `--ollama-url http://localhost:11434/api/generate`)
+  when you're away from the lab network.
+* The full multilingual build is the same commands without `--skip-llm`
+  (Ollama reachable); per-language text is cached, so only missing
+  translations are generated.

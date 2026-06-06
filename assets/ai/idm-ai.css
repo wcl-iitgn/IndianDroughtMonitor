@@ -111,3 +111,82 @@
 .idm-summary-title { margin: 0 0 12px; font-size: 21px; }
 .idm-summary-text { font-size: 16.5px; line-height: 1.7; color: #2c2826; white-space: pre-wrap; }
 .idm-summary-author { margin: 16px 0 0; font-style: italic; color: var(--usdm-muted, #7a716c); font-size: 14px; }
+
+/* ---- sign-in view + signed-in bar (WCL OpenAI API sessions) ---- */
+.idm-chat-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 14px;
+  border-bottom: 1px solid #e4ded8;
+  background: #faf7f3;
+}
+.idm-chat-auth-title { font-weight: 700; font-size: 14px; color: #2b2826; }
+.idm-chat-auth-input {
+  padding: 8px 10px;
+  border: 1px solid #d8d1ca;
+  border-radius: 6px;
+  font-size: 13.5px;
+  font-family: inherit;
+}
+.idm-chat-auth-input:focus { outline: 2px solid rgba(218, 57, 16, .35); border-color: #da3910; }
+.idm-chat-signin {
+  padding: 9px 12px;
+  background: #da3910;
+  color: #fff;
+  border: 0;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+.idm-chat-signin:hover { background: #b92f0c; }
+.idm-chat-signin:disabled { opacity: .6; cursor: default; }
+.idm-chat-auth-err { color: #b91c1c; font-size: 12.5px; min-height: 1em; }
+.idm-chat-auth-note { color: #6b6664; font-size: 12px; line-height: 1.45; }
+.idm-chat-userbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 14px;
+  border-bottom: 1px solid #e4ded8;
+  background: #faf7f3;
+  font-size: 12.5px;
+  color: #4a4644;
+}
+.idm-chat-signout {
+  background: none;
+  border: 0;
+  color: #da3910;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+.idm-chat-signout:hover { text-decoration: underline; }
+
+/* ---- fix: the hidden attribute must beat the flex display above ---- */
+.idm-chat-auth[hidden], .idm-chat-userbar[hidden] { display: none; }
+
+/* ---- expandable panel ---- */
+.idm-chat-headbtns { display: flex; align-items: center; gap: 2px; }
+.idm-chat-expand {
+  background: none; border: 0; color: #fff;
+  font-size: 17px; line-height: 1; cursor: pointer; padding: 4px 7px;
+}
+.idm-chat-expand:hover, .idm-chat-close:hover { opacity: .85; }
+.idm-chat-panel.idm-chat-max {
+  width: min(760px, calc(100vw - 32px));
+  height: min(86vh, 920px);
+}
+
+/* ---- user bar buttons (request access + sign out) ---- */
+.idm-chat-userbtns { display: flex; align-items: center; gap: 12px; flex: 0 0 auto; }
+.idm-chat-priv {
+  background: none; border: 0; color: #6b6664;
+  font-size: 12.5px; font-weight: 600; cursor: pointer; padding: 2px 0;
+}
+.idm-chat-priv:hover { color: #da3910; text-decoration: underline; }
+.idm-chat-priv:disabled { opacity: .5; cursor: default; }
+.idm-chat-whoami { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -12,6 +12,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:data_query.primary">
 <div class="usdm-nav-inner">
@@ -24,12 +25,13 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="data_query.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="data_query.data" href="data.html">Data</a> <span class="sep">/</span> <span data-i18n="data_query.query_the_data">Query the Data</span></div>
 <h1 class="page-title" data-i18n="data_query.query_the_data">Query the Data</h1>
-<p data-i18n="data_query.run_your_own_read_only_stron" data-i18n-html="1" style="font-size:16.5px;max-width:80ch;color:#3a3431;">
+<p data-i18n="data_query.run_your_own_read_only_stron" data-i18n-html="1" class="page-lead">
       Run your own read-only <strong>SQL</strong> (AlaSQL dialect) against the same in-browser tables
       that power the assistant: the national weekly drought series, the latest per-state breakdown,
       and the monthly Hydrological Outlook means. Everything runs locally in your browser —
@@ -41,7 +43,7 @@
 <div class="query-layout">
 <section class="query-main">
 <div class="query-editor-wrap">
-<textarea aria-label="SQL query" data-i18n-attr="placeholder:data_query.select_from_drought_state_la;aria-label:data_query.sql_query" id="sql-input" placeholder="SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10" spellcheck="false"></textarea>
+<textarea aria-label="SQL query" data-i18n-attr="placeholder:data_query.select_from_drought_state_la, aria-label:data_query.sql_query" id="sql-input" placeholder="SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10" spellcheck="false"></textarea>
 <div class="query-actions">
 <button class="idm-btn" data-i18n="data_query.run_query" id="run-btn" type="button">▶ Run query</button>
 <button class="idm-btn ghost" data-i18n="data_query.clear" id="clear-btn" type="button">Clear</button>
@@ -68,17 +70,16 @@
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>

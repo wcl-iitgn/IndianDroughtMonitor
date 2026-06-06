@@ -13,6 +13,7 @@
 <script src="assets/i18n/i18n.js"></script>
 </head>
 <body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
 <header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
 <nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:data_graphs.primary">
 <div class="usdm-nav-inner">
@@ -25,32 +26,32 @@
 <a data-i18n="common_nav.about" href="about.html">About</a>
 <a data-i18n="common_nav.contact" href="contact.html">Contact</a>
 <a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
 </div>
 </nav>
-<main class="usdm-main">
+<main class="usdm-main" id="main">
 <div class="usdm-breadcrumbs"><a data-i18n="data_graphs.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="data_graphs.data" href="data.html">Data</a> <span class="sep">/</span> <span data-i18n="data_graphs.data_graphs">Data Graphs</span></div>
 <h1 class="page-title" data-i18n="data_graphs.data_graphs">Data Graphs</h1>
-<p data-i18n="data_graphs.the_percent_of_india_s_area" style="font-size:16.5px;color:#3a3431;">The percent of India’s area in each drought class, every week from July 2021 to the present.</p>
+<p data-i18n="data_graphs.the_percent_of_india_s_area" class="page-lead page-lead--full">The percent of India’s area in each drought class, every week from July 2021 to the present.</p>
 <div class="dsci-bar-wrap" style="padding:16px;">
 <div class="muted" data-i18n="data_graphs.loading_time_series" id="chart-loading" style="padding:40px;text-align:center;">Loading time series…</div>
 <svg id="ts-chart" style="width:100%;height:auto;display:none;background:#fff;border:1px solid #e2dfdc;border-radius:6px;" viewbox="0 0 1140 380" xmlns="http://www.w3.org/2000/svg"></svg>
 </div>
-<h2 data-i18n="data_graphs.reading_the_chart" data-i18n-html="1">Reading the<br>Chart</h2>
+<h2 data-i18n="data_graphs.reading_the_chart" data-i18n-html="1">Reading the<br/>Chart</h2>
 <p data-i18n="data_graphs.each_coloured_band_is_the_sh">Each coloured band represents the percentage of India’s area classified within a specific drought category during a given week (D0: Abnormally Dry through D4: Exceptional Drought). Seasonal drought expansion before the monsoon and recovery after the monsoon are visible each year, while wider dark-red bands indicate the most severe and widespread drought events.</p>
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
-<div class="partner-logos">
-<img alt="Water and Climate Lab, IIT Gandhinagar" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
-<img alt="Indian Institute of Technology Gandhinagar" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
-<img alt="India Meteorological Department" data-i18n-attr="alt:common_footer.india_meteorological_departm" src="assets/logos/imd.png"/>
-</div>
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
 <p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
         The India Drought Monitor is developed by the Water and Climate Lab at the Indian
         Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
         India Meteorological Department and the Central Water Commission, satellite products
         from ISRO/NRSC, and global datasets from NASA.
       </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
 <div class="contact-block">
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>
