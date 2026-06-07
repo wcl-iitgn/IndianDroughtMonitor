@@ -29,7 +29,8 @@
     "primary": "پرائمري"
   },
   "common_header": {
-    "india_drought_monitor": "India Drought Monitor"
+    "india_drought_monitor": "India Drought Monitor",
+    "skip_to_content": "مکيه مواد ڏانهن وڃو"
   },
   "common_nav": {
     "current": "موجوده",
@@ -39,7 +40,10 @@
     "forecast": "اڳڪٿي",
     "hydrological_outlook": "هائيڊرولاجيڪل آئوٽ لڪ",
     "about": "بابت",
-    "contact": "رابطو ڪريو"
+    "contact": "رابطو ڪريو",
+    "acknowledgements": "اعتراف",
+    "disclaimer": "ڊسڪليمر",
+    "publications": "شايع ٿيل مواد"
   },
   "common_footer": {
     "the_india_drought_monitor_is": "India Drought Monitor کي IIT Gandhinagar ۾ Water and Climate Lab پاران تيار ڪيو ويو آهي، جيڪو India Meteorological Department ۽ Central Water Commission کان هائيڊرو-ميٽيورولوجيڪل ڊيٽا، ISRO/NRSC کان سيٽلائيٽ پراڊڪٽس، ۽ NASA کان عالمي ڊيٽا سيٽ حاصل ڪري ٿو.",
@@ -68,7 +72,9 @@
     "2026_water_and_climate_lab_i": "© 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · تحقيق ۽ نمائش جي مقصدن لاءِ",
     "water_and_climate_lab_iit_ga": "Water and Climate Lab, IIT Gandhinagar",
     "indian_institute_of_technolo": "Indian Institute of Technology Gandhinagar",
-    "india_meteorological_departm": "India Meteorological Department"
+    "india_meteorological_departm": "India Meteorological Department",
+    "disclaimer_short": "انڊيا ڊراٽ مانيٽر جا اڳڪٿيون ۽ انڊيڪس مسلسل وڌندڙ سائنس تي ٻڌل آهن ۽ بغير ڪنهن وارنٽي جي مهيا ڪيا ويا آهن. مواد جو استعمال مڪمل طور تي توهان جي پنهنجي خطري تي آهي.",
+    "read_full_disclaimer": "مڪمل ڊسڪليمر پڙهو ←"
   },
   "animations": {
     "animations_india_drought_mon": "اينيميشنز | India Drought Monitor",
@@ -196,7 +202,11 @@
     "gujarat_382355_india": "گجرات 382355، ڀارت",
     "reporting_local_conditions": "مقامي حالتن جي رپورٽ ڪرڻ",
     "strong_how_local_reports_are": "مقامي رپورٽون ڪيئن استعمال ڪيون وڃن ٿيون: فصل، پاڻي، ۽ چراگاهن جي حالتن تي زميني مشاهدا ٽيم کي Combined Drought Index کي سمجهڻ ۽ درست ثابت ڪرڻ ۾ مدد ڪن ٿا. مهرباني ڪري نوٽ ڪريو ته هڪ رپورٽ ڏڪار جي مدد لاءِ درخواست نه آهي، ۽ ان ڳالهه جي ڪا به ضمانت نه آهي ته نقشو ڪنهن هڪ رپورٽ جي ڪري تبديل ٿيندو. نقشو ڪيترن ئي قسمن جي هائيڊرو-ميٽيورولوجيڪل ڊيٽا تي ٻڌل آهي؛ مقامي رپورٽون قيمتي حوالو شامل ڪن ٿيون ته حالتون زميني سطح تي ماڻهن کي ڪيئن متاثر ڪري رهيون آهن.",
-    "primary": "پرائمري"
+    "primary": "پرائمري",
+    "project_incharge": "پروجيڪٽ انچارج",
+    "vm_role_dean": "ڊين، تحقيق ۽ ترقي، IIT گانڌي نگر",
+    "vm_role_professor": "پروفيسر، سول انجنيئرنگ شعبو",
+    "website_developers": "ويب سائيٽ ڊولپرز"
   },
   "data_download": {
     "data_download_india_drought": "ڊيٽا ڊائون لوڊ | India Drought Monitor",
@@ -278,7 +288,9 @@
     "primary": "پرائمري",
     "select_from_drought_state_la;aria-label:data_query": {
       "sql_query": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10"
-    }
+    },
+    "select_from_drought_state_la": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10",
+    "sql_query": "SQL query"
   },
   "data_tables": {
     "data_tables_india_drought_mo": "ڊيٽا ٽيبلز | India Drought Monitor",
@@ -523,5 +535,41 @@
     "exceptional_drought": "غير معمولي ڏڪار",
     "primary": "پرائمري",
     "choose_summary_week": "خلاصي وارو هفتو چونڊيو"
+  },
+  "ack": {
+    "acknowledgements": "اعتراف",
+    "cwc_desc": "هائيڊرولوجيڪل ڊيٽا جيڪا مانيٽر جي تجزين ۽ آئوٽ لڪ پروڊڪٽس جي مدد ڪري ٿي.",
+    "cwc_name": "مرڪزي پاڻي ڪميشن (CWC)",
+    "endorsement": "انهن تنظيمن جي ڊيٽا جي استعمال جو مطلب اهو ناهي ته اهي انڊيا ڊراٽ مانيٽر يا ان مان تيار ڪيل ڪنهن به پروڊڪٽ جي توثيق ڪن ٿا.",
+    "imd_desc": "هائيڊرو-موسمياتي مشاهدا ۽ گرڊ ٿيل ڊيٽاسيٽس جيڪي مانيٽر جي خشڪسالي جي انڊيڪس جو بنياد آهن.",
+    "imd_name": "ڀارتي موسميات کاتو (IMD)",
+    "isro_desc": "خشڪسالي جي نگراني ۾ استعمال ٿيندڙ سيٽلائيٽ ڊيٽا پروڊڪٽس.",
+    "isro_name": "ڀارتي خلائي تحقيق جي تنظيم (ISRO) / قومي ريموٽ سينسنگ سينٽر (NRSC)",
+    "lead": "انڊيا ڊراٽ مانيٽر قومي ۽ بين الاقوامي ادارن پاران مهيا ڪيل ڊيٽا، پروڊڪٽس ۽ خدمتن تي ٻڌل آهي. اسان شڪرگذاري سان هيٺين ڊيٽا مهيا ڪندڙن جو اعتراف ڪريون ٿا:",
+    "nasa_desc": "مانيٽر جي تجزين ۾ استعمال ٿيندڙ عالمي ڊيٽاسيٽس.",
+    "nasa_name": "نيشنل ايرووناٽڪس اينڊ اسپيس ايڊمنسٽريشن (NASA)"
+  },
+  "common_map": {
+    "smoothness": "همواري (Smoothness)",
+    "smoothness_aria": "نڪشي جي همواري",
+    "smoothness_title": "وڌيڪ = گرڊ سيلز جي وچ ۾ وڌيڪ هموار انٽرپوليشن"
+  },
+  "disclaimer": {
+    "body_accuracy": "انڊيا ڊراٽ مانيٽر جو مقصد اهو يقيني بڻائڻ آهي ته مهيا ڪيل سمورو مواد درست هجي ۽ موجوده سائنسي سمجهه سان مطابقت رکي. تنهن هوندي، موسمياتي ۽ هائيڊرولوجيڪل اڳڪٿين جي سائنس مسلسل تبديل ٿي رهي آهي. تنهن ڪري، ڪنهن به اڳڪٿي کي حتمي حقيقت نه سمجهيو وڃي.",
+    "body_funding": "انڊيا ڊراٽ مانيٽر کي سائنس ۽ ٽيڪنالاجي کاتي (DST) پاران فنڊ ڪيل هائيڊرو ڪلائميٽ ايڪسٽريمس ۾ ميجر ريسرچ اينڊ ڊولپمينٽ پروگرام (MRDP) جي مدد حاصل آهي.",
+    "body_warranty": "قانون جي اجازت ڏنل مڪمل حد تائين، انڊيا ڊراٽ مانيٽر مواد جي حوالي سان تمام ظاهر يا اڻ ظاهر وارنٽين کي رد ڪري ٿو. مواد جو استعمال مڪمل طور تي توهان جي پنهنجي خطري تي آهي.",
+    "disclaimer": "ڊسڪليمر",
+    "disclaimer_india_drought_monitor": "ڊسڪليمر | انڊيا ڊراٽ مانيٽر",
+    "home": "گهر",
+    "primary": "بنيادي"
+  },
+  "publications": {
+    "home": "گهر",
+    "lead": "واٽر اينڊ ڪلائميٽ ليب ۽ ساٿين جي پيئر-رؤيوز ٿيل تحقيق جيڪا انڊيا ڊراٽ مانيٽر — ان جي ڊيٽاسيٽس، طريقن ۽ خشڪسالي جي پروڊڪٽس جو بنياد آهي.",
+    "note": "ڪجهه مقالن لاءِ ادارتي يا پبلشر جي رسائي جي ضرورت ٿي سگهي ٿي.",
+    "primary": "بنيادي",
+    "publications": "شايع ٿيل مواد",
+    "publications_india_drought_monitor": "شايع ٿيل مواد | انڊيا ڊراٽ مانيٽر",
+    "view_paper": "مقالو ڏسو"
   }
 }

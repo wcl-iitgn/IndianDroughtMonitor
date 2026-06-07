@@ -29,7 +29,8 @@
     "primary": "प्राथमिकम्"
   },
   "common_header": {
-    "india_drought_monitor": "India Drought Monitor"
+    "india_drought_monitor": "India Drought Monitor",
+    "skip_to_content": "मुख्यसामग्रीं प्रति गच्छन्तु"
   },
   "common_nav": {
     "current": "वर्तमानम्",
@@ -39,7 +40,10 @@
     "forecast": "पूर्वानुमानम्",
     "hydrological_outlook": "जलतात्त्विकदृष्टिकोणः",
     "about": "विषये",
-    "contact": "सम्पर्कः"
+    "contact": "सम्पर्कः",
+    "acknowledgements": "कृतज्ञताः",
+    "disclaimer": "अस्वीकरणम्",
+    "publications": "प्रकाशनानि"
   },
   "common_footer": {
     "the_india_drought_monitor_is": "India Drought Monitor इत्यस्य विकासः IIT Gandhinagar इत्यत्र विद्यमानया Water and Climate Lab द्वारा कृतः अस्ति, यस्मिन् India Meteorological Department तथा केन्द्रीयजलआयोगतः जल-मौसमदत्तांशः, ISRO/NRSC तः उपग्रह-उत्पादाः, NASA तः वैश्विकदत्तांशसञ्चयाः च उपयुक्ताः सन्ति।",
@@ -68,7 +72,9 @@
     "2026_water_and_climate_lab_i": "© 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · अनुसन्धाय प्रदर्शनार्थं च",
     "water_and_climate_lab_iit_ga": "Water and Climate Lab, IIT Gandhinagar",
     "indian_institute_of_technolo": "Indian Institute of Technology Gandhinagar",
-    "india_meteorological_departm": "India Meteorological Department"
+    "india_meteorological_departm": "India Meteorological Department",
+    "disclaimer_short": "इण्डिया ड्रॉट मॉनिटर इत्यस्य पूर्वानुमानं सूचकाङ्काः च निरन्तरवर्धमानविज्ञाने आधृताः सन्ति, ते च \"यथा अस्ति\" तथा प्रदीयन्ते। प्रयोगः भवताम् आत्मजोखिमेन एव करणीयः।",
+    "read_full_disclaimer": "पूर्णम् अस्वीकरणं पठन्तु →"
   },
   "animations": {
     "animations_india_drought_mon": "एनिमेशन्स् | India Drought Monitor",
@@ -196,7 +202,11 @@
     "gujarat_382355_india": "Gujarat 382355, India",
     "reporting_local_conditions": "स्थानीयपरिस्थितीनां विवरणम्",
     "strong_how_local_reports_are": "स्थानीयविवरणानां उपयोगः कथं भवति: धरातले सस्य-जल-चारागाहपरिस्थितीनां प्रत्यक्षीकरणं दलाय संयुक्त-अनावृष्टि-सूचकाङ्कस्य व्याख्यायां प्रमाणीकरणे च साहाय्यं करोति। कृपया ध्यानं ददतु यत् विवरणं अनावृष्टिसहायतायै आवेदनं नास्ति, न च कोऽपि निश्चयः अस्ति यत् कस्यचित् एकस्य विवरणस्य कारणात् मानचित्रं परिवर्तिष्यते। मानचित्रं बहुविधजलमौसमदत्तांशे आधारितम् अस्ति; स्थानीयविवरणानि धरातले जनान् कथं प्रभावितं कुर्वन्ति इति विषये मूल्यवान् सन्दर्भं योजयन्ति।",
-    "primary": "प्राथमिकम्"
+    "primary": "प्राथमिकम्",
+    "project_incharge": "परियोजना प्रभारी",
+    "vm_role_dean": "डीन, अनुसन्धान एवं विकासः, IIT गान्धीनगरम्",
+    "vm_role_professor": "प्राध्यापकः, सिविल इञ्जीनियरिङ्ग विभागः",
+    "website_developers": "जालस्थान विकासकाः"
   },
   "data_download": {
     "data_download_india_drought": "दत्तांशडाउनलोड् | India Drought Monitor",
@@ -278,7 +288,9 @@
     "primary": "प्राथमिकम्",
     "select_from_drought_state_la;aria-label:data_query": {
       "sql_query": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10"
-    }
+    },
+    "select_from_drought_state_la": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10",
+    "sql_query": "SQL query"
   },
   "data_tables": {
     "data_tables_india_drought_mo": "डेटा-कोष्ठकाः | India Drought Monitor",
@@ -523,5 +535,41 @@
     "exceptional_drought": "असाधारणानावृष्टिः",
     "primary": "प्राथमिकम्",
     "choose_summary_week": "सारांशसप्ताहं चिनुतु"
+  },
+  "ack": {
+    "acknowledgements": "कृतज्ञताः",
+    "cwc_desc": "जलविज्ञान सम्बन्धीकृत दत्तांशः यः मनिटर इत्यस्य विश्लेषणस्य आउटलुक उत्पादनानां च समर्थनं करोति।",
+    "cwc_name": "केन्द्रीय जल आयोगम् (CWC)",
+    "endorsement": "एतेषां संस्थानां दत्तांशप्रयोगस्य अयं अर्थः न भवति यत् ते इण्डिया ड्रॉट मॉनिटर अथवा तस्य उत्पादनानां समर्थनं कुर्वन्ति।",
+    "imd_desc": "जल-मौसम सम्बन्धी अवलोकनानि ग्रिड दत्तांशाः च ये मनिटर सूचकांकस्य आधारः सन्ति।",
+    "imd_name": "भारतीय मौसम विज्ञान विभागः (IMD)",
+    "isro_desc": "उपग्रह दत्तांश उत्पादाः ये शुष्कतापर्यवेक्षणे प्रयुक्ताः सन्ति।",
+    "isro_name": "भारतीय अन्तरिक्ष अनुसन्धान सङ्गठनम् (ISRO) / राष्ट्रिय सुदूर संवेदन केन्द्रम् (NRSC)",
+    "lead": "इण्डिया ड्रॉट मॉनिटर राष्ट्रिय र अन्तर्राष्ट्रिय संस्थाभिः प्रदत्तदत्तांशैः उत्पादैः च निर्मितम् अस्ति। वयम् एतेभ्यः दत्तांशप्रदातृभ्यः कृतज्ञतां ज्ञापयामः:",
+    "nasa_desc": "वैश्विक दत्तांशाः ये मनिटर विश्लेषणेषु प्रयुक्ताः सन्ति।",
+    "nasa_name": "नेशनल एयरोनॉटिक्स एंड स्पेस एडमिनिस्ट्रेशन (NASA)"
+  },
+  "common_map": {
+    "smoothness": "मन्दता (Smoothness)",
+    "smoothness_aria": "मानचित्र मन्दता",
+    "smoothness_title": "उच्चतरम् = ग्रिड कोशाणाम् मध्ये सुगमं विन्यासम्"
+  },
+  "disclaimer": {
+    "body_accuracy": "इण्डिया ड्रॉट मॉनिटर प्रदत्ता सामग्री शुद्धा वर्तते इति सुनिश्चितं कर्तुं प्रयतते। किन्तु मौसम-जलविज्ञान-सम्बन्धी पूर्वानुमानस्य विज्ञानं निरन्तरं परिवर्तनशीलम् अस्ति। अतः किमपि पूर्वानुमानं निश्चितं सत्यं न मन्तव्यम्।",
+    "body_funding": "इण्डिया ड्रॉट मॉनिटर विज्ञान एवं प्रौद्योगिकी विभाग (DST) द्वारा पोषितेन हाइड्रो क्लाइमेट एक्सट्रीम्स प्रमुख अनुसन्धान विकास कार्यक्रमेण (MRDP) समर्थितम् अस्ति।",
+    "body_warranty": "नियमानुसारं इण्डिया ड्रॉट मॉनिटर सामग्रीसम्बन्धे सर्वप्रकारकाः स्पष्टाः वा अन्तर्निहिताः ग्यारंटीः अस्वीकरोति।",
+    "disclaimer": "अस्वीकरणम्",
+    "disclaimer_india_drought_monitor": "अस्वीकरणम् | इण्डिया ड्रॉट मॉनिटर",
+    "home": "गृहम्",
+    "primary": "प्राथमिकम्"
+  },
+  "publications": {
+    "home": "गृहम्",
+    "lead": "वाटर एण्ड क्लाइमेट लैब तथा सहकारिणां पीयर-रिव्यूड अनुसन्धानं यत् इण्डिया ड्रॉट मॉनिटर इत्यस्य आधाराः सन्ति।",
+    "note": "केषाञ्चन लेखानां कृते संस्थागतप्रवेशस्य आवश्यकता भवितुं शक्नोति।",
+    "primary": "प्राथमिकम्",
+    "publications": "प्रकाशनानि",
+    "publications_india_drought_monitor": "प्रकाशनानि | इण्डिया ड्रॉट मॉनिटर",
+    "view_paper": "लेखं पश्यन्तु"
   }
 }

@@ -21,6 +21,7 @@
 #        [--params drought rainfall runoff soil] [--dates ...] [--maps-only]
 # =============================================================================
 
+import re
 import argparse
 import datetime as dt
 import json
@@ -46,6 +47,39 @@ PARAMS = {
                  "value_header": "Expected soil moisture (v/v)", "site_metric": "expected soil moisture"},
 }
 PARAM_ORDER = ["drought", "rainfall", "runoff", "soil"]
+
+
+
+# --- PDF archive policy ------------------------------------------------------
+# PDF archives are kept ONLY for these languages (site text still covers every
+# configured language); each archive series keeps at most the newest 4 PDFs,
+# and a PDF that already exists for a given date is never rebuilt.
+ARCHIVE_LANGS = ("English", "Hindi")   # languages that keep a multi-date PDF archive
+PDF_ARCHIVE_KEEP = 4                    # ...this many newest per series, for those languages
+
+def _archive_keep(key):
+    # Every language gets the CURRENT pdf; non-archive languages keep only it.
+    return PDF_ARCHIVE_KEEP if key in ARCHIVE_LANGS else 1
+
+def prune_pdf_archive(archive_dir, keep=PDF_ARCHIVE_KEEP, log=print):
+    """Keep only the newest `keep` PDFs per filename series in archive_dir
+    (dates sort lexically in both YYYY-MM-DD and YYYY_MM_DD forms)."""
+    from collections import defaultdict
+    d = Path(archive_dir)
+    if not d.is_dir():
+        return
+    groups = defaultdict(list)
+    for p in d.glob("*.pdf"):
+        m = re.match(r"(.*?)(\d{4}[-_]\d{2}[-_]\d{2})\.pdf$", p.name)
+        if m:
+            groups[m.group(1)].append((m.group(2), p))
+    for _prefix, items in groups.items():
+        for _date, p in sorted(items)[:-keep]:
+            try:
+                p.unlink()
+                log("  archive prune: removed %s" % p.name)
+            except OSError:
+                pass
 
 
 def grid_path(repo, param, h):
@@ -323,7 +357,8 @@ def main():
                 if not gp.exists():
                     print("  ! missing %s" % gp.relative_to(repo)); ok = False; break
                 out_png = fdir / "_maps" / ("%s_%dday_%s.png" % (param, h, d))
-                M.render_param_map(repo, gp, PARAMS[param]["cmap"], out_png, fine_step=args.fine_step)
+                M.render_param_map(repo, gp, PARAMS[param]["cmap"], out_png, fine_step=args.fine_step,
+                                   legend=("cdi" if PARAMS[param]["kind"] == "cdi" else "bands"))
                 mp[h] = out_png
             if not ok:
                 continue
@@ -384,12 +419,16 @@ def main():
                 national, rows = data_for[(param, d)]
                 national = nat_for.get((key, param, d), national)
                 out_pdf = fdir / key / "PDF_Archive" / ("IDM_Forecast_%s_%s.pdf" % (PARAMS[param]["file_label"], d))
+                if out_pdf.exists():
+                    print("  = %-9s %-8s %s (already in archive)" % (key, param, d)); skipped += 1; continue
                 try:
                     build_forecast_pdf(repo, lang, param, d, label, national, rows, maps_for[(param, d)], out_pdf)
                     print("  + %-9s %-8s %s" % (key, param, d)); built += 1
                 except Exception as e:
                     print("  ! %-9s %-8s %s : %s" % (key, param, d, e)); skipped += 1
 
+    for lang in langs:
+        prune_pdf_archive(fdir / lang["key"] / "PDF_Archive", keep=_archive_keep(lang["key"]))
     print("\nDone. PDFs built: %d, skipped: %d" % (built, skipped))
     return 0
 

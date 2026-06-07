@@ -39,6 +39,39 @@ import idm_llm
 
 
 # ----------------------------------------------------------------------------- regional outlook
+
+# --- PDF archive policy ------------------------------------------------------
+# PDF archives are kept ONLY for these languages (site text still covers every
+# configured language); each archive series keeps at most the newest 4 PDFs,
+# and a PDF that already exists for a given date is never rebuilt.
+ARCHIVE_LANGS = ("English", "Hindi")   # languages that keep a multi-date PDF archive
+PDF_ARCHIVE_KEEP = 4                    # ...this many newest per series, for those languages
+
+def _archive_keep(key):
+    # Every language gets the CURRENT pdf; non-archive languages keep only it.
+    return PDF_ARCHIVE_KEEP if key in ARCHIVE_LANGS else 1
+
+def prune_pdf_archive(archive_dir, keep=PDF_ARCHIVE_KEEP, log=print):
+    """Keep only the newest `keep` PDFs per filename series in archive_dir
+    (dates sort lexically in both YYYY-MM-DD and YYYY_MM_DD forms)."""
+    from collections import defaultdict
+    d = Path(archive_dir)
+    if not d.is_dir():
+        return
+    groups = defaultdict(list)
+    for p in d.glob("*.pdf"):
+        m = re.match(r"(.*?)(\d{4}[-_]\d{2}[-_]\d{2})\.pdf$", p.name)
+        if m:
+            groups[m.group(1)].append((m.group(2), p))
+    for _prefix, items in groups.items():
+        for _date, p in sorted(items)[:-keep]:
+            try:
+                p.unlink()
+                log("  archive prune: removed %s" % p.name)
+            except OSError:
+                pass
+
+
 def _describe_cdi(drought_pct, severe_pct):
     if drought_pct < 5:
         tone = "Largely normal conditions"
@@ -263,7 +296,7 @@ def main():
             grid = alt if alt.exists() else grid
         out_png = sumdir / "_maps" / ("CDI_%s.png" % d)
         try:
-            M.render_param_map(repo, grid, M.CDI, out_png, fine_step=args.fine_step)
+            M.render_param_map(repo, grid, M.CDI, out_png, fine_step=args.fine_step, legend="cdi")
             map_for[d] = out_png
             region_for[d] = compute_regional_cdi(repo, d)
             print("  map+regions: %s" % d)
@@ -332,12 +365,16 @@ def main():
                 skipped += 1; continue
             nat = national_part(txt.read_text(encoding="utf-8"))
             out_pdf = sumdir / key / "PDF_Archive" / ("IDM_Summary_%s.pdf" % d)
+            if out_pdf.exists():
+                print("  = %-9s %s (already in archive)" % (key, d)); skipped += 1; continue
             try:
                 build_summary_pdf(repo, lang, d, label, nat, region_for.get(d, []), map_for[d], out_pdf)
                 print("  + %-9s %s" % (key, d)); built += 1
             except Exception as e:
                 print("  ! %-9s %s : %s" % (key, d, e)); skipped += 1
 
+    for lang in langs:
+        prune_pdf_archive(sumdir / lang["key"] / "PDF_Archive", keep=_archive_keep(lang["key"]))
     print("\nDone. PDFs built: %d, skipped: %d" % (built, skipped))
     return 0
 

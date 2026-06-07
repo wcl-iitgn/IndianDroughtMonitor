@@ -346,7 +346,7 @@
         return L.length ? L[L.length - 1].iso : new Date().toISOString().slice(0, 10);
       }
       dlBtn.addEventListener("click", function () {
-        var url = map.toPNGDataURL(false); // data layer only (no HUD overlay) for a clean map
+        var url = map.toPNGDataURL(false, true); // clean map + baked-in legend
         var a = document.createElement("a");
         a.href = url;
         a.download = (cfg.downloadName || "india-drought-map") + "_" + currentDateStr() + ".png";

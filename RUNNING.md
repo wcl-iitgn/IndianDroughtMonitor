@@ -2,7 +2,7 @@
 
 One model — **`gemma4:e2b`** on a local Ollama server — does the *build-time* text:
 the PDF prose, the weekly national summary, and the translation of that text (and
-the PDFs' static headings/About text) into all 22 languages. There is no separate
+the PDFs' static headings/About text) into every configured language (see Texts/languages.json). There is no separate
 translation service and no multi-stage ordering to manage by hand.
 
 The **chatbot is separate**: at runtime it talks to the WCL OpenAI API on
@@ -16,8 +16,8 @@ run or test the chatbot. See section 3 for the port requirement that implies.
 python3 -m pip install --break-system-packages numpy scipy pandas matplotlib reportlab requests
 
 # PDFs are built with XeLaTeX (MacTeX) + the language fonts you already installed
-# (Carlito for English; Noto Sans Devanagari/Bengali/Gujarati/Gurmukhi/Oriya/Tamil/
-#  Telugu/Kannada/Malayalam/Ol Chiki; Noto Naskh Arabic + Noto Nastaliq Urdu for RTL).
+# (Carlito for English; Noto Sans Devanagari/Bengali/Gujarati/Gurmukhi/Tamil/
+#  Telugu/Kannada/Malayalam; Noto Naskh Arabic for Sindhi).
 
 # The model:
 ollama pull gemma4:e2b
@@ -71,7 +71,7 @@ python3 build.py --with-districts          # also refresh district data (needs n
 python3 build.py --ollama-url http://localhost:11434/api/generate
 ```
 
-The 22 languages are read from `Texts/languages.json`; edit that file to add or
+The languages are read from `Texts/languages.json`; edit that file to add or
 remove a language (key, FLORES `code`, `native` label, `dir`, and `pdf_font`).
 
 Because the static-text translation is slow on a small model (≈30–50 calls/language),

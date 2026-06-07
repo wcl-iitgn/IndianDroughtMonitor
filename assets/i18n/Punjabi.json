@@ -29,7 +29,8 @@
     "primary": "ਪ੍ਰਾਇਮਰੀ"
   },
   "common_header": {
-    "india_drought_monitor": "India Drought Monitor"
+    "india_drought_monitor": "India Drought Monitor",
+    "skip_to_content": "ਸਮੱਗਰੀ 'ਤੇ ਜਾਓ"
   },
   "common_nav": {
     "current": "ਮੌਜੂਦਾ",
@@ -39,7 +40,10 @@
     "forecast": "ਭਵਿੱਖਬਾਣੀ",
     "hydrological_outlook": "ਹਾਈਡ੍ਰੋਲੋਜੀਕਲ ਆਊਟਲੁੱਕ",
     "about": "ਬਾਰੇ",
-    "contact": "ਸੰਪਰਕ"
+    "contact": "ਸੰਪਰਕ",
+    "acknowledgements": "ਧੰਨਵਾਦ",
+    "disclaimer": "ਡਿਸਕਲੇਮਰ",
+    "publications": "ਪ੍ਰਕਾਸ਼ਨ"
   },
   "common_footer": {
     "the_india_drought_monitor_is": "India Drought Monitor ਨੂੰ Indian Institute of Technology Gandhinagar ਵਿਖੇ Water and Climate Lab ਦੁਆਰਾ ਵਿਕਸਤ ਕੀਤਾ ਗਿਆ ਹੈ, ਜੋ India Meteorological Department ਅਤੇ ਕੇਂਦਰੀ ਜਲ ਕਮਿਸ਼ਨ ਤੋਂ ਹਾਈਡ੍ਰੋ-ਮੀਟਿਓਰੋਲੋਜੀਕਲ ਡੇਟਾ, ISRO/NRSC ਤੋਂ ਸੈਟੇਲਾਈਟ ਉਤਪਾਦਾਂ, ਅਤੇ NASA ਤੋਂ ਗਲੋਬਲ ਡੇਟਾਸੈਟਾਂ 'ਤੇ ਆਧਾਰਿਤ ਹੈ।",
@@ -68,7 +72,9 @@
     "2026_water_and_climate_lab_i": "© 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · ਖੋਜ ਅਤੇ ਪ੍ਰਦਰਸ਼ਨ ਦੇ ਉਦੇਸ਼ਾਂ ਲਈ",
     "water_and_climate_lab_iit_ga": "Water and Climate Lab, IIT Gandhinagar",
     "indian_institute_of_technolo": "Indian Institute of Technology Gandhinagar",
-    "india_meteorological_departm": "India Meteorological Department"
+    "india_meteorological_departm": "India Meteorological Department",
+    "disclaimer_short": "ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਦੇ ਪੂਰਵ-ਅਨੁਮਾਨ ਅਤੇ ਸੂਚਕਾਂਕ ਨਿਰੰਤਰ ਵਿਕਸਤ ਹੋ ਰਹੀ ਵਿਗਿਆਨ 'ਤੇ ਅਧਾਰਤ ਹਨ ਅਤੇ ਬਿਨਾਂ ਕਿਸੇ ਵਾਰੰਟੀ ਦੇ \"ਜਿਵੇਂ ਹੈ\" ਪ੍ਰਦਾਨ ਕੀਤੇ ਜਾਂਦੇ ਹਨ। ਸਮੱਗਰੀ ਦੀ ਵਰਤੋਂ ਪੂਰੀ ਤਰ੍ਹਾਂ ਤੁਹਾਡੇ ਆਪਣੇ ਜੋਖਮ 'ਤੇ ਹੈ।",
+    "read_full_disclaimer": "ਪੂਰਾ ਡਿਸਕਲੇਮਰ ਪੜ੍ਹੋ →"
   },
   "animations": {
     "animations_india_drought_mon": "ਐਨੀਮੇਸ਼ਨ | India Drought Monitor",
@@ -196,7 +202,11 @@
     "gujarat_382355_india": "Gujarat 382355, India",
     "reporting_local_conditions": "ਸਥਾਨਕ ਸਥਿਤੀਆਂ ਦੀ ਰਿਪੋਰਟ ਕਰਨਾ",
     "strong_how_local_reports_are": "ਸਥਾਨਕ ਰਿਪੋਰਟਾਂ ਦੀ ਵਰਤੋਂ ਕਿਵੇਂ ਕੀਤੀ ਜਾਂਦੀ ਹੈ: ਫਸਲ, ਪਾਣੀ ਅਤੇ ਚਰਾਗਾਹ ਦੀਆਂ ਜ਼ਮੀਨੀ ਸਥਿਤੀਆਂ ਦੇ ਨਿਰੀਖਣ ਟੀਮ ਨੂੰ ਸੰਯੁਕਤ ਸੋਕਾ ਸੂਚਕਾਂਕ ਦੀ ਵਿਆਖਿਆ ਅਤੇ ਪ੍ਰਮਾਣਿਤ ਕਰਨ ਵਿੱਚ ਮਦਦ ਕਰਦੇ ਹਨ। ਕਿਰਪਾ ਕਰਕੇ ਧਿਆਨ ਦਿਓ ਕਿ ਇੱਕ ਰਿਪੋਰਟ ਸੋਕਾ ਸਹਾਇਤਾ ਲਈ ਅਰਜ਼ੀ ਨਹੀਂ ਹੈ, ਅਤੇ ਇਸ ਗੱਲ ਦੀ ਕੋਈ ਗਰੰਟੀ ਨਹੀਂ ਹੈ ਕਿ ਨਕਸ਼ਾ ਕਿਸੇ ਇੱਕ ਰਿਪੋਰਟ ਕਾਰਨ ਬਦਲ ਜਾਵੇਗਾ। ਨਕਸ਼ਾ ਕਈ ਤਰ੍ਹਾਂ ਦੇ ਹਾਈਡ੍ਰੋ-ਮੀਟਿਓਰੋਲੋਜੀਕਲ ਡੇਟਾ 'ਤੇ ਅਧਾਰਤ ਹੈ; ਸਥਾਨਕ ਰਿਪੋਰਟਾਂ ਇਸ ਬਾਰੇ ਕੀਮਤੀ ਸੰਦਰਭ ਜੋੜਦੀਆਂ ਹਨ ਕਿ ਸਥਿਤੀਆਂ ਜ਼ਮੀਨੀ ਪੱਧਰ 'ਤੇ ਲੋਕਾਂ ਨੂੰ ਕਿਵੇਂ ਪ੍ਰਭਾਵਿਤ ਕਰ ਰਹੀਆਂ ਹਨ।",
-    "primary": "ਪ੍ਰਾਇਮਰੀ"
+    "primary": "ਪ੍ਰਾਇਮਰੀ",
+    "project_incharge": "ਪ੍ਰੋਜੈਕਟ ਇੰਚਾਰਜ",
+    "vm_role_dean": "ਡੀਨ, ਖੋਜ ਅਤੇ ਵਿਕਾਸ, IIT ਗਾਂਧੀਨਗਰ",
+    "vm_role_professor": "ਪ੍ਰੋਫੈਸਰ, ਸਿਵਲ ਇੰਜੀਨੀਅਰਿੰਗ ਵਿਭਾਗ",
+    "website_developers": "ਵੈੱਬਸਾਈਟ ਡਿਵੈਲਪਰ"
   },
   "data_download": {
     "data_download_india_drought": "ਡੇਟਾ ਡਾਊਨਲੋਡ | India Drought Monitor",
@@ -278,7 +288,9 @@
     "primary": "ਪ੍ਰਾਇਮਰੀ",
     "select_from_drought_state_la;aria-label:data_query": {
       "sql_query": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10"
-    }
+    },
+    "select_from_drought_state_la": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10",
+    "sql_query": "SQL query"
   },
   "data_tables": {
     "data_tables_india_drought_mo": "ਡੇਟਾ ਟੇਬਲ | India Drought Monitor",
@@ -523,5 +535,41 @@
     "exceptional_drought": "ਬੇਮਿਸਾਲ ਸੋਕਾ",
     "primary": "ਪ੍ਰਾਇਮਰੀ",
     "choose_summary_week": "ਸਾਰ ਹਫ਼ਤਾ ਚੁਣੋ"
+  },
+  "ack": {
+    "acknowledgements": "ਧੰਨਵਾਦ",
+    "cwc_desc": "ਹਾਈਡ੍ਰੋਲੋਜੀਕਲ ਡੇਟਾ ਜੋ ਮਾਨੀਟਰ ਦੇ ਵਿਸ਼ਲੇਸ਼ਣ ਅਤੇ ਆਉਟਲੁੱਕ ਉਤਪਾਦਾਂ ਦਾ ਸਮਰਥਨ ਕਰਦਾ ਹੈ।",
+    "cwc_name": "ਕੇਂਦਰੀ ਜਲ ਕਮਿਸ਼ਨ (CWC)",
+    "endorsement": "ਇਨ੍ਹਾਂ ਸੰਸਥਾਵਾਂ ਦੇ ਡੇਟਾ ਦੀ ਵਰਤੋਂ ਦਾ ਮਤਲਬ ਇਹ ਨਹੀਂ ਹੈ ਕਿ ਉਹ ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਜਾਂ ਇਸ ਤੋਂ ਤਿਆਰ ਕੀਤੇ ਕਿਸੇ ਵੀ ਉਤਪਾਦ ਦਾ ਸਮਰਥਨ ਕਰਦੇ ਹਨ।",
+    "imd_desc": "ਹਾਈਡ੍ਰੋ-ਮੌਸਮ ਸੰਬੰਧੀ ਨਿਰੀਖਣ ਅਤੇ ਗ੍ਰਿਡ ਕੀਤੇ ਡੇਟਾਸੈਟ ਜੋ ਮਾਨੀਟਰ ਦੇ ਸੋਕੇ ਦੇ ਸੂਚਕਾਂਕ ਦਾ ਅਧਾਰ ਹਨ।",
+    "imd_name": "ਭਾਰਤੀ ਮੌਸਮ ਵਿਭਾਗ (IMD)",
+    "isro_desc": "ਸੋਕੇ ਦੀ ਨਿਗਰਾਨੀ ਵਿੱਚ ਵਰਤੇ ਜਾਣ ਵਾਲੇ ਸੈਟੇਲਾਈਟ ਡੇਟਾ ਉਤਪਾਦ।",
+    "isro_name": "ਭਾਰਤੀ ਪੁਲਾੜ ਖੋਜ ਸੰਸਥਾ (ISRO) / ਰਾਸ਼ਟਰੀ ਰਿਮੋਟ ਸੈਂਸਿੰਗ ਸੈਂਟਰ (NRSC)",
+    "lead": "ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਰਾਸ਼ਟਰੀ ਅਤੇ ਅੰਤਰਰਾਸ਼ਟਰੀ ਏਜੰਸੀਆਂ ਦੁਆਰਾ ਉਦਾਰਤਾ ਨਾਲ ਉਪਲਬਧ ਕਰਵਾਏ ਗਏ ਡੇਟਾ, ਉਤਪਾਦਾਂ ਅਤੇ ਸੇਵਾਵਾਂ 'ਤੇ ਬਣਾਇਆ ਗਿਆ ਹੈ। ਅਸੀਂ ਹੇਠਾਂ ਦਿੱਤੇ ਡੇਟਾ ਪ੍ਰਦਾਤਾਵਾਂ ਦਾ ਧੰਨਵਾਦ ਕਰਦੇ ਹਾਂ:",
+    "nasa_desc": "ਮਾਨੀਟਰ ਦੇ ਵਿਸ਼ਲੇਸ਼ਣ ਵਿੱਚ ਵਰਤੇ ਜਾਣ ਵਾਲੇ ਗਲੋਬਲ ਡੇਟਾਸੈਟ।",
+    "nasa_name": "ਨੈਸ਼ਨਲ ਐਰੋਨਾਟਿਕਸ ਐਂਡ ਸਪੇਸ ਐਡਮਿਨਿਸਟ੍ਰੇਸ਼ਨ (NASA)"
+  },
+  "common_map": {
+    "smoothness": "ਸਮੂਥਨੈੱਸ",
+    "smoothness_aria": "ਨਕਸ਼ਾ ਸਮੂਥਨੈੱਸ",
+    "smoothness_title": "ਉੱਚਾ = ਗ੍ਰਿਡ ਸੈੱਲਾਂ ਵਿਚਕਾਰ ਨਿਰਵਿਘਨ ਇੰਟਰਪੋਲੇਸ਼ਨ"
+  },
+  "disclaimer": {
+    "body_accuracy": "ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਦਾ ਉਦੇਸ਼ ਇਹ ਯਕੀਨੀ ਬਣਾਉਣਾ ਹੈ ਕਿ ਪ੍ਰਦਾਨ ਕੀਤੀ ਗਈ ਸਾਰੀ ਸਮੱਗਰੀ ਸਹੀ ਹੋਵੇ ਅਤੇ ਮੌਜੂਦਾ ਵਿਗਿਆਨਕ ਸਮਝ ਦੇ ਅਨੁਕੂਲ ਹੋਵੇ। ਹਾਲਾਂਕਿ, ਮੌਸਮ ਅਤੇ ਹਾਈਡ੍ਰੋਲੋਜੀਕਲ ਪੂਰਵ-ਅਨੁਮਾਨਾਂ ਦੇ ਨਾਲ-珍 ਖੇਤਰ ਦੇ ਵਿਗਿਆਨ ਨਿਰੰਤਰ ਵਿਕਸਤ ਹੋ ਰਹੇ ਹਨ। ਇਸ ਲਈ, ਕਿਸੇ ਵੀ ਪੂਰਵ-ਅਨੁਮਾਨ ਨੂੰ ਤੱਥ ਦਾ ਪੱਕਾ ਬਿਆਨ ਨਹੀਂ ਮੰਨਿਆ ਜਾਣਾ ਚਾਹੀਦਾ।",
+    "body_funding": "ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਵਿਗਿਆਨ ਅਤੇ ਤਕਨਾਲੋਜੀ ਵਿਭਾਗ (DST) ਦੁਆਰਾ ਫੰਡ ਕੀਤੇ ਗਏ ਹਾਈਡ੍ਰੋ ਕਲਾਈਮੇਟ ਐਕਸਟ੍ਰੀਮਜ਼ ਵਿੱਚ ਮੇਜਰ ਰਿਸਰਚ ਐਂਡ ਡਿਵੈਲਪਮੈਂਟ ਪ੍ਰੋਗਰਾਮ (MRDP) ਦੁਆਰਾ ਸਮਰਥਿਤ ਹੈ।",
+    "body_warranty": "ਲਾਗੂ ਕਾਨੂੰਨ ਦੁਆਰਾ ਇਜਾਜ਼ਤ ਦਿੱਤੀ ਗਈ ਪੂਰੀ ਹੱਦ ਤੱਕ, ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ ਸਮੱਗਰੀ ਦੇ ਸੰਬੰਧ ਵਿੱਚ ਪ੍ਰਗਟ ਜਾਂ ਨਿਹਿਤ ਸਾਰੀਆਂ ਵਾਰੰਟੀਆਂ ਨੂੰ ਰੱਦ ਕਰਦਾ ਹੈ। ਤੁਹਾਡੀ ਵਰਤੋਂ ਪੂਰੀ ਤਰ੍ਹਾਂ ਤੁਹਾਡੇ ਆਪਣੇ ਜੋਖਮ 'ਤੇ ਹੈ, ਅਤੇ ਅਸੀਂ ਕੋਈ ਗਰੰਟੀ ਨਹੀਂ ਦਿੰਦੇ ਕਿ ਸਮੱਗਰੀ ਗਲਤੀ-ਮੁਕਤ ਹੈ।",
+    "disclaimer": "ਡਿਸਕਲੇਮਰ",
+    "disclaimer_india_drought_monitor": "ਡਿਸਕਲੇਮਰ | ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ",
+    "home": "ਹੋਮ",
+    "primary": "ਪ੍ਰਾਇਮਰੀ"
+  },
+  "publications": {
+    "home": "ਹੋਮ",
+    "lead": "ਵਾਟਰ ਐਂਡ ਕਲਾਈਮੇਟ ਲੈਬ ਅਤੇ ਸਹਿਯੋਗੀਆਂ ਦੀ ਪੀਅਰ-ਰਿਵਿਊਡ ਖੋਜ ਜੋ ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ — ਇਸਦੇ ਡੇਟਾਸੈਟਾਂ, ਵਿਧੀਆਂ ਅਤੇ ਸੋਕੇ ਦੇ ਉਤਪਾਦਾਂ ਦਾ ਅਧਾਰ ਹੈ।",
+    "note": "ਕੁਝ ਲੇਖਾਂ ਲਈ ਸੰਸਥਾਗਤ ਜਾਂ ਪ੍ਰਕਾਸ਼ਕ ਪਹੁੰਚ ਦੀ ਲੋੜ ਹੋ ਸਕਦੀ ਹੈ।",
+    "primary": "ਪ੍ਰਾਇਮਰੀ",
+    "publications": "ਪ੍ਰਕਾਸ਼ਨ",
+    "publications_india_drought_monitor": "ਪ੍ਰਕਾਸ਼ਨ | ਇੰਡੀਆ ਡਰਾਟ ਮਾਨੀਟਰ",
+    "view_paper": "ਪੇਪਰ ਦੇਖੋ"
   }
 }

@@ -58,7 +58,7 @@ def run(title, cmd):
 def main():
     ap = argparse.ArgumentParser(description="Sequentially (re)build the IDM portal via gemma4.")
     ap.add_argument("--langs", nargs="+", default=None,
-                    help="languages to build (default: all 23). e.g. --langs English Hindi")
+                    help="languages to build (default: every language in Texts/languages.json). e.g. --langs English Hindi")
     ap.add_argument("--only", default=None,
                     help="comma-separated subset of stages: " + ",".join(ALL_STAGES))
     ap.add_argument("--with-districts", action="store_true",

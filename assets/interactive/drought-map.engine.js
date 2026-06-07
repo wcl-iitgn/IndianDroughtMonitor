@@ -399,6 +399,68 @@ function zoomToStateBoundingBox(stateId) {
 /**
  * Renders the primary CDI heat map layer on the raster canvas
  */
+// ---- Download legend (built from the ACTIVE colormap; colours never re-derived) ----
+function _legFmt(v) { return (Math.round(v * 100) / 100).toString(); }
+function _legWrap(ctx, text, cx, y, maxW, lh) {
+  var words = String(text).split(" "), line = "", lines = [];
+  for (var i = 0; i < words.length; i++) {
+    var t = line ? line + " " + words[i] : words[i];
+    if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = words[i]; }
+    else line = t;
+  }
+  if (line) lines.push(line);
+  for (var j = 0; j < lines.length; j++) ctx.fillText(lines[j], cx, y + j * lh);
+}
+function _legendModel(cmap) {
+  if (cmap.discrete) {
+    var seen = {}, entries = [];
+    Object.keys(cmap.discrete).forEach(function (k) {
+      var d = cmap.discrete[k];
+      if (!seen[d.color]) { seen[d.color] = 1; entries.push({ color: d.color, label: d.cls }); }
+    });
+    return { kind: "classes", title: cmap.label || "", entries: entries };
+  }
+  var bands = cmap.bands || [];
+  if (bands.length <= 6) {
+    var ent = [];
+    if (cmap.aboveColor) ent.push({ color: cmap.aboveColor, label: cmap.aboveCls || "Above" });
+    for (var i = bands.length - 1; i >= 0; i--) ent.push({ color: bands[i].color, label: bands[i].cls || "" });
+    return { kind: "classes", title: cmap.label || "", entries: ent };
+  }
+  var colors = bands.map(function (b) { return b.color; });
+  if (cmap.aboveColor) colors.push(cmap.aboveColor);
+  return { kind: "bar", title: cmap.label || "", colors: colors, bounds: bands.map(function (b) { return b.upTo; }) };
+}
+function _drawLegend(octx, W, mapH, H, cmap) {
+  var m = _legendModel(cmap), top = mapH, padX = Math.round(W * 0.05);
+  octx.save();
+  octx.fillStyle = "#ffffff"; octx.fillRect(0, top, W, H);
+  octx.fillStyle = "#262220"; octx.textAlign = "center"; octx.textBaseline = "alphabetic";
+  octx.font = "bold 16px Inter, Arial, sans-serif";
+  octx.fillText(m.title, W / 2, top + 22);
+  if (m.kind === "classes") {
+    var n = m.entries.length, cellW = (W - 2 * padX) / n, swH = 26, swY = top + 40,
+        swW = Math.min(cellW * 0.72, 120);
+    octx.font = "12px Inter, Arial, sans-serif";
+    m.entries.forEach(function (e, i) {
+      var cx = padX + i * cellW + cellW / 2;
+      octx.fillStyle = e.color; octx.fillRect(cx - swW / 2, swY, swW, swH);
+      octx.strokeStyle = "#8a8a8a"; octx.lineWidth = 1; octx.strokeRect(cx - swW / 2, swY, swW, swH);
+      octx.fillStyle = "#262220";
+      _legWrap(octx, e.label, cx, swY + swH + 16, cellW - 6, 13);
+    });
+  } else {
+    var bx = padX, bw = W - 2 * padX, by = top + 44, bh = 26, k = m.colors.length, segW = bw / k;
+    for (var i = 0; i < k; i++) { octx.fillStyle = m.colors[i]; octx.fillRect(bx + i * segW, by, segW, bh); }
+    octx.strokeStyle = "#8a8a8a"; octx.lineWidth = 1; octx.strokeRect(bx, by, bw, bh);
+    octx.fillStyle = "#262220"; octx.font = "11px Inter, Arial, sans-serif";
+    m.bounds.forEach(function (b, i) { octx.fillText(_legFmt(b), bx + (i + 1) * segW, by + bh + 15); });
+    octx.fillText("\u2264", bx + 4, by + bh + 15);
+    octx.fillText(">", bx + bw - 4, by + bh + 15);
+  }
+  octx.restore();
+}
+
 function renderStaticMap() {
     if (!state.gridCDI) return;
 
@@ -1123,15 +1185,17 @@ function formatDateToYYYYMMDD(date) {
     getGrayscale: function () { return state.grayscale; },
     // Composite the raster (data) and vector (overlay) canvases onto a white
     // background and return a PNG data URL. Used for the "download map" button.
-    toPNGDataURL: function (withOverlay) {
+    toPNGDataURL: function (withOverlay, withLegend) {
       var w = C_raster.width, h = C_raster.height;
+      var legH = (withLegend && state.colormap) ? Math.round(w * 0.16) : 0;
       var off = document.createElement("canvas");
-      off.width = w; off.height = h;
+      off.width = w; off.height = h + legH;
       var octx = off.getContext("2d");
       octx.fillStyle = "#ffffff";
-      octx.fillRect(0, 0, w, h);
+      octx.fillRect(0, 0, w, h + legH);
       octx.drawImage(C_raster, 0, 0);
       if (withOverlay) octx.drawImage(C_vector, 0, 0);
+      if (legH) _drawLegend(octx, w, h, legH, state.colormap);
       return off.toDataURL("image/png");
     },
     // Return the flattened raster pixels (white bg + data) for GIF frame capture.

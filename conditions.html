@@ -4,6 +4,8 @@
 <head>
 <meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title data-i18n="conditions.conditions_outlooks_india_dr">Hydrometeorological Conditions | India Drought Monitor</title>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/interactive/drought-map.css" rel="stylesheet"/>
@@ -210,4 +212,19 @@
   </script>
 <script src="assets/ai/idm-ai.js"></script>
 <script src="assets/ai/idm-chatbot.js"></script>
+
+<script>
+/* Date shown next to the translatable "Last Updated" label -- driven from the
+   latest data week (English), never a frozen static string. */
+(function () {
+  var el = document.getElementById("last-updated");
+  if (!el || !window.fetch) return;
+  fetch("data/summaries/index.json").then(function (r) { return r.json(); }).then(function (j) {
+    var list = (j && j.summaries) || []; if (!list.length) return;
+    list.sort(function (a, b) { return String(b.date || "").localeCompare(String(a.date || "")); });
+    var d = new Date(list[0].date + "T00:00:00");
+    el.textContent = isNaN(d) ? list[0].date : d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  }).catch(function () {});
+})();
+</script>
 </body></html>

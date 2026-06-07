@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  6 JUN 2026 16:13
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  7 JUN 2026 18:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summarie
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summarie
 s/_build/Tamil_drought_2026-05-20/forecast.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summaries/
 _build/Tamil_drought_2026-05-20/forecast.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -363,12 +363,11 @@ File: map15.png Graphic file (type bmp)
 File: map30.png Graphic file (type bmp)
 <map30.png>
 
-Overfull \hbox (4.40483pt too wide) in paragraph at lines 53--54
-[]\TU/NotoSansTamil(0)/m/n/10.95 மக்கள்தொகை வறட்சியை முன்னறிவிப்பு \TU/Carlito(
-0)/m/n/10.95 7 \TU/NotoSansTamil(0)/m/n/10.95 நாட்களில் சுமார் \TU/Carlito(0)/m
-/n/10.95 14 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம், \TU/Carlito(0)/m/n/10.95 15
- \TU/NotoSansTamil(0)/m/n/10.95 நாட்களில் \TU/Carlito(0)/m/n/10.95 10 \TU/NotoS
-ansTamil(0)/m/n/10.95 சதவீதம்
+Overfull \hbox (20.33519pt too wide) in paragraph at lines 53--54
+[]\TU/NotoSansTamil(0)/m/n/10.95 மண் வறட்சி கணிப்பு ஏழு நாட்களில் இந்தியாவில் ச
+ுமார் \TU/Carlito(0)/m/n/10.95 14 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம், பதினை
+ந்து நாட்களில் \TU/Carlito(0)/m/n/10.95 10 \TU/NotoSansTamil(0)/m/n/10.95 சதவீத
+ம்,
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -380,7 +379,7 @@ File: imd.png Graphic file (type bmp)
 [1
 
 ]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summaries/
 _build/Tamil_drought_2026-05-20/forecast.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -398,7 +397,7 @@ Here is how much of TeX's memory you used:
  33808 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,451b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,398b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/fo
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/fo
 recast_summaries/_build/Tamil_drought_2026-05-20/forecast.pdf (1 page).

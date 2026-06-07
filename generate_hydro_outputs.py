@@ -195,6 +195,39 @@ INDIA_UNION = None      # shapely geometry OR None
 # ===========================================================================
 # Boundaries
 # ===========================================================================
+
+# --- PDF archive policy ------------------------------------------------------
+# PDF archives are kept ONLY for these languages (site text still covers every
+# configured language); each archive series keeps at most the newest 4 PDFs,
+# and a PDF that already exists for a given date is never rebuilt.
+ARCHIVE_LANGS = ("English", "Hindi")   # languages that keep a multi-date PDF archive
+PDF_ARCHIVE_KEEP = 4                    # ...this many newest per series, for those languages
+
+def _archive_keep(key):
+    # Every language gets the CURRENT pdf; non-archive languages keep only it.
+    return PDF_ARCHIVE_KEEP if key in ARCHIVE_LANGS else 1
+
+def prune_pdf_archive(archive_dir, keep=PDF_ARCHIVE_KEEP, log=print):
+    """Keep only the newest `keep` PDFs per filename series in archive_dir
+    (dates sort lexically in both YYYY-MM-DD and YYYY_MM_DD forms)."""
+    from collections import defaultdict
+    d = Path(archive_dir)
+    if not d.is_dir():
+        return
+    groups = defaultdict(list)
+    for p in d.glob("*.pdf"):
+        m = re.match(r"(.*?)(\d{4}[-_]\d{2}[-_]\d{2})\.pdf$", p.name)
+        if m:
+            groups[m.group(1)].append((m.group(2), p))
+    for _prefix, items in groups.items():
+        for _date, p in sorted(items)[:-keep]:
+            try:
+                p.unlink()
+                log("  archive prune: removed %s" % p.name)
+            except OSError:
+                pass
+
+
 def load_boundaries(repo, boundaries_path):
     """Best-effort India boundary for clipping + outlines.
     Priority: explicit --boundaries shapefile (geopandas) > repo state_vector_boundaries.json.
@@ -436,8 +469,8 @@ def generate_dashboards_for_pdf(input_dir, dest_dir, date_str, log=print):
     for pretty_name in pdf_params:
         cfg = PARAMS[pretty_name]
         out = dest_dir / f"{pretty_name}_dashboard.png"
-        if out.exists():
-            continue
+        # Always re-render: the filename carries no date, so an exists-skip would
+        # freeze the first month's dashboards into every later month's PDF.
         try:
             build_dashboard(pretty_name, cfg, out, input_dir, date_str)
             log(f"    dashboard: {pretty_name}")
@@ -635,6 +668,10 @@ def build_pdf(out_base, repo, date_str, params_to_do, summary_week):
     archive = out_base / "PDF_Archive"
     archive.mkdir(parents=True, exist_ok=True)
     out_pdf = archive / f"Hydrolook_{date_str}.pdf"
+    if out_pdf.exists():
+        print(f"  = Hydrolook_{date_str}.pdf already in archive -- skipped")
+        prune_pdf_archive(archive)
+        return out_pdf
 
     summary_txt = ""
     sp = repo / "data" / "summaries" / f"summary_{summary_week}.txt"
@@ -851,6 +888,10 @@ def main():
                 try:
                     for lang in langs:
                         key = lang["key"]
+                        out_pdf_check = out_base / key / "PDF_Archive" / f"Hydrolook_{date_str}.pdf"
+                        if out_pdf_check.exists():
+                            print(f"  = {key}: Hydrolook_{date_str}.pdf already in archive -- skipped")
+                            continue
                         texts = load_pdf_texts(repo, key)
                         if texts is None:
                             print(f"  ! {key}: Texts/{key}/pdf.json not found — run translate_texts.py; skipping")
@@ -872,6 +913,8 @@ def main():
                                                   texts=texts, pdf_font=lang["pdf_font"])
                 finally:
                     shutil.rmtree(pdf_dash_dir, ignore_errors=True)
+                for lang in langs:
+                    prune_pdf_archive(out_base / lang["key"] / "PDF_Archive", keep=_archive_keep(lang["key"]))
         else:
             print("Building PDF report (matplotlib fallback)…")
             build_pdf(out_base, repo, date_str, params_to_do, summary_week)

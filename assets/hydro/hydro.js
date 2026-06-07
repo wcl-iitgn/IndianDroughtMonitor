@@ -189,17 +189,26 @@
 
     function render() {
       var PDF_DIR = langPdfDir();
+      var lang = (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English";
+      var maxN = (lang === "English" || lang === "Hindi") ? 4 : 1;   // archive: 4 for En/Hi, current only otherwise
       fetch(REPORTS_URL, { cache: "no-cache" }).then(function (r) {
         if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
         return r.json();
       }).then(function (j) {
-        var reports = j.reports || [];
+        var cands = (j.reports || []).slice(0, maxN);
+        return Promise.all(cands.map(function (rep) {
+          return fetch(encPath(PDF_DIR + "/" + rep.file), { method: "HEAD" })
+            .then(function (r) { return r.ok ? rep : null; }).catch(function () { return null; });
+        }));
+      }).then(function (res) {
+        var reports = res.filter(Boolean);
         listEl.innerHTML = "";
         if (!reports.length) {
-          listEl.innerHTML = "<li class='hydro-empty'>No reports available yet.</li>";
+          listEl.innerHTML = "<li class='hydro-empty'>No reports available in this language yet.</li>";
+          if (dlCurrent) dlCurrent.style.display = "none";
+          if (dl) dl.style.display = "none";
           return;
         }
-
         if (dlCurrent) {
           var cur = reports[0];
           dlCurrent.href = encPath(PDF_DIR + "/" + cur.file);
@@ -207,7 +216,6 @@
           dlCurrent.title = "Download the current month report (" + cur.label + ")";
           dlCurrent.style.display = "";
         }
-
         function select(rep, liEl) {
           var src = encPath(PDF_DIR + "/" + rep.file);
           frame.src = src + "#view=FitH";
@@ -218,7 +226,6 @@
           Array.prototype.forEach.call(listEl.children, function (c) { c.classList.remove("active"); });
           if (liEl) liEl.classList.add("active");
         }
-
         reports.forEach(function (rep, i) {
           var li = document.createElement("li");
           li.innerHTML =
@@ -229,9 +236,8 @@
             '<a class="hydro-report-dl" href="' + encPath(PDF_DIR + "/" + rep.file) + '" download title="Download ' + rep.label + ' report">&#11015;</a>';
           li.querySelector(".hydro-report-btn").addEventListener("click", function () { select(rep, li); });
           listEl.appendChild(li);
-          if (i === 0) select(rep, li);   // preview the newest by default
+          if (i === 0) select(rep, li);
         });
-
         frame.addEventListener("error", function () { if (fallback) fallback.hidden = false; });
       }).catch(function (e) {
         listEl.innerHTML = "<li class='hydro-empty'>" + e.message + "</li>";

@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  6 JUN 2026 16:12
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  7 JUN 2026 18:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summarie
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summarie
 s/_build/Malayalam_drought_2026-05-20/forecast.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summaries/
 _build/Malayalam_drought_2026-05-20/forecast.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -364,6 +364,13 @@ File: map15.png Graphic file (type bmp)
 <map15.png>
 File: map30.png Graphic file (type bmp)
 <map30.png>
+
+Overfull \hbox (5.75621pt too wide) in paragraph at lines 53--54
+[]\TU/NotoSansMalayalam(0)/m/n/10.95 പത്ത് ദിവസത്തിനുള്ളിൽ ഇന്ത്യയുടെ \TU/Carli
+to(0)/m/n/10.95 14 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം പേർക്ക് വരൾച്ച പ്ര
+തീക്ഷിക്കുന്നു, പതിനഞ്ച്
+ []
+
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
@@ -373,7 +380,7 @@ File: imd.png Graphic file (type bmp)
 [1
 
 ]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/forecast_summaries/
 _build/Malayalam_drought_2026-05-20/forecast.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -387,11 +394,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  5131 strings out of 468168
  133246 string characters out of 5432816
- 590006 words of memory out of 5000000
+ 589006 words of memory out of 5000000
  33808 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,447b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,395b,474s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/fo
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/fo
 recast_summaries/_build/Malayalam_drought_2026-05-20/forecast.pdf (1 page).

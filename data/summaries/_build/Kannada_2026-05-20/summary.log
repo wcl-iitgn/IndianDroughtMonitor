@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  6 JUN 2026 16:09
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  7 JUN 2026 18:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/
 Kannada_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/Ka
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/Ka
 nnada_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -359,6 +359,20 @@ LaTeX Font Warning: Font shape `TU/NotoSansKannada(0)/b/n' undefined
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
+
+Overfull \hbox (10.5108pt too wide) in paragraph at lines 51--52
+\TU/Carlito(0)/m/n/10.95 15.3\TU/NotoSansKannada(0)/m/n/10.95 % ಆಗಿದೆ. ಈ ಅಂಕಿಅಂ
+ಶವು ಹಿಂದಿನ ವಾರದ \TU/Carlito(0)/m/n/10.95 16.2\TU/NotoSansKannada(0)/m/n/10.95 %
+ ಮತ್ತು ಒಂದು ತಿಂಗಳ ಹಿಂದೆ ಗಮನಿಸಿದ \TU/Carlito(0)/m/n/10.95 17.2\TU/NotoSansKannad
+a(0)/m/n/10.95 %ಗಿಂತ ಕಡಿಮೆಯಾಗಿದೆ,
+ []
+
+
+Overfull \hbox (13.42303pt too wide) in paragraph at lines 51--52
+\TU/NotoSansKannada(0)/m/n/10.95 ಪ್ರದೇಶಗಳು ಡೆಲ್ಲಿ ಕಂಟೋನ್ಮೆಂಟ್, ಮಣಿಪುರ, ಮಿಜೋರಾಂ,
+ ಅರುಣಾಚಲ ಪ್ರದೇಶ, ಜಮ್ಮು ಮತ್ತು ಕಾಶ್ಮೀರ ಮತ್ತು ಮೇಘಾಲಯ
+ []
+
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
@@ -388,7 +402,7 @@ ular/OT:language=dflt;mapping=tex-text;!
 Missing character: There is no · (U+00B7) in font Noto Sans Kannada Regular Reg
 ular/OT:language=dflt;mapping=tex-text;!
 [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/summaries/_build/Ka
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/Ka
 nnada_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -408,5 +422,5 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  73i,14n,93p,1869b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 21/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/su
 mmaries/_build/Kannada_2026-05-20/summary.pdf (2 pages).

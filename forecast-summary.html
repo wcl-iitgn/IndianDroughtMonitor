@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title data-i18n="forecast_summary.forecast_outlook_india_droug">Forecast Outlook | India Drought Monitor</title>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/ai/idm-ai.css" rel="stylesheet"/>
@@ -147,56 +149,60 @@
       var DIR = "data/forecast_summaries/";
       var FILE_LABEL = { drought: "Drought", rainfall: "Rainfall", runoff: "Runoff", soil: "SoilMoisture" };
       var PARAM_NAME = { drought: "Drought (CDI)", rainfall: "Rainfall", runoff: "Runoff", soil: "Soil Moisture" };
-      var dates = [];
+      var all = [];
 
       function encPath(p) { return p.split("/").map(encodeURIComponent).join("/"); }
       function stripHeader(t) { return t.replace(/^#[^\n]*\n+/, "").trim(); }
       function curLang() { return (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English"; }
+      function archiveMax(lang) { return (lang === "English" || lang === "Hindi") ? 4 : 1; }
       function param() { return paramSel.value; }
       function date() { return dateSel.value; }
-      function label() { var d = dates.filter(function (x) { return x.date === date(); })[0]; return d ? d.label : date(); }
-
-      function pdfUrl(lang) {
-        return encPath(DIR + lang + "/PDF_Archive/IDM_Forecast_" + FILE_LABEL[param()] + "_" + date() + ".pdf");
-      }
-      function setDownload() {
-        var lang = curLang();
-        function apply(u) { dlBtn.href = u; dlBtn.setAttribute("download", "IDM_Forecast_" + FILE_LABEL[param()] + "_" + date() + ".pdf"); }
-        var primary = pdfUrl(lang);
-        if (lang === "English") { apply(primary); return; }
-        fetch(primary, { method: "HEAD" }).then(function (r) { apply(r.ok ? primary : pdfUrl("English")); })
-          .catch(function () { apply(pdfUrl("English")); });
-      }
+      function label() { var d = all.filter(function (x) { return x.date === date(); })[0]; return d ? d.label : date(); }
+      function pdfUrl(lang, p, d) { return encPath(DIR + lang + "/PDF_Archive/IDM_Forecast_" + FILE_LABEL[p] + "_" + d + ".pdf"); }
+      function textUrl(lang, p, d) { return (lang === "English") ? encPath(DIR + p + "_" + d + ".txt") : encPath(DIR + lang + "/" + p + "_" + d + ".txt"); }
 
       function show() {
         if (!date()) return;
-        textEl.textContent = "Loading\u2026";
-        titleEl.textContent = PARAM_NAME[param()] + " \u2014 " + label();
         var lang = curLang();
-        var engUrl = encPath(DIR + param() + "_" + date() + ".txt");
-        var url = (lang === "English") ? engUrl : encPath(DIR + lang + "/" + param() + "_" + date() + ".txt");
-        fetch(url).then(function (r) {
-          if (!r.ok) throw new Error("nolang"); return r.text();
-        }).catch(function () {
-          return fetch(engUrl).then(function (r) { if (!r.ok) throw new Error(); return r.text(); });
-        }).then(function (t) { textEl.textContent = stripHeader(t); })
-          .catch(function () { textEl.textContent = "This forecast outlook could not be loaded."; });
-        setDownload();
+        titleEl.textContent = PARAM_NAME[param()] + " \u2014 " + label();
+        textEl.textContent = "Loading\u2026";
+        dlBtn.href = pdfUrl(lang, param(), date());
+        dlBtn.setAttribute("download", "IDM_Forecast_" + FILE_LABEL[param()] + "_" + date() + ".pdf");
+        fetch(textUrl(lang, param(), date())).then(function (r) { if (!r.ok) throw 0; return r.text(); })
+          .then(function (t) { textEl.textContent = stripHeader(t); })
+          .catch(function () { textEl.textContent = "This forecast outlook is not available in the selected language yet."; });
+      }
+
+      // Active-language date list (language is the hierarchy): newest 4 for
+      // English/Hindi, current only otherwise; only dates whose forecast PDFs
+      // exist in that language (proxy-checked on drought). No English fallback.
+      function rebuild() {
+        var lang = curLang();
+        var cands = all.slice(0, archiveMax(lang));
+        Promise.all(cands.map(function (it) {
+          return fetch(pdfUrl(lang, "drought", it.date), { method: "HEAD" })
+            .then(function (r) { return r.ok ? it : null; }).catch(function () { return null; });
+        })).then(function (res) {
+          var avail = res.filter(Boolean);
+          if (!avail.length && all.length) avail = [all[0]];
+          dateSel.innerHTML = "";
+          avail.forEach(function (it, i) {
+            var o = document.createElement("option");
+            o.value = it.date; o.textContent = it.label;
+            if (i === 0) o.selected = true;
+            dateSel.appendChild(o);
+          });
+          show();
+        });
       }
 
       fetch(encPath(DIR + "index.json")).then(function (r) { return r.json(); }).then(function (j) {
-        dates = (j && j.forecasts) || [];
-        if (!dates.length) { textEl.textContent = "No forecasts are available yet."; return; }
-        dates.forEach(function (it, i) {
-          var o = document.createElement("option");
-          o.value = it.date; o.textContent = it.label;
-          if (i === 0) o.selected = true;
-          dateSel.appendChild(o);
-        });
-        show();
+        all = (j && j.forecasts) || [];
+        if (!all.length) { textEl.textContent = "No forecasts are available yet."; return; }
         paramSel.addEventListener("change", show);
         dateSel.addEventListener("change", show);
-        document.addEventListener("idm:languagechange", setDownload);
+        document.addEventListener("idm:languagechange", rebuild);
+        rebuild();
       }).catch(function () { textEl.textContent = "The forecast archive could not be loaded."; });
     })();
   </script>

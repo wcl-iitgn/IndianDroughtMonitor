@@ -202,9 +202,12 @@ def interp_fine(Z, fine_step=0.05):
     return Zf, fine_lat, fine_lon
 
 
-def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=1500, log=print):
+def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=1500, log=print,
+                     legend=None, legend_title=None):
     """Render any parameter grid to a PNG matching the site: same data, exact colormap,
-    standard interpolation, India land-mask, black state + mainland boundaries."""
+    standard interpolation, India land-mask, black state + mainland boundaries.
+    legend: None (no legend), "cdi" (drought-class swatches) or "bands" (threshold
+    colour bar built verbatim from the cmap's band spec - colours never re-derived)."""
     repo = Path(repo)
     Z, rows, cols = read_grid(grid_path)
     Zf, fine_lat, fine_lon = interp_fine(Z, fine_step=fine_step)
@@ -221,8 +224,11 @@ def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=15
 
     aspect = (LON_E - LON_W) / (LAT_N - LAT_S)
     fig_w = 7.4
-    fig = plt.figure(figsize=(fig_w, fig_w / aspect), dpi=width_px / fig_w)
-    ax = fig.add_axes([0, 0, 1, 1]); ax.set_xlim(LON_W, LON_E); ax.set_ylim(LAT_S, LAT_N)
+    map_h = fig_w / aspect
+    leg_h = 0.78 if legend else 0.0          # bottom strip for the legend
+    fig = plt.figure(figsize=(fig_w, map_h + leg_h), dpi=width_px / fig_w)
+    ax = fig.add_axes([0, leg_h / (map_h + leg_h), 1, map_h / (map_h + leg_h)])
+    ax.set_xlim(LON_W, LON_E); ax.set_ylim(LAT_S, LAT_N)
     ax.set_aspect("equal"); ax.axis("off")
 
     hs = fine_step / 2.0
@@ -265,6 +271,43 @@ def render_param_map(repo, grid_path, cmap, out_png, fine_step=0.05, width_px=15
                 solid_capstyle="round", solid_joinstyle="round")
     except Exception as e:
         log("  ! mainland outline not drawn (%s)" % e)
+
+    # ---- legend strip (colours come verbatim from the cmap band spec) --------
+    if legend:
+        from matplotlib.patches import Rectangle
+        axL = fig.add_axes([0.04, 0.012, 0.92, (leg_h - 0.10) / (map_h + leg_h)])
+        axL.set_xlim(0, 1); axL.set_ylim(0, 1); axL.axis("off")
+        if legend == "cdi":
+            # bands ascend in upTo: [D4, D3, D2, D1, D0]; "above" = no drought.
+            cols = [cmap["above"]] + [hexc for _, hexc in reversed(cmap["bands"])]
+            labels = ["No drought", "D0 Abnormally dry", "D1 Moderate",
+                      "D2 Severe", "D3 Extreme", "D4 Exceptional"]
+            title = legend_title or "Drought classification (CDI)"
+            n = len(cols); w = 1.0 / n
+            for i, (c, lab) in enumerate(zip(cols, labels)):
+                axL.add_patch(Rectangle((i * w, 0.42), w, 0.34, facecolor=c,
+                                        edgecolor="#8a8a8a", linewidth=0.6))
+                axL.text(i * w + w / 2, 0.30, lab, ha="center", va="top", fontsize=7.6,
+                         color="#262220")
+            axL.text(0.5, 0.97, title, ha="center", va="top", fontsize=8.8,
+                     fontweight="bold", color="#262220")
+        else:  # "bands": threshold colour bar with boundary tick values
+            cols = [hexc for _, hexc in cmap["bands"]] + [cmap["above"]]
+            bounds = [upTo for upTo, _ in cmap["bands"]]
+            title = legend_title or cmap.get("label", "")
+            n = len(cols); w = 1.0 / n
+            for i, c in enumerate(cols):
+                axL.add_patch(Rectangle((i * w, 0.42), w, 0.34, facecolor=c,
+                                        edgecolor="#8a8a8a", linewidth=0.6))
+            for i, b in enumerate(bounds):
+                x = (i + 1) * w
+                axL.plot([x, x], [0.38, 0.42], color="#262220", linewidth=0.7)
+                axL.text(x, 0.30, ("%g" % b), ha="center", va="top", fontsize=7.6,
+                         color="#262220")
+            axL.text(0.0, 0.30, "\u2264", ha="center", va="top", fontsize=7.6, color="#262220")
+            axL.text(1.0, 0.30, ">", ha="center", va="top", fontsize=7.6, color="#262220")
+            axL.text(0.5, 0.97, title, ha="center", va="top", fontsize=8.8,
+                     fontweight="bold", color="#262220")
 
     out_png = Path(out_png)
     out_png.parent.mkdir(parents=True, exist_ok=True)

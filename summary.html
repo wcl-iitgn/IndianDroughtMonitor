@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title data-i18n="summary.national_drought_summary_ind">National Drought Summary | India Drought Monitor</title>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/ai/idm-ai.css" rel="stylesheet"/>
@@ -139,69 +141,60 @@
       var dateSel = document.getElementById("sum-date");
       var dlBtn = document.getElementById("sum-download");
       var ARCHIVE = "data/summaries/";
-      var current = { label: "", date: "" };
+      var all = [];
 
       function stripHeader(t) { return t.replace(/^#[^\n]*\n+/, "").trim(); }
       function encPath(p) { return p.split("/").map(encodeURIComponent).join("/"); }
-      function curLang() {
-        return (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English";
-      }
-      function pdfUrl(lang, date) {
-        return encPath(ARCHIVE + lang + "/PDF_Archive/IDM_Summary_" + date + ".pdf");
-      }
-      // Point the download at the selected language's PDF, falling back to English.
-      function setDownload(date) {
-        var lang = curLang();
-        function apply(url) {
-          dlBtn.href = url;
-          dlBtn.setAttribute("download", "IDM_Summary_" + date + ".pdf");
-        }
-        var primary = pdfUrl(lang, date);
-        if (lang === "English") { apply(primary); return; }
-        fetch(primary, { method: "HEAD" })
-          .then(function (r) { apply(r.ok ? primary : pdfUrl("English", date)); })
-          .catch(function () { apply(pdfUrl("English", date)); });
-      }
+      function curLang() { return (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English"; }
+      function archiveMax(lang) { return (lang === "English" || lang === "Hindi") ? 4 : 1; }
+      function pdfUrl(lang, date) { return encPath(ARCHIVE + lang + "/PDF_Archive/IDM_Summary_" + date + ".pdf"); }
+      function textUrl(lang, file) { return (lang === "English") ? encPath(ARCHIVE + file) : encPath(ARCHIVE + lang + "/" + file); }
 
       function show(item) {
-        textEl.textContent = "Loading\u2026";
-        current = { label: item.label, date: item.date };
         var lang = curLang();
-        var engUrl = encPath(ARCHIVE + item.file);
-        var url = (lang === "English") ? engUrl : encPath(ARCHIVE + lang + "/" + item.file);
-        fetch(url).then(function (r) {
-          if (!r.ok) throw new Error("nolang"); return r.text();
-        }).catch(function () {
-          return fetch(engUrl).then(function (r) { if (!r.ok) throw new Error(); return r.text(); });
-        }).then(function (t) {
-          titleEl.textContent = "National Drought Summary \u2014 " + item.label;
-          textEl.textContent = stripHeader(t);
-        }).catch(function () {
-          textEl.textContent = "This summary could not be loaded.";
+        titleEl.textContent = "National Drought Summary \u2014 " + item.label;
+        textEl.textContent = "Loading\u2026";
+        dlBtn.href = pdfUrl(lang, item.date);
+        dlBtn.setAttribute("download", "IDM_Summary_" + item.date + ".pdf");
+        fetch(textUrl(lang, item.file)).then(function (r) {
+          if (!r.ok) throw 0; return r.text();
+        }).then(function (t) { textEl.textContent = stripHeader(t); })
+          .catch(function () { textEl.textContent = "This summary is not available in the selected language yet."; });
+      }
+
+      // Date options follow the ACTIVE language (language is the hierarchy):
+      // newest 4 for English/Hindi, current only for every other language, and
+      // only dates whose PDF exists in that language -- no English fallback.
+      function rebuild() {
+        var lang = curLang();
+        var cands = all.slice(0, archiveMax(lang));
+        Promise.all(cands.map(function (it) {
+          return fetch(pdfUrl(lang, it.date), { method: "HEAD" })
+            .then(function (r) { return r.ok ? it : null; }).catch(function () { return null; });
+        })).then(function (res) {
+          var avail = res.filter(Boolean);
+          if (!avail.length && all.length) avail = [all[0]];
+          dateSel.innerHTML = "";
+          avail.forEach(function (it, i) {
+            var o = document.createElement("option");
+            o.value = it.date; o.textContent = it.label;
+            if (i === 0) o.selected = true;
+            dateSel.appendChild(o);
+          });
+          if (avail.length) show(avail[0]);
         });
-        setDownload(item.date);
       }
 
       fetch(encPath(ARCHIVE + "index.json")).then(function (r) { return r.json(); }).then(function (j) {
-        var list = (j && j.summaries) || [];
-        if (!list.length) { textEl.textContent = "No summaries are available yet."; return; }
-        list.forEach(function (it, i) {
-          var o = document.createElement("option");
-          o.value = it.date; o.textContent = it.label;
-          if (i === 0) o.selected = true;
-          dateSel.appendChild(o);
-        });
-        show(list[0]);
+        all = (j && j.summaries) || [];
+        if (!all.length) { textEl.textContent = "No summaries are available yet."; return; }
         dateSel.addEventListener("change", function () {
-          var it = list.filter(function (x) { return x.date === dateSel.value; })[0];
+          var it = all.filter(function (x) { return x.date === dateSel.value; })[0];
           if (it) show(it);
         });
-        document.addEventListener("idm:languagechange", function () {
-          if (current.date) setDownload(current.date);
-        });
-      }).catch(function () {
-        textEl.textContent = "The summary archive could not be loaded.";
-      });
+        document.addEventListener("idm:languagechange", rebuild);
+        rebuild();
+      }).catch(function () { textEl.textContent = "The summary archive could not be loaded."; });
     })();
   </script>
 </body>

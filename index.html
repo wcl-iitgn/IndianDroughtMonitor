@@ -5,6 +5,8 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title data-i18n="index.current_map_india_drought_mo">Current Map | India Drought Monitor</title>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <meta content="#da3910" name="theme-color"/>
 <link href="assets/styles.css" rel="stylesheet"/>
 <link href="assets/interactive/drought-map.css" rel="stylesheet"/>
@@ -38,7 +40,7 @@
 <div class="page-title-row">
 <div class="release-block">
 <h2 data-i18n="index.current_drought_conditions">Current Drought Conditions</h2>
-<div class="data-valid" data-i18n="index.combined_drought_index_week">Last Updated: May 20, 2026</div>
+<div class="data-valid" id="cdi-last-updated">Last Updated: May 20, 2026</div>
 </div>
 </div>
 <!-- toolbar -->
@@ -102,14 +104,7 @@
 <hr class="soft"/>
 <section>
 <h2 data-i18n="index.this_week_s_summary">This Week's Summary</h2>
-<p class="summary-section lead" data-i18n="index.large_parts_of_peninsular_an">
-        Large parts of peninsular and central India continue to show rainfall deficits as the
-        pre-monsoon period advances. The Combined Drought Index indicates severe-to-extreme
-        conditions across interior Maharashtra, northern Karnataka, Telangana and parts of
-        Rajasthan, while improved soil moisture has eased conditions over the eastern Gangetic
-        plains. Reservoir storage in several western and southern basins remains below the
-        ten-year average, sustaining short-term agricultural stress.
-      </p>
+<p class="summary-section lead" id="weekly-teaser">Large parts of peninsular and central India continue to show rainfall deficits as the pre-monsoon period advances. The Combined Drought Index indicates severe-to-extreme conditions across interior Maharashtra, northern Karnataka, Telangana and parts of Rajasthan, while improved soil moisture has eased conditions over the eastern Gangetic plains. Reservoir storage in several western and southern basins remains below the ten-year average, sustaining short-term agricultural stress.</p>
 <p><a class="btn" data-i18n="index.read_the_full_national_summa" href="summary.html">Read the Full National Summary</a></p>
 </section>
 </main>
@@ -187,5 +182,54 @@
   </script>
 <script src="assets/ai/idm-ai.js"></script>
 <script src="assets/ai/idm-chatbot.js"></script>
+
+<script>
+/* Weekly summary teaser — DYNAMIC: first paragraph of the latest generated
+   national summary, in the visitor's language (English fallback). The static
+   text above is only shown if every fetch fails (e.g. offline). */
+(function () {
+  var p = document.getElementById("weekly-teaser");
+  if (!p || !window.fetch) return;
+  var lang = "English";
+  try { lang = localStorage.getItem("idm_lang") || "English"; } catch (e) {}
+  function apply(txt) {
+    var body = String(txt).replace(/^#[^\n]*\n+/, "");
+    var para = (body.split(/\n\s*\n/)[0] || "").trim();
+    if (para) p.textContent = para;
+  }
+  fetch("data/summaries/index.json")
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (j) {
+      var list = (j && j.summaries) || [];
+      if (!list.length) throw 0;
+      list.sort(function (a, b) { return String(b.date || "").localeCompare(String(a.date || "")); });
+      var f = list[0].file;
+      var eng = "data/summaries/" + f;
+      var prim = (lang === "English") ? eng : "data/summaries/" + encodeURIComponent(lang) + "/" + f;
+      return fetch(prim).then(function (r) {
+        if (r.ok) return r.text();
+        return fetch(eng).then(function (r2) { if (!r2.ok) throw 0; return r2.text(); });
+      });
+    })
+    .then(apply)
+    .catch(function () { /* keep the built-in fallback text */ });
+})();
+</script>
+
+<script>
+/* "Last Updated" reflects the latest available data week (English date, set at
+   runtime) -- NOT a static i18n string, so it never freezes when data rolls over. */
+(function () {
+  var el = document.getElementById("cdi-last-updated");
+  if (!el || !window.fetch) return;
+  fetch("data/summaries/index.json").then(function (r) { return r.json(); }).then(function (j) {
+    var list = (j && j.summaries) || []; if (!list.length) return;
+    list.sort(function (a, b) { return String(b.date || "").localeCompare(String(a.date || "")); });
+    var d = new Date(list[0].date + "T00:00:00");
+    var s = isNaN(d) ? list[0].date : d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+    el.textContent = "Last Updated: " + s;
+  }).catch(function () {});
+})();
+</script>
 </body>
 </html>

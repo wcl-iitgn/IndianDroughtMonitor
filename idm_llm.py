@@ -138,14 +138,21 @@ def translate(text, target_language, model=None, timeout=None, url=None, num_pre
     see translate_bounded)."""
     if not text or not text.strip() or is_english(target_language):
         return text
+    n_words = max(1, len(text.split()))
     system = (
-        "You are a professional translator. Translate the user's text into %s.\n"
+        "You are a professional translator and crux extractor: you carry the user's "
+        "text into %s with its full meaning intact, in the most compact natural "
+        "phrasing.\n"
         "Rules:\n"
         "1. Output ONLY the translation - no introduction, no notes, no quotation marks.\n"
         "2. Use plain text with NO markdown or symbols: no *, no **, no _, no #, no backticks.\n"
         "3. Keep every number, unit, date and place name exactly as given.\n"
-        "4. Write it as one flowing paragraph; do not insert blank lines."
-        % target_language
+        "4. Write it as one flowing paragraph; do not insert blank lines.\n"
+        "5. NATIVE SCRIPT ONLY: write %s in its own native script; never romanize or "
+        "transliterate into Latin letters.\n"
+        "6. MAX WORD LIMIT: do not exceed %d words for this paragraph. If a literal "
+        "translation would run longer, give the crux: keep every fact and number, drop filler."
+        % (target_language, target_language, n_words)
     )
     if extra_rules:
         system += "\n" + extra_rules.strip()
@@ -182,7 +189,7 @@ TRANSLATE_HARD_RATIO = 1.30    # after all attempts, sentence-clamp down to this
 TRANSLATE_MAX_ATTEMPTS = 3     # 1 initial try + up to 2 "shorten" retries
 
 _CONCISE_RULE = (
-    "5. LENGTH LIMIT: the translation must be about the SAME LENGTH as the original "
+    "7. LENGTH LIMIT: the translation must be about the SAME LENGTH as the original "
     "text, and never longer. Translate faithfully but economically; do not elaborate, "
     "explain, or add anything that is not in the original."
 )
@@ -229,7 +236,7 @@ def translate_bounded(text, target_language, model=None, timeout=None, url=None,
         rules = _CONCISE_RULE
         if attempt > 1 and best is not None:
             over = max(1, int(round((best[0] - 1.0) * 100)))
-            rules += ("\n6. Your previous translation was about %d%% longer than the "
+            rules += ("\n8. Your previous translation was about %d%% longer than the "
                       "original. This attempt MUST be shorter: keep every fact, but cut "
                       "filler words and use the most compact natural phrasing." % over)
         out = translate(text, target_language, model=model, timeout=timeout, url=url,

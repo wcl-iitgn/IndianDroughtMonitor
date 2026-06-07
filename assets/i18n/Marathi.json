@@ -29,7 +29,8 @@
     "primary": "प्राथमिक"
   },
   "common_header": {
-    "india_drought_monitor": "India Drought Monitor"
+    "india_drought_monitor": "India Drought Monitor",
+    "skip_to_content": "मुख्य सामग्रीवर जा"
   },
   "common_nav": {
     "current": "सध्याचे",
@@ -39,7 +40,10 @@
     "forecast": "अंदाज",
     "hydrological_outlook": "हायड्रोलॉजिकल आऊटलुक",
     "about": "बद्दल",
-    "contact": "संपर्क"
+    "contact": "संपर्क",
+    "acknowledgements": "ऋणनिर्देश",
+    "disclaimer": "डिस्क्लेमर",
+    "publications": "प्रकाशने"
   },
   "common_footer": {
     "the_india_drought_monitor_is": "India Drought Monitor हे IIT Gandhinagar मधील Water and Climate Lab द्वारे विकसित केले गेले आहे, जे India Meteorological Department आणि Central Water Commission कडून जल-हवामान डेटा, ISRO/NRSC कडून उपग्रह उत्पादने आणि NASA कडून जागतिक डेटासेट प्राप्त करते.",
@@ -68,7 +72,9 @@
     "2026_water_and_climate_lab_i": "© 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · संशोधन आणि प्रात्यक्षिक उद्देशांसाठी",
     "water_and_climate_lab_iit_ga": "Water and Climate Lab, IIT Gandhinagar",
     "indian_institute_of_technolo": "Indian Institute of Technology Gandhinagar",
-    "india_meteorological_departm": "India Meteorological Department"
+    "india_meteorological_departm": "India Meteorological Department",
+    "disclaimer_short": "इंडिया ड्रॉट मॉनिटरचे अंदाज आणि निर्देशांक सातत्याने विकसित होणाऱ्या विज्ञानावर आधारित आहेत आणि ते कोणत्याही वॉरंटीशिवाय \"जसे आहे तसे\" प्रदान केले जातात. सामग्रीचा वापर पूर्णपणे तुमच्या स्वतःच्या जोखमीवर आहे.",
+    "read_full_disclaimer": "पूर्ण डिस्क्लेमर वाचा →"
   },
   "animations": {
     "animations_india_drought_mon": "ॲनिमेशन्स | India Drought Monitor",
@@ -196,7 +202,11 @@
     "gujarat_382355_india": "गुजरात 382355, भारत",
     "reporting_local_conditions": "स्थानिक परिस्थितीचा अहवाल देणे",
     "strong_how_local_reports_are": "स्थानिक अहवाल कसे वापरले जातात: पीक, पाणी आणि कुरणाच्या परिस्थितीवरील प्रत्यक्ष निरीक्षणे टीमला Combined Drought Index चा अर्थ लावण्यास आणि तो प्रमाणित करण्यास मदत करतात. कृपया लक्षात घ्या की अहवाल हा दुष्काळ मदतीसाठीचा अर्ज नाही आणि कोणत्याही एका अहवालामुळे नकाशा बदलेल याची कोणतीही हमी नाही. नकाशा अनेक प्रकारच्या जल-हवामान डेटावर आधारित आहे; स्थानिक अहवाल जमिनीवर परिस्थिती लोकांवर कसा परिणाम करत आहे याबद्दल मौल्यवान संदर्भ जोडतात.",
-    "primary": "प्राथमिक"
+    "primary": "प्राथमिक",
+    "project_incharge": "प्रकल्प प्रभारी",
+    "vm_role_dean": "डीन, संशोधन आणि विकास, IIT गांधीनगर",
+    "vm_role_professor": "प्राध्यापक, सिव्हिल इंजिनिअरिंग विभाग",
+    "website_developers": "वेबसाइट डेव्हलपर्स"
   },
   "data_download": {
     "data_download_india_drought": "डेटा डाउनलोड | India Drought Monitor",
@@ -278,7 +288,9 @@
     "primary": "प्राथमिक",
     "select_from_drought_state_la;aria-label:data_query": {
       "sql_query": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10"
-    }
+    },
+    "select_from_drought_state_la": "SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10",
+    "sql_query": "SQL query"
   },
   "data_tables": {
     "data_tables_india_drought_mo": "डेटा टेबल्स | India Drought Monitor",
@@ -523,5 +535,41 @@
     "exceptional_drought": "अपवादात्मक दुष्काळ",
     "primary": "प्राथमिक",
     "choose_summary_week": "सारांश आठवडा निवडा"
+  },
+  "ack": {
+    "acknowledgements": "ऋणनिर्देश",
+    "cwc_desc": "हायड्रोलॉजिकल डेटा जो मॉनिटरच्या विश्लेषण आणि आउटलुक उत्पादनांना समर्थन देतो.",
+    "cwc_name": "केंद्रीय जल आयोग (CWC)",
+    "endorsement": "या संस्थांच्या डेटाचा वापर केल्याचा अर्थ असा नाही की ते इंडिया ड्रॉट मॉनिटर किंवा त्यापासून तयार केलेल्या कोणत्याही उत्पादनांना मान्यता देतात.",
+    "imd_desc": "हायड्रो-हवामान निरीक्षणे आणि ग्रिड केलेले डेटासेट जे मॉनिटरच्या दुष्काळ निर्देशांकांचा आधार आहेत.",
+    "imd_name": "भारतीय हवामान विभाग (IMD)",
+    "isro_desc": "दुष्काळ निरीक्षणासाठी वापरली जाणारी उपग्रह डेटा उत्पादने.",
+    "isro_name": "भारतीय अंतराळ संशोधन संस्था (ISRO) / राष्ट्रीय रिमोट सेन्सिंग केंद्र (NRSC)",
+    "lead": "इंडिया ड्रॉट मॉनिटर राष्ट्रीय आणि आंतरराष्ट्रीय संस्थांनी उदारतेने उपलब्ध करून दिलेल्या डेटा, उत्पादने आणि सेवांवर आधारित आहे. आम्ही खालील डेटा प्रदात्यांचे कृतज्ञतापूर्वक आभार मानतो:",
+    "nasa_desc": "मॉनिटरच्या विश्लेषणात वापरले जाणारे जागतिक डेटासेट.",
+    "nasa_name": "नॅशनल एरोनॉटिक्स अँड स्पेस ॲडमिनिस्ट्रेशन (NASA)"
+  },
+  "common_map": {
+    "smoothness": "स्मूथनेस",
+    "smoothness_aria": "नकाशा स्मूथनेस",
+    "smoothness_title": "उच्च = ग्रिड सेल्समधील अधिक गुळगुळीत इंटरपोलेशन"
+  },
+  "disclaimer": {
+    "body_accuracy": "प्रदान केलेली सर्व सामग्री अचूक आहे आणि वर्तमान वैज्ञानिक समजुतीशी सुसंगत आहे याची खात्री करणे हे इंडिया ड्रॉट मॉनिटरचे उद्दिष्ट आहे. तथापि, हवामान आणि जलशास्त्रीय अंदाज तसेच हवामान अंदाजांमागील विज्ञान सातत्याने विकसित होत आहे. त्यामुळे, सामग्रीमध्ये समाविष्ट असलेला कोणताही अंदाज तथ्यांचे अंतिम विधान मानला जाऊ नये.",
+    "body_funding": "इंडिया ड्रॉट मॉनिटरला विज्ञान आणि तंत्रज्ञान विभाग (DST) द्वारे अर्थसहाय्यित हायड्रो क्लायमेट एक्स्ट्रिम्समधील मुख्य संशोधन आणि विकास कार्यक्रम (MRDP) द्वारे समर्थन दिले जाते.",
+    "body_warranty": "लागू कायद्यानुसार परवानगी असलेल्या पूर्ण मर्यादेपर्यंत, इंडिया ड्रॉट मॉनिटर सामग्रीच्या संदर्भात व्यक्त किंवा सूचित केलेल्या सर्व वॉरंटी किंवा सादरीकरणे नाकारतो. सामग्रीचा वापर पूर्णपणे तुमच्या स्वतःच्या जोखमीवर आहे आणि सामग्री त्रुटीमुक्त आहे किंवा तुमच्या विशिष्ट गरजांसाठी योग्य आहे याची आम्ही कोणतीही हमी देत नाही.",
+    "disclaimer": "डिस्क्लेमर",
+    "disclaimer_india_drought_monitor": "डिस्क्लेमर | इंडिया ड्रॉट मॉनिटर",
+    "home": "होम",
+    "primary": "प्राथमिक"
+  },
+  "publications": {
+    "home": "होम",
+    "lead": "वॉटर अँड क्लायमेट लॅब आणि सहकाऱ्यांचे पीअर-रिव्ह्यू केलेले संशोधन जे इंडिया ड्रॉट मॉनिटर — त्याचे डेटासेट, पद्धती आणि दुष्काळ उत्पादनांचा आधार आहे.",
+    "note": "काही लेखांसाठी संस्थात्मक किंवा प्रकाशक प्रवेशाची आवश्यकता असू शकते.",
+    "primary": "प्राथमिक",
+    "publications": "प्रकाशने",
+    "publications_india_drought_monitor": "प्रकाशने | इंडिया ड्रॉट मॉनिटर",
+    "view_paper": "पेपर पहा"
   }
 }
