@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 06:41
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
 Punjabi_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Pu
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Pu
 njabi_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -360,12 +360,6 @@ LaTeX Font Warning: Font shape `TU/NotoSansGurmukhi(0)/b/n' undefined
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
-Missing character: There is no т (U+0442) in font Noto Sans Gurmukhi Regular Re
-gular/OT:script=latn;language=dflt;mapping=tex-text;!
-Missing character: There is no е (U+0435) in font Noto Sans Gurmukhi Regular Re
-gular/OT:script=latn;language=dflt;mapping=tex-text;!
-Missing character: There is no л (U+043B) in font Noto Sans Gurmukhi Regular Re
-gular/OT:script=latn;language=dflt;mapping=tex-text;!
 Missing character: There is no અ (U+0A85) in font Noto Sans Gurmukhi Regular Re
 gular/OT:script=latn;language=dflt;mapping=tex-text;!
 Missing character: There is no ન (U+0AA8) in font Noto Sans Gurmukhi Regular Re
@@ -394,7 +388,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Pu
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Pu
 njabi_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -412,7 +406,7 @@ Here is how much of TeX's memory you used:
  33789 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1869b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1839b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
 mmaries/_build/Punjabi_2026-05-20/summary.pdf (2 pages).

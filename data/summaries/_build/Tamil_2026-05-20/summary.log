@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 06:41
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
 Tamil_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ta
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ta
 mil_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -358,6 +358,25 @@ LaTeX Font Warning: Font shape `TU/NotoSansTamil(0)/b/n' undefined
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
+
+Overfull \hbox (22.09526pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 சிறிய பகுதி வறட்சி நிலையை அனுபவித்தது. இந்த வாரம
+் வறட்சி நிலையை அனுபவித்த மொத்தப்
+ []
+
+
+Overfull \hbox (13.74594pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 முந்தைய வாரத்தை விட வறட்சிப் பகுதி குறைவதைக் காட
+்டுகிறது, அது \TU/Carlito(0)/m/n/10.95 16.2\TU/NotoSansTamil(0)/m/n/10.95 % ஆக 
+இருந்தது, அதாவது
+ []
+
+
+Overfull \hbox (13.6808pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 பகுதிகள் தேசிய தலைநகர் டெல்லி, மணிப்பூர், மிசோரம
+், அருணாச்சலப் பிரதேசம், ஜம்மு காஷ்மீர்
+ []
+
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
@@ -370,7 +389,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ta
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ta
 mil_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -390,5 +409,5 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  73i,15n,93p,1867b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
 mmaries/_build/Tamil_2026-05-20/summary.pdf (2 pages).

@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 06:41
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
 Marathi_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ma
 rathi_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -379,7 +379,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ma
 rathi_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -397,7 +397,7 @@ Here is how much of TeX's memory you used:
  33807 multiletter control sequences out of 15000+600000
  630708 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1869b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1842b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
 mmaries/_build/Marathi_2026-05-20/summary.pdf (2 pages).

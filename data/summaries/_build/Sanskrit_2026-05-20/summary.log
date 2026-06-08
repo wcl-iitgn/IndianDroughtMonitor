@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 06:41
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
 Sanskrit_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Sa
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Sa
 nskrit_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -368,23 +368,23 @@ LaTeX Font Warning: Font shape `TU/TiroDevanagariHindi(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (7.70566pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 अस्मिन् सप्ताहे डी०+ शुष्कता-वर्गस्य कुलक्
-षेत्रम् १५.३ प्रतिशतम् अस्ति, यत् पूर्वसप्ताहे तुलनायां ०.९ प्रतिशत-बिन्दुनाश्र
-यः
+Overfull \hbox (12.666pt too wide) in paragraph at lines 56--57
+[]\TU/TiroDevanagariHindi(0)/m/n/10.95 इदस्य सप्ताहस्य राष्ट्रीय-शुष्कता-स्थिति
+ः बहुधा क्षेत्रान् सामान्य-श्रेणीयां प्रदर्शयति, लघुभागः शुष्कता-परिस्थितीं अनु
+भवति।
  []
 
 
-Overfull \hbox (12.47617pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 दिल्ली-केंद्रशासितप्रदेशः ५२.२ प्रतिशतम्, 
-मणिपूरः ४२.३ प्रतिशतम्, मिजोरामः ४०.८ प्रतिशतम्, अरुणाचलप्रदेशः ४०.३ प्रतिशतम्,
-
+Overfull \hbox (9.09265pt too wide) in paragraph at lines 56--57
+\TU/TiroDevanagariHindi(0)/m/n/10.95 सर्वाधिकप्रभावितक्षेत्राः दिल्ली-क्षेत्रम्
+, मणिपुरम्, मिजोराम्, अरुणाचलप्रदेशः, जम्मू-कश्मीरः, तथा मेघालयः आसन्। विपरीतात
+ः
  []
 
 
-Overfull \hbox (14.56035pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 जम्मू-कश्मीरः ३८.९ प्रतिशतम्, तथा मेघालयः 
-३४.१ प्रतिशतम्। विपरीता, पश्चिमबंगालः ०.० प्रतिशतम्, राजस्थानम् १.० प्रतिशतम्,
+Overfull \hbox (4.05566pt too wide) in paragraph at lines 56--57
+\TU/TiroDevanagariHindi(0)/m/n/10.95 पश्चिमबंगालः शून्यप्रतिशतम् क्षेत्रम् शुष्
+कतायाः प्रतिपादितवती, यदा राजस्थानम्, गुजरातम्, तथा तेलङ्गानाः अनुक्रमतः १.०%,
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -399,7 +399,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Sa
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Sa
 nskrit_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -417,7 +417,7 @@ Here is how much of TeX's memory you used:
  33807 multiletter control sequences out of 15000+600000
  630708 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1870b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1843b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
 mmaries/_build/Sanskrit_2026-05-20/summary.pdf (2 pages).

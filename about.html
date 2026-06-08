@@ -78,6 +78,13 @@
 <li><strong data-i18n="ack.nasa_name">National Aeronautics and Space Administration (NASA)</strong><span data-i18n="ack.nasa_desc">Global datasets used in the Monitor’s analyses.</span></li>
 </ul>
 <p class="ack-note" data-i18n="ack.endorsement">The use of data from these organisations does not imply their endorsement of the India Drought Monitor or of any products derived from it.</p>
+<hr class="soft"/>
+<section id="walkthrough-section">
+<h2 data-i18n="about.website_walkthrough" id="walkthrough">Website walkthrough</h2>
+<video id="walkthrough-video" controls preload="metadata" playsinline aria-label="Website walkthrough video" style="width:100%;max-width:960px;display:block;margin-top:10px;background:#000;border:1px solid #e2dfdc;border-radius:8px;">
+Your browser does not support embedded video.
+</video>
+</section>
 </main>
 <footer class="usdm-footer">
 <div class="usdm-footer-inner">
@@ -140,5 +147,23 @@
 <script src="assets/vendor/alasql.min.js"></script>
 <script src="assets/ai/idm-ai.js"></script>
 <script src="assets/ai/idm-chatbot.js"></script>
+<script>
+/* Website walkthrough: English video for the English UI, Hindi video for every other language. */
+(function () {
+  function pickWalkthrough() {
+    var v = document.getElementById("walkthrough-video");
+    if (!v) return;
+    var lang = (window.IDM_I18N && window.IDM_I18N.current) || null;
+    if (!lang) { try { lang = localStorage.getItem("idm_lang"); } catch (e) {} }
+    if (!lang) lang = "English";
+    var src = (lang === "English") ? "assets/video/walkthrough_en.mp4"
+                                    : "assets/video/walkthrough_hi.mp4";
+    if (v.getAttribute("src") !== src) { v.setAttribute("src", src); v.load(); }
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", pickWalkthrough);
+  else pickWalkthrough();
+  window.addEventListener("idm:i18n-ready", pickWalkthrough);
+})();
+</script>
 </body>
 </html>
