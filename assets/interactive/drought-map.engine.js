@@ -1096,9 +1096,17 @@ async function loadCDIDataForDate(dateStr) {
 /**
  * Orchestrates step-by-step playback loops across dates at custom framerates
  */
-async function startCDIAnimation(startDateInput = "2021-07-14", endDateInput = "2024-11-13", fps = 2) {
+async function startCDIAnimation(startDateInput, endDateInput, fps = 2) {
     // Clear any active animation pipelines to prevent visual speed stacking
     stopCDIAnimation();
+
+    // Default to the full available record (from the CDI manifest) when bounds are
+    // omitted, so playback never stops at a stale hardcoded date. Falls back to the
+    // first grid date if the manifest isn't present.
+    var _manDates = (typeof window !== "undefined" && Array.isArray(window.IDM_CDI_DATES)
+                     && window.IDM_CDI_DATES.length) ? window.IDM_CDI_DATES : null;
+    if (startDateInput == null) startDateInput = _manDates ? _manDates[0] : "2021-07-14";
+    if (endDateInput == null) endDateInput = _manDates ? _manDates[_manDates.length - 1] : startDateInput;
 
     let currentDate = parseDateString(startDateInput);
     const endDate = parseDateString(endDateInput);

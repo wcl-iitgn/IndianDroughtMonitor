@@ -136,6 +136,26 @@
     });
   }
 
+  // Keep the footer copyright year current at runtime (across languages and digit
+  // scripts) so it never freezes at a hardcoded year: replace the 4-digit year in the
+  // footer line with the current year, rendered in the same digit script it already uses.
+  function updateFooterYear() {
+    var el = document.querySelector(".footer-copy");
+    if (!el) return;
+    var year = String(new Date().getFullYear());
+    try {
+      el.textContent = el.textContent.replace(/\p{Nd}{4}/u, function (run) {
+        if (/^[0-9]{4}$/.test(run)) return year;                 // already Latin digits
+        var zero = Math.min.apply(null, run.split("").map(function (c) { return c.codePointAt(0); }));
+        return year.split("").map(function (d) {                 // render year in the same script
+          return String.fromCodePoint(zero + (d.charCodeAt(0) - 48));
+        }).join("");
+      });
+    } catch (e) {
+      el.textContent = el.textContent.replace(/[0-9]{4}/, year); // engines without \p{Nd}
+    }
+  }
+
   function start() {
     // direction first (cheap, avoids a flash for RTL)
     var loadStrings = (current === DEFAULT_LANG)
@@ -163,6 +183,7 @@
       window.IDM_I18N.current = current;
       applyTranslations();
       buildPicker();
+      updateFooterYear();
       // let dynamic pages know the language is settled
       try { window.dispatchEvent(new CustomEvent("idm:i18n-ready", { detail: { lang: current } })); } catch (e) {}
     });

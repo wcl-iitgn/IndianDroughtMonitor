@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 01:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/
 Malayalam_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/Ma
 layalam_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -361,35 +361,22 @@ LaTeX Font Warning: Font shape `TU/NotoSansMalayalam(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (1.33643pt too wide) in paragraph at lines 56--57
-[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സ്ഥിതി സാധാരണ വിഭാ
-ഗത്തിൽ ഭൂരിഭാഗം പ്രദേശങ്ങളെ കാണിക്കുന്നു,
+Overfull \hbox (7.67647pt too wide) in paragraph at lines 56--57
+[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സാഹചര്യം ഭൂരിഭാഗം 
+പ്രദേശങ്ങളും സാധാരണ വിഭാഗത്തിൽ തുടരുന്നതും
  []
 
 
-Overfull \hbox (20.81282pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 ചെറിയൊരു ഭാഗം വരൾച്ച അനുഭവിക്കുന്നു. ഈ ആഴ്ച 
-വരൾച്ച അനുഭവിക്കുന്ന ആകെ വിസ്തീർണ്ണം
+Overfull \hbox (14.51477pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 ഡി\TU/Carlito(0)/m/n/10.95 0 \TU/NotoSansMal
+ayalam(0)/m/n/10.95 അല്ലെങ്കിൽ അതിലും മോശമായ അവസ്ഥയിൽ ഉൾപ്പെട്ടു. ഇത് കഴിഞ്ഞ ആഴ
+്ചയുമായി താരതമ്യം
  []
 
 
-Overfull \hbox (8.85664pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 ഇത് ആഴ്ചതോറും \TU/Carlito(0)/m/n/10.95 0.9 \
-TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം പോയി കുറച്ചതിനെ സൂചിപ്പിക്കുന്നു. വരൾച
-്ച ബാധിച്ച പ്രദേശങ്ങളിൽ
- []
-
-
-Overfull \hbox (7.5232pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 ഡൽഹി, മണിപ്പൂർ, മിസോറാം, അരുണാചൽ പ്രദേശ്, ജമ
-്മു കശ്മീർ, മേഘാലയ എന്നിവിടങ്ങളാണ് ഏറ്റവും
- []
-
-
-Overfull \hbox (20.48776pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 കൂടുതൽ ബാധിച്ചത്. ഇതിന് വിപരീതമായി, പശ്ചിമ ബ
-ംഗാൾ \TU/Carlito(0)/m/n/10.95 0.0\TU/NotoSansMalayalam(0)/m/n/10.95 % വരൾച്ച റി
-പ്പോർട്ട് ചെയ്തു, അതേസമയം
+Overfull \hbox (9.99861pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 മിസോറാം, അരുണാചൽ പ്രദേശ്, ജമ്മു കശ്മീർ, മേഘാ
+ലയ എന്നിവിടങ്ങളാണ്. ഇതിന് വിപരീതമായി, പശ്ചിമ
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -404,7 +391,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/Ma
 layalam_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -418,11 +405,11 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  5109 strings out of 468168
  132854 string characters out of 5432816
- 583771 words of memory out of 5000000
+ 584771 words of memory out of 5000000
  33789 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  73i,15n,93p,1871b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/su
 mmaries/_build/Malayalam_2026-05-20/summary.pdf (2 pages).

@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:09
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 01:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/forecast_summarie
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/forecast_summarie
 s/_build/Tamil_rainfall_2026-05-20/forecast.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/forecast_summaries/
 _build/Tamil_rainfall_2026-05-20/forecast.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -362,6 +362,14 @@ File: map15.png Graphic file (type bmp)
 <map15.png>
 File: map30.png Graphic file (type bmp)
 <map30.png>
+
+Overfull \hbox (6.47435pt too wide) in paragraph at lines 60--61
+[]\TU/NotoSansTamil(0)/m/n/10.95 தேசிய அளவில் எதிர்பார்க்கப்பட்ட மழைப்பொழிவு சர
+ாசரியாக \TU/Carlito(0)/m/n/10.95 16 \TU/NotoSansTamil(0)/m/n/10.95 மிமீ \TU/Car
+lito(0)/m/n/10.95 61 \TU/NotoSansTamil(0)/m/n/10.95 மிமீ மற்றும் \TU/Carlito(0)
+/m/n/10.95 169 \TU/NotoSansTamil(0)/m/n/10.95 மிமீ ஆகும். 
+ []
+
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
@@ -369,7 +377,7 @@ File: iitgn.png Graphic file (type bmp)
 [1
 
 ]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/forecast_summaries/
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/forecast_summaries/
 _build/Tamil_rainfall_2026-05-20/forecast.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -389,5 +397,5 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  73i,14n,93p,380b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/fo
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/fo
 recast_summaries/_build/Tamil_rainfall_2026-05-20/forecast.pdf (1 page).

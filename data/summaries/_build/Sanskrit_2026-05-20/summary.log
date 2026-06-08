@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 13:07
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 01:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/
 Sanskrit_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Sa
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/Sa
 nskrit_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -368,23 +368,16 @@ LaTeX Font Warning: Font shape `TU/TiroDevanagariHindi(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (12.666pt too wide) in paragraph at lines 56--57
-[]\TU/TiroDevanagariHindi(0)/m/n/10.95 इदस्य सप्ताहस्य राष्ट्रीय-शुष्कता-स्थिति
-ः बहुधा क्षेत्रान् सामान्य-श्रेणीयां प्रदर्शयति, लघुभागः शुष्कता-परिस्थितीं अनु
-भवति।
+Overfull \hbox (1.85469pt too wide) in paragraph at lines 56--57
+\TU/TiroDevanagariHindi(0)/m/n/10.95 संकुचनं प्रदर्शयति, यत् कुल-शुष्कता-क्षेत्
+रम् सप्ताह-प्रति-सप्ताहं ०.९ प्रतिशत-बिन्दुः न्यूनम् आसीत्। शुष्कतायाः उपस्थिति
+-
  []
 
 
-Overfull \hbox (9.09265pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 सर्वाधिकप्रभावितक्षेत्राः दिल्ली-क्षेत्रम्
-, मणिपुरम्, मिजोराम्, अरुणाचलप्रदेशः, जम्मू-कश्मीरः, तथा मेघालयः आसन्। विपरीतात
-ः
- []
-
-
-Overfull \hbox (4.05566pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 पश्चिमबंगालः शून्यप्रतिशतम् क्षेत्रम् शुष्
-कतायाः प्रतिपादितवती, यदा राजस्थानम्, गुजरातम्, तथा तेलङ्गानाः अनुक्रमतः १.०%,
+Overfull \hbox (1.17584pt too wide) in paragraph at lines 56--57
+\TU/TiroDevanagariHindi(0)/m/n/10.95 आसन्। विपरीता, पश्चिमबंगालः ०.० प्रतिशतः क
+्षेत्रम् शुष्कतायाः सूचयत्, तथा राजस्थानम्, गुजरातम्, तथा तेलङ्गानाः अनुक्रमतः
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -399,7 +392,7 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/summaries/_build/Sa
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/summaries/_build/Sa
 nskrit_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -419,5 +412,5 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  73i,14n,93p,1843b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 23/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 24/data/su
 mmaries/_build/Sanskrit_2026-05-20/summary.pdf (2 pages).

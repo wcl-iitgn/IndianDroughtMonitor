@@ -32,41 +32,47 @@ LANGS = REPO / "Texts" / "languages.json"
 OUTDIR = REPO / "assets" / "i18n"
 
 _PH = re.compile(r"\{[^}{]+\}")
-# Proper-noun / brand strings that must NEVER be translated -- they should read
-# identically in every language (like "Google"). Protected the same way as the
-# {curly} placeholders: swapped for a sentinel before translation, restored after.
+# Product name(s) that must NEVER be translated -- they should read identically in every
+# language (like "Google"). We keep them verbatim the simplest leak-proof way: translate
+# only the text AROUND them and never send the name to the model, so it cannot be
+# transliterated. {curly} placeholders are kept verbatim the same way. This protection is
+# deliberately scoped to the STATIC UI STRINGS only -- dynamic text and PDFs are untouched.
 _KEEP = ("India Drought Monitor",)
+# one matcher for every span we keep verbatim: a product name OR a {curly} placeholder
+_KEEP_RE = re.compile("|".join([re.escape(k) for k in _KEEP] + [_PH.pattern]))
 
 
-def _protect(s):
-    holders = []
-    # brand / do-not-translate terms first, so the product name survives verbatim
-    for term in _KEEP:
-        while term in s:
-            s = s.replace(term, "ZZPH%dZZ" % len(holders), 1)
-            holders.append(term)
-    # {curly} placeholders
-    for h in _PH.findall(s):
-        s = s.replace(h, "ZZPH%dZZ" % len(holders), 1)
-        holders.append(h)
-    return s, holders
-
-
-def _restore(s, holders):
-    for i, h in enumerate(holders):
-        s = re.sub(r"ZZPH\s*%d\s*ZZ" % i, lambda _m: h, s)
-    return s
+def _tr_plain(text, lang_label):
+    """Translate a run of ordinary text; keep the English for it if the model errors."""
+    try:
+        return idm_llm.translate(text, lang_label)
+    except Exception as e:  # noqa: BLE001
+        print("        (kept English: %s)" % str(e)[:70])
+        return text
 
 
 def _tr(val, lang_label):
     if not isinstance(val, str) or not val.strip():
         return val
-    prot, holders = _protect(val)
-    try:
-        out = idm_llm.translate(prot, lang_label)
-    except Exception as e:  # noqa: BLE001
-        print("        (kept English: %s)" % str(e)[:70]); out = prot
-    return _restore(out, holders)
+    out, pos = [], 0
+    for m in _KEEP_RE.finditer(val):
+        gap = val[pos:m.start()]
+        if gap.strip():
+            lead = gap[:len(gap) - len(gap.lstrip())]
+            trail = gap[len(gap.rstrip()):]
+            out.append(lead + _tr_plain(gap.strip(), lang_label) + trail)
+        else:
+            out.append(gap)
+        out.append(m.group(0))          # the product name / placeholder, kept verbatim
+        pos = m.end()
+    tail = val[pos:]
+    if tail.strip():
+        lead = tail[:len(tail) - len(tail.lstrip())]
+        trail = tail[len(tail.rstrip()):]
+        out.append(lead + _tr_plain(tail.strip(), lang_label) + trail)
+    else:
+        out.append(tail)
+    return "".join(out)
 
 
 def _walk(obj, lang_label, n):
