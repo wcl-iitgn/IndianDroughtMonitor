@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage[a4paper,top=1.5cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
+\usepackage[a4paper,top=0.6cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{ragged2e}
@@ -15,27 +15,32 @@
 \definecolor{muted}{HTML}{6B635E}
 \setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
 
-\setlength{\headheight}{0pt}\setlength{\headsep}{0pt}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancyfoot[C]{%
+\setlength{\headheight}{28pt}\setlength{\headsep}{6pt}
+\newcommand{\idmfooter}{%
   \begin{minipage}{\textwidth}
     {\color{rule}\hrule height 0.7pt}\vspace{4pt}
     \noindent
-    \begin{minipage}[c]{0.66\textwidth}{\scriptsize\color{muted}{\latinfont Developed by the Water and Climate Lab, IIT Gandhinagar, using hydro-meteorological data from IMD and partner agencies}.}\end{minipage}\hfill
+    \begin{minipage}[c]{0.66\textwidth}{\scriptsize\color{muted}{\latinfont Developed by the Water and Climate Lab, IIT Gandhinagar, using hydro-meteorological data from partner agencies}.}\end{minipage}\hfill
     \begin{minipage}[c]{0.32\textwidth}\raggedleft
       \includegraphics[height=0.62cm]{wcl.png}\hspace{6pt}%
-      \includegraphics[height=0.62cm]{iitgn.png}\hspace{6pt}%
-      \includegraphics[height=0.62cm]{imd.png}
+      \includegraphics[height=0.62cm]{iitgn.png}
     \end{minipage}\\[3pt]
     {\scriptsize\color{muted}© {\latinfont 2026 Water and Climate Lab} · {\latinfont Indian Institute of Technology Gandhinagar} · {\latinfont For research and demonstration purposes}.}
   \end{minipage}%
 }
+\newcommand{\idmrunhead}{%
+  \begin{minipage}{\textwidth}
+    {\small\bfseries\color{titleblue}{\latinfont National Drought Summary}}\hfill{\small\color{muted}{\latinfont Week ending May 20, 2026}}\\[2pt]
+    {\color{rule}\hrule height 0.6pt}
+  \end{minipage}%
+}
+\fancypagestyle{idmfoot}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyfoot[C]{\idmfooter}}
+\fancypagestyle{idmrun}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyhead[C]{\idmrunhead}\fancyfoot[C]{\idmfooter}}
+\pagestyle{idmrun}
 
 \begin{document}
 
+\thispagestyle{idmfoot}
 \noindent
 \begin{minipage}[c]{0.16\textwidth}\includegraphics[width=\linewidth]{wcl.png}\end{minipage}\hfill
 \begin{minipage}[c]{0.80\textwidth}\raggedleft
@@ -49,7 +54,7 @@
 \end{center}
 \vspace{2pt}
 {\large\bfseries\color{titleblue}{\latinfont Summary}}\\[3pt]
-{\justifying\normalsize\color{textblack}এই সপ্তাহের জাতীয় খরা পরিস্থিতি স্বাভাবিক বিভাগে থাকা একটি বড় এলাকা দ্বারা চিহ্নিত, যেখানে অল্প অংশ খরা পরিস্থিতির সম্মুখীন। এই সপ্তাহে খরা দ্বারা প্রভাবিত মোট এলাকা, বিশেষত ডি{\latinfont 0} বা তার চেয়ে খারাপ, ছিল ১৫.৩ শতাংশ। এই পরিসংখ্যান আগের সপ্তাহের ১৬.২ শতাংশ এবং প্রায় এক মাস আগের ১৭.২ শতাংশের তুলনায় হ্রাস নির্দেশ করে, যা সপ্তাহ থেকে সপ্তাহে ০.৯ শতাংশ পয়েন্টের হ্রাস। খরা দ্বারা সবচেয়ে বেশি প্রভাবিত অঞ্চলগুলির মধ্যে রয়েছে {\latinfont NCT of Delhi}, মণিপুর, মিজোরাম, অরুণাচল প্রদেশ, জম্মু ও কাশ্মীর এবং মেঘালয়। অন্যদিকে, পশ্চিমবঙ্গ ০.০ শতাংশ খরা রেকর্ড করেছে, এবং রাজস্থান, গুজরাট ও তেলেঙ্গানা খরা দ্বারা সবচেয়ে কম প্রভাবিত রাজ্য হিসাবে ১.০\%, ২.১\% এবং ৩.৪\% শতাংশের হার দেখিয়েছে।\par}
+{\justifying\normalsize\color{textblack}এই সপ্তাহের জাতীয় খরা পরিস্থিতি দেখায় বেশিরভাগ এলাকা স্বাভাবিক শ্রেণীতে রয়েছে, অল্প কিছু অংশ খরা পরিস্থিতির সম্মুখীন। এই সপ্তাহে ডি{\latinfont 0}+ খরা শ্রেণীতে মোট এলাকার পরিমাণ ছিল ১৫.৩\%, যা আগের সপ্তাহের তুলনায় ০.৯ শতাংশ পয়েন্ট হ্রাস। খরা শ্রেণীতে ক্রমবর্ধমান বন্টন হলো স্বাভাবিক ৮৪.৭\%, ডি{\latinfont 0}+ ১৫.৩\%, ডি{\latinfont 1}+ ৩.১\%, ডি{\latinfont 2}+ ০.২\%, ডি{\latinfont 3}+ ০.০\%, এবং ডি{\latinfont 4} ০.০\%। খরা দ্বারা সবচেয়ে বেশি প্রভাবিত রাজ্যগুলি হলো দিল্লি {\latinfont NCT} যেখানে ৫২.২\%, মণিপুর ৪২.৩\%, মিজোরাম ৪০.৮\%, অরুণাচল প্রদেশ ৪০.৩\%, জম্মু ও কাশ্মীর ৩৮.৯\%, এবং মেঘালয় ৩৪.১\%। অন্যদিকে, পশ্চিমবঙ্গ খরা ০.০\% রিপোর্ট করেছে, এবং রাজস্থান, গুজরাট ও তেলেঙ্গানা যথাক্রমে ১.০\%, ২.১\% ও ৩.৪\% খরা রিপোর্ট করেছে।\par}
 \vspace{8pt}
 {\large\bfseries\color{titleblue}{\latinfont Regional Outlook}}\\[2pt]
 {\normalsize\color{titleblue}\textbf{{\latinfont North}}}\enspace {\normalsize\color{textblack}{\latinfont Moderate, scattered drought. About 28}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Northwest}}}\enspace {\normalsize\color{textblack}{\latinfont Largely normal conditions. About 4}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Northeast}}}\enspace {\normalsize\color{textblack}{\latinfont Moderate, scattered drought. About 27}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont East}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 7}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Central}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 15}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont West}}}\enspace {\normalsize\color{textblack}{\latinfont Moderate, scattered drought. About 22}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont South}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 16}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.}

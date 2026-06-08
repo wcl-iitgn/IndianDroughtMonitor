@@ -122,13 +122,19 @@
 </footer>
 <script src="assets/interactive/drought-map.colormaps.js"></script>
 <script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/cdi-manifest.js"></script>
 <script src="assets/interactive/drought-map.app.js"></script>
 <script>
     window.addEventListener("DOMContentLoaded", function () {
-      IDM.fillDateSelect(document.getElementById("date-old"), "2025-05-21");
-      IDM.fillDateSelect(document.getElementById("date-new"), "2026-05-20");
-      document.getElementById("tag-old").textContent = "2025-05-21";
-      document.getElementById("tag-new").textContent = "2026-05-20";
+      // Newest available week (right/new) and ~1 year earlier (left/old), from
+      // the CDI manifest, so defaults and captions never go stale.
+      var L = IDM.buildDateList();
+      var newestIso = L.length ? L[L.length - 1].iso : null;
+      var priorIso  = L.length ? L[Math.max(0, L.length - 1 - 52)].iso : null;
+      IDM.fillDateSelect(document.getElementById("date-old"), priorIso);
+      IDM.fillDateSelect(document.getElementById("date-new"), newestIso);
+      document.getElementById("tag-old").textContent = priorIso || "";
+      document.getElementById("tag-new").textContent = newestIso || "";
 
       (async function () {
         // Non-interactive renderers (display only). size 700 to match canvas.
@@ -136,7 +142,7 @@
         var newer = IDM.buildMap(document.getElementById("N_raster"), document.getElementById("N_vector"), "cdi", { interactive:false, size:700 });
         await newer.init(); newer.renderStaticMap();   // newer shows current by default
         await older.init();
-        await older.loadCDIDataForDate("20250521"); older.renderStaticMap();
+        await older.loadCDIDataForDate((priorIso || "").replace(/-/g, "")); older.renderStaticMap();
         document.getElementById("slider-loading").classList.add("idm-hidden");
 
         document.getElementById("date-old").addEventListener("change", function(e){

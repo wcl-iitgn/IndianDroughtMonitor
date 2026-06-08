@@ -243,8 +243,12 @@
   "data_download": {
     "12mo": "12mo",
     "1mo": "1mo",
+    "2mo": "2mo",
     "3mo": "3mo",
+    "4mo": "4mo",
     "6mo": "6mo",
+    "9mo": "9mo",
+    "24mo": "24mo",
     "accumulation_windows": "Accumulation windows",
     "all_india_drought_monitor_pr": "All India Drought Monitor products are provided as plain-text gridded files. Each line is <code>latitude longitude value</code> on a 0.25° grid. The Combined Drought Index also has a weekly time series back to July 2021.",
     "boundaries": "Boundaries",
@@ -435,6 +439,7 @@
     "variable": "Variable"
   },
   "hydro_reports": {
+    "archive_note": "The PDF archive is maintained only for the English and Hindi versions of the report.",
     "download_current_month_pdf": "⬇ Download current month PDF",
     "download_this_report": "⬇ Download this report",
     "each_month_the_water_and_cli": "Each month the Water and Climate Lab compiles the full India Hydrological Outlook into a single PDF report. Browse the archive below: pick a date to preview the report inline, or download any report directly.",

@@ -1,11 +1,11 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  7 JUN 2026 18:38
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  8 JUN 2026 06:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/
 Malayalam_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ma
 layalam_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -228,22 +228,22 @@ Package fontspec Info:
 No file summary.aux.
 \openout1 = `summary.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
+LaTeX Font Info:    ... okay on input line 41.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -253,16 +253,16 @@ LaTeX Font Info:    ... okay on input line 37.
 * layoutoffset:(h,v)=(0.0pt,0.0pt)
 * modes: 
 * h-part:(L,W,R)=(54.06006pt, 489.38776pt, 54.06006pt)
-* v-part:(T,H,B)=(42.67912pt, 717.00946pt, 85.35826pt)
+* v-part:(T,H,B)=(17.07182pt, 742.61676pt, 85.35826pt)
 * \paperwidth=597.50787pt
 * \paperheight=845.04684pt
 * \textwidth=489.38776pt
-* \textheight=717.00946pt
+* \textheight=742.61676pt
 * \oddsidemargin=-18.20993pt
 * \evensidemargin=-18.20993pt
-* \topmargin=-66.59087pt
-* \headheight=0.0pt
-* \headsep=0.0pt
+* \topmargin=-92.19817pt
+* \headheight=28.0pt
+* \headsep=6.0pt
 * \topskip=11.0pt
 * \footskip=56.9055pt
 * \marginparwidth=59.0pt
@@ -285,108 +285,123 @@ Package fontspec Info:
 
 \symlegacymaths=\mathgroup4
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 37.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 37.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 37.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 37.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 37.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 37.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 37.
-LaTeX Font Info:    Redeclaring math accent \check on input line 37.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 37.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 37.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \colon on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 37.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 37.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 37.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 41.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 41.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 41.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 41.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 41.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 41.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 41.
+LaTeX Font Info:    Redeclaring math accent \check on input line 41.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 41.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 41.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \colon on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 41.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 41.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 41.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 37.
+(Font)              `operators' in the math version `normal' on input line 41.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/NotoSansMalayalam(0)/m/n on input li
-ne 37.
+ne 41.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 37.
+(Font)              `operators' in the math version `bold' on input line 41.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/NotoSansMalayalam(0)/m/n on input l
-ine 37.
+ine 41.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/NotoSansMalayalam(0)/m/n --> TU/NotoSansMalayalam(0)
-/m/n on input line 37.
+/m/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/NotoSansMalayalam(0)/m/it on input 
-line 37.
+line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/NotoSansMalayalam(0)/b/n on input l
-ine 37.
+ine 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
 (Font)                  OT1/cmss/m/n --> TU/NotoSansMalayalam(0)/m/n on input l
-ine 37.
+ine 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 41.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/NotoSansMalayalam(0)/m/n --> TU/NotoSansMalayalam(0)
-/b/n on input line 37.
+/b/n on input line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/NotoSansMalayalam(0)/b/it on input
- line 37.
+ line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
 (Font)                  OT1/cmss/bx/n --> TU/NotoSansMalayalam(0)/b/n on input 
-line 37.
+line 41.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 37.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 41.
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <10.95> on input line 40.
+(Font)              <10.95> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 40.
+(Font)              <8> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 40.
+(Font)              <6> on input line 45.
 
 LaTeX Font Warning: Font shape `TU/NotoSansMalayalam(0)/b/n' undefined
 (Font)              using `TU/NotoSansMalayalam(0)/m/n' instead on input line 4
-2.
+7.
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
+Missing character: There is no ị (U+1ECB) in font Noto Sans Malayalam Regular R
+egular/OT:script=latn;language=dflt;mapping=tex-text;!
 
-Overfull \hbox (30.8138pt too wide) in paragraph at lines 51--52
-[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സാഹചര്യം സാധാരണ വി
-ഭാഗത്തിൽ തുടരുന്ന വലിയ പ്രദേശങ്ങളോടെയാണ്,
+Overfull \hbox (6.71288pt too wide) in paragraph at lines 56--57
+[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സ്ഥിതിവിവരക്കണക്കു
+കൾ കാണിക്കുന്നത് മിക്ക പ്രദേശങ്ങളും
  []
 
 
-Overfull \hbox (36.89656pt too wide) in paragraph at lines 51--52
-\TU/NotoSansMalayalam(0)/m/n/10.95 ചെറിയൊരു ഭാഗം വരൾച്ച അനുഭവിക്കുന്നു. ഈ ആഴ്ച 
-വരൾച്ച ബാധിച്ച ആകെ പ്രദേശം ഡി\TU/Carlito(0)/m/n/10.95 0 \TU/NotoSansMalayalam(0
-)/m/n/10.95 അല്ലെങ്കിൽ
+Overfull \hbox (30.66049pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 സാധാരണ വിഭാഗത്തിൽ തുടരുന്നുവെന്നും ചെറിയൊരു 
+ഭാഗം വരൾച്ച അനുഭവിക്കുന്നുവെന്നും വ്യക്തമാക്കുന്നു.
  []
 
 
-Overfull \hbox (28.3779pt too wide) in paragraph at lines 51--52
-\TU/NotoSansMalayalam(0)/m/n/10.95 രാജസ്ഥാൻ \TU/Carlito(0)/m/n/10.95 1.0\TU/Not
-oSansMalayalam(0)/m/n/10.95 %, ഗുജറാത്ത് \TU/Carlito(0)/m/n/10.95 2.1\TU/NotoSa
-nsMalayalam(0)/m/n/10.95 %, തെലങ്കാന \TU/Carlito(0)/m/n/10.95 3.4\TU/NotoSansMa
-layalam(0)/m/n/10.95 % വരൾച്ചാ നിരക്കുകളോടെ ഏറ്റവും കുറവ് ബാധിക്കപ്പെട്ട
+Overfull \hbox (3.84375pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 ഡി\TU/Carlito(0)/m/n/10.95 0\TU/NotoSansMala
+yalam(0)/m/n/10.95 +യിൽ \TU/Carlito(0)/m/n/10.95 15.3\TU/NotoSansMalayalam(0)/m
+/n/10.95 %, ഡി\TU/Carlito(0)/m/n/10.95 1\TU/NotoSansMalayalam(0)/m/n/10.95 +യിൽ
+ \TU/Carlito(0)/m/n/10.95 3.1\TU/NotoSansMalayalam(0)/m/n/10.95 %, ഡി\TU/Carlit
+o(0)/m/n/10.95 2\TU/NotoSansMalayalam(0)/m/n/10.95 +യിൽ \TU/Carlito(0)/m/n/10.9
+5 0.2\TU/NotoSansMalayalam(0)/m/n/10.95 %, ഡി\TU/Carlito(0)/m/n/10.95 3\TU/Noto
+SansMalayalam(0)/m/n/10.95 +യിൽ \TU/Carlito(0)/m/n/10.95 0.0\TU/NotoSansMalayal
+am(0)/m/n/10.95 %, ഡി\TU/Carlito(0)/m/n/10.95 4\TU/NotoSansMalayalam(0)/m/n/10.
+95 യിൽ \TU/Carlito(0)/m/n/10.95 0.0\TU/NotoSansMalayalam(0)/m/n/10.95 % എന്നിങ്
+ങനെയാണ്.
+ []
+
+
+Overfull \hbox (14.00108pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 (\TU/Carlito(0)/m/n/10.95 42.3\TU/NotoSansMa
+layalam(0)/m/n/10.95 %), മിസോറം (\TU/Carlito(0)/m/n/10.95 40.8\TU/NotoSansMalay
+alam(0)/m/n/10.95 %), അരുണാചൽ പ്രദേശ് (\TU/Carlito(0)/m/n/10.95 40.3\TU/NotoSan
+sMalayalam(0)/m/n/10.95 %), ജമ്മു കശ്മീർ (\TU/Carlito(0)/m/n/10.95 38.9)\TU/Not
+oSansMalayalam(0)/m/n/10.95 , മേഘാലയ (\TU/Carlito(0)/m/n/10.95 34.1) \TU/NotoSa
+nsMalayalam(0)/m/n/10.95 എന്നിവയാണ്.
  []
 
 File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
-File: imd.png Graphic file (type bmp)
-<imd.png>
 [1
 
 ]
@@ -394,10 +409,8 @@ File: wcl.png Graphic file (type bmp)
 <wcl.png>
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
-File: imd.png Graphic file (type bmp)
-<imd.png>
  [2]
-(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/summaries/_build/Ma
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/summaries/_build/Ma
 layalam_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
@@ -410,12 +423,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5109 strings out of 468168
- 132780 string characters out of 5432816
- 584938 words of memory out of 5000000
+ 132854 string characters out of 5432816
+ 584771 words of memory out of 5000000
  33789 multiletter control sequences out of 15000+600000
- 630684 words of font info for 77 fonts, out of 8000000 for 9000
+ 630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1871b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1871b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 12/data/su
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 22/data/su
 mmaries/_build/Malayalam_2026-05-20/summary.pdf (2 pages).

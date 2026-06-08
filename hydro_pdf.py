@@ -359,6 +359,7 @@ TEX_TEMPLATE = r'''
 
 \usepackage[paperwidth=20in, paperheight=20in, margin=0in]{geometry}
 \usepackage{graphicx}
+\usepackage{adjustbox}
 \usepackage[table]{xcolor}
 \usepackage{tikz}
 \usepackage{tcolorbox}
@@ -405,7 +406,7 @@ TEX_TEMPLATE = r'''
 \newcommand{\pageheader}[1]{%
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.4,-0.25) {%
-    \includegraphics[height=1.4in]{WCL_Logo_cropped.png}%
+    \includegraphics[height=1.4in]{WCL_new.png}%
   };
   \node[anchor=center, text=titleblue, font=\Large\bfseries, align=center, text width=14in]
     at (9.5,-0.55) {#1};
@@ -452,21 +453,21 @@ TEX_TEMPLATE = r'''
       {\normalsize\textcolor{textblack}{\latinfont Indian Institute of}}\\[2pt]
       {\normalsize\textcolor{textblack}{\latinfont Technology Gandhinagar}}
     \end{tabular}};
-  \node[anchor=center, inner sep=0pt] at (9.5,1.0) {\includegraphics[height=1.6in]{WCL_Logo_cropped.png}};
-  \node[anchor=east, inner sep=0pt] at (18.85,1.0) {\includegraphics[height=1.75in]{IMD_nobg.png}};
+  \node[anchor=east, inner sep=0pt] at (18.85,1.0) {\includegraphics[height=1.7in]{WCL_new.png}};
 \end{tikzpicture}%
 }
 
 \newcommand{\summaryat}[2]{%
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-#1) {%
+    \adjustbox{max totalheight=1.35in}{%
     \begin{minipage}{18.4in}
       \begin{tcolorbox}[colback=summarygold, colframe=summarygoldborder,
                         boxrule=0pt, leftrule=3pt, arc=0pt, sharp corners,
                         left=14pt, right=14pt, top=10pt, bottom=10pt]
       {\normalsize\textbf{ {{T_summary_label}} } #2}
       \end{tcolorbox}
-    \end{minipage}%
+    \end{minipage}}%
   };
 \end{tikzpicture}%
 }
@@ -474,12 +475,13 @@ TEX_TEMPLATE = r'''
 \newcommand{\summaryone}[2]{%
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-#1) {%
+    \adjustbox{max totalheight=4.0in}{%
     \begin{minipage}{18.4in}
       \begin{tcolorbox}[colback=footerblue, colframe=footerblue, boxrule=0.8pt, arc=8pt,
                         left=18pt, right=18pt, top=14pt, bottom=14pt]
       {\normalsize\textcolor{textblack}{\textbf{ {{T_summary_heading}} } #2}}
       \end{tcolorbox}
-    \end{minipage}%
+    \end{minipage}}%
   };
 \end{tikzpicture}%
 }
@@ -487,7 +489,7 @@ TEX_TEMPLATE = r'''
 \newcommand{\introat}[2]{%
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-#1) {%
-    \begin{minipage}{18.4in}\justifying\normalsize\textcolor{textblack}{#2}\end{minipage}};
+    \adjustbox{max totalheight=2.3in}{\begin{minipage}{18.4in}\justifying\normalsize\textcolor{textblack}{#2}\end{minipage}}};
 \end{tikzpicture}%
 }
 
@@ -507,6 +509,7 @@ TEX_TEMPLATE = r'''
 \summaryone{1.7}{{{page1_summary}}}
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-5.9) {%
+    \adjustbox{max totalheight=11.0in}{%
     \begin{minipage}[t]{8.2in}\vspace{0pt}
       {\textbf{\textcolor{titleblue}{\Large {{T_section_rainfall_temp}} }}}\\[0.5em]
       {\justifying\normalsize {{page1_rainfall_temp}}\par}
@@ -514,7 +517,7 @@ TEX_TEMPLATE = r'''
       {\textbf{\textcolor{titleblue}{\Large {{T_section_sm_ro_et}} }}}\\[0.5em]
       {\justifying\normalsize {{page1_sm_ro_et}}\par}
       {{PAGE1_RIVERS_BLOCK}}
-    \end{minipage}};
+    \end{minipage}}};
   \node[anchor=north west, inner sep=0pt] at (9.2,-5.9) {%
     \begin{minipage}[t]{9.5in}\vspace{0pt}\centering
       \includegraphics[width=\linewidth]{1-s2_0-S0022169421010271-gr1_lrg.png}\\[0.5em]
@@ -562,6 +565,7 @@ TEX_TEMPLATE = r'''
 \pageribbon\pageheader{ {{T_ribbon_title}} }
 \begin{tikzpicture}[remember picture, overlay, x=1in, y=1in, shift=(current page.north west)]
   \node[anchor=north west, inner sep=0pt] at (0.5,-2.2) {%
+    \adjustbox{max totalheight=14.3in}{%
     \begin{minipage}[t]{9.0in}\vspace{0pt}
       {\textcolor{titleblue}{\LARGE {{T_about_heading}} }}\\[0.5em]
       {\justifying\normalsize\textcolor{textblack}{ {{T_about_body}} }\par}
@@ -571,8 +575,9 @@ TEX_TEMPLATE = r'''
       \vspace{1.3em}
       {\textcolor{titleblue}{\LARGE {{T_model_heading}} }}\\[0.5em]
       {\justifying\normalsize\textcolor{textblack}{ {{T_model_body}} }\par}
-    \end{minipage}};
+    \end{minipage}}};
   \node[anchor=north west, inner sep=0pt] at (9.9,-2.2) {%
+    \adjustbox{max totalheight=14.3in}{%
     \begin{minipage}[t]{8.9in}\vspace{0pt}
       {\textcolor{titleblue}{\LARGE {{T_disclaimer_heading}} }}\\[0.5em]
       {\justifying\normalsize\textcolor{textblack}{ {{T_disclaimer_body}} }\par}
@@ -598,7 +603,7 @@ TEX_TEMPLATE = r'''
       \normalsize\textcolor{textblack}{ {{T_person2_name}}\newline {{T_person2_role}}\newline {{T_affiliation}}\newline {\latinfont 24350007@iitgn.ac.in}} &
       \normalsize\textcolor{textblack}{ {{T_person3_name}}\newline {{T_person3_role}}\newline {{T_affiliation}}\newline {\latinfont paras.sharma@iitgn.ac.in}}
       \end{tabular}
-    \end{minipage}};
+    \end{minipage}}};
 \end{tikzpicture}
 \pagefooterfull\pagenum{7}\null
 
@@ -728,7 +733,7 @@ def build_latex_pdf(repo, out_base, date_str, labels, year, month, day,
 
     # static images shipped in the repo
     static_dir = repo / "Hydrologic_Outlook" / "PDF_images"
-    STATIC_FILES = ["WCL_Logo_cropped.png", "IITGN.png", "IMD_nobg.png",
+    STATIC_FILES = ["WCL_new.png", "IITGN.png",
                     "1-s2_0-S0022169421010271-gr1_lrg.png",
                     "prof_vimal_circle.png", "devesh_circle.png", "paras_circle.png"]
     for fn in STATIC_FILES:

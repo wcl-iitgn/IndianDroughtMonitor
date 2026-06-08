@@ -29,17 +29,29 @@
   var PRODUCTS = {
     cdi:        { label: "Combined Drought Index (CDI)", file: "./data/Current_CDI.txt", frames: true },
     spi1:       { label: "SPI — 1 month",  file: "./data/SPI_1month.txt" },
+    spi2:       { label: "SPI — 2 month",  file: "./data/SPI_2month.txt" },
     spi3:       { label: "SPI — 3 month",  file: "./data/SPI_3month.txt" },
+    spi4:       { label: "SPI — 4 month",  file: "./data/SPI_4month.txt" },
     spi6:       { label: "SPI — 6 month",  file: "./data/SPI_6month.txt" },
+    spi9:       { label: "SPI — 9 month",  file: "./data/SPI_9month.txt" },
     spi12:      { label: "SPI — 12 month", file: "./data/SPI_12month.txt" },
+    spi24:      { label: "SPI — 24 month", file: "./data/SPI_24month.txt" },
     sri1:       { label: "SRI — 1 month",  file: "./data/SRI_1month.txt" },
+    sri2:       { label: "SRI — 2 month",  file: "./data/SRI_2month.txt" },
     sri3:       { label: "SRI — 3 month",  file: "./data/SRI_3month.txt" },
+    sri4:       { label: "SRI — 4 month",  file: "./data/SRI_4month.txt" },
     sri6:       { label: "SRI — 6 month",  file: "./data/SRI_6month.txt" },
+    sri9:       { label: "SRI — 9 month",  file: "./data/SRI_9month.txt" },
     sri12:      { label: "SRI — 12 month", file: "./data/SRI_12month.txt" },
+    sri24:      { label: "SRI — 24 month", file: "./data/SRI_24month.txt" },
     ssmi1:      { label: "SSMI — 1 month", file: "./data/SSMI_1month.txt" },
+    ssmi2:      { label: "SSMI — 2 month", file: "./data/SSMI_2month.txt" },
     ssmi3:      { label: "SSMI — 3 month", file: "./data/SSMI_3month.txt" },
+    ssmi4:      { label: "SSMI — 4 month", file: "./data/SSMI_4month.txt" },
     ssmi6:      { label: "SSMI — 6 month", file: "./data/SSMI_6month.txt" },
+    ssmi9:      { label: "SSMI — 9 month", file: "./data/SSMI_9month.txt" },
     ssmi12:     { label: "SSMI — 12 month", file: "./data/SSMI_12month.txt" },
+    ssmi24:     { label: "SSMI — 24 month", file: "./data/SSMI_24month.txt" },
     fcdi7:      { label: "Forecast CDI — 7 day",  file: "./data/Future_CDI_7day.txt" },
     fcdi15:     { label: "Forecast CDI — 15 day", file: "./data/Future_CDI_15day.txt" },
     fcdi30:     { label: "Forecast CDI — 30 day", file: "./data/Future_CDI_30day.txt" },
@@ -64,8 +76,23 @@
   function buildDateList() {
     if (DATES) return DATES;
     DATES = [];
+    // Preferred source: the build-generated manifest of weeks that actually
+    // exist in data/Drough_TS/ (assets/interactive/cdi-manifest.js, loaded
+    // before this script). Newly added grids appear automatically after the
+    // next build, with no code change here.
+    var man = (typeof window !== "undefined" && Array.isArray(window.IDM_CDI_DATES))
+      ? window.IDM_CDI_DATES : null;
+    if (man && man.length) {
+      man.forEach(function (iso) {
+        DATES.push({ iso: iso, compact: ("" + iso).replace(/-/g, "") });
+      });
+      return DATES;
+    }
+    // Fallback (manifest missing, e.g. opened without a build): generate a
+    // weekly sequence from the first grid up to TODAY, so the list still
+    // self-extends. The engine skips any week whose file is absent.
     var d = new Date(2021, 6, 14);          // 2021-07-14 (month is 0-based)
-    var end = new Date(2026, 4, 20);        // 2026-05-20
+    var end = new Date();                    // today (was hardcoded 2026-05-20)
     while (d <= end) {
       var y = d.getFullYear();
       var m = String(d.getMonth() + 1).padStart(2, "0");

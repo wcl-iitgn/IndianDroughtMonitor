@@ -10,7 +10,7 @@
 #   python3 build.py                 # full build, all 23 languages, via gemma4
 #   python3 build.py --langs English # English only (fast; no translation)
 #   python3 build.py --skip-llm      # no model at all (template summary, English)
-#   python3 build.py --only hydro    # run just one stage (hydro|summary|forecast|schema|districts)
+#   python3 build.py --only hydro    # run just one stage (hydro|summary|forecast|schema|districts|cdimanifest)
 #   python3 build.py --with-districts# also (re)fetch + rebuild district data
 #   python3 build.py --model gemma4:e2b --ollama-url http://localhost:11434/api/generate
 #
@@ -33,8 +33,8 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent
 PY = sys.executable
-ALL_STAGES = ["districts", "pdfstrings", "uistrings", "hydro", "summary", "forecast", "schema"]
-DEFAULT_STAGES = ["pdfstrings", "uistrings", "hydro", "summary", "forecast", "schema"]
+ALL_STAGES = ["districts", "cdimanifest", "pdfstrings", "uistrings", "hydro", "summary", "forecast", "schema"]
+DEFAULT_STAGES = ["cdimanifest", "pdfstrings", "uistrings", "hydro", "summary", "forecast", "schema"]
 
 
 def langs_all():
@@ -66,7 +66,9 @@ def main():
     ap.add_argument("--skip-llm", action="store_true",
                     help="do not use the model: template summary, English only")
     ap.add_argument("--force", action="store_true",
-                    help="re-translate per-language text even if it already exists")
+                    help="force a full rebuild: re-translate cached text, regenerate existing "
+                         "PDFs, and also run the district-data stage (so a single "
+                         "'build.py --force' covers the whole pipeline end to end)")
     ap.add_argument("--ollama-url", default=None,
                     help="override Ollama /api/generate URL (else $IDM_OLLAMA_URL or LAN default)")
     ap.add_argument("--model", default=None,
@@ -88,7 +90,7 @@ def main():
         stages = [s.strip() for s in args.only.split(",") if s.strip() in ALL_STAGES]
     else:
         stages = list(DEFAULT_STAGES)
-        if args.with_districts:
+        if args.with_districts or args.force:
             stages = ["districts"] + stages
     langs = ["English"] if args.skip_llm else (args.langs or langs_all())
 
@@ -121,6 +123,13 @@ def main():
         run("Districts — state/grid/district stats (fetches GeoJSON)",
             [PY, "build_districts.py"])
 
+    # ---- cdi date manifest — list the weekly CDI grids in data/Drough_TS so
+    #      the map's date picker + animation auto-include newly added weeks
+    #      (no code edit). Cheap, deterministic, no LLM/network. ---------------
+    if "cdimanifest" in stages:
+        run("CDI week manifest (interactive map date list)",
+            [PY, "build_cdi_manifest.py"])
+
     # ---- pdf static strings — translate the hydro PDF labels/headings (cached) --
     if "pdfstrings" in stages and not args.skip_llm:
         cmd = [PY, "translate_pdf_strings.py", "--langs"] + langs
@@ -145,6 +154,8 @@ def main():
             cmd += ["--date", args.date]
         if args.skip_llm:
             cmd += ["--no-llm"]
+        if args.force:
+            cmd += ["--force"]
         cmd += ["--langs"] + langs
         run("Hydro outputs — gemma4 prose + per-language translation", cmd)
         # refresh the website manifests (dashboards/maps/month + per-language PDF list)

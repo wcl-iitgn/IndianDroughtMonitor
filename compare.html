@@ -130,11 +130,17 @@
 </footer>
 <script src="assets/interactive/drought-map.colormaps.js"></script>
 <script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/cdi-manifest.js"></script>
 <script src="assets/interactive/drought-map.app.js"></script>
 <script>
     window.addEventListener("DOMContentLoaded", function () {
-      IDM.fillDateSelect(document.getElementById("date-left"), "2026-05-20");
-      IDM.fillDateSelect(document.getElementById("date-right"), "2025-05-21");
+      // Default to the newest available week (left) and ~1 year earlier (right),
+      // both derived from the CDI manifest so they never go stale.
+      var L = IDM.buildDateList();
+      var newestIso = L.length ? L[L.length - 1].iso : null;
+      var priorIso  = L.length ? L[Math.max(0, L.length - 1 - 52)].iso : null;
+      IDM.fillDateSelect(document.getElementById("date-left"), newestIso);
+      IDM.fillDateSelect(document.getElementById("date-right"), priorIso);
 
       (async function () {
         try {
@@ -144,7 +150,7 @@
 
           var right = IDM.buildMap(document.getElementById("R_raster"), document.getElementById("R_vector"), "cdi", { interactive: true, size: 520 });
           await right.init();
-          var ok = await right.loadCDIDataForDate("20250521");
+          var ok = await right.loadCDIDataForDate((priorIso || "").replace(/-/g, ""));
           if (ok) { right.renderStaticMap(); right.renderDynamicHUD(); }
           document.getElementById("loading-right").classList.add("idm-hidden");
 

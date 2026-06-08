@@ -40,8 +40,8 @@
       from that week's data grid.
     </p>
 <div class="idm-anim-panel">
-<div class="idm-field"><label data-i18n="animations.start_week" for="anim_start_date">Start week</label><input id="anim_start_date" max="2026-05-20" min="2021-07-14" type="date" value="2024-01-03"/></div>
-<div class="idm-field"><label data-i18n="animations.end_week" for="anim_end_date">End week</label><input id="anim_end_date" max="2026-05-20" min="2021-07-14" type="date" value="2026-05-20"/></div>
+<div class="idm-field"><label data-i18n="animations.start_week" for="anim_start_date">Start week</label><input id="anim_start_date" type="date"/></div>
+<div class="idm-field"><label data-i18n="animations.end_week" for="anim_end_date">End week</label><input id="anim_end_date" type="date"/></div>
 <div class="idm-field"><label data-i18n="animations.frames_sec" for="anim_fps">Frames / sec</label><input id="anim_fps" max="15" min="1" type="number" value="4"/></div>
 <div class="idm-field"><label> </label><label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="animations.greyscale">Greyscale</span></label></div>
 <div class="idm-anim-actions">
@@ -134,6 +134,7 @@
 </footer>
 <script src="assets/interactive/drought-map.colormaps.js"></script>
 <script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/cdi-manifest.js"></script>
 <script src="assets/interactive/drought-map.app.js"></script>
 <script src="assets/vendor/gif.js"></script>
 <script>
@@ -151,6 +152,20 @@
           fps:document.getElementById("anim_fps")
         }
       });
+
+      // Bound the animation date pickers to the actual CDI record (from the
+      // manifest): new weeks become selectable, and the window defaults to the
+      // last ~2 years ending at the newest available week. No hardcoded dates.
+      (function () {
+        var L = IDM.buildDateList();
+        if (!L.length) return;
+        var oldestIso = L[0].iso, newestIso = L[L.length - 1].iso;
+        var startIso  = L[Math.max(0, L.length - 1 - 104)].iso;
+        var s = document.getElementById("anim_start_date");
+        var e = document.getElementById("anim_end_date");
+        if (s) { s.min = oldestIso; s.max = newestIso; s.value = startIso; }
+        if (e) { e.min = oldestIso; e.max = newestIso; e.value = newestIso; }
+      })();
 
       // ---- Download animation as GIF ----
       // Iterate the chosen week range, render each frame, capture the flattened
@@ -172,19 +187,21 @@
           statusEl.style.display = "block";
           statusEl.textContent = "Building GIF… 0/" + frames.length;
 
-          var w = m.canvases.raster.width, h = m.canvases.raster.height;
-          var gif = new GIF({ workers: 2, quality: 10, width: w, height: h,
-                              workerScript: "assets/vendor/gif.worker.js", background: "#ffffff" });
-
+          var gif = null;   // created lazily from the first frame so its size includes the legend
           for (var i = 0; i < frames.length; i++) {
             var ok = await m.loadCDIDataForDate(frames[i].compact);
             if (ok) {
               m.renderStaticMap();
-              var c = m.captureRasterCanvas();   // white bg + data, flattened
+              var c = m.captureRasterCanvas(true);   // white bg + data + baked-in legend
+              if (!gif) {
+                gif = new GIF({ workers: 2, quality: 10, width: c.width, height: c.height,
+                                workerScript: "assets/vendor/gif.worker.js", background: "#ffffff" });
+              }
               gif.addFrame(c, { copy: true, delay: Math.round(1000 / fps) });
             }
             statusEl.textContent = "Building GIF… " + (i + 1) + "/" + frames.length;
           }
+          if (!gif) { gifBtn.disabled = false; statusEl.textContent = "No frames in the selected range."; return; }
 
           gif.on("progress", function (p) { statusEl.textContent = "Encoding GIF… " + Math.round(p * 100) + "%"; });
           gif.on("finished", function (blob) {

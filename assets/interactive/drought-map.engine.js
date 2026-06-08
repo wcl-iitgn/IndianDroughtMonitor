@@ -439,15 +439,19 @@ function _drawLegend(octx, W, mapH, H, cmap) {
   octx.font = "bold 16px Inter, Arial, sans-serif";
   octx.fillText(m.title, W / 2, top + 22);
   if (m.kind === "classes") {
-    var n = m.entries.length, cellW = (W - 2 * padX) / n, swH = 26, swY = top + 40,
-        swW = Math.min(cellW * 0.72, 120);
+    var n = m.entries.length, barX = padX, barW = W - 2 * padX, segW = barW / n,
+        swH = 26, swY = top + 40;
     octx.font = "12px Inter, Arial, sans-serif";
+    // continuous bar: colour blocks drawn edge-to-edge (no gaps between classes)
     m.entries.forEach(function (e, i) {
-      var cx = padX + i * cellW + cellW / 2;
-      octx.fillStyle = e.color; octx.fillRect(cx - swW / 2, swY, swW, swH);
-      octx.strokeStyle = "#8a8a8a"; octx.lineWidth = 1; octx.strokeRect(cx - swW / 2, swY, swW, swH);
-      octx.fillStyle = "#262220";
-      _legWrap(octx, e.label, cx, swY + swH + 16, cellW - 6, 13);
+      octx.fillStyle = e.color;
+      octx.fillRect(barX + i * segW, swY, segW + 0.6, swH);   // +0.6 avoids hairline AA gaps
+    });
+    octx.strokeStyle = "#8a8a8a"; octx.lineWidth = 1;          // single outer border
+    octx.strokeRect(barX, swY, barW, swH);
+    octx.fillStyle = "#262220";                                // labels centred under each block
+    m.entries.forEach(function (e, i) {
+      _legWrap(octx, e.label, barX + i * segW + segW / 2, swY + swH + 16, segW - 6, 13);
     });
   } else {
     var bx = padX, bw = W - 2 * padX, by = top + 44, bh = 26, k = m.colors.length, segW = bw / k;
@@ -459,6 +463,23 @@ function _drawLegend(octx, W, mapH, H, cmap) {
     octx.fillText(">", bx + bw - 4, by + bh + 15);
   }
   octx.restore();
+}
+
+// Composite raster (+ optional overlay) on white, optionally appending the legend
+// strip; returns the offscreen canvas. Shared by toPNGDataURL and the GIF export.
+function _flattenedCanvas(withOverlay, withLegend) {
+  var w = C_raster.width, h = C_raster.height;
+  var cmap = state.colormap || (typeof window !== "undefined" && window.IDM_COLORMAPS ? window.IDM_COLORMAPS.CDI : null);
+  var legH = (withLegend && cmap) ? Math.round(w * 0.16) : 0;
+  var off = document.createElement("canvas");
+  off.width = w; off.height = h + legH;
+  var octx = off.getContext("2d");
+  octx.fillStyle = "#ffffff";
+  octx.fillRect(0, 0, w, h + legH);
+  octx.drawImage(C_raster, 0, 0);
+  if (withOverlay) octx.drawImage(C_vector, 0, 0);
+  if (legH) _drawLegend(octx, w, h, legH, cmap);
+  return off;
 }
 
 function renderStaticMap() {
@@ -1186,28 +1207,12 @@ function formatDateToYYYYMMDD(date) {
     // Composite the raster (data) and vector (overlay) canvases onto a white
     // background and return a PNG data URL. Used for the "download map" button.
     toPNGDataURL: function (withOverlay, withLegend) {
-      var w = C_raster.width, h = C_raster.height;
-      var legH = (withLegend && state.colormap) ? Math.round(w * 0.16) : 0;
-      var off = document.createElement("canvas");
-      off.width = w; off.height = h + legH;
-      var octx = off.getContext("2d");
-      octx.fillStyle = "#ffffff";
-      octx.fillRect(0, 0, w, h + legH);
-      octx.drawImage(C_raster, 0, 0);
-      if (withOverlay) octx.drawImage(C_vector, 0, 0);
-      if (legH) _drawLegend(octx, w, h, legH, state.colormap);
-      return off.toDataURL("image/png");
+      return _flattenedCanvas(withOverlay, withLegend).toDataURL("image/png");
     },
-    // Return the flattened raster pixels (white bg + data) for GIF frame capture.
-    captureRasterCanvas: function () {
-      var w = C_raster.width, h = C_raster.height;
-      var off = document.createElement("canvas");
-      off.width = w; off.height = h;
-      var octx = off.getContext("2d");
-      octx.fillStyle = "#ffffff";
-      octx.fillRect(0, 0, w, h);
-      octx.drawImage(C_raster, 0, 0);
-      return off;
+    // Return the flattened raster canvas (white bg + data, optional baked-in legend)
+    // for GIF frame capture. captureRasterCanvas(true) includes the legend strip.
+    captureRasterCanvas: function (withLegend) {
+      return _flattenedCanvas(false, withLegend);
     },
     renderStaticMap: renderStaticMap,
     renderDynamicHUD: renderDynamicHUD,

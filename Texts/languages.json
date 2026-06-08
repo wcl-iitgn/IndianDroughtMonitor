@@ -43,7 +43,7 @@
       "label": "Hindi",
       "native": "हिन्दी",
       "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
+      "pdf_font": "Tiro Devanagari Hindi",
       "script": "devanagari"
     },
     {
@@ -61,7 +61,7 @@
       "label": "Maithili",
       "native": "मैथिली",
       "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
+      "pdf_font": "Tiro Devanagari Hindi",
       "script": "devanagari"
     },
     {
@@ -79,7 +79,7 @@
       "label": "Marathi",
       "native": "मराठी",
       "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
+      "pdf_font": "Tiro Devanagari Hindi",
       "script": "devanagari"
     },
     {
@@ -88,7 +88,7 @@
       "label": "Nepali",
       "native": "नेपाली",
       "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
+      "pdf_font": "Tiro Devanagari Hindi",
       "script": "devanagari"
     },
     {
@@ -106,17 +106,8 @@
       "label": "Sanskrit",
       "native": "संस्कृतम्",
       "dir": "ltr",
-      "pdf_font": "Noto Sans Devanagari",
+      "pdf_font": "Tiro Devanagari Hindi",
       "script": "devanagari"
-    },
-    {
-      "key": "Sindhi",
-      "code": "snd_Arab",
-      "label": "Sindhi",
-      "native": "سنڌي",
-      "dir": "rtl",
-      "pdf_font": "Noto Naskh Arabic",
-      "script": "arabic"
     },
     {
       "key": "Tamil",

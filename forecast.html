@@ -170,11 +170,12 @@
       var current = "drought";
       var leadSel = document.getElementById("lead-select");
       var grayChk = document.getElementById("grayscale-toggle");
-      var INIT = new Date(2026, 4, 20); // forecast initialization: 20 May 2026
+      var INIT = null;  // forecast initialization date; loaded from data/forecast_summaries/index.json below
       var DOPTS = { year: "numeric", month: "short", day: "numeric" };
 
       function productKey() { return VAR[current].prefix + leadSel.value; }
       function refreshValidity() {
+        if (!INIT) { document.getElementById("validity").textContent = ""; return; }
         var lead = parseInt(leadSel.value, 10);
         var v = new Date(INIT.getTime() + lead * 86400000);
         document.getElementById("validity").textContent =
@@ -186,6 +187,19 @@
         IDM.renderLegend("legend-host", cmap);
         if (grayChk && grayChk.checked) IDM.greyscaleLegend(true);
       }
+      // Load the real initialization date from the forecast index (newest
+      // entry) and refresh the validity label; falls back silently if absent.
+      (function () {
+        if (!window.fetch) return;
+        fetch("data/forecast_summaries/index.json").then(function (r) { return r.json(); }).then(function (j) {
+          var list = (j && j.forecasts) || [];
+          if (!list.length) return;
+          list.sort(function (a, b) { return String(b.date || "").localeCompare(String(a.date || "")); });
+          var d = new Date(list[0].date + "T00:00:00");
+          if (!isNaN(d)) { INIT = d; refreshValidity(); }
+        }).catch(function () {});
+      })();
+
       refreshValidity();
 
       IDM.mountMap({

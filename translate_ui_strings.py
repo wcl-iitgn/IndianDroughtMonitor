@@ -32,12 +32,23 @@ LANGS = REPO / "Texts" / "languages.json"
 OUTDIR = REPO / "assets" / "i18n"
 
 _PH = re.compile(r"\{[^}{]+\}")
+# Proper-noun / brand strings that must NEVER be translated -- they should read
+# identically in every language (like "Google"). Protected the same way as the
+# {curly} placeholders: swapped for a sentinel before translation, restored after.
+_KEEP = ("India Drought Monitor",)
 
 
 def _protect(s):
-    holders = _PH.findall(s)
-    for i, h in enumerate(holders):
-        s = s.replace(h, "ZZPH%dZZ" % i, 1)
+    holders = []
+    # brand / do-not-translate terms first, so the product name survives verbatim
+    for term in _KEEP:
+        while term in s:
+            s = s.replace(term, "ZZPH%dZZ" % len(holders), 1)
+            holders.append(term)
+    # {curly} placeholders
+    for h in _PH.findall(s):
+        s = s.replace(h, "ZZPH%dZZ" % len(holders), 1)
+        holders.append(h)
     return s, holders
 
 

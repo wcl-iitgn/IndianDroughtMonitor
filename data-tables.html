@@ -122,6 +122,7 @@
 </footer>
 <script src="assets/interactive/drought-map.colormaps.js"></script>
 <script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/cdi-manifest.js"></script>
 <script src="assets/interactive/drought-map.app.js"></script>
 <script>
     var STATE_GRID=null, NAMES=null, currentRows=[];
@@ -203,10 +204,11 @@
     }
 
     window.addEventListener("DOMContentLoaded", async function () {
-      IDM.fillDateSelect(document.getElementById("date-select"));
+      var dsel = document.getElementById("date-select");
+      IDM.fillDateSelect(dsel);                          // defaults to the newest week
       await loadStateGrid();
-      await refresh("20260520");
-      document.getElementById("date-select").addEventListener("change", function(e){ refresh(e.target.value.replace(/-/g,"")); });
+      await refresh((dsel.value || "").replace(/-/g, ""));
+      dsel.addEventListener("change", function(e){ refresh(e.target.value.replace(/-/g,"")); });
       document.getElementById("sort-select").addEventListener("change", function(){ render(currentRows); });
     });
   </script>

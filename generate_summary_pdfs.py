@@ -135,7 +135,7 @@ def national_part(raw_text):
 # A persistent footer (logos + blurb + copyright) is placed via fancyhdr on EVERY
 # page, inside the reserved bottom margin -- body text can never seep into it.
 TEX_TEMPLATE = r"""\documentclass[11pt]{article}
-\usepackage[a4paper,top=1.5cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
+\usepackage[a4paper,top=0.6cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{ragged2e}
@@ -151,27 +151,32 @@ TEX_TEMPLATE = r"""\documentclass[11pt]{article}
 \definecolor{muted}{HTML}{6B635E}
 \setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
 
-\setlength{\headheight}{0pt}\setlength{\headsep}{0pt}
-\pagestyle{fancy}
-\fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
-\renewcommand{\footrulewidth}{0pt}
-\fancyfoot[C]{%
+\setlength{\headheight}{28pt}\setlength{\headsep}{6pt}
+\newcommand{\idmfooter}{%
   \begin{minipage}{\textwidth}
     {\color{rule}\hrule height 0.7pt}\vspace{4pt}
     \noindent
     \begin{minipage}[c]{0.66\textwidth}{\scriptsize\color{muted}{{T_footer_blurb}}}\end{minipage}\hfill
     \begin{minipage}[c]{0.32\textwidth}\raggedleft
       \includegraphics[height=0.62cm]{wcl.png}\hspace{6pt}%
-      \includegraphics[height=0.62cm]{iitgn.png}\hspace{6pt}%
-      \includegraphics[height=0.62cm]{imd.png}
+      \includegraphics[height=0.62cm]{iitgn.png}
     \end{minipage}\\[3pt]
     {\scriptsize\color{muted}{{T_copyright}}}
   \end{minipage}%
 }
+\newcommand{\idmrunhead}{%
+  \begin{minipage}{\textwidth}
+    {\small\bfseries\color{titleblue}{{T_doc_title}}}\hfill{\small\color{muted}{{T_week_label}}}\\[2pt]
+    {\color{rule}\hrule height 0.6pt}
+  \end{minipage}%
+}
+\fancypagestyle{idmfoot}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyfoot[C]{\idmfooter}}
+\fancypagestyle{idmrun}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyhead[C]{\idmrunhead}\fancyfoot[C]{\idmfooter}}
+\pagestyle{idmrun}
 
 \begin{document}
 {{BODYDIR}}
+\thispagestyle{idmfoot}
 \noindent
 \begin{minipage}[c]{0.16\textwidth}\includegraphics[width=\linewidth]{wcl.png}\end{minipage}\hfill
 \begin{minipage}[c]{0.80\textwidth}\raggedleft
@@ -199,7 +204,7 @@ PDF_STRINGS = {
         "regional_heading": "Regional Outlook",
         "caption": "Combined Drought Index (CDI) for the week ending {label}.",
         "footer_blurb": ("Developed by the Water and Climate Lab, IIT Gandhinagar, using "
-                         "hydro-meteorological data from IMD and partner agencies."),
+                         "hydro-meteorological data from partner agencies."),
         "copyright": ("\u00a9 2026 Water and Climate Lab \u00b7 Indian Institute of Technology "
                       "Gandhinagar \u00b7 For research and demonstration purposes."),
         "week_label": "Week ending {label}",
@@ -249,7 +254,7 @@ def build_summary_pdf(repo, lang, date_str, label, national, region_lines, map_p
     for name, src in [("cdi_map.png", map_png),
                       ("wcl.png", repo / "assets" / "logos" / "wcl.png"),
                       ("iitgn.png", repo / "assets" / "logos" / "iitgn.png"),
-                      ("imd.png", repo / "assets" / "logos" / "imd.png")]:
+                      ]:
         (build_dir / name).write_bytes(Path(src).read_bytes())
     tex_path = build_dir / "summary.tex"
     tex_path.write_text(tex, encoding="utf-8")
@@ -275,7 +280,7 @@ def main():
     ap.add_argument("--fine-step", type=float, default=0.05)
     ap.add_argument("--maps-only", action="store_true")
     ap.add_argument("--force", action="store_true",
-                    help="re-translate per-language text even if it already exists")
+                    help="re-translate per-language text AND rebuild PDFs even if they already exist")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
@@ -365,7 +370,7 @@ def main():
                 skipped += 1; continue
             nat = national_part(txt.read_text(encoding="utf-8"))
             out_pdf = sumdir / key / "PDF_Archive" / ("IDM_Summary_%s.pdf" % d)
-            if out_pdf.exists():
+            if out_pdf.exists() and not args.force:
                 print("  = %-9s %s (already in archive)" % (key, d)); skipped += 1; continue
             try:
                 build_summary_pdf(repo, lang, d, label, nat, region_for.get(d, []), map_for[d], out_pdf)

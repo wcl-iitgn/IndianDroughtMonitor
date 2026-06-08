@@ -752,33 +752,37 @@ def load_pdf_texts(repo, lang_key):
     return json.loads(p.read_text(encoding="utf-8"))
 
 
-def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="gemma4:e2b"):
+def translate_paragraphs(paragraphs, tgt_lang_name, api_url, model="gemma4:e2b", script=None):
     """Translate the dynamic LLM paragraphs (dict slot->text) into the target language
     via the shared idm_llm module. Each paragraph is LENGTH-BOUNDED relative to its
     English source (the PDF layout's word budgets only constrain the English), so a
     translation can never overflow its fixed-height box: the model is told to match
     the source length, over-long attempts get "shorten" retries, and as a last resort
     whole sentences are trimmed. Returns a new dict, or None if the server is down."""
+    import pdf_layout_budget
     slots = list(paragraphs.keys())
     texts = [paragraphs[s] for s in slots]
     labels = ["%s -> %s" % (s, tgt_lang_name) for s in slots]
+    # width-aware per-slot character budgets so each block keeps ~the English line count
+    budgets = [pdf_layout_budget.budget_chars(s, paragraphs[s], script) for s in slots]
     try:
-        out = _simple_translate(texts, tgt_lang_name, api_url, model, labels=labels)
+        out = _simple_translate(texts, tgt_lang_name, api_url, model, labels=labels, budgets=budgets)
     except Exception as e:
         print(f"    (paragraph translation failed: {e})")
         return None
     return {s: out[i] for i, s in enumerate(slots)}
 
 
-def _simple_translate(texts, tgt_lang_name, api_url, model="gemma4:e2b", labels=None):
+def _simple_translate(texts, tgt_lang_name, api_url, model="gemma4:e2b", labels=None, budgets=None):
     """Translate each paragraph through idm_llm's length-bounded translator, which
     uses the proper translation prompt, enforces the per-paragraph length budget and
     sanitises the result for LaTeX (strips markdown/preamble, collapses blank
     lines). `api_url` is honoured so a direct run's --translate-api wins."""
     import idm_llm
     labels = labels or [None] * len(texts)
-    return [idm_llm.translate_bounded(t, tgt_lang_name, model=model, url=api_url, label=lab)
-            for t, lab in zip(texts, labels)]
+    budgets = budgets or [None] * len(texts)
+    return [idm_llm.translate_bounded(t, tgt_lang_name, model=model, url=api_url, label=lab, max_chars=mc)
+            for t, lab, mc in zip(texts, labels, budgets)]
 
 
 def main():
@@ -803,6 +807,8 @@ def main():
                     help="Ollama /api/generate URL used to translate non-English PDF prose")
     ap.add_argument("--translate-model", default="gemma4:e2b",
                     help="Ollama model for translation (same model as prose by default)")
+    ap.add_argument("--force", action="store_true",
+                    help="rebuild hydro PDFs even if they already exist in the archive")
     args = ap.parse_args()
 
     repo = Path(args.repo).resolve()
@@ -889,7 +895,7 @@ def main():
                     for lang in langs:
                         key = lang["key"]
                         out_pdf_check = out_base / key / "PDF_Archive" / f"Hydrolook_{date_str}.pdf"
-                        if out_pdf_check.exists():
+                        if out_pdf_check.exists() and not args.force:
                             print(f"  = {key}: Hydrolook_{date_str}.pdf already in archive -- skipped")
                             continue
                         texts = load_pdf_texts(repo, key)
@@ -902,7 +908,8 @@ def main():
                         else:
                             paragraphs = translate_paragraphs(
                                 en_paragraphs, lang.get("label") or lang["key"],
-                                args.translate_api, model=args.translate_model)
+                                args.translate_api, model=args.translate_model,
+                                script=lang.get("script"))
                             if paragraphs is None:
                                 print(f"  ! {key}: translation server unavailable — skipping (English PDF still built)")
                                 continue

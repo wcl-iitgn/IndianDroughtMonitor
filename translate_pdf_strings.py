@@ -73,11 +73,22 @@ def _restore(s, holders):
     return s
 
 
-def _tr_value(val, lang_label):
+def _tr_value(val, lang_label, key=None, script=None):
     """Translate one string, preserving placeholders and any line breaks. If a line
-    fails to translate, keep the English for that line and carry on."""
+    fails to translate, keep the English for that line and carry on. For single-line
+    values, a width-aware character budget (pdf_layout_budget) keeps the translation to
+    ~the English line count in its PDF slot; multi-line values fall back to the default
+    source-relative bound."""
     if not isinstance(val, str) or not val.strip():
         return val
+    nonblank = [ln for ln in val.split("\n") if ln.strip()]
+    max_chars = None
+    if len(nonblank) == 1:
+        try:
+            import pdf_layout_budget
+            max_chars = pdf_layout_budget.budget_chars(key, val, script)
+        except Exception:
+            max_chars = None
     out = []
     for line in val.split("\n"):
         if not line.strip():
@@ -85,7 +96,7 @@ def _tr_value(val, lang_label):
             continue
         prot, holders = _protect(line)
         try:
-            tr = idm_llm.translate(prot, lang_label)
+            tr = idm_llm.translate_bounded(prot, lang_label, max_chars=max_chars)
         except Exception as e:  # noqa: BLE001
             print("        (kept English for one line: %s)" % str(e)[:70])
             tr = prot
@@ -93,19 +104,19 @@ def _tr_value(val, lang_label):
     return "\n".join(out)
 
 
-def _walk(obj, lang_label, n):
+def _walk(obj, lang_label, n, script=None, key=None):
     if isinstance(obj, dict):
         res = {}
         for k, v in obj.items():
-            res[k] = v if k in SKIP_KEYS else _walk(v, lang_label, n)
+            res[k] = v if k in SKIP_KEYS else _walk(v, lang_label, n, script=script, key=k)
         return res
     if isinstance(obj, list):
-        return [_walk(x, lang_label, n) for x in obj]
+        return [_walk(x, lang_label, n, script=script, key=key) for x in obj]
     if isinstance(obj, str):
         n[0] += 1
         preview = obj.replace("\n", " ")[:46]
         print("      [%2d] %s%s" % (n[0], preview, "…" if len(obj) > 46 else ""), flush=True)
-        return _tr_value(obj, lang_label)
+        return _tr_value(obj, lang_label, key=key, script=script)
     return obj
 
 
@@ -137,7 +148,7 @@ def main():
         label = lang.get("label") or key
         n = [0]
         print("  translating static strings -> %-10s via %s ..." % (key, idm_llm.MODEL))
-        translated = _walk(english, label, n)
+        translated = _walk(english, label, n, script=lang.get("script"))
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(translated, ensure_ascii=False, indent=2), encoding="utf-8")
         print("    wrote Texts/%s/pdf.json (%d strings)" % (key, n[0])); done += 1

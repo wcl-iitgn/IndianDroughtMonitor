@@ -224,37 +224,48 @@ def clamp_sentences_to_chars(text, max_chars):
 
 def translate_bounded(text, target_language, model=None, timeout=None, url=None,
                       soft_ratio=TRANSLATE_SOFT_RATIO, hard_ratio=TRANSLATE_HARD_RATIO,
-                      attempts=TRANSLATE_MAX_ATTEMPTS, label=None, log=print):
-    """Translate `text` with a length budget relative to the source, for prose that
-    must fit a fixed PDF box. Returns text whose visual length is at most
-    hard_ratio x the source (except a single over-long sentence, which is never cut)."""
+                      attempts=TRANSLATE_MAX_ATTEMPTS, label=None, log=print, max_chars=None):
+    """Translate `text` with a length budget, for prose that must fit a fixed PDF box.
+
+    Two budgeting modes:
+      * max_chars given   -> the output's visual length is bounded to that ABSOLUTE
+        character budget (used by the width-aware slot fitter, pdf_layout_budget);
+      * max_chars is None -> bounded RELATIVE to the source, at most hard_ratio x the
+        source length (the original behaviour, unchanged).
+    A single over-long sentence is never cut."""
     if not text or not text.strip() or is_english(target_language):
         return text
     src_len = max(1, visual_len(text))
-    best = None  # (ratio, output)
+    if max_chars is not None:
+        accept_chars = cap_chars = max(1, int(max_chars))
+    else:
+        accept_chars = max(1, int(src_len * soft_ratio))
+        cap_chars = max(1, int(src_len * hard_ratio))
+    best = None  # (length, output)
     for attempt in range(1, attempts + 1):
         rules = _CONCISE_RULE
         if attempt > 1 and best is not None:
-            over = max(1, int(round((best[0] - 1.0) * 100)))
+            ref = accept_chars if max_chars is not None else src_len
+            over = max(1, int(round((best[0] / float(ref) - 1.0) * 100)))
             rules += ("\n8. Your previous translation was about %d%% longer than the "
-                      "original. This attempt MUST be shorter: keep every fact, but cut "
+                      "target length. This attempt MUST be shorter: keep every fact, but cut "
                       "filler words and use the most compact natural phrasing." % over)
         out = translate(text, target_language, model=model, timeout=timeout, url=url,
                         temperature=(0.1 if attempt == 1 else 0.3), extra_rules=rules)
-        ratio = visual_len(out) / float(src_len)
-        if best is None or ratio < best[0]:
-            best = (ratio, out)
-        if ratio <= soft_ratio:
+        L = visual_len(out)
+        if best is None or L < best[0]:
+            best = (L, out)
+        if L <= accept_chars:
             return out
-    ratio, out = best
-    if ratio > hard_ratio:
-        clamped = clamp_sentences_to_chars(out, int(src_len * hard_ratio))
+    L, out = best
+    if L > cap_chars:
+        clamped = clamp_sentences_to_chars(out, cap_chars)
         if label:
-            log("    (%s: %.2fx source after %d tries -> clamped to %.2fx)"
-                % (label, ratio, attempts, visual_len(clamped) / float(src_len)))
+            log("    (%s: %d chars after %d tries -> clamped to %d)"
+                % (label, L, attempts, visual_len(clamped)))
         return clamped
     if label:
-        log("    (%s: %.2fx source, within the hard limit)" % (label, ratio))
+        log("    (%s: %d chars, within budget %d)" % (label, L, cap_chars))
     return out
 
 

@@ -191,6 +191,8 @@
       var PDF_DIR = langPdfDir();
       var lang = (window.IDM_I18N && window.IDM_I18N.current) ? window.IDM_I18N.current : "English";
       var maxN = (lang === "English" || lang === "Hindi") ? 4 : 1;   // archive: 4 for En/Hi, current only otherwise
+      var _note = document.getElementById("archive-note");
+      if (_note) _note.hidden = (lang === "English" || lang === "Hindi");
       fetch(REPORTS_URL, { cache: "no-cache" }).then(function (r) {
         if (!r.ok) throw new Error("could not load reports manifest (" + r.status + ")");
         return r.json();
