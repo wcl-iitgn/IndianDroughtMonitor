@@ -1,7 +1,5 @@
-# India Drought Monitor — National Summary for week ending 2026-05-27
+# India Drought Monitor — National Summary for week ending 2026-06-03
 
-The national drought situation this week shows that the majority of the area remains in the Normal category, with 79.9% of India in Normal conditions.
+The national drought situation this week shows a distribution across the drought classes, with 80.4% of the area in the Normal category and 19.6% in the D0+ category. The total area affected by drought, specifically D0+, was 19.6% this week, which represents a contraction of 0.5 percentage points compared to the previous week's 20.1%. Looking further back, the area in D0+ was 15.0% approximately one month ago.
 
-The total drought area, classified as D0 or worse, increased to 20.1% this week, representing an expansion of 4.8 percentage points compared to the previous week's 15.3%.
-
-The states most affected by drought include Gujarat with 98.3% of its area in drought, followed by the NCT of Delhi at 52.2%, Maharashtra at 51.3%, Jammu & Kashmir at 47.9%, Mizoram at 47.4%, and Arunachal Pradesh at 46.6%. Conversely, Sikkim, Nagaland, Tripura, and West Bengal reported 0.0% of their area in drought.
+Gujarat exhibited the highest level of drought impact, with 85.2% of its area in drought. Other states with significant drought presence include the NCT of Delhi, which had 69.6% in drought, Arunanchal Pradesh at 52.8%, Jammu & Kashmir at 50.4%, Mizoram at 49.8%, and Meghalaya at 43.5%. Conversely, Sikkim reported 0.0% in drought, and Nagaland reported 0.7% in drought.

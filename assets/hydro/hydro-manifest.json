@@ -1,6 +1,6 @@
 {
-  "month_label": "April 2026",
-  "generated": "2026-04-30",
+  "month_label": "May 2026",
+  "generated": "2026-05-31",
   "parameters": [
     {
       "key": "Rainfall",
@@ -10,23 +10,13 @@
       "dashboard": "Rainfall_dashboard.png",
       "maps": [
         {
-          "file": "April (2025*).png",
-          "label": "April (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "April (Current).png",
-          "label": "April (Current)",
+          "file": "April.png",
+          "label": "April",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "December.png",
-          "label": "December",
           "role": "other"
         },
         {
@@ -45,13 +35,23 @@
           "role": "other"
         },
         {
+          "file": "June (Forecast).png",
+          "label": "June (Forecast)",
+          "role": "other"
+        },
+        {
           "file": "March.png",
           "label": "March",
           "role": "other"
         },
         {
-          "file": "May (Forecast).png",
-          "label": "May (Forecast)",
+          "file": "May (2025*).png",
+          "label": "May (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "May (Current).png",
+          "label": "May (Current)",
           "role": "other"
         }
       ]
@@ -64,23 +64,13 @@
       "dashboard": "Temperature_dashboard.png",
       "maps": [
         {
+          "file": "April.png",
+          "label": "April",
+          "role": "other"
+        },
+        {
           "file": "April (2010).png",
           "label": "April (2010)",
-          "role": "other"
-        },
-        {
-          "file": "April (2025*).png",
-          "label": "April (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "April (Current).png",
-          "label": "April (Current)",
-          "role": "other"
-        },
-        {
-          "file": "December.png",
-          "label": "December",
           "role": "other"
         },
         {
@@ -94,6 +84,11 @@
           "role": "other"
         },
         {
+          "file": "June (Forecast).png",
+          "label": "June (Forecast)",
+          "role": "other"
+        },
+        {
           "file": "March.png",
           "label": "March",
           "role": "other"
@@ -104,8 +99,13 @@
           "role": "other"
         },
         {
-          "file": "May (Forecast).png",
-          "label": "May (Forecast)",
+          "file": "May (2025*).png",
+          "label": "May (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "May (Current).png",
+          "label": "May (Current)",
           "role": "other"
         }
       ]
@@ -118,23 +118,13 @@
       "dashboard": "Relative_Wetness_dashboard.png",
       "maps": [
         {
-          "file": "April (2025*).png",
-          "label": "April (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "April (Current).png",
-          "label": "April (Current)",
+          "file": "April.png",
+          "label": "April",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "December.png",
-          "label": "December",
           "role": "other"
         },
         {
@@ -153,13 +143,23 @@
           "role": "other"
         },
         {
+          "file": "June (Forecast).png",
+          "label": "June (Forecast)",
+          "role": "other"
+        },
+        {
           "file": "March.png",
           "label": "March",
           "role": "other"
         },
         {
-          "file": "May (Forecast).png",
-          "label": "May (Forecast)",
+          "file": "May (2025*).png",
+          "label": "May (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "May (Current).png",
+          "label": "May (Current)",
           "role": "other"
         }
       ]
@@ -172,23 +172,13 @@
       "dashboard": "Total_Runoff_dashboard.png",
       "maps": [
         {
-          "file": "April (2025*).png",
-          "label": "April (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "April (Current).png",
-          "label": "April (Current)",
+          "file": "April.png",
+          "label": "April",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "December.png",
-          "label": "December",
           "role": "other"
         },
         {
@@ -202,13 +192,23 @@
           "role": "other"
         },
         {
+          "file": "June (Forecast).png",
+          "label": "June (Forecast)",
+          "role": "other"
+        },
+        {
           "file": "March.png",
           "label": "March",
           "role": "other"
         },
         {
-          "file": "May (Forecast).png",
-          "label": "May (Forecast)",
+          "file": "May (2025*).png",
+          "label": "May (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "May (Current).png",
+          "label": "May (Current)",
           "role": "other"
         },
         {
@@ -226,18 +226,8 @@
       "dashboard": "Evapotranspiration_dashboard.png",
       "maps": [
         {
-          "file": "April (2025*).png",
-          "label": "April (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "April (Current).png",
-          "label": "April (Current)",
-          "role": "other"
-        },
-        {
-          "file": "December.png",
-          "label": "December",
+          "file": "April.png",
+          "label": "April",
           "role": "other"
         },
         {
@@ -261,13 +251,23 @@
           "role": "other"
         },
         {
+          "file": "June (Forecast).png",
+          "label": "June (Forecast)",
+          "role": "other"
+        },
+        {
           "file": "March.png",
           "label": "March",
           "role": "other"
         },
         {
-          "file": "May (Forecast).png",
-          "label": "May (Forecast)",
+          "file": "May (2025*).png",
+          "label": "May (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "May (Current).png",
+          "label": "May (Current)",
           "role": "other"
         }
       ]

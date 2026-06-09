@@ -1,0 +1,61 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,top=0.6cm,bottom=3.0cm,left=1.9cm,right=1.9cm,footskip=2.0cm]{geometry}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{ragged2e}
+\usepackage{fancyhdr}
+\usepackage{fontspec}
+\setmainfont{Noto Sans Malayalam}
+\setsansfont{Noto Sans Malayalam}
+\newfontfamily\latinfont{Carlito}
+\renewcommand{\familydefault}{\sfdefault}
+\definecolor{titleblue}{HTML}{0F2F4A}
+\definecolor{textblack}{HTML}{1A1A1A}
+\definecolor{rule}{HTML}{C9C4C0}
+\definecolor{muted}{HTML}{6B635E}
+\setlength{\parindent}{0pt}\setlength{\parskip}{0.5em}
+
+\setlength{\headheight}{28pt}\setlength{\headsep}{6pt}
+\newcommand{\idmfooter}{%
+  \begin{minipage}{\textwidth}
+    {\color{rule}\hrule height 0.7pt}\vspace{4pt}
+    \noindent
+    \begin{minipage}[c]{0.66\textwidth}{\scriptsize\color{muted}{\latinfont Developed by the Water and Climate Lab, IIT Gandhinagar, using hydro-meteorological data from partner agencies}.}\end{minipage}\hfill
+    \begin{minipage}[c]{0.32\textwidth}\raggedleft
+      \includegraphics[height=0.62cm]{wcl.png}\hspace{6pt}%
+      \includegraphics[height=0.62cm]{iitgn.png}
+    \end{minipage}\\[3pt]
+    {\scriptsize\color{muted}© {\latinfont 2026 Water and Climate Lab} · {\latinfont Indian Institute of Technology Gandhinagar} · {\latinfont For research and demonstration purposes}.}
+  \end{minipage}%
+}
+\newcommand{\idmrunhead}{%
+  \begin{minipage}{\textwidth}
+    {\small\bfseries\color{titleblue}{\latinfont National Drought Summary}}\hfill{\small\color{muted}{\latinfont Week ending June 3, 2026}}\\[2pt]
+    {\color{rule}\hrule height 0.6pt}
+  \end{minipage}%
+}
+\fancypagestyle{idmfoot}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyfoot[C]{\idmfooter}}
+\fancypagestyle{idmrun}{\fancyhf{}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}\fancyhead[C]{\idmrunhead}\fancyfoot[C]{\idmfooter}}
+\pagestyle{idmrun}
+
+\begin{document}
+
+\thispagestyle{idmfoot}
+\noindent
+\begin{minipage}[c]{0.16\textwidth}\includegraphics[width=\linewidth]{wcl.png}\end{minipage}\hfill
+\begin{minipage}[c]{0.80\textwidth}\raggedleft
+  {\fontsize{19}{22}\selectfont\bfseries\color{titleblue}{\latinfont National Drought Summary}}\\[2pt]
+  {\normalsize\color{muted}{\latinfont Week ending June 3, 2026}}
+\end{minipage}
+\vspace{6pt}{\color{rule}\hrule height 1pt}\vspace{10pt}
+\begin{center}
+  \includegraphics[width=0.60\textwidth]{cdi_map.png}\\[3pt]
+  {\small\color{muted}{\latinfont Combined Drought Index (CDI) for the week ending June 3, 2026}.}
+\end{center}
+\vspace{2pt}
+{\large\bfseries\color{titleblue}{\latinfont Summary}}\\[3pt]
+{\justifying\normalsize\color{textblack}ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സാഹചര്യം വരൾച്ച വിഭാഗങ്ങളിലുടനീളം വിതരണം കാണിക്കുന്നു, {\latinfont 80.4} ശതമാനം പ്രദേശങ്ങൾ സാധാരണ വിഭാഗത്തിലും {\latinfont 19.6} ശതമാനം ഡി{\latinfont 0}+ വിഭാഗത്തിലും ആണ്. ഈ ആഴ്ച വരൾച്ച ബാധിച്ച ആകെ പ്രദേശം ഡി{\latinfont 0}+ ആയിരുന്നു, അത് കഴിഞ്ഞ ആഴ്ചയിലെ {\latinfont 20.1} ശതമാനത്തിൽ നിന്ന് {\latinfont 0.5} ശതമാനം പോയി കുറഞ്ഞു. ഒരു മാസം മുമ്പ് ഡി{\latinfont 0}+ വിഭാഗത്തിൽ {\latinfont 15.0} ശതമാനം പ്രദേശമായിരുന്നു. ഗുജറാത്തിലെ {\latinfont 85.2} ശതമാനം പ്രദേശങ്ങളിലും വരൾച്ചയുടെ ഏറ്റവും ഉയർന്ന ആഘാതം കാണപ്പെട്ടു. ഡൽഹിയിലെ കേന്ദ്രഭ {\latinfont tr}ị പ്രദേശവും {\latinfont 69.6} ശതമാനം വരൾച്ചയും, അരുണാചൽ പ്രദേശ് {\latinfont 52.8} ശതമാനം, ജമ്മു കശ്മീർ {\latinfont 50.4} ശതമാനം, മിസോറം {\latinfont 49.8} ശതമാനം, മേഘാലയ {\latinfont 43.5} ശതമാനം എന്നിവയിൽ ഗണ്യമായ വരൾച്ചയുണ്ട്. എന്നാൽ സിക്കിം {\latinfont 0.0} ശതമാനം വരൾച്ചയും നാഗാലാൻഡ് {\latinfont 0.7} ശതമാനം വരൾച്ചയും റിപ്പോർട്ട് ചെയ്തു.\par}
+\vspace{8pt}
+{\large\bfseries\color{titleblue}{\latinfont Regional Outlook}}\\[2pt]
+{\normalsize\color{titleblue}\textbf{{\latinfont North}}}\enspace {\normalsize\color{textblack}{\latinfont Moderate, scattered drought. About 30}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Northwest}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 5}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Northeast}}}\enspace {\normalsize\color{textblack}{\latinfont Moderate, scattered drought. About 37}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). A notable share is in severe-or-worse categories (D2}–{\latinfont D4)}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont East}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 11}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont Central}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 11}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont West}}}\enspace {\normalsize\color{textblack}{\latinfont Widespread drought. About 42}\% {\latinfont of the area is in drought (D0}–{\latinfont D4). Pockets of severe-or-worse conditions are present}.} \par\smallskip {\normalsize\color{titleblue}\textbf{{\latinfont South}}}\enspace {\normalsize\color{textblack}{\latinfont Mostly normal, with localised dryness. About 8}\% {\latinfont of the area is in drought (D0}–{\latinfont D4)}.}
+\end{document}

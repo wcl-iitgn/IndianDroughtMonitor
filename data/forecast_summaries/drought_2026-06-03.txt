@@ -1,0 +1,12 @@
+# Drought (CDI) forecast outlook initialized 2026-06-03
+
+Forecast drought (D0–D4) is expected to cover about 18% of India at 7 days, 25% at 15 days and 27% at 30 days.
+
+Regional outlook — area in forecast drought (D0–D4) (7 / 15 / 30-day):
+- North: 29% / 35% / 47%
+- Northwest: 4% / 7% / 14%
+- Northeast: 33% / 40% / 33%
+- East: 21% / 42% / 61%
+- Central: 11% / 32% / 36%
+- West: 38% / 37% / 8%
+- South: 7% / 6% / 0%

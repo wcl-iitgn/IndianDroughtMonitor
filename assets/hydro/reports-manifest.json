@@ -1,6 +1,11 @@
 {
   "reports": [
     {
+      "file": "Hydrolook_2026_05_31.pdf",
+      "label": "May 2026",
+      "date": "2026-05-31"
+    },
+    {
       "file": "Hydrolook_2026_04_30.pdf",
       "label": "April 2026",
       "date": "2026-04-30"
