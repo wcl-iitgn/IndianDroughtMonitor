@@ -1,0 +1,12 @@
+# Runoff forecast outlook initialized 2026-06-10
+
+Nationally, expected runoff averages about 6.08 mm (7-day), 17 mm (15-day) and 41 mm (30-day).
+
+Regional outlook — expected runoff (7 / 15 / 30-day):
+- North: 2.66 mm / 5.41 mm / 14 mm
+- Northwest: 1.00 mm / 2.27 mm / 6.81 mm
+- Northeast: 41 mm / 110 mm / 239 mm
+- East: 5.63 mm / 13 mm / 33 mm
+- Central: 1.73 mm / 4.33 mm / 14 mm
+- West: 1.69 mm / 7.02 mm / 35 mm
+- South: 5.37 mm / 18 mm / 44 mm
