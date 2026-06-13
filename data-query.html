@@ -5,6 +5,18 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
 <title data-i18n="data_query.query_the_data_india_drought">Query the Data | India Drought Monitor</title>
+<meta name="description" content="Query India Drought Monitor data in your browser with SQL over the weekly drought grids and per-state tables."/>
+<link rel="canonical" href="https://indiadroughtmonitor.in/data-query.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="India Drought Monitor"/>
+<meta property="og:title" content="Query the Data | India Drought Monitor"/>
+<meta property="og:description" content="Query India Drought Monitor data in your browser with SQL over the weekly drought grids and per-state tables."/>
+<meta property="og:url" content="https://indiadroughtmonitor.in/data-query.html"/>
+<meta property="og:image" content="https://indiadroughtmonitor.in/assets/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Query the Data | India Drought Monitor"/>
+<meta name="twitter:description" content="Query India Drought Monitor data in your browser with SQL over the weekly drought grids and per-state tables."/>
+<meta name="twitter:image" content="https://indiadroughtmonitor.in/assets/og-image.png"/>
 <link href="favicon.ico" rel="icon" sizes="any"/>
 <link href="apple-touch-icon.png" rel="apple-touch-icon"/>
 <meta content="#da3910" name="theme-color"/>
@@ -40,18 +52,18 @@
       nothing is sent to a server. Only <code>SELECT</code> queries are allowed.
     </p>
 <p style="margin:-8px 0 18px;">
-<a class="idm-btn ghost" data-i18n="data_query.download_schema_pdf" download="" href="data/IDM_Database_Schema.pdf">⬇ Download database schema (PDF)</a>
+<a class="idm-btn ghost" data-i18n="data_query.download_schema_pdf" download="" href="data/IDM_Database_Schema.pdf"><span aria-hidden="true">⬇</span> Download database schema (PDF)</a>
 </p>
 <div class="query-layout">
 <section class="query-main">
 <div class="query-editor-wrap">
 <textarea aria-label="SQL query" data-i18n-attr="placeholder:data_query.select_from_drought_state_la, aria-label:data_query.sql_query" id="sql-input" placeholder="SELECT * FROM drought_state_latest ORDER BY drought_pct DESC LIMIT 10" spellcheck="false"></textarea>
 <div class="query-actions">
-<button class="idm-btn" data-i18n="data_query.run_query" id="run-btn" type="button">▶ Run query</button>
+<button class="idm-btn" data-i18n="data_query.run_query" id="run-btn" type="button"><span aria-hidden="true">▶</span> Run query</button>
 <button class="idm-btn ghost" data-i18n="data_query.clear" id="clear-btn" type="button">Clear</button>
 <span class="query-status" id="query-status"></span>
 <span class="query-actions-spacer"></span>
-<button class="idm-btn ghost" data-i18n="data_query.download_csv" disabled="" id="csv-btn" type="button">⬇ Download CSV</button>
+<button class="idm-btn ghost" data-i18n="data_query.download_csv" disabled="" id="csv-btn" type="button"><span aria-hidden="true">⬇</span> Download CSV</button>
 </div>
 </div>
 <div class="query-result" id="query-result">
@@ -86,8 +98,8 @@
 <div>
 <h3 data-i18n="common_footer.contact_us">Contact Us</h3>
 <p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
-<p><span class="contact-icon">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
-<p><span class="contact-icon">@</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+<p><span class="contact-icon" aria-hidden="true">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon" aria-hidden="true">✉</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
 </div>
 <div>
 <h3 data-i18n="common_footer.maps">Maps</h3>
