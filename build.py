@@ -18,8 +18,11 @@
 #   * hydro must run first: it writes the weekly English summary + index.json that
 #     the summary stage reads. The summary/forecast stages then translate that text
 #     into every language with gemma4 and render the per-language PDFs.
-#   * districts is a static, network-dependent data refresh; it is NOT in the
-#     default run. Use --with-districts (or --only districts) when boundaries change.
+#   * districts is a static, network-dependent data refresh. It is not part of a
+#     routine default run, BUT a default build will fold it in automatically when
+#     the district data is older than the latest weekly timeseries (so the
+#     per-district map/chatbot never silently lags the rest of the site). Use
+#     --with-districts (or --only districts) to force it when boundaries change.
 #
 # When it finishes it prints the exact git commands to commit the result.
 # =============================================================================
@@ -40,6 +43,43 @@ DEFAULT_STAGES = ["cdimanifest", "pdfstrings", "uistrings", "hydro", "summary", 
 def langs_all():
     data = json.loads((REPO / "Texts" / "languages.json").read_text(encoding="utf-8"))
     return [l["key"] for l in data["languages"]]
+
+
+def _latest_timeseries_week(repo):
+    """YYYY-MM-DD of the most recent row in the national CDI-area timeseries, or None."""
+    ts = repo / "data" / "India_Drought_Area_Timeseries.txt"
+    try:
+        rows = [l for l in ts.read_text(encoding="utf-8").splitlines() if l.strip()]
+        p = rows[-1].split()
+        return "%04d-%02d-%02d" % (int(float(p[0])), int(float(p[1])), int(float(p[2])))
+    except Exception:
+        return None
+
+
+def _district_week(repo):
+    """week_ending recorded in the district data, or None if it was never built."""
+    for name in ("index.json", "district-stats.json"):
+        fp = repo / "data" / "districts" / name
+        try:
+            return json.loads(fp.read_text(encoding="utf-8")).get("week_ending")
+        except Exception:
+            continue
+    return None
+
+
+def districts_stale(repo):
+    """True when district data is missing or older than the latest timeseries week.
+
+    The districts stage is network-dependent and normally opt-in, but if the rest
+    of the site has advanced to a newer week the per-district map/chatbot numbers
+    would silently lag. In that case we fold it into the default build so a plain
+    'python3 build.py' keeps everything on the same week.
+    """
+    latest = _latest_timeseries_week(repo)
+    if latest is None:
+        return False                      # can't determine the week -> don't force a network stage
+    have = _district_week(repo)
+    return have is None or have < latest
 
 
 def run(title, cmd):
@@ -90,7 +130,13 @@ def main():
         stages = [s.strip() for s in args.only.split(",") if s.strip() in ALL_STAGES]
     else:
         stages = list(DEFAULT_STAGES)
-        if args.with_districts or args.force:
+        force_districts = args.with_districts or args.force
+        if not force_districts and districts_stale(REPO):
+            print("[auto] district data is stale (have week %s, latest week %s) "
+                  "-> adding 'districts' to this build."
+                  % (_district_week(REPO) or "none", _latest_timeseries_week(REPO)))
+            force_districts = True
+        if force_districts:
             stages = ["districts"] + stages
     langs = ["English"] if args.skip_llm else (args.langs or langs_all())
 

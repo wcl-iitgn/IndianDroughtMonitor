@@ -286,6 +286,9 @@ def main():
     repo = Path(args.repo).resolve()
     sumdir = repo / "data" / "summaries"
     weeks = json.loads((sumdir / "index.json").read_text(encoding="utf-8")).get("summaries", [])
+    # newest week across the whole index (independent of any --dates filter below),
+    # so summary_latest.txt is only ever overwritten by the genuinely latest week.
+    latest_date = max((w["date"] for w in weeks), default=None)
     if args.dates:
         weeks = [w for w in weeks if w["date"] in args.dates]
     if not weeks:
@@ -321,7 +324,11 @@ def main():
         header = m.group(1) if m else ""
         nat = national_part(raw)
         block = regional_block_text(region_for[d])
-        txt.write_text(header + nat + ("\n\n" + block if block else "") + "\n", encoding="utf-8")
+        full = header + nat + ("\n\n" + block if block else "") + "\n"
+        txt.write_text(full, encoding="utf-8")
+        # keep the site's live national+regional summary in sync with the newest week
+        if d == latest_date:
+            (repo / "data" / "summary_latest.txt").write_text(full, encoding="utf-8")
     print("Regional sections written into English summary_*.txt")
 
     if args.maps_only:

@@ -150,6 +150,8 @@ def cdi_at(grid, lat, lng):
 
 
 def classify(v):
+    if v is None or v != v:  # None or NaN -> no data, never an exceptional-drought cell
+        return None
     if v > -0.5: return "none"
     if v > -0.8: return "d0"
     if v > -1.3: return "d1"
@@ -226,7 +228,10 @@ def build(make_grids=True, cdi_path=None):
             v = cdi_at(cdi, la, lo)
             if v is None:
                 continue
-            tally[classify(v)] += 1; tot += 1
+            cls = classify(v)
+            if cls is None:   # NaN/masked cell -> not counted toward coverage or drought
+                continue
+            tally[cls] += 1; tot += 1
         if tot >= 1:
             def pc(k): return round(100.0 * tally[k] / tot, 1)
             row = {"district": dname, "state": ID_TO_NAME.get(sid, st_nm), "state_id": sid,

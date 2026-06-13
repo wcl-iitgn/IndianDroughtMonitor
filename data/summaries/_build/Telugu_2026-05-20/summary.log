@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Telugu_2026-05
--20/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/T
+elugu_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Telugu_2026-05-
-20/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tel
+ugu_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -224,8 +224,8 @@ Package fontspec Info:
 (fontspec)             <->"Carlito/BI/OT:script=latn;language=dflt;"
 
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Telugu_2026-05-
-20/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tel
+ugu_2026-05-20/summary.aux)
 \openout1 = `summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -361,9 +361,9 @@ LaTeX Font Warning: Font shape `TU/NotoSansTelugu(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (16.06635pt too wide) in paragraph at lines 56--57
-[]\TU/NotoSansTelugu(0)/m/n/10.95 ఈ వారం జాతీయ కరువు పరిస్థితిలో ఎక్కువ ప్రాంతా
-లు సాధారణ వర్గంలో ఉన్నాయి, కొద్ది భాగం కరువు పరిస్థితులను అనుభవిస్తోంది.
+Overfull \hbox (12.63898pt too wide) in paragraph at lines 56--57
+[]\TU/NotoSansTelugu(0)/m/n/10.95 ఈ వారం జాతీయ కరువు పరిస్థితి సాధారణ వర్గంలో మ
+ిగిలిన పెద్ద ప్రాంతంతో, తక్కువ భాగం కరువు పరిస్థితులను అనుభవిస్తోంది.
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -378,8 +378,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Telugu_2026-05-
-20/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tel
+ugu_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -391,12 +391,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5112 strings out of 468168
- 132851 string characters out of 5432816
+ 132959 string characters out of 5432816
  584732 words of memory out of 5000000
  33790 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1821b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1835b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Telugu_2026-05-20/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Telugu_2026-05-20/summary.pdf (2 pages).

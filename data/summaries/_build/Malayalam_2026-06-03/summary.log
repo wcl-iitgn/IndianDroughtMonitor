@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026
--06-03/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/M
+alayalam_2026-06-03/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026-
-06-03/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Mal
+ayalam_2026-06-03/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -360,13 +360,22 @@ LaTeX Font Warning: Font shape `TU/NotoSansMalayalam(0)/b/n' undefined
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
-Missing character: There is no ị (U+1ECB) in font Noto Sans Malayalam Regular R
-egular/OT:script=latn;language=dflt;mapping=tex-text;!
 
-Overfull \hbox (10.49734pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 പ്രദേശമായിരുന്നു. ഗുജറാത്തിലെ \TU/Carlito(0)
-/m/n/10.95 85.2 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം പ്രദേശങ്ങളിലും വരൾച്ച
-യുടെ ഏറ്റവും ഉയർന്ന ആഘാതം
+Overfull \hbox (13.78218pt too wide) in paragraph at lines 56--57
+[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഇന്ത്യയുടെ ഭൂരിഭാഗവും സാധാരണ നിലയിലാണ്, വര
+ൾച്ചയുടെ ആഘാതം വലിയ പ്രദേശങ്ങളിൽ ഒതുങ്ങാതെ
+ []
+
+
+Overfull \hbox (19.14401pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 ചിതറിക്കിടക്കുന്ന കൂട്ടങ്ങളിലാണ് കാണപ്പെടുന്
+നത്. വടക്കുപടിഞ്ഞാറൻ ഇന്ത്യ, മധ്യ ഇന്ത്യ,
+ []
+
+
+Overfull \hbox (0.65533pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 അതേസമയം മഹാരാഷ്ട്ര, ഹരിയാന-ഡൽഹി, ജമ്മു കശ്മീ
+ർ, വടക്കുകിഴക്കൻ സംസ്ഥാനങ്ങളിലെ ചില
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -381,8 +390,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026-
-06-03/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Mal
+ayalam_2026-06-03/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -394,12 +403,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5109 strings out of 468168
- 132763 string characters out of 5432816
+ 132847 string characters out of 5432816
  583771 words of memory out of 5000000
  33789 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,2032b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1870b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Malayalam_2026-06-03/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Malayalam_2026-06-03/summary.pdf (2 pages).

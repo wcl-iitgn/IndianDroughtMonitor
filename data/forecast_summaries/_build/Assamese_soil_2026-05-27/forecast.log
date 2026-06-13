@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:09
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/forecast_summaries/_build/Assam
-ese_soil_2026-05-27/forecast.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/forecast_summaries
+/_build/Assamese_soil_2026-05-27/forecast.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/forecast_summaries/_build/Assame
-se_soil_2026-05-27/forecast.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/forecast_summaries/_
+build/Assamese_soil_2026-05-27/forecast.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -370,8 +370,8 @@ File: iitgn.png Graphic file (type bmp)
 [1
 
 ]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/forecast_summaries/_build/Assame
-se_soil_2026-05-27/forecast.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/forecast_summaries/_
+build/Assamese_soil_2026-05-27/forecast.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -383,12 +383,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5128 strings out of 468168
- 133043 string characters out of 5432816
+ 133127 string characters out of 5432816
  587867 words of memory out of 5000000
  33806 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,364b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,378b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/forecast_summar
-ies/_build/Assamese_soil_2026-05-27/forecast.pdf (1 page).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/for
+ecast_summaries/_build/Assamese_soil_2026-05-27/forecast.pdf (1 page).

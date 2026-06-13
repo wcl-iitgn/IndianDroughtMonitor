@@ -5,3 +5,13 @@
 # Python cache
 __pycache__/
 *.pyc
+
+# intermediate per-language/per-week build dirs (regenerated each run;
+# the finished PDFs/txt live alongside these and are committed, the
+# _build working dirs should not be)
+**/_build/
+data/summaries/_build/
+data/forecast_summaries/_build/
+
+# macOS cruft
+.DS_Store

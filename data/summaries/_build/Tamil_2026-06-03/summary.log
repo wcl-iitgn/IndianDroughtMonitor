@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-06-
-03/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/T
+amil_2026-06-03/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-06-0
-3/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-06-03/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -358,43 +358,46 @@ LaTeX Font Warning: Font shape `TU/NotoSansTamil(0)/b/n' undefined
 
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
+Missing character: There is no 东 (U+4E1C) in font Noto Sans Tamil Regular Regul
+ar/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no 北 (U+5317) in font Noto Sans Tamil Regular Regul
+ar/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no 东 (U+4E1C) in font Noto Sans Tamil Regular Regul
+ar/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no 北 (U+5317) in font Noto Sans Tamil Regular Regul
+ar/OT:script=latn;language=dflt;mapping=tex-text;!
 
-Overfull \hbox (4.62291pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 சாதாரண பிரிவில் மற்றும் \TU/Carlito(0)/m/n/10.95
- 19.6 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம் \TU/Carlito(0)/m/n/10.95 D0\TU/Not
-oSansTamil(0)/m/n/10.95 + பிரிவில் உள்ளது. இந்த வாரம் வறட்சியால் பாதிக்கப்பட்ட
+Overfull \hbox (8.46861pt too wide) in paragraph at lines 56--57
+[]\TU/NotoSansTamil(0)/m/n/10.95 இந்தியாவின் பெரும்பாலான பகுதி தற்போது சாதாரண ந
+ிலையில் உள்ளது, வறட்சி பாதிப்புகள் பரந்த
  []
 
 
-Overfull \hbox (1.21329pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 மொத்த பகுதி \TU/Carlito(0)/m/n/10.95 D0\TU/NotoS
-ansTamil(0)/m/n/10.95 + ஆக \TU/Carlito(0)/m/n/10.95 19.6\TU/NotoSansTamil(0)/m/
-n/10.95 % ஆகும், இது முந்தைய வாரத்தின் \TU/Carlito(0)/m/n/10.95 20.1\TU/NotoSan
-sTamil(0)/m/n/10.95 % உடன் \TU/Carlito(0)/m/n/10.95 0.5 \TU/NotoSansTamil(0)/m/
-n/10.95 சதவீத புள்ளிகள்
+Overfull \hbox (7.48793pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 பகுதிகளுக்குப் பதிலாக சிதறிய குழுக்களில் மட்டுமே
+ உள்ளன. வடமேற்கு இந்தியா, மத்திய இந்தியா
  []
 
 
-Overfull \hbox (12.16435pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 குறைவைக் குறிக்கிறது. மேலும் பின்னோக்கிப் பார்க்
-கும்போது, \TU/Carlito(0)/m/n/10.95 D0\TU/NotoSansTamil(0)/m/n/10.95 + பகுதியில்
- சுமார் ஒரு மாதத்திற்கு
+Overfull \hbox (4.82256pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 மற்றும்东北 பகுதியில் அசாதாரணமாக வறண்ட முதல் மிதமா
+ன வறட்சி நிலை (\TU/Carlito(0)/m/n/10.95 D0\TU/NotoSansTamil(0)/m/n/10.95 –\TU/C
+arlito(0)/m/n/10.95 D1) \TU/NotoSansTamil(0)/m/n/10.95 காணப்படுகிறது,
  []
 
 
-Overfull \hbox (10.25774pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 முன்பு \TU/Carlito(0)/m/n/10.95 15.0\TU/NotoSans
-Tamil(0)/m/n/10.95 % இருந்தது. குஜராத் வறட்சி தாக்கத்தில் அதிகபட்ச நிலையை வெளிப
-்படுத்தியது, அதன்
+Overfull \hbox (14.97444pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 முதல் மிக தீவிர வறட்சி நிலை (\TU/Carlito(0)/m/n/
+10.95 D2\TU/NotoSansTamil(0)/m/n/10.95 –\TU/Carlito(0)/m/n/10.95 D3) \TU/NotoSa
+nsTamil(0)/m/n/10.95 காணப்படுகிறது. அதிக வறட்சி பாதித்த மாநிலங்கள் மகாராஷ்டிரா
  []
 
 
-Overfull \hbox (4.17763pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 பிரதேசம் \TU/Carlito(0)/m/n/10.95 52.8\TU/NotoSa
-nsTamil(0)/m/n/10.95 %, ஜம்மு காஷ்மீர் \TU/Carlito(0)/m/n/10.95 50.4\TU/NotoSan
-sTamil(0)/m/n/10.95 %, மிசோரம் \TU/Carlito(0)/m/n/10.95 49.8\TU/NotoSansTamil(0
-)/m/n/10.95 %, மற்றும் மேகாலயா \TU/Carlito(0)/m/n/10.95 43.5\TU/NotoSansTamil(0
-)/m/n/10.95 % வறட்சி இருப்புடன்
+Overfull \hbox (11.06413pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 ஆகும், அங்கு சுமார் \TU/Carlito(0)/m/n/10.95 42\
+TU/NotoSansTamil(0)/m/n/10.95 % பகுதி வறட்சி வகைகளில் (\TU/Carlito(0)/m/n/10.95
+ D0\TU/NotoSansTamil(0)/m/n/10.95 –\TU/Carlito(0)/m/n/10.95 D4) \TU/NotoSansTam
+il(0)/m/n/10.95 உள்ளது, அதைத் தொடர்ந்து ஹரியானா,
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -409,8 +412,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-06-0
-3/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-06-03/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -422,12 +425,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5109 strings out of 468168
- 132603 string characters out of 5432816
+ 132687 string characters out of 5432816
  584731 words of memory out of 5000000
  33789 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,2028b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1866b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Tamil_2026-06-03/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Tamil_2026-06-03/summary.pdf (2 pages).

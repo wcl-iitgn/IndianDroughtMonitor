@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:31
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-
-20/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/T
+amil_2026-05-20/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-2
-0/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-20/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -224,8 +224,8 @@ Package fontspec Info:
 (fontspec)             <->"Carlito/BI/OT:script=latn;language=dflt;"
 
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-2
-0/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-20/summary.aux)
 \openout1 = `summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -361,17 +361,24 @@ LaTeX Font Warning: Font shape `TU/NotoSansTamil(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (75.20093pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 வறட்சி நிலையை அனுபவிக்கிறது. இந்த வாரம் டி\TU/Ca
-rlito(0)/m/n/10.95 0 \TU/NotoSansTamil(0)/m/n/10.95 அல்லது அதற்கும் மோசமான பிரி
-வில் வகைப்படுத்தப்பட்ட
+Overfull \hbox (30.96494pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 பகுதி \TU/Carlito(0)/m/n/10.95 D0 \TU/NotoSansTa
+mil(0)/m/n/10.95 மற்றும் அதற்கு மேல் \TU/Carlito(0)/m/n/10.95 15.3\TU/NotoSansT
+amil(0)/m/n/10.95 % ஆகும். இது முந்தைய வாரத்தை விட வறட்சிப் பகுதி குறைவதைக்
  []
 
 
-Overfull \hbox (35.44452pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 ஏனெனில் மொத்த வறட்சி பகுதி வாரத்திற்கு வாரமாக \T
-U/Carlito(0)/m/n/10.95 0.9 \TU/NotoSansTamil(0)/m/n/10.95 சதவீத புள்ளிகள் குறைந
-்துள்ளது. வறட்சியால்
+Overfull \hbox (4.42508pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 பகுதி \TU/Carlito(0)/m/n/10.95 17.2\TU/NotoSansT
+amil(0)/m/n/10.95 % ஆக இருந்தது, இது வாரத்திற்கு வாரமாக \TU/Carlito(0)/m/n/10.9
+5 0.9 \TU/NotoSansTamil(0)/m/n/10.95 சதவீத புள்ளிகள் குறைவதைக் காட்டுகிறது.
+ []
+
+
+Overfull \hbox (15.23506pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 வறட்சத்தால் அதிகம் பாதிக்கப்பட்ட மாநிலங்கள் \TU/
+Carlito(0)/m/n/10.95 NCT of Delhi\TU/NotoSansTamil(0)/m/n/10.95 , அருணாச்சலப் ப
+ிரதேசம், ஜம்மு காஷ்மீர்,
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -386,8 +393,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-2
-0/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-20/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -399,12 +406,12 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
  ) 
 Here is how much of TeX's memory you used:
  5112 strings out of 468168
- 132809 string characters out of 5432816
+ 132917 string characters out of 5432816
  584722 words of memory out of 5000000
  33790 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1852b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1866b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Tamil_2026-05-20/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Tamil_2026-05-20/summary.pdf (2 pages).

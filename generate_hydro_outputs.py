@@ -183,6 +183,24 @@ PARAMS = {
 # Website shows these five (Streamflow excluded by default).
 WEBSITE_PARAMS = ['Rainfall', 'Temperature', 'Relative_Wetness', 'Total_Runoff', 'Evapotranspiration']
 
+# Chatbot hydrologic stats (assets/ai/hydro-stats.json): for each parameter, the
+# display label, the unit/kind, and a one-line description. The numeric values are
+# recomputed every hydro run from the SAME monthly input grids the maps/PDF use
+# (national mean per month-column, ignoring masked NaN cells).
+# Tuple: (PARAMS key, display name, kind, description)
+HYDRO_STATS_META = [
+    ("Rainfall", "Rainfall", "percentile",
+     "Monthly rainfall as a percentile (0-100) of the historical record; ~50 = normal, lower = drier."),
+    ("Temperature", "Surface Air Temperature", "anomaly_degC",
+     "Temperature anomaly in degrees C vs the historical mean for that month; positive = warmer than normal."),
+    ("Relative_Wetness", "Relative Wetness (Soil Moisture)", "anomaly_pct",
+     "Soil-moisture (relative wetness) anomaly, % departure from the historical mean; negative = drier soils than normal."),
+    ("Total_Runoff", "Total Runoff", "anomaly_pct",
+     "Total-runoff anomaly, % departure from the historical mean; negative = below-normal runoff."),
+    ("Evapotranspiration", "Evapotranspiration", "anomaly_pct",
+     "Evapotranspiration anomaly, % departure from the historical mean; negative = below-normal ET."),
+]
+
 INDIA_BBOX = (66.0, 6.5, 98.5, 38.5)
 FINE_RESOLUTION = 0.08
 
@@ -502,8 +520,21 @@ def generate_maps_and_dashboards(input_dir, out_base, date_str, params_to_do):
 # ===========================================================================
 # National drought summary (weekly) — via the LAN Ollama endpoint
 # ===========================================================================
+# Minimum fraction of a state's CDI cells that must carry real (non-masked) data
+# before we characterise that state in the weekly summary. Below this the state is
+# EXCLUDED (and a warning is printed), so a week where a state's grid is mostly
+# masked (NaN) can never be published as drought -- this is what produced the bogus
+# "Gujarat 85.2% in drought" after the 2026-05-27 / 2026-06-03 input regression.
+MIN_STATE_COVERAGE = 0.5
+
+
 def classify_cdi(v):
     # Absolute CDI thresholds (same as the website engine + legend).
+    # Masked / missing cells (None or NaN) are NOT drought: return None ("no data")
+    # so callers can EXCLUDE them from the tally instead of letting a NaN fall
+    # through every threshold and be mis-counted as D4 (exceptional drought).
+    if v is None or v != v:        # v != v is True only for NaN
+        return None
     if v > -0.5: return "None"
     if v > -0.8: return "D0"
     if v > -1.3: return "D1"
@@ -555,13 +586,28 @@ def build_summary_context(repo: Path):
         for r in sg.itertuples():
             v = nearest(float(r.lat), float(r.lng))
             if v is None: continue
-            tally[int(r.value)][classify_cdi(v)] += 1
+            cls = classify_cdi(v)
+            if cls is None:                       # masked / no-data cell -> ignore (not drought)
+                tally[int(r.value)]["nodata"] += 1
+                continue
+            tally[int(r.value)][cls] += 1
             tally[int(r.value)]["tot"] += 1
-        st = []
+        st, low_cov = [], []
         for sid, c in tally.items():
-            if c["tot"] < 8: continue
-            none = 100 * c["None"] / c["tot"]
-            st.append((names.get(sid, str(sid)), round(100 - none, 1)))
+            valid = c["tot"]; nodata = c["nodata"]; total = valid + nodata
+            cov = (valid / total) if total else 0.0
+            name = names.get(sid, str(sid))
+            if total >= 8 and cov < MIN_STATE_COVERAGE:
+                low_cov.append((name, 100 * (1 - cov)))
+            if valid < 8 or cov < MIN_STATE_COVERAGE:
+                continue                          # too little real data to characterise the state
+            none = 100 * c["None"] / valid        # % computed over VALID cells only
+            st.append((name, round(100 - none, 1)))
+        if low_cov:
+            low_cov.sort(key=lambda x: -x[1])
+            print("    ! data-coverage warning: excluded state(s) whose CDI grid is mostly "
+                  "masked this week (no-data %): "
+                  + ", ".join("%s %.1f%%" % (n, p) for n, p in low_cov))
         st.sort(key=lambda x: -x[1])
         worst = st[:6]; best = st[-4:][::-1]
     except Exception as e:
@@ -657,6 +703,58 @@ def generate_summary(repo: Path, api_url, model, use_llm):
     (arch_dir / "index.json").write_text(json.dumps({"summaries": items}, indent=2))
     print(f"  summary: wrote summary_{week}.txt ; archive now has {len(items)} weeks")
     return week
+
+
+# ===========================================================================
+# Chatbot hydrologic stats (assets/ai/hydro-stats.json)
+# ===========================================================================
+def write_hydro_stats(repo: Path, input_dir: Path, date_str: str):
+    """Regenerate assets/ai/hydro-stats.json from the SAME monthly input grids the
+    maps/PDF use. For each parameter we record the NATIONAL MEAN of every month-column
+    (current/forecast/prev1-4/last_year/driest/wettest), ignoring masked (NaN) cells.
+
+    This runs as part of every hydro build so the chatbot's hydrologic answers always
+    reflect the published outlook month instead of going stale (previously this file
+    had no generator and was frozen at February 2026)."""
+    # input column key -> output key in hydro-stats.json
+    col_map = [("current", "current_month"), ("forecast", "forecast_month"),
+               ("prev1", "prev_1"), ("prev2", "prev_2"), ("prev3", "prev_3"),
+               ("prev4", "prev_4"), ("last_year", "last_year_same_month"),
+               ("lowest", "driest"), ("highest", "wettest")]
+
+    means = []
+    for pkey, label, kind, desc in HYDRO_STATS_META:
+        prefix = PARAMS[pkey]["file_prefix"]
+        try:
+            df = load_param(prefix, input_dir, date_str)
+        except FileNotFoundError:
+            print(f"  ! hydro-stats: input {prefix}_{date_str} not found -- skipping {label}")
+            continue
+        cur_vals = pd.to_numeric(df["current"], errors="coerce").to_numpy(dtype=float)
+        entry = {"parameter": label, "kind": kind, "description": desc,
+                 "n_cells": int(np.isfinite(cur_vals).sum())}
+        for src, dst in col_map:
+            vals = pd.to_numeric(df[src], errors="coerce").to_numpy(dtype=float)
+            entry[dst] = round(float(np.nanmean(vals)), 2) if np.isfinite(vals).any() else None
+        means.append(entry)
+
+    cur_lbl = f"{LABELS['current']} {LABELS['current_year']}"
+    fc_lbl = f"{LABELS['forecast']} {LABELS['forecast_year']}"
+    out = {
+        "month_label": cur_lbl,
+        "generated": date_str.replace("_", "-"),
+        "national_means": means,
+        "columns": [dst for _src, dst in col_map],
+        "note": (f"Each value is the NATIONAL MEAN over all India grid cells for that "
+                 f"month-column. 'current_month' is the latest observed month ({cur_lbl}); "
+                 f"'forecast_month' is the one-month-ahead forecast ({fc_lbl}); prev_1..prev_4 "
+                 f"are the four months before current; 'driest'/'wettest' are the historically "
+                 f"most extreme analogue months."),
+    }
+    dest = repo / "assets" / "ai" / "hydro-stats.json"
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(out, indent=2) + "\n", encoding="utf-8")
+    print(f"  hydro-stats: wrote {dest.relative_to(repo)} ({len(means)} parameters, month {cur_lbl})")
 
 
 # ===========================================================================
@@ -795,8 +893,9 @@ def main():
     ap.add_argument("--boundaries", default=None, help="Optional admin-boundary file (shapefile/GeoJSON) for outlines")
     ap.add_argument("--include-streamflow", action="store_true",
                     help="Also generate the two Streamflow products (excluded by default)")
-    ap.add_argument("--only", default="maps,dashboards,summaries,pdf",
-                    help="Comma list of stages to run: maps,dashboards,summaries,pdf")
+    ap.add_argument("--only", default="maps,dashboards,summaries,pdf,stats",
+                    help="Comma list of stages to run: maps,dashboards,summaries,pdf,stats "
+                         "(stats = chatbot hydro-stats.json; cheap, no LLM/network)")
     ap.add_argument("--pdf-engine", default="latex", choices=["latex", "matplotlib"],
                     help="latex = exact 9-page XeLaTeX outlook (needs xelatex+Carlito); "
                          "matplotlib = lightweight fallback PDF")
@@ -843,6 +942,10 @@ def main():
 
     print("Loading boundaries…")
     load_boundaries(repo, args.boundaries)
+
+    if "stats" in stages:
+        print("Writing chatbot hydro stats (assets/ai/hydro-stats.json)…")
+        write_hydro_stats(repo, input_dir, date_str)
 
     if "maps" in stages or "dashboards" in stages:
         print("Generating maps and dashboards…")

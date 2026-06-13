@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:08
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-
-27/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/T
+amil_2026-05-27/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-2
-7/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-27/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -224,7 +224,8 @@ Package fontspec Info:
 (fontspec)             <->"Carlito/BI/OT:script=latn;language=dflt;"
 
 
-No file summary.aux.
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-27/summary.aux)
 \openout1 = `summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -243,6 +244,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -365,10 +367,39 @@ Overfull \hbox (5.51575pt too wide) in paragraph at lines 56--57
  []
 
 
-Overfull \hbox (12.4082pt too wide) in paragraph at lines 56--57
-\TU/NotoSansTamil(0)/m/n/10.95 சிக்கிம், நாகாலாந்து, திரிபுரா மற்றும் மேற்கு வங
-்காளம் தங்கள் பரப்பளவில் \TU/Carlito(0)/m/n/10.95 0.0 \TU/NotoSansTamil(0)/m/n/
-10.95 சதவீதம் வறட்சியைப்
+Overfull \hbox (20.96684pt too wide) in paragraph at lines 56--57
+\TU/Carlito(0)/m/n/10.95 79.9 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம் இயல்பான நி
+லையில் உள்ளது. வறட்சி அல்லது அதற்கும் மோசமான தகுதி கொண்ட
+ []
+
+
+Overfull \hbox (27.93643pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 ஒப்பிடுகையில் \TU/Carlito(0)/m/n/10.95 4.8 \TU/N
+otoSansTamil(0)/m/n/10.95 சதவீத புள்ளிகள் அதிகரித்துள்ளது. வறட்சியால் அதிகம் பா
+திக்கப்பட்ட மாநிலங்கள்
+ []
+
+
+Overfull \hbox (17.82916pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 குஜராத் \TU/Carlito(0)/m/n/10.95 98.3 \TU/NotoSa
+nsTamil(0)/m/n/10.95 சதவீதம், டெல்லி தேசிய தலைநகர் மண்டலம் \TU/Carlito(0)/m/n/1
+0.95 52.2 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம், மகாராஷ்டிரா \TU/Carlito(0)/m/
+n/10.95 51.3 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதம்,
+ []
+
+
+Overfull \hbox (35.20317pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 ஜம்மு காஷ்மீர் \TU/Carlito(0)/m/n/10.95 47.9 \TU
+/NotoSansTamil(0)/m/n/10.95 சதவீதம், மிசோரம் \TU/Carlito(0)/m/n/10.95 47.4 \TU/
+NotoSansTamil(0)/m/n/10.95 சதவீதம் மற்றும் அருணாச்சலப் பிரதேசம் \TU/Carlito(0)/
+m/n/10.95 46.6 \TU/NotoSansTamil(0)/m/n/10.95 சதவீதமாகும்.
+ []
+
+
+Overfull \hbox (16.87215pt too wide) in paragraph at lines 56--57
+\TU/NotoSansTamil(0)/m/n/10.95 இதற்கு மாறாக, சிக்கிம், நாகாலாந்து, திரிபுரா மற்
+றும் மேற்கு வங்காளம் தங்கள் பரப்பளவில் \TU/Carlito(0)/m/n/10.95 0.0 \TU/NotoSan
+sTamil(0)/m/n/10.95 சதவீதம்
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -383,8 +414,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Tamil_2026-05-2
-7/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Tam
+il_2026-05-27/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -395,13 +426,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5109 strings out of 468168
- 132603 string characters out of 5432816
- 584731 words of memory out of 5000000
- 33789 multiletter control sequences out of 15000+600000
+ 5112 strings out of 468168
+ 132917 string characters out of 5432816
+ 584722 words of memory out of 5000000
+ 33790 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1977b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1991b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Tamil_2026-05-27/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Tamil_2026-05-27/summary.pdf (2 pages).

@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:08
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026
--05-27/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/M
+alayalam_2026-05-27/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026-
-05-27/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Mal
+ayalam_2026-05-27/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -225,7 +225,8 @@ Package fontspec Info:
 (fontspec)             <->"Carlito/BI/OT:script=latn;language=dflt;"
 
 
-No file summary.aux.
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Mal
+ayalam_2026-05-27/summary.aux)
 \openout1 = `summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -244,6 +245,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -361,25 +363,10 @@ LaTeX Font Warning: Font shape `TU/NotoSansMalayalam(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (19.39241pt too wide) in paragraph at lines 56--57
-[]\TU/NotoSansMalayalam(0)/m/n/10.95 ഈ ആഴ്ചയിലെ ദേശീയ വരൾച്ച സ്ഥിതിവിവരക്കണക്കു
-കൾ അനുസരിച്ച് ഇന്ത്യയുടെ \TU/Carlito(0)/m/n/10.95 79.9 \TU/NotoSansMalayalam(0)
-/m/n/10.95 ശതമാനം
- []
-
-
-Overfull \hbox (51.31937pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം, ജമ്മു കശ്മീർ \TU/Carlito(0)/m/n/10.9
-5 47.9 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം, മിസോറാം \TU/Carlito(0)/m/n/10
-.95 47.4 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം, ആറുനാചൽ പ്രദേശ് \TU/Carlito
-(0)/m/n/10.95 46.6 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം എന്നിങ്ങനെയാണ്.
- []
-
-
-Overfull \hbox (16.35889pt too wide) in paragraph at lines 56--57
-\TU/NotoSansMalayalam(0)/m/n/10.95 എന്നാൽ സിക്കിം, നാഗാലാൻഡ്, ത്രിപുര, പശ്ചിമ ബ
-ംഗാൾ എന്നിവയുടെ \TU/Carlito(0)/m/n/10.95 0.0 \TU/NotoSansMalayalam(0)/m/n/10.95
- ശതമാനം പ്രദേശത്ത് വരൾച്ച
+Overfull \hbox (4.07095pt too wide) in paragraph at lines 56--57
+\TU/NotoSansMalayalam(0)/m/n/10.95 കഴിഞ്ഞ ആഴ്ചയിലെ \TU/Carlito(0)/m/n/10.95 15.
+3 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനത്തിൽ നിന്ന് \TU/Carlito(0)/m/n/10.95
+ 4.8 \TU/NotoSansMalayalam(0)/m/n/10.95 ശതമാനം പോയിന്റുകൾ വർദ്ധനവാണ്. വരൾച്ച
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -394,8 +381,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Malayalam_2026-
-05-27/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/Mal
+ayalam_2026-05-27/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -406,13 +393,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5109 strings out of 468168
- 132763 string characters out of 5432816
- 583771 words of memory out of 5000000
- 33789 multiletter control sequences out of 15000+600000
+ 5112 strings out of 468168
+ 133085 string characters out of 5432816
+ 584762 words of memory out of 5000000
+ 33790 multiletter control sequences out of 15000+600000
  630692 words of font info for 78 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,15n,93p,1981b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,15n,93p,1995b,605s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Malayalam_2026-05-27/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Malayalam_2026-05-27/summary.pdf (2 pages).

@@ -1,12 +1,12 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  9 JUN 2026 16:08
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.6.3)  11 JUN 2026 00:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Sanskrit_2026-
-05-27/summary.tex
+**"/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/S
+anskrit_2026-05-27/summary.tex"
 
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Sanskrit_2026-0
-5-27/summary.tex
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/San
+skrit_2026-05-27/summary.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -232,7 +232,8 @@ Package fontspec Info:
 (fontspec)             <->"Carlito/BI/OT:script=latn;language=dflt;"
 
 
-No file summary.aux.
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/San
+skrit_2026-05-27/summary.aux)
 \openout1 = `summary.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 41.
@@ -251,6 +252,7 @@ LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
 LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 41.
 LaTeX Font Info:    ... okay on input line 41.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -368,17 +370,16 @@ LaTeX Font Warning: Font shape `TU/TiroDevanagariHindi(0)/b/n' undefined
 File: cdi_map.png Graphic file (type bmp)
 <cdi_map.png>
 
-Overfull \hbox (1.09552pt too wide) in paragraph at lines 56--57
+Overfull \hbox (11.50896pt too wide) in paragraph at lines 56--57
 []\TU/TiroDevanagariHindi(0)/m/n/10.95 इदस्य सप्ताहस्य राष्ट्रिय-शुष्कता-स्थिति
-ः दर्शयति यत् बहुभागः सामान्य-श्रेणीयां तिष्ठति, भारतस्य ७९.९ प्रतिशतः सामान्य-
-
+ः प्रदर्शयति यत् बहुभागः सामान्य-श्रेणीयां तिष्ठति, भारतस्य ७९.९ प्रतिशतः सामान
+्य-
  []
 
 
-Overfull \hbox (7.49472pt too wide) in paragraph at lines 56--57
-\TU/TiroDevanagariHindi(0)/m/n/10.95 स्थितौ अस्ति। अस्मिन् सप्ताहे कुल-शुष्कता-
-क्षेत्रम्, \TU/Carlito(0)/m/n/10.95 D0 \TU/TiroDevanagariHindi(0)/m/n/10.95 अथव
-ा उससे-अधिकः वर्गीकृतम्, २०.१ प्रतिशतं कृत्वा पूर्वसप्ताहस्य
+Overfull \hbox (4.8258pt too wide) in paragraph at lines 56--57
+\TU/TiroDevanagariHindi(0)/m/n/10.95 मिजोराम् (४७.४ प्रतिशतं), तथा अरुणाचलप्रदे
+शः (४६.६ प्रतिशतं) सन्ति। विपरीतातः सिक्किम, नागालन्द, त्रिपुरा, पश्चिमबंगालः
  []
 
 File: wcl.png Graphic file (type bmp)
@@ -393,8 +394,8 @@ File: wcl.png Graphic file (type bmp)
 File: iitgn.png Graphic file (type bmp)
 <iitgn.png>
  [2]
-(/Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_build/Sanskrit_2026-0
-5-27/summary.aux)
+(/Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/summaries/_build/San
+skrit_2026-05-27/summary.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -405,13 +406,13 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
  ) 
 Here is how much of TeX's memory you used:
- 5129 strings out of 468168
- 133611 string characters out of 5432816
- 584821 words of memory out of 5000000
- 33807 multiletter control sequences out of 15000+600000
+ 5132 strings out of 468168
+ 133931 string characters out of 5432816
+ 584812 words of memory out of 5000000
+ 33808 multiletter control sequences out of 15000+600000
  630708 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 73i,14n,93p,1980b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 73i,14n,93p,1994b,552s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on /Users/aryanghoslya/IndianDroughtMonitor/data/summaries/_buil
-d/Sanskrit_2026-05-27/summary.pdf (2 pages).
+Output written on /Users/aryanghoslya/Downloads/IndianDroughtMonitor 2/data/sum
+maries/_build/Sanskrit_2026-05-27/summary.pdf (2 pages).
