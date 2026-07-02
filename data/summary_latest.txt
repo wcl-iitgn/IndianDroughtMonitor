@@ -1,8 +1,6 @@
 # India Drought Monitor — National Summary for week ending 2026-07-01
 
-The national drought situation this week shows a significant area experiencing drought conditions. The cumulative area in the Normal class is 58.8%, while the combined area in D0 and above is 41.2%. The drought area, specifically D0 and above, increased by 4.1 percentage points compared to the previous week, with the total area being 41.2%.
-
-The most affected regions by the percentage of area experiencing any drought are Goa at 100.0%, Manipur at 98.1%, Chhattisgarh at 86.7%, Jharkhand at 73.2%, Meghalaya at 71.4%, and the NCT of Delhi at 69.6%. Conversely, the least affected states are Tamil Nadu with 5.0%, Rajasthan with 6.5%, Andhra Pradesh with 14.8%, and Karnataka with 18.0%.
+The national drought situation this week shows a significant expansion of dry conditions across the country. The cumulative area experiencing drought has increased to 41.2% in the D0+ category. This represents an expansion of 4.1 percentage points compared to the previous week, with the D0+ area being 41.2%, compared to 37.1% in the last week and 19.6% one month ago. The most affected regions by drought presence include Goa with 100.0%, Manipur with 98.1%, Chhattisgarh with 86.7%, Jharkhand with 73.2%, Meghalaya with 71.4%, and the NCT of Delhi with 69.6%. Conversely, the least affected states are Tamil Nadu with 5.0%, Rajasthan with 6.5%, Andhra Pradesh with 14.8%, and Karnataka with 18.0%.
 
 Regional conditions this week:
 - North: Widespread drought. About 46% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
