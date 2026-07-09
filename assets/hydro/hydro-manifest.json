@@ -1,6 +1,6 @@
 {
-  "month_label": "May 2026",
-  "generated": "2026-05-31",
+  "month_label": "June 2026",
+  "generated": "2026-06-30",
   "parameters": [
     {
       "key": "Rainfall",
@@ -30,13 +30,18 @@
           "role": "other"
         },
         {
-          "file": "January.png",
-          "label": "January",
+          "file": "July (Forecast).png",
+          "label": "July (Forecast)",
           "role": "other"
         },
         {
-          "file": "June (Forecast).png",
-          "label": "June (Forecast)",
+          "file": "June (2025*).png",
+          "label": "June (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "June (Current).png",
+          "label": "June (Current)",
           "role": "other"
         },
         {
@@ -45,13 +50,8 @@
           "role": "other"
         },
         {
-          "file": "May (2025*).png",
-          "label": "May (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "May (Current).png",
-          "label": "May (Current)",
+          "file": "May.png",
+          "label": "May",
           "role": "other"
         }
       ]
@@ -79,13 +79,18 @@
           "role": "other"
         },
         {
-          "file": "January.png",
-          "label": "January",
+          "file": "July (Forecast).png",
+          "label": "July (Forecast)",
           "role": "other"
         },
         {
-          "file": "June (Forecast).png",
-          "label": "June (Forecast)",
+          "file": "June (2025*).png",
+          "label": "June (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "June (Current).png",
+          "label": "June (Current)",
           "role": "other"
         },
         {
@@ -94,18 +99,13 @@
           "role": "other"
         },
         {
+          "file": "May.png",
+          "label": "May",
+          "role": "other"
+        },
+        {
           "file": "May (2023).png",
           "label": "May (2023)",
-          "role": "other"
-        },
-        {
-          "file": "May (2025*).png",
-          "label": "May (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "May (Current).png",
-          "label": "May (Current)",
           "role": "other"
         }
       ]
@@ -138,13 +138,18 @@
           "role": "other"
         },
         {
-          "file": "January.png",
-          "label": "January",
+          "file": "July (Forecast).png",
+          "label": "July (Forecast)",
           "role": "other"
         },
         {
-          "file": "June (Forecast).png",
-          "label": "June (Forecast)",
+          "file": "June (2025*).png",
+          "label": "June (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "June (Current).png",
+          "label": "June (Current)",
           "role": "other"
         },
         {
@@ -153,13 +158,8 @@
           "role": "other"
         },
         {
-          "file": "May (2025*).png",
-          "label": "May (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "May (Current).png",
-          "label": "May (Current)",
+          "file": "May.png",
+          "label": "May",
           "role": "other"
         }
       ]
@@ -187,13 +187,18 @@
           "role": "other"
         },
         {
-          "file": "January.png",
-          "label": "January",
+          "file": "July (Forecast).png",
+          "label": "July (Forecast)",
           "role": "other"
         },
         {
-          "file": "June (Forecast).png",
-          "label": "June (Forecast)",
+          "file": "June (2025*).png",
+          "label": "June (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "June (Current).png",
+          "label": "June (Current)",
           "role": "other"
         },
         {
@@ -202,13 +207,8 @@
           "role": "other"
         },
         {
-          "file": "May (2025*).png",
-          "label": "May (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "May (Current).png",
-          "label": "May (Current)",
+          "file": "May.png",
+          "label": "May",
           "role": "other"
         },
         {
@@ -236,13 +236,13 @@
           "role": "other"
         },
         {
-          "file": "January.png",
-          "label": "January",
+          "file": "July (2002).png",
+          "label": "July (2002)",
           "role": "other"
         },
         {
-          "file": "July (2002).png",
-          "label": "July (2002)",
+          "file": "July (Forecast).png",
+          "label": "July (Forecast)",
           "role": "other"
         },
         {
@@ -251,8 +251,13 @@
           "role": "other"
         },
         {
-          "file": "June (Forecast).png",
-          "label": "June (Forecast)",
+          "file": "June (2025*).png",
+          "label": "June (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "June (Current).png",
+          "label": "June (Current)",
           "role": "other"
         },
         {
@@ -261,13 +266,8 @@
           "role": "other"
         },
         {
-          "file": "May (2025*).png",
-          "label": "May (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "May (Current).png",
-          "label": "May (Current)",
+          "file": "May.png",
+          "label": "May",
           "role": "other"
         }
       ]
