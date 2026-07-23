@@ -123,7 +123,7 @@ def main():
         os.environ["IDM_OLLAMA_URL"] = args.ollama_url
     if args.model:
         os.environ["IDM_LLM_MODEL"] = args.model
-    ollama_url = os.environ.get("IDM_OLLAMA_URL", "http://10.0.60.193:11434/api/generate")
+    ollama_url = os.environ.get("IDM_OLLAMA_URL", "http://10.0.60.130:11434/api/generate")
     model = os.environ.get("IDM_LLM_MODEL", "gemma4:e2b")
 
     if args.only:

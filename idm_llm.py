@@ -31,7 +31,7 @@ import time
 import unicodedata
 import urllib.request
 
-OLLAMA_URL = os.environ.get("IDM_OLLAMA_URL", "http://10.0.60.193:11434/api/generate")
+OLLAMA_URL = os.environ.get("IDM_OLLAMA_URL", "http://10.0.60.130:11434/api/generate")
 MODEL = os.environ.get("IDM_LLM_MODEL", "gemma4:e2b")
 NUM_CTX = int(os.environ.get("IDM_LLM_NUM_CTX", "8192"))
 TIMEOUT = int(os.environ.get("IDM_LLM_TIMEOUT", "300"))
