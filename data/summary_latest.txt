@@ -1,6 +1,8 @@
 # India Drought Monitor — National Summary for week ending 2026-08-05
 
-The national drought situation this week shows a significant portion of the country remains in normal conditions, with 65.7% of the area classified as Normal and 34.3% in D0 or worse. The total drought area, specifically D0+, has contracted this week to 34.3%, which represents a decrease of 0.8 percentage points compared to last week's 35.1%. Looking at the most affected regions, Sikkim recorded 80.8% of its area in drought, followed by Arunanchal Pradesh at 78.3% and Andhra Pradesh at 72.4%. Conversely, states like Nagaland, Gujarat, Tripura, and Rajasthan were the least affected, with their drought percentages at 1.3%, 2.7%, 9.9%, and 10.8% respectively.
+The national drought situation this week is characterized by a significant proportion of the area experiencing drought conditions. The cumulative area categorized as Normal was 65.7%, while the area experiencing drought conditions, including D0 and above, accounted for 34.3%. The total drought area, specifically D0 and above, was 34.3% this week, showing a contraction of 0.8 percentage points compared to last week's 35.1%.
+
+The most severely affected regions by the percentage of area experiencing any drought condition include Sikkim with 80.8%, Arunachal Pradesh with 78.3%, Andhra Pradesh with 72.4%, Mizoram with 68.0%, Goa with 67.9%, and the NCT of Delhi with 65.2%. Conversely, the least affected states were Nagaland with 1.3%, Gujarat with 2.7%, Tripura with 9.9%, and Rajasthan with 10.8%.
 
 Regional conditions this week:
 - North: Moderate, scattered drought. About 34% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
