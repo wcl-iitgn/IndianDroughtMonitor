@@ -1,0 +1,12 @@
+# Rainfall forecast outlook initialized 2026-08-12
+
+Nationally, expected rainfall averages about 53 mm (7-day), 107 mm (15-day) and 176 mm (30-day).
+
+Regional outlook — expected rainfall (7 / 15 / 30-day):
+- North: 53 mm / 92 mm / 127 mm
+- Northwest: 20 mm / 36 mm / 49 mm
+- Northeast: 100 mm / 228 mm / 438 mm
+- East: 70 mm / 150 mm / 244 mm
+- Central: 98 mm / 183 mm / 243 mm
+- West: 53 mm / 104 mm / 184 mm
+- South: 21 mm / 62 mm / 148 mm
