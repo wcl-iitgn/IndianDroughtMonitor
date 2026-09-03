@@ -1,6 +1,10 @@
 {
   "forecasts": [
     {
+      "date": "2026-09-02",
+      "label": "September 2, 2026"
+    },
+    {
       "date": "2026-08-26",
       "label": "August 26, 2026"
     },
