@@ -174,6 +174,9 @@
 <div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
         © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
       </div>
+<div class="footer-copy" style="margin-top:6px">
+        Total visits: <span id="visit-count">—</span>
+      </div>
 </div>
 </footer>
 <script src="assets/interactive/drought-map.colormaps.js"></script>
@@ -242,6 +245,22 @@
     var s = isNaN(d) ? list[0].date : d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
     el.textContent = "Last Updated: " + s;
   }).catch(function () {});
+})();
+</script>
+
+<!-- GoatCounter tracking (replace "indiadroughtmonitor" with your GoatCounter site code) -->
+<script data-goatcounter="https://indiadroughtmonitor.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+
+<script>
+/* Show total visit count in the footer; hide the line if the request fails. */
+(function () {
+  var el = document.getElementById("visit-count");
+  if (!el || !window.fetch) return;
+  fetch("https://indiadroughtmonitor.goatcounter.com/counter/TOTAL.json")
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(function (j) { el.textContent = j.count; })
+    .catch(function () { el.parentNode.style.display = "none"; });
 })();
 </script>
 
