@@ -72,7 +72,7 @@
 <label class="idm-check"><input checked="" id="isolate-toggle" type="checkbox"/> <span data-i18n="index.isolate_selected_state">Isolate selected state</span></label>
 <label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="index.greyscale">Greyscale</span></label>
 <button class="idm-btn ghost" data-i18n="index.download_png" id="download-png" type="button"><span aria-hidden="true">⬇</span> Download PNG</button>
-<label class="idm-interp" data-i18n-attr="title:common_map.smoothness_title" title="Higher = smoother interpolation between grid cells"><span data-i18n="common_map.smoothness">Smoothness</span> <input aria-label="Map smoothness" data-i18n-attr="aria-label:common_map.smoothness_aria" id="interp-slider" max="6" min="1" step="1" type="range" value="3"/><span class="idm-interp-val" id="interp-value">3</span></label>
+<label class="idm-interp" data-i18n-attr="title:common_map.smoothness_title" title="Higher = smoother interpolation between grid cells"><span data-i18n="common_map.smoothness">Smoothness</span> <input aria-label="Map smoothness" data-i18n-attr="aria-label:common_map.smoothness_aria" id="interp-slider" max="6" min="1" step="1" type="range" value="3"/><span class="idm-interp-val" id="interp-value">3</span></label>
 </div>
 <div class="idm-viewer-grid">
 <div aria-label="Interactive drought map" class="idm-map-panel" data-i18n-attr="aria-label:index.interactive_drought_map">
@@ -244,10 +244,5 @@
   }).catch(function () {});
 })();
 </script>
-
-<!-- Visitor tracking (map hidden from page) -->
-<div id="visitor-map-hidden" style="display:none" aria-hidden="true">
-<script type="text/javascript" id="mapmyvisitors" src="//mapmyvisitors.com/map.js?d=qN-HMK6nQ4W83KWluKbPiPonLUz-8T8RD1juL3rYUJc&cl=ffffff&w=a"></script>
-</div>
 </body>
 </html>
