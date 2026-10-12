@@ -48,20 +48,20 @@
   var DIVERGING = {
     label: "Standardised Index",
     bands: [
-      { upTo: -2.0, color: "#000000", cls: "<= -2.0" },
-      { upTo: -1.6, color: "#A52A2A", cls: "-2.0 to -1.6" },
-      { upTo: -1.3, color: "#FF0000", cls: "-1.6 to -1.3" },
-      { upTo: -0.8, color: "#FFA500", cls: "-1.3 to -0.8" },
+      { upTo: -2.0, color: "#A52A2A", cls: "<= -2.0" },
+      { upTo: -1.6, color: "#FF0000", cls: "-2.0 to -1.6" },
+      { upTo: -1.3, color: "#FFA500", cls: "-1.6 to -1.3" },
+      { upTo: -0.8, color: "#FCD394", cls: "-1.3 to -0.8" },
       { upTo: -0.5, color: "#FFFF00", cls: "-0.8 to -0.5" },
       { upTo:  0.5, color: "#FFFFFF", cls: "-0.5 to 0.5 (near normal)" },
       { upTo:  0.8, color: "#B9F96E", cls: "0.5 to 0.8" },
       { upTo:  1.3, color: "#B3D16E", cls: "0.8 to 1.3" },
       { upTo:  1.6, color: "#3CBC3D", cls: "1.3 to 1.6" },
       { upTo:  2.0, color: "#009E1E", cls: "1.6 to 2.0" },
-      { upTo:  3.0, color: "#6370F8", cls: "2.0 to 3.0" }
+//      { upTo:  3.0, color: "#6370F8", cls: "2.0 to 3.0" }
     ],
-    aboveColor: "#6370F8",     // > 3.0
-    aboveCls: "> 3.0 (very wet)",
+    aboveColor: "#6370F8",     // > 2.0
+    aboveCls: "> 2.0",
     nodataColor: null
   };
 
@@ -143,16 +143,21 @@
   var SOILMOIST = {
     label: "Soil Moisture (v/v)",
     bands: [
-      { upTo: 0.05, color: "#8C510A", cls: "0.00–0.05 (dry)" },
-      { upTo: 0.10, color: "#BF812D", cls: "0.05–0.10" },
-      { upTo: 0.15, color: "#DFC27D", cls: "0.10–0.15" },
-      { upTo: 0.20, color: "#F6E8C3", cls: "0.15–0.20" },
-      { upTo: 0.25, color: "#C7EAE5", cls: "0.20–0.25" },
-      { upTo: 0.30, color: "#80CDC1", cls: "0.25–0.30" },
-      { upTo: 0.40, color: "#35978F", cls: "0.30–0.40" },
-      { upTo: 0.50, color: "#01665E", cls: "0.40–0.50" }
+      { upTo: -2.0, color: "#A52A2A", cls: "<= -2.0" },
+      { upTo: -1.6, color: "#FF0000", cls: "-2.0 to -1.6" },
+      { upTo: -1.3, color: "#FFA500", cls: "-1.6 to -1.3" },
+      { upTo: -0.8, color: "#FCD394", cls: "-1.3 to -0.8" },
+      { upTo: -0.5, color: "#FFFF00", cls: "-0.8 to -0.5" },
+      { upTo:  0.5, color: "#FFFFFF", cls: "-0.5 to 0.5 (near normal)" },
+      { upTo:  0.8, color: "#B9F96E", cls: "0.5 to 0.8" },
+      { upTo:  1.3, color: "#B3D16E", cls: "0.8 to 1.3" },
+      { upTo:  1.6, color: "#3CBC3D", cls: "1.3 to 1.6" },
+      { upTo:  2.0, color: "#009E1E", cls: "1.6 to 2.0" },
+//      { upTo:  3.0, color: "#6370F8", cls: "2.0 to 3.0" }
     ],
-    aboveColor: "#003C30", aboveCls: "> 0.50 (wet)", nodataColor: null
+    aboveColor: "#6370F8",     // > 2.0
+    aboveCls: "> 2.0",
+    nodataColor: null
   };
 
   // ---------------------------------------------------------------------------

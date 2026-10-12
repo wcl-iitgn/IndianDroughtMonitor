@@ -1,0 +1,12 @@
+# Soil Moisture forecast outlook initialized 2026-10-07
+
+Nationally, expected soil moisture averages about 0.44 v/v (7-day), 0.40 v/v (15-day) and 0.36 v/v (30-day).
+
+Regional outlook — expected soil moisture (7 / 15 / 30-day):
+- North: 0.33 v/v / 0.27 v/v / 0.18 v/v
+- Northwest: 0.42 v/v / 0.36 v/v / 0.32 v/v
+- Northeast: 0.27 v/v / 0.18 v/v / 0.04 v/v
+- East: 0.96 v/v / 0.89 v/v / 0.73 v/v
+- Central: 0.99 v/v / 0.90 v/v / 0.76 v/v
+- West: 0.11 v/v / 0.08 v/v / 0.07 v/v
+- South: 0.08 v/v / 0.16 v/v / 0.36 v/v

@@ -3,10 +3,10 @@
 The national drought situation this week is characterized by a significant proportion of the area remaining in the Normal category, with a substantial portion in the D0+ category. The total drought area, specifically D0+, was 35.9% this week, showing an expansion of 0.4 percentage points compared to the previous week, as the area was 35.5% last week. Looking further back, the area was 37.1% approximately one month ago. The states most affected by drought were Manipur with 75.4%, Arunachal Pradesh with 72.0%, Jharkhand with 68.7%, Goa with 67.9%, the NCT of Delhi with 65.2%, and Assam with 60.4%. Conversely, the least affected states were Nagaland with 5.6%, Tripura with 8.7%, Odisha with 11.7%, and Uttarakhand with 13.2%.
 
 Regional conditions this week:
-- North: Moderate, scattered drought. About 34% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- Northwest: Moderate, scattered drought. About 29% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- Northeast: Widespread drought. About 57% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- East: Moderate, scattered drought. About 37% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- Central: Moderate, scattered drought. About 28% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- West: Widespread drought. About 47% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- South: Moderate, scattered drought. About 29% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- North: Widespread drought. About 54% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Northwest: Moderate, scattered drought. About 26% of the area is in drought (D0–D4).
+- Northeast: Widespread drought. About 42% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- East: Moderate, scattered drought. About 29% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Central: Moderate, scattered drought. About 30% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Moderate, scattered drought. About 29% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- South: Moderate, scattered drought. About 28% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.

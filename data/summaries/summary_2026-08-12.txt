@@ -5,10 +5,10 @@ The national drought situation this week shows a significant proportion of the c
 The states most affected by drought conditions were Goa with 91.1%, Sikkim with 86.9%, and Arunachal Pradesh with 82.3%. Other states showing significant drought impact included Bihar at 71.0%, Andhra Pradesh at 70.1%, and Uttar Pradesh at 66.2%. Conversely, Gujarat, Nagaland, Odisha, and Rajasthan were among the least affected states, with percentages of 3.9%, 5.6%, 7.6%, and 11.0% respectively.
 
 Regional conditions this week:
-- North: Widespread drought. About 41% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- Northwest: Mostly normal, with localised dryness. About 14% of the area is in drought (D0–D4).
-- Northeast: Widespread drought. About 59% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- East: Moderate, scattered drought. About 35% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- Central: Moderate, scattered drought. About 33% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- West: Widespread drought. About 45% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- South: Moderate, scattered drought. About 39% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- North: Widespread drought. About 58% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Northwest: Mostly normal, with localised dryness. About 12% of the area is in drought (D0–D4).
+- Northeast: Widespread drought. About 42% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- East: Moderate, scattered drought. About 31% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Central: Moderate, scattered drought. About 35% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Moderate, scattered drought. About 26% of the area is in drought (D0–D4).
+- South: Moderate, scattered drought. About 38% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.

@@ -3,10 +3,10 @@
 The national drought situation this week shows that the majority of the area remains in the Normal category, with 79.9% of India in this condition. The total area experiencing drought, classified as D0 or worse, was 20.1% this week, which represents an expansion of 4.8 percentage points compared to the previous week's 15.3%. The cumulative drought areas are distributed across the classes, with 7.6% in D1+ and 1.8% in D2+. The states most affected by drought include NCT of Delhi at 52.2%, Jammu & Kashmir at 47.8%, Maharashtra at 46.4%, Arunachal Pradesh at 46.0%, Mizoram at 44.0%, and Manipur at 42.6%. Conversely, Sikkim, Nagaland, Tripura, and West Bengal reported zero percent of their area in drought.
 
 Regional conditions this week:
-- North: Moderate, scattered drought. About 32% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- North: Widespread drought. About 48% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
 - Northwest: Mostly normal, with localised dryness. About 5% of the area is in drought (D0–D4).
-- Northeast: Moderate, scattered drought. About 27% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- East: Mostly normal, with localised dryness. About 9% of the area is in drought (D0–D4).
-- Central: Mostly normal, with localised dryness. About 14% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- West: Widespread drought. About 47% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- South: Mostly normal, with localised dryness. About 13% of the area is in drought (D0–D4).
+- Northeast: Moderate, scattered drought. About 34% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- East: Mostly normal, with localised dryness. About 8% of the area is in drought (D0–D4).
+- Central: Mostly normal, with localised dryness. About 11% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Mostly normal, with localised dryness. About 13% of the area is in drought (D0–D4).
+- South: Mostly normal, with localised dryness. About 8% of the area is in drought (D0–D4).
