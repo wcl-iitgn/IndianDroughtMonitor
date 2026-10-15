@@ -1,0 +1,12 @@
+# India Drought Monitor — National Summary for week ending 2026-10-14
+
+The national drought situation this week is characterized by a significant portion of the country experiencing drought conditions. The total area in the D0+ drought class was 45.9% this week. This figure shows an expansion of the drought area compared to the previous week, as the D0+ area was 45.4% last week, representing an increase of 0.5 percentage points week-on-week. The cumulative distribution across drought classes is as follows: Normal at 54.1%, D0+ at 45.9%, D1+ at 21.5%, D2+ at 6.6%, D3+ at 1.9%, and D4 at 0.8%. The states most affected by drought were Goa with 94.6%, Karnataka with 82.3%, Arunanchal Pradesh with 80.3%, Jammu & Kashmir with 78.0%, Manipur with 76.3%, and Maharashtra with 74.1%. Conversely, Odisha was the least affected state with 1.8% in drought.
+
+Regional conditions this week:
+- North: Widespread drought. About 43% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Northwest: Moderate, scattered drought. About 29% of the area is in drought (D0–D4).
+- Northeast: Widespread drought. About 62% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- East: Moderate, scattered drought. About 33% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Central: Moderate, scattered drought. About 28% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- West: Extensive drought. About 71% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- South: Widespread drought. About 64% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
