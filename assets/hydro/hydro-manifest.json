@@ -1,6 +1,6 @@
 {
-  "month_label": "August 2026",
-  "generated": "2026-08-31",
+  "month_label": "September 2026",
+  "generated": "2026-09-30",
   "parameters": [
     {
       "key": "Rainfall",
@@ -10,23 +10,13 @@
       "dashboard": "Rainfall_dashboard.png",
       "maps": [
         {
-          "file": "April.png",
-          "label": "April",
+          "file": "August.png",
+          "label": "August",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "August (2025*).png",
-          "label": "August (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "August (Current).png",
-          "label": "August (Current)",
           "role": "other"
         },
         {
@@ -50,8 +40,18 @@
           "role": "other"
         },
         {
-          "file": "September (Forecast).png",
-          "label": "September (Forecast)",
+          "file": "October (Forecast).png",
+          "label": "October (Forecast)",
+          "role": "other"
+        },
+        {
+          "file": "September (2025*).png",
+          "label": "September (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "September (Current).png",
+          "label": "September (Current)",
           "role": "other"
         }
       ]
@@ -64,23 +64,13 @@
       "dashboard": "Temperature_dashboard.png",
       "maps": [
         {
-          "file": "April.png",
-          "label": "April",
-          "role": "other"
-        },
-        {
           "file": "April (2010).png",
           "label": "April (2010)",
           "role": "other"
         },
         {
-          "file": "August (2025*).png",
-          "label": "August (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "August (Current).png",
-          "label": "August (Current)",
+          "file": "August.png",
+          "label": "August",
           "role": "other"
         },
         {
@@ -104,8 +94,18 @@
           "role": "other"
         },
         {
-          "file": "September (Forecast).png",
-          "label": "September (Forecast)",
+          "file": "October (Forecast).png",
+          "label": "October (Forecast)",
+          "role": "other"
+        },
+        {
+          "file": "September (2025*).png",
+          "label": "September (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "September (Current).png",
+          "label": "September (Current)",
           "role": "other"
         }
       ]
@@ -118,23 +118,13 @@
       "dashboard": "Relative_Wetness_dashboard.png",
       "maps": [
         {
-          "file": "April.png",
-          "label": "April",
+          "file": "August.png",
+          "label": "August",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "August (2025*).png",
-          "label": "August (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "August (Current).png",
-          "label": "August (Current)",
           "role": "other"
         },
         {
@@ -158,8 +148,18 @@
           "role": "other"
         },
         {
-          "file": "September (Forecast).png",
-          "label": "September (Forecast)",
+          "file": "October (Forecast).png",
+          "label": "October (Forecast)",
+          "role": "other"
+        },
+        {
+          "file": "September (2025*).png",
+          "label": "September (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "September (Current).png",
+          "label": "September (Current)",
           "role": "other"
         }
       ]
@@ -172,23 +172,13 @@
       "dashboard": "Total_Runoff_dashboard.png",
       "maps": [
         {
-          "file": "April.png",
-          "label": "April",
+          "file": "August.png",
+          "label": "August",
           "role": "other"
         },
         {
           "file": "August (2002).png",
           "label": "August (2002)",
-          "role": "other"
-        },
-        {
-          "file": "August (2025*).png",
-          "label": "August (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "August (Current).png",
-          "label": "August (Current)",
           "role": "other"
         },
         {
@@ -212,8 +202,18 @@
           "role": "other"
         },
         {
-          "file": "September (Forecast).png",
-          "label": "September (Forecast)",
+          "file": "October (Forecast).png",
+          "label": "October (Forecast)",
+          "role": "other"
+        },
+        {
+          "file": "September (2025*).png",
+          "label": "September (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "September (Current).png",
+          "label": "September (Current)",
           "role": "other"
         }
       ]
@@ -226,18 +226,8 @@
       "dashboard": "Evapotranspiration_dashboard.png",
       "maps": [
         {
-          "file": "April.png",
-          "label": "April",
-          "role": "other"
-        },
-        {
-          "file": "August (2025*).png",
-          "label": "August (2025*)",
-          "role": "other"
-        },
-        {
-          "file": "August (Current).png",
-          "label": "August (Current)",
+          "file": "August.png",
+          "label": "August",
           "role": "other"
         },
         {
@@ -266,8 +256,18 @@
           "role": "other"
         },
         {
-          "file": "September (Forecast).png",
-          "label": "September (Forecast)",
+          "file": "October (Forecast).png",
+          "label": "October (Forecast)",
+          "role": "other"
+        },
+        {
+          "file": "September (2025*).png",
+          "label": "September (2025*)",
+          "role": "other"
+        },
+        {
+          "file": "September (Current).png",
+          "label": "September (Current)",
           "role": "other"
         }
       ]
