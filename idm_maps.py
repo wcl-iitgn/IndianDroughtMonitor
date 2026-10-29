@@ -134,15 +134,17 @@ def load_state_grid(repo):
 
 
 # ----------------------------------------------------------------------------- regions
-# state_id -> compass region (ids from state_vector_boundaries.json). id 1 = generic land.
+# state_id -> compass region (ids from state_vector_boundaries.json). id 1 = coastal/border
+# fringe of the land mask (not a state).  38 = Ladakh (UT since 2019); 9 is the merged
+# Dadra & Nagar Haveli and Daman & Diu (old id 10 retired).
 STATE_REGION = {
     29: "Northwest", 12: "Northwest", 28: "Northwest", 13: "Northwest", 7: "Northwest", 26: "Northwest",
-    15: "North", 14: "North", 35: "North", 34: "North",
+    15: "North", 38: "North", 14: "North", 35: "North", 34: "North",
     5: "Northeast", 4: "Northeast", 22: "Northeast", 23: "Northeast", 24: "Northeast",
     25: "Northeast", 33: "Northeast", 30: "Northeast",
     6: "East", 16: "East", 36: "East", 37: "East",
     20: "Central", 8: "Central",
-    21: "West", 11: "West", 9: "West", 10: "West",
+    21: "West", 11: "West", 9: "West",
     3: "South", 17: "South", 18: "South", 31: "South", 32: "South", 27: "South", 2: "South", 19: "South",
 }
 REGION_ORDER = ["North", "Northwest", "Northeast", "East", "Central", "West", "South"]

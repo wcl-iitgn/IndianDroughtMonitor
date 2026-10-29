@@ -228,9 +228,14 @@ function districtAt(lng, lat, stateId) {
     const cand = state._districtsByState[stateId];
     if (!cand) return null;
     for (const d of cand) {
+        // Even-odd rule across ALL of the district's rings: a point inside an
+        // interior ring (an enclave belonging to another district, e.g. the
+        // exclaves inside Pudukkottai / Bhavnagar) is NOT in this district.
+        let crossings = 0;
         for (const ring of d.rings) {
-            if (pointInRing(lng, lat, ring)) return d.name;
+            if (pointInRing(lng, lat, ring)) crossings++;
         }
+        if (crossings % 2 === 1) return d.name;
     }
     return null;
 }
@@ -611,6 +616,10 @@ function renderStaticMap() {
         c_raster.lineWidth = 0.5;
         c_raster.lineJoin = "round";
         for (const d of state.allDistricts) {
+            // The selected state is drawn at higher detail below; skip its coarse
+            // lines here so the two resolutions never show as a doubled border.
+            if (state.selectedStateId !== null && d.state_id === state.selectedStateId
+                && state.districtsForState && state.districtsForState.length > 0) continue;
             for (const ring of d.rings) {
                 let first = true;
                 for (let i = 0; i < ring.length; i++) {

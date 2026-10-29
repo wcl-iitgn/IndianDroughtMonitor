@@ -147,21 +147,27 @@
   // and wire it to zoomToStateBoundingBox. Union Territories are excluded from the
   // dropdown (states only).
   // ---------------------------------------------------------------------------
-  // state_ids that are Union Territories (per state_vector_boundaries.json):
-  // Andaman & Nicobar (2), Chandigarh (7), Dadara & Nagar Havelli (9),
-  // Daman & Diu (10), Jammu & Kashmir (15), Lakshadweep (19), NCT of Delhi (26),
-  // Puducherry (27).
-  var UT_IDS = { 2: 1, 7: 1, 9: 1, 10: 1, 15: 1, 19: 1, 26: 1, 27: 1 };
+  // Union Territories are flagged in state_vector_boundaries.json ("ut": true,
+  // written by build_boundaries.py).  This table is only a fallback for an older
+  // boundary file without that flag:
+  // Andaman & Nicobar (2), Chandigarh (7), Dadra & Nagar Haveli and Daman & Diu (9),
+  // Jammu & Kashmir (15), Lakshadweep (19), NCT of Delhi (26), Puducherry (27),
+  // Ladakh (38).
+  var UT_IDS = { 2: 1, 7: 1, 9: 1, 15: 1, 19: 1, 26: 1, 27: 1, 38: 1 };
 
   function wireStateSelect(selectEl, map) {
     if (!selectEl || !map) return;
-    var byId = {};
+    var byId = {}, utFlag = {}, haveFlag = false;
     map.state.stateVectorBoundaries.forEach(function (p) {
-      if (p && typeof p.state_id !== "undefined" && p.name) byId[p.state_id] = p.name;
+      if (p && typeof p.state_id !== "undefined" && p.name) {
+        byId[p.state_id] = p.name;
+        if (typeof p.ut === "boolean") { utFlag[p.state_id] = p.ut; haveFlag = true; }
+      }
     });
+    function isUT(id) { return haveFlag ? !!utFlag[id] : !!UT_IDS[id]; }
     Object.keys(byId)
       .map(function (id) { return { id: parseInt(id, 10), name: byId[id] }; })
-      .filter(function (it) { return !UT_IDS[it.id]; })   // states only — drop UTs
+      .filter(function (it) { return !isUT(it.id); })   // states only — drop UTs
       .sort(function (a, b) { return a.name.localeCompare(b.name); })
       .forEach(function (it) {
         var o = document.createElement("option");
