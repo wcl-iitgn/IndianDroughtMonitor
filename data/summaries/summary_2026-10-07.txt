@@ -4,9 +4,9 @@ The national drought situation this week shows a significant proportion of the c
 
 Regional conditions this week:
 - North: Widespread drought. About 45% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- Northwest: Moderate, scattered drought. About 33% of the area is in drought (D0–D4).
-- Northeast: Widespread drought. About 58% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- Northwest: Moderate, scattered drought. About 34% of the area is in drought (D0–D4).
+- Northeast: Widespread drought. About 59% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
 - East: Moderate, scattered drought. About 34% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
-- Central: Moderate, scattered drought. About 31% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
+- Central: Moderate, scattered drought. About 30% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
 - West: Extensive drought. About 66% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
 - South: Widespread drought. About 58% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).

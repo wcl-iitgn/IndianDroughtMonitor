@@ -3,10 +3,10 @@
 Forecast drought (D0–D4) is expected to cover about 46% of India at 7 days, 43% at 15 days and 40% at 30 days.
 
 Regional outlook — area in forecast drought (D0–D4) (7 / 15 / 30-day):
-- North: 39% / 38% / 37%
-- Northwest: 39% / 39% / 38%
-- Northeast: 73% / 67% / 52%
-- East: 22% / 17% / 5%
-- Central: 25% / 23% / 18%
-- West: 81% / 79% / 78%
-- South: 61% / 56% / 58%
+- North: 40% / 38% / 38%
+- Northwest: 39% / 40% / 39%
+- Northeast: 74% / 68% / 51%
+- East: 23% / 18% / 6%
+- Central: 25% / 23% / 17%
+- West: 81% / 79% / 79%
+- South: 60% / 57% / 58%

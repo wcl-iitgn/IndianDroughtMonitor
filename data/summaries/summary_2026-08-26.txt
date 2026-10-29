@@ -6,9 +6,9 @@ The states most affected by drought conditions were Goa, with 94.6% of its area 
 
 Regional conditions this week:
 - North: Widespread drought. About 51% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- Northwest: Moderate, scattered drought. About 21% of the area is in drought (D0–D4).
+- Northwest: Moderate, scattered drought. About 22% of the area is in drought (D0–D4).
 - Northeast: Widespread drought. About 53% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
-- East: Moderate, scattered drought. About 36% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
+- East: Moderate, scattered drought. About 35% of the area is in drought (D0–D4). A notable share is in severe-or-worse categories (D2–D4).
 - Central: Moderate, scattered drought. About 32% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
 - West: Moderate, scattered drought. About 36% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
 - South: Widespread drought. About 42% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
