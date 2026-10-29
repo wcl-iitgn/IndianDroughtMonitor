@@ -1,8 +1,6 @@
 # India Drought Monitor — National Summary for week ending 2026-10-28
 
-The national drought situation this week shows a significant area experiencing drought conditions. The total area under the D0+ drought class was 49.6%, which represents an expansion of 2.9 percentage points compared to the previous week's 46.7%.
-
-The most affected regions by drought were Goa, with 92.2% of its area in drought, followed by Manipur at 91.6%, Ladakh at 89.2%, Arunachal Pradesh at 84.9%, Assam at 82.7%, and Maharashtra at 82.4%. Conversely, the NCT of Delhi, Dadra & Nagar Haveli and Daman & Diu, and Puducherry reported 0.0% of their area in drought, while Odisha was affected in 5.9% of its area.
+The national drought situation this week shows a significant proportion of the country experiencing drought conditions. The cumulative area categorized as Normal was 50.4%, while the area experiencing D0 or worse drought was 49.6%. This week-on-week, the total drought area, specifically D0+, increased by 2.9 percentage points compared to the previous week, moving from 46.7% to 49.6%. The most affected regions by drought presence include Goa at 92.2%, Manipur at 91.6%, Ladakh at 89.2%, Arunachal Pradesh at 84.9%, Assam at 82.7%, and Maharashtra at 82.4%. Conversely, the NCT of Delhi, Dadra & Nagar Haveli and Daman & Diu, and Puducherry reported zero percent of their area in drought.
 
 Regional conditions this week:
 - North: Widespread drought. About 43% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
