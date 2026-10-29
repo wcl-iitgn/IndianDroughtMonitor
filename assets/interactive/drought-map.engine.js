@@ -323,6 +323,42 @@ function resetZoom() {
 }
 
 /**
+ * Geographic extent of a state taken from its OUTLINE polygons.  The 0.0625-degree
+ * raster has only 1-3 cells for tiny union territories (Lakshadweep, Chandigarh,
+ * Delhi ...), which gave a useless zoom box.  Exterior rings only (counter-clockwise,
+ * positive area); specks below 0.5 % of the state's largest piece are ignored so a
+ * far-off islet cannot blow the view up.  Returns null if no outline is available.
+ */
+function stateOutlineBBox(stateId) {
+    const vb = state.stateVectorBoundaries;
+    if (!vb || !vb.length) return null;
+    const pieces = [];
+    for (const p of vb) {
+        if (p.state_id !== stateId || !p.coordinates || p.coordinates.length < 4) continue;
+        const c = p.coordinates;
+        let a = 0, mnLa = Infinity, mxLa = -Infinity, mnLo = Infinity, mxLo = -Infinity;
+        for (let i = 0; i < c.length; i++) {
+            if (c[i].lat < mnLa) mnLa = c[i].lat;
+            if (c[i].lat > mxLa) mxLa = c[i].lat;
+            if (c[i].lng < mnLo) mnLo = c[i].lng;
+            if (c[i].lng > mxLo) mxLo = c[i].lng;
+            if (i < c.length - 1) a += c[i].lng * c[i + 1].lat - c[i + 1].lng * c[i].lat;
+        }
+        a /= 2;
+        if (a > 0) pieces.push({ a: a, mnLa: mnLa, mxLa: mxLa, mnLo: mnLo, mxLo: mxLo });
+    }
+    if (!pieces.length) return null;
+    const big = Math.max.apply(null, pieces.map(function (q) { return q.a; }));
+    const keep = pieces.filter(function (q) { return q.a >= big * 0.005; });
+    return {
+        minLat: Math.min.apply(null, keep.map(function (q) { return q.mnLa; })),
+        maxLat: Math.max.apply(null, keep.map(function (q) { return q.mxLa; })),
+        minLng: Math.min.apply(null, keep.map(function (q) { return q.mnLo; })),
+        maxLng: Math.max.apply(null, keep.map(function (q) { return q.mxLo; }))
+    };
+}
+
+/**
  * Scans the underlying state matrix to calculate the geometric envelope of a state 
  * and fits the canvas camera smoothly over it with a 0.5-degree margin cushion.
  */
@@ -349,13 +385,19 @@ function zoomToStateBoundingBox(stateId) {
         }
     }
 
-    // If matching coordinate indices are found, convert back to geographic degrees
-    if (minR !== Infinity) {
-        // Row 0 is North (top), max row is South (bottom)
-        let maxLat = state.base.long_N - (minR * state.stateStep);
-        let minLat = state.base.long_N - (maxR * state.stateStep);
-        let minLng = state.base.lat_W + (minC * state.stateStep);
-        let maxLng = state.base.lat_W + (maxC * state.stateStep);
+    // Prefer the exact outline extent; fall back to the raster footprint
+    const ob = stateOutlineBBox(stateId);
+    if (ob || minR !== Infinity) {
+        let maxLat, minLat, minLng, maxLng;
+        if (ob) {
+            maxLat = ob.maxLat; minLat = ob.minLat; minLng = ob.minLng; maxLng = ob.maxLng;
+        } else {
+            // Row 0 is North (top), max row is South (bottom)
+            maxLat = state.base.long_N - (minR * state.stateStep);
+            minLat = state.base.long_N - (maxR * state.stateStep);
+            minLng = state.base.lat_W + (minC * state.stateStep);
+            maxLng = state.base.lat_W + (maxC * state.stateStep);
+        }
 
         // Add a 0.5-degree padding envelope so the state doesn't look squeezed against the edge
         const padding = 0.5;

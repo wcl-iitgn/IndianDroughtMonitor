@@ -165,15 +165,23 @@
       }
     });
     function isUT(id) { return haveFlag ? !!utFlag[id] : !!UT_IDS[id]; }
-    Object.keys(byId)
-      .map(function (id) { return { id: parseInt(id, 10), name: byId[id] }; })
-      .filter(function (it) { return !isUT(it.id); })   // states only — drop UTs
-      .sort(function (a, b) { return a.name.localeCompare(b.name); })
-      .forEach(function (it) {
+    // every state AND union territory, in two alphabetical groups
+    var items = Object.keys(byId)
+      .map(function (id) { var n = parseInt(id, 10); return { id: n, name: byId[id], ut: isUT(n) }; })
+      .sort(function (a, b) { return a.name.localeCompare(b.name); });
+    function addGroup(label, list) {
+      if (!list.length) return;
+      var g = document.createElement("optgroup");
+      g.label = label;
+      list.forEach(function (it) {
         var o = document.createElement("option");
         o.value = String(it.id); o.textContent = it.name;
-        selectEl.appendChild(o);
+        g.appendChild(o);
       });
+      selectEl.appendChild(g);
+    }
+    addGroup("States", items.filter(function (it) { return !it.ut; }));
+    addGroup("Union Territories", items.filter(function (it) { return it.ut; }));
     selectEl.addEventListener("change", function () {
       var id = parseInt(selectEl.value, 10);
       if (id) map.zoomToStateBoundingBox(id);
