@@ -149,6 +149,9 @@ KEEP_UPPER = {"NTR"}                       # acronyms that must stay upper-case
 NAME_FIX = {                               # (state_id, name after case-normalising) -> display
     (3, "Y.S.R."): "Y.S.R. Kadapa",
     (3, "Ntr"): "NTR",
+    (36, "Alipur Duar"): "Alipurduar",                   # source writes it as two words
+    (36, "South 24Parganas"): "South 24 Parganas",       # missing space in the source
+    (23, "South West Kh>Si Hills"): "South West Khasi Hills",   # one '>' left in the source
 }
 
 
@@ -170,6 +173,8 @@ def find_source(arg):
     p = Path(arg) if arg else SRC_SHP
     if p.suffix.lower() == ".zip":
         SRC_DIR.mkdir(parents=True, exist_ok=True)
+        for old in SRC_DIR.glob("DISTRICT_BOUNDARY.*"):      # no stale index files from an older version
+            old.unlink()
         with zipfile.ZipFile(p) as z:
             for m in z.namelist():
                 if Path(m).name.startswith("DISTRICT_BOUNDARY.") and not m.endswith("/"):
@@ -464,6 +469,11 @@ def build(source, detail_files=True, disputed_mode="assign"):
     print("  districts read: %d" % len(base))
     for r in base:
         r["name"] = clean_name(r["raw"], r["state_id"])
+    odd = [(ID_TO_NAME[r["state_id"]], r["name"]) for r in base
+           if re.search(r"[^A-Za-z0-9 .&()'\-]", r["name"])]
+    if odd:
+        sys.exit("Garbled district names (symbols in place of letters) - fix them in the shapefile "
+                 "or add them to NAME_FIX:\n  " + "\n  ".join("%s / %s" % o for o in odd))
 
     # ---- topology-preserving simplification (shared borders stay shared) ----
     geoms = [r["geom"] for r in base]

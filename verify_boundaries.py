@@ -68,6 +68,9 @@ def main():
     check("no upper-case-only district names left (except acronyms)",
           not [d["name"] for d in dd if d["name"].isupper() and d["name"] not in ("NTR",)],
           str([d["name"] for d in dd if d["name"].isupper()][:5]))
+    import re as _re
+    garbled = [d["name"] for d in dd if _re.search(r"[^A-Za-z0-9 .&()'\-]", d["name"])]
+    check("no symbols in place of letters in district names", not garbled, str(garbled[:5]))
     check("no 'Unknown'/empty district names", all(d["name"] and d["name"] != "Unknown" for d in dd))
     check("every district has geometry", all(len(d["rings"]) >= 1 for d in dd))
     check("district ids unique", len({d["id"] for d in dd}) == len(dd))
