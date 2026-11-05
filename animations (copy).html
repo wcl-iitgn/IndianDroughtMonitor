@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+
+<html lang="en-IN">
+<head>
+<meta charset="utf-8"/><meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title data-i18n="animations.animations_india_drought_mon">Animations | India Drought Monitor</title>
+<meta name="description" content="Animated week-by-week playback of India&#x27;s Combined Drought Index, from July 2021 to the latest weekly update."/>
+<link rel="canonical" href="https://indiadroughtmonitor.in/animations.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="India Drought Monitor"/>
+<meta property="og:title" content="Animations | India Drought Monitor"/>
+<meta property="og:description" content="Animated week-by-week playback of India&#x27;s Combined Drought Index, from July 2021 to the latest weekly update."/>
+<meta property="og:url" content="https://indiadroughtmonitor.in/animations.html"/>
+<meta property="og:image" content="https://indiadroughtmonitor.in/assets/og-image.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Animations | India Drought Monitor"/>
+<meta name="twitter:description" content="Animated week-by-week playback of India&#x27;s Combined Drought Index, from July 2021 to the latest weekly update."/>
+<meta name="twitter:image" content="https://indiadroughtmonitor.in/assets/og-image.png"/>
+<link href="favicon.ico" rel="icon" sizes="any"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<meta content="#da3910" name="theme-color"/>
+<link href="assets/styles.css" rel="stylesheet"/>
+<link href="assets/interactive/drought-map.css" rel="stylesheet"/>
+<script src="assets/vendor/papaparse.min.js"></script>
+<script src="assets/vendor/alasql.min.js"></script>
+<link href="assets/ai/idm-ai.css" rel="stylesheet"/>
+<script src="assets/i18n/i18n.js"></script>
+</head>
+<body>
+<a class="skip-link" data-i18n="common_header.skip_to_content" href="#main">Skip to content</a>
+<header class="usdm-header"><div class="usdm-header-inner"><h1 class="usdm-title"><a data-i18n="common_header.india_drought_monitor" href="index.html">India Drought Monitor</a></h1></div></header>
+<nav aria-label="Primary" class="usdm-nav" data-i18n-attr="aria-label:animations.primary">
+<div class="usdm-nav-inner">
+<a data-i18n="common_nav.current" href="index.html">Current</a>
+<a class="active" data-i18n="common_nav.maps" href="maps.html">Maps</a>
+<a data-i18n="common_nav.data" href="data.html">Data</a>
+<a data-i18n="common_nav.summary" href="summary.html">Summary</a>
+<a data-i18n="common_nav.forecast" href="forecast.html">Forecast</a>
+<a data-i18n="common_nav.hydrological_outlook" href="hydro.html">Hydrological Outlook</a>
+<a data-i18n="common_nav.about" href="about.html">About</a>
+<a data-i18n="common_nav.contact" href="contact.html">Contact</a>
+<a data-i18n="common_nav.disclaimer" href="disclaimer.html">Disclaimer</a>
+<a data-i18n="common_nav.publications" href="publications.html">Publications</a>
+</div>
+</nav>
+<main class="usdm-main" id="main">
+<div class="usdm-breadcrumbs"><a data-i18n="animations.home" href="index.html">Home</a> <span class="sep">/</span> <a data-i18n="animations.maps" href="maps.html">Maps</a> <span class="sep">/</span> <span data-i18n="animations.animations">Animations</span></div>
+<h1 class="page-title" data-i18n="animations.animations">Animations</h1>
+<p data-i18n="animations.watch_the_combined_drought_i" class="page-lead">
+      Watch the Combined Drought Index evolve week by week across the full record (July 2021 to
+      the present). Set a date range and frame rate, then press play. Every frame is read live
+      from that week's data grid.
+    </p>
+<div class="idm-anim-panel">
+<div class="idm-field"><label data-i18n="animations.start_week" for="anim_start_date">Start week</label><input id="anim_start_date" type="date"/></div>
+<div class="idm-field"><label data-i18n="animations.end_week" for="anim_end_date">End week</label><input id="anim_end_date" type="date"/></div>
+<div class="idm-field"><label data-i18n="animations.frames_sec" for="anim_fps">Frames / sec</label><input id="anim_fps" max="15" min="1" type="number" value="4"/></div>
+<div class="idm-field"><label> </label><label class="idm-check"><input id="grayscale-toggle" type="checkbox"/> <span data-i18n="animations.greyscale">Greyscale</span></label></div>
+<div class="idm-anim-actions">
+<button class="idm-btn" data-i18n="animations.play" id="btn_start_anim" type="button"><span aria-hidden="true">▶</span> Play</button>
+<button class="idm-btn ghost" data-i18n="animations.stop" id="btn_stop_anim" type="button">■ Stop</button>
+<button class="idm-btn ghost" data-i18n="animations.png" id="download-png" type="button"><span aria-hidden="true">⬇</span> PNG</button>
+<button class="idm-btn ghost" data-i18n="animations.gif" id="download-gif" type="button"><span aria-hidden="true">⬇</span> GIF</button>
+</div>
+</div>
+<div class="idm-gif-status" id="gif-status" style="display:none;"></div>
+<div class="idm-viewer-grid">
+<div class="idm-map-panel">
+<div id="idm-map-loading"><div class="idm-spinner"></div><div data-i18n="animations.loading_data">Loading data…</div></div>
+<div class="idm-canvas-stage">
+<canvas height="840" id="C_vector" width="840"></canvas>
+<canvas height="840" id="C_raster" width="840"></canvas>
+</div>
+</div>
+<aside class="idm-rail">
+<div class="idm-card">
+<h3 data-i18n="animations.drought_classes">Drought Classes</h3>
+<div class="idm-legend-list">
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-none"></span> <span data-i18n="animations.no_drought">No Drought</span></div>
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-d0"></span> <span data-i18n="animations.d0_abnormally_dry">D0 — Abnormally Dry</span></div>
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-d1"></span> <span data-i18n="animations.d1_moderate">D1 — Moderate</span></div>
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-d2"></span> <span data-i18n="animations.d2_severe">D2 — Severe</span></div>
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-d3"></span> <span data-i18n="animations.d3_extreme">D3 — Extreme</span></div>
+<div class="idm-legend-item"><span class="idm-legend-swatch sw-d4"></span> <span data-i18n="animations.d4_exceptional">D4 — Exceptional</span></div>
+</div>
+<p class="idm-readout-hint" data-i18n="animations.the_current_week_is_stamped">The current week is stamped on the map while playing.</p>
+</div>
+</aside>
+</div>
+</main>
+<footer class="usdm-footer">
+<div class="usdm-footer-inner">
+<div class="footer-brand">
+<img alt="Water and Climate Lab, IIT Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.water_and_climate_lab_iit_ga" src="assets/logos/wcl.png"/>
+<p class="partner-blurb" data-i18n="common_footer.the_india_drought_monitor_is">
+        The India Drought Monitor is developed by the Water and Climate Lab at the Indian
+        Institute of Technology Gandhinagar, drawing on hydro-meteorological data from the
+        India Meteorological Department and the Central Water Commission, satellite products
+        from ISRO/NRSC, and global datasets from NASA.
+      </p>
+<img alt="Indian Institute of Technology Gandhinagar" class="footer-brand-logo" data-i18n-attr="alt:common_footer.indian_institute_of_technolo" src="assets/logos/iitgn.png"/>
+</div>
+<div class="contact-block">
+<div>
+<h3 data-i18n="common_footer.contact_us">Contact Us</h3>
+<p data-i18n="common_footer.strong_water_and_climate_lab" data-i18n-html="1"><strong>Water and Climate Lab</strong><br/>Indian Institute of Technology Gandhinagar</p>
+<p><span class="contact-icon" aria-hidden="true">📍</span><span data-i18n="common_footer.palaj_gandhinagar">Palaj, Gandhinagar</span></p>
+<p><span class="contact-icon" aria-hidden="true">✉</span><a data-i18n="common_footer.wcl_iitgn_ac_in" href="mailto:wcl@iitgn.ac.in">wcl@iitgn.ac.in</a></p>
+</div>
+<div>
+<h3 data-i18n="common_footer.maps">Maps</h3>
+<ul>
+<li><a data-i18n="common_footer.current_map" href="index.html">Current Map</a></li>
+<li><a data-i18n="common_footer.compare_two_weeks" href="compare.html">Compare Two Weeks</a></li>
+<li><a data-i18n="common_footer.comparison_slider" href="slider.html">Comparison Slider</a></li>
+<li><a data-i18n="common_footer.animations" href="animations.html">Animations</a></li>
+<li><a data-i18n="common_footer.map_archive" href="archive.html">Map Archive</a></li>
+<li><a data-i18n="common_footer.hydromet_conditions" href="conditions.html">Hydrometeorological Conditions</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.hydrological_outlook">Hydrological Outlook</h3>
+<ul>
+<li><a data-i18n="common_footer.dashboards" href="hydro.html">Dashboards</a></li>
+<li><a data-i18n="common_footer.individual_maps" href="hydro-maps.html">Individual Maps</a></li>
+<li><a data-i18n="common_footer.pdf_reports" href="hydro-reports.html">PDF Reports</a></li>
+</ul>
+</div>
+<div>
+<h3 data-i18n="common_footer.resources">Resources</h3>
+<ul>
+<li><a data-i18n="common_footer.data" href="data.html">Data</a></li>
+<li><a data-i18n="common_footer.national_summary" href="summary.html">National Summary</a></li>
+<li><a data-i18n="common_footer.forecast" href="forecast.html">Forecast</a></li>
+<li><a data-i18n="common_footer.forecast_outlook" href="forecast-summary.html">Forecast Outlook (PDF)</a></li>
+<li><a data-i18n="common_footer.what_is_the_idm" href="about.html">What is the IDM?</a></li>
+<li><a data-i18n="common_footer.contact_authors" href="contact.html">Contact Authors</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-disclaimer"><span data-i18n="common_footer.disclaimer_short">The India Drought Monitor’s forecasts and indices are based on continuously evolving science and are provided “as is”, without warranties of any kind. Use of the content is entirely at your own risk.</span> <a data-i18n="common_footer.read_full_disclaimer" href="disclaimer.html">Read the full disclaimer →</a></div>
+<div class="footer-copy" data-i18n="common_footer.2026_water_and_climate_lab_i">
+        © 2026 Water and Climate Lab · Indian Institute of Technology Gandhinagar · For research and demonstration purposes
+      </div>
+</div>
+</footer>
+<script src="assets/interactive/drought-map.colormaps.js"></script>
+<script src="assets/interactive/drought-map.engine.js"></script>
+<script src="assets/interactive/cdi-manifest.js"></script>
+<script src="assets/interactive/drought-map.app.js"></script>
+<script src="assets/vendor/gif.js"></script>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+      var map = IDM.mountMap({
+        raster:"C_raster", vector:"C_vector", product:"cdi", interactive:true,
+        loader:"#idm-map-loading",
+        grayscaleChk:"grayscale-toggle",
+        downloadBtn:"download-png", downloadName:"india-drought-animation-frame",
+        animControls:{
+          btnStart:document.getElementById("btn_start_anim"),
+          btnStop:document.getElementById("btn_stop_anim"),
+          startDate:document.getElementById("anim_start_date"),
+          endDate:document.getElementById("anim_end_date"),
+          fps:document.getElementById("anim_fps")
+        }
+      });
+
+      // Bound the animation date pickers to the actual CDI record (from the
+      // manifest): new weeks become selectable, and the window defaults to the
+      // last ~2 years ending at the newest available week. No hardcoded dates.
+      (function () {
+        var L = IDM.buildDateList();
+        if (!L.length) return;
+        var oldestIso = L[0].iso, newestIso = L[L.length - 1].iso;
+        var startIso  = L[Math.max(0, L.length - 1 - 104)].iso;
+        var s = document.getElementById("anim_start_date");
+        var e = document.getElementById("anim_end_date");
+        if (s) { s.min = oldestIso; s.max = newestIso; s.value = startIso; }
+        if (e) { e.min = oldestIso; e.max = newestIso; e.value = newestIso; }
+      })();
+
+      // ---- Download animation as GIF ----
+      // Iterate the chosen week range, render each frame, capture the flattened
+      // raster canvas, and encode to a .gif with gif.js (worker vendored locally).
+      var gifBtn = document.getElementById("download-gif");
+      var statusEl = document.getElementById("gif-status");
+      gifBtn.addEventListener("click", function () {
+        Promise.resolve(map).then(async function (m) {
+          if (!m || !m.loadCDIDataForDate) { m = await map; }
+          var dates = IDM.buildDateList().map(function (d) { return d; });
+          var startIso = document.getElementById("anim_start_date").value;
+          var endIso = document.getElementById("anim_end_date").value;
+          var fps = parseInt(document.getElementById("anim_fps").value, 10) || 4;
+          var frames = dates.filter(function (d) { return d.iso >= startIso && d.iso <= endIso; });
+          if (!frames.length) { return; }
+
+          m.stopCDIAnimation && m.stopCDIAnimation();
+          gifBtn.disabled = true;
+          statusEl.style.display = "block";
+          statusEl.textContent = "Building GIF… 0/" + frames.length;
+
+          var gif = null;   // created lazily from the first frame so its size includes the legend
+          for (var i = 0; i < frames.length; i++) {
+            var ok = await m.loadCDIDataForDate(frames[i].compact);
+            if (ok) {
+              m.renderStaticMap();
+              var c = m.captureRasterCanvas(true);   // white bg + data + baked-in legend
+              if (!gif) {
+                gif = new GIF({ workers: 2, quality: 10, width: c.width, height: c.height,
+                                workerScript: "assets/vendor/gif.worker.js", background: "#ffffff" });
+              }
+              gif.addFrame(c, { copy: true, delay: Math.round(1000 / fps) });
+            }
+            statusEl.textContent = "Building GIF… " + (i + 1) + "/" + frames.length;
+          }
+          if (!gif) { gifBtn.disabled = false; statusEl.textContent = "No frames in the selected range."; return; }
+
+          gif.on("progress", function (p) { statusEl.textContent = "Encoding GIF… " + Math.round(p * 100) + "%"; });
+          gif.on("finished", function (blob) {
+            var url = URL.createObjectURL(blob);
+            var a = document.createElement("a");
+            var dStr = endIso || new Date().toISOString().slice(0, 10);
+            a.href = url; a.download = "india-drought-animation_" + dStr + ".gif";
+            document.body.appendChild(a); a.click(); document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            statusEl.textContent = "GIF downloaded (" + frames.length + " frames).";
+            gifBtn.disabled = false;
+            setTimeout(function () { statusEl.style.display = "none"; }, 4000);
+          });
+          gif.render();
+        });
+      });
+    });
+  </script>
+<script src="assets/ai/idm-ai.js"></script>
+<script src="assets/ai/idm-chatbot.js"></script>
+</body></html>
