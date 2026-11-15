@@ -1,6 +1,6 @@
 {
-  "month_label": "September 2026",
-  "generated": "2026-09-30",
+  "month_label": "October 2026",
+  "generated": "2026-10-31",
   "parameters": [
     {
       "key": "Rainfall",
@@ -35,23 +35,23 @@
           "role": "other"
         },
         {
-          "file": "May.png",
-          "label": "May",
+          "file": "November (Forecast).png",
+          "label": "November (Forecast)",
           "role": "other"
         },
         {
-          "file": "October (Forecast).png",
-          "label": "October (Forecast)",
+          "file": "October (2025*).png",
+          "label": "October (2025*)",
           "role": "other"
         },
         {
-          "file": "September (2025*).png",
-          "label": "September (2025*)",
+          "file": "October (Current).png",
+          "label": "October (Current)",
           "role": "other"
         },
         {
-          "file": "September (Current).png",
-          "label": "September (Current)",
+          "file": "September.png",
+          "label": "September",
           "role": "other"
         }
       ]
@@ -84,28 +84,28 @@
           "role": "other"
         },
         {
-          "file": "May.png",
-          "label": "May",
-          "role": "other"
-        },
-        {
           "file": "May (2023).png",
           "label": "May (2023)",
           "role": "other"
         },
         {
-          "file": "October (Forecast).png",
-          "label": "October (Forecast)",
+          "file": "November (Forecast).png",
+          "label": "November (Forecast)",
           "role": "other"
         },
         {
-          "file": "September (2025*).png",
-          "label": "September (2025*)",
+          "file": "October (2025*).png",
+          "label": "October (2025*)",
           "role": "other"
         },
         {
-          "file": "September (Current).png",
-          "label": "September (Current)",
+          "file": "October (Current).png",
+          "label": "October (Current)",
+          "role": "other"
+        },
+        {
+          "file": "September.png",
+          "label": "September",
           "role": "other"
         }
       ]
@@ -143,23 +143,23 @@
           "role": "other"
         },
         {
-          "file": "May.png",
-          "label": "May",
+          "file": "November (Forecast).png",
+          "label": "November (Forecast)",
           "role": "other"
         },
         {
-          "file": "October (Forecast).png",
-          "label": "October (Forecast)",
+          "file": "October (2025*).png",
+          "label": "October (2025*)",
           "role": "other"
         },
         {
-          "file": "September (2025*).png",
-          "label": "September (2025*)",
+          "file": "October (Current).png",
+          "label": "October (Current)",
           "role": "other"
         },
         {
-          "file": "September (Current).png",
-          "label": "September (Current)",
+          "file": "September.png",
+          "label": "September",
           "role": "other"
         }
       ]
@@ -192,8 +192,8 @@
           "role": "other"
         },
         {
-          "file": "May.png",
-          "label": "May",
+          "file": "November (Forecast).png",
+          "label": "November (Forecast)",
           "role": "other"
         },
         {
@@ -202,18 +202,18 @@
           "role": "other"
         },
         {
-          "file": "October (Forecast).png",
-          "label": "October (Forecast)",
+          "file": "October (2025*).png",
+          "label": "October (2025*)",
           "role": "other"
         },
         {
-          "file": "September (2025*).png",
-          "label": "September (2025*)",
+          "file": "October (Current).png",
+          "label": "October (Current)",
           "role": "other"
         },
         {
-          "file": "September (Current).png",
-          "label": "September (Current)",
+          "file": "September.png",
+          "label": "September",
           "role": "other"
         }
       ]
@@ -251,23 +251,23 @@
           "role": "other"
         },
         {
-          "file": "May.png",
-          "label": "May",
+          "file": "November (Forecast).png",
+          "label": "November (Forecast)",
           "role": "other"
         },
         {
-          "file": "October (Forecast).png",
-          "label": "October (Forecast)",
+          "file": "October (2025*).png",
+          "label": "October (2025*)",
           "role": "other"
         },
         {
-          "file": "September (2025*).png",
-          "label": "September (2025*)",
+          "file": "October (Current).png",
+          "label": "October (Current)",
           "role": "other"
         },
         {
-          "file": "September (Current).png",
-          "label": "September (Current)",
+          "file": "September.png",
+          "label": "September",
           "role": "other"
         }
       ]
