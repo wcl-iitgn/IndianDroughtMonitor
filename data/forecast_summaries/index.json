@@ -1,6 +1,14 @@
 {
   "forecasts": [
     {
+      "date": "2026-11-18",
+      "label": "November 18, 2026"
+    },
+    {
+      "date": "2026-11-11",
+      "label": "November 11, 2026"
+    },
+    {
       "date": "2026-11-04",
       "label": "November 4, 2026"
     },
