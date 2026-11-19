@@ -1,6 +1,6 @@
 # India Drought Monitor — National Summary for week ending 2026-11-18
 
-About 45.5% of India's area is in some level of drought (D0 or worse), with 54.5% at normal conditions. Severe-to-extreme drought (D2 or worse) covers roughly 8.7% of the country. Compared with the previous week, the drought-affected area contracted. Conditions reflect the balance of pre-monsoon rainfall, soil moisture and runoff captured in the Combined Drought Index, with the most persistent stress across rain-fed parts of peninsular and central India.
+The national drought situation this week shows a significant proportion of the country experiencing drought conditions. The cumulative area in the Normal class was 54.5%, while the area experiencing drought conditions (D0 and above) was 45.5%. This week-on-week, the total drought area (D0+) contracted by 1.1 percentage points, moving from 46.6% in the previous week to 45.5%. The most affected states by area in any drought class were Goa with 100.0%, Manipur with 91.6%, Ladakh with 90.1%, Assam with 89.9%, Arunachal Pradesh with 85.0%, and Maharashtra with 82.8%. Conversely, the NCT of Delhi, Dadra & Nagar Haveli and Daman & Diu, and Puducherry reported 0.0% of their area in drought. Odisha was the least affected state with 0.4% of its area in drought.
 
 Regional conditions this week:
 - North: Moderate, scattered drought. About 39% of the area is in drought (D0–D4). Pockets of severe-or-worse conditions are present.
